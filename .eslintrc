@@ -1,0 +1,35 @@
+{
+  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["import", "jsx-a11y", "react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+      }
+    }
+  },
+  "rules": {
+    // disallow use of semicolons instead of ASI
+    "semi": ["error", "never"],
+
+    // disallow dangling commas
+    "comma-dangle": ["error", "never"],
+
+    // allow non-pure components
+    "react/prefer-stateless-function": ["off"],
+
+    // prefer .js over .jsx
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+
+    // allow forbidden propTypes such as array
+    "react/forbid-prop-types": [0]
+  }
+}

@@ -1,1 +1,3 @@
-react-crane
+React-Crane
+
+A React Components Library

@@ -9,8 +9,9 @@
     "build": "npm run clean-dist && npm run build-modules && npm run build-umd",
     "build-storybook": "build-storybook",
     "build-umd": "webpack --config webpack.config.js",
-    "build-modules": "cross-env NODE_ENV=build babel src --out-dir dist/module ",
-    "clean-dist": "rimraf dist"
+    "build-modules": "cross-env BABEL_ENV=build babel src --out-dir dist/module ",
+    "clean-dist": "rimraf dist",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "keywords": [
     "select",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@storybook/addon-knobs": "^3.2.8",
     "@storybook/react": "^3.2.5",
+    "@storybook/storybook-deployer": "^2.0.0",
     "autoprefixer": "^7.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

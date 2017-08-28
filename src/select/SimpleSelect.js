@@ -169,7 +169,7 @@ class SimpleSelect extends Component {
       optionComponent,
       optionRenderer,
       options,
-      valueKey,
+      valueKey
     } = this.props
     const MenuComponent = this.props.menuComponent
     return (

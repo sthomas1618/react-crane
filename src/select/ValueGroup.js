@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import PropType from 'prop-types'
 
-class Value extends Component {
+class ValueGroup extends Component {
   static propTypes = {
     inputValue: PropType.string,
     labelKey: PropType.string,
@@ -56,4 +56,4 @@ class Value extends Component {
   }
 }
 
-export default Value
+export default ValueGroup

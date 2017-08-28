@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import PropType from 'prop-types'
 
@@ -9,7 +10,8 @@ class Value extends Component {
     placeholder: PropType.string,
     showInput: PropType.bool,
     value: PropType.object,
-    valueComponent: PropType.func
+    valueComponent: PropType.func,
+    valueGroupRenderer: PropType.func
   }
 
   static defaultProps = {
@@ -19,7 +21,8 @@ class Value extends Component {
     placeholder: '',
     showInput: false,
     value: null,
-    valueComponent: null
+    valueComponent: null,
+    valueGroupRenderer: null
   }
 
   onMouseDown = (event) => {
@@ -33,19 +36,23 @@ class Value extends Component {
       inputValue,
       placeholder,
       showInput,
-      value
+      value,
+      valueComponent,
+      valueGroupRenderer
     } = this.props
-    const ValueComponent = this.props.valueComponent
+    const ValueRenderer = valueGroupRenderer || valueComponent
 
     if (showInput && inputValue) {
       return null
     }
 
-    const display = value
-      ? <ValueComponent {...this.props} />
+    const rendererProps = _.omit(this.props, 'valueGroupRenderer', 'placeholder')
+
+    const renderer = value
+      ? <ValueRenderer {...rendererProps} />
       : <span className="crane-select-placeholder">{placeholder}</span>
 
-    return <div className="crane-select-value-group">{display}</div>
+    return <div className="crane-select-value-group">{renderer}</div>
   }
 }
 

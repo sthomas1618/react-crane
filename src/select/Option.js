@@ -4,27 +4,31 @@ import PropType from 'prop-types'
 class Option extends Component {
   static propTypes = {
     labelKey: PropType.string,
-    onMouseDown: PropType.func.isRequired,
-    option: PropType.object
+    onOptionClick: PropType.func.isRequired,
+    option: PropType.object,
+    optionRenderer: PropType.func
   }
 
   static defaultProps = {
     option: null,
+    optionRenderer: null,
     labelKey: 'label'
   }
 
   onMouseDown = (event) => {
-    this.props.onMouseDown(event, this.props.option)
+    this.props.onOptionClick(event, this.props.option)
   }
 
   render() {
-    const { option, labelKey } = this.props
+    const { option, labelKey, optionRenderer } = this.props
 
     if (!option) {
       return null
     }
 
-    const label = option[labelKey]
+    const renderer = optionRenderer
+      ? optionRenderer({ option, labelKey })
+      : option[labelKey]
 
     return (
       <div
@@ -34,7 +38,7 @@ class Option extends Component {
         role="option"
         tabIndex="0"
       >
-        {label}
+        {renderer}
       </div>
     )
   }

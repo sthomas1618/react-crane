@@ -27,12 +27,15 @@ class SimpleSelect extends Component {
     onFocus: PropType.func,
     onInputChange: PropType.func,
     optionComponent: PropType.func,
+    optionRenderer: PropType.func,
     options: PropType.array,
     placeholder: PropType.string,
     showInput: PropType.bool,
     value: PropType.object,
     valueComponent: PropType.func,
+    valueRenderer: PropType.func,
     valueGroupComponent: PropType.func,
+    valueGroupRenderer: PropType.func,
     valueKey: PropType.string
   }
 
@@ -48,12 +51,15 @@ class SimpleSelect extends Component {
     onFocus: null,
     onInputChange: null,
     optionComponent: Option,
+    optionRenderer: null,
     options: [],
     placeholder: 'Select value...',
     showInput: false,
     value: null,
     valueComponent: Value,
+    valueRenderer: null,
     valueGroupComponent: ValueGroup,
+    valueGroupRenderer: null,
     valueKey: 'value'
   }
 
@@ -158,7 +164,13 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { labelKey, valueKey, options, optionComponent } = this.props
+    const {
+      labelKey,
+      optionComponent,
+      optionRenderer,
+      options,
+      valueKey,
+    } = this.props
     const MenuComponent = this.props.menuComponent
     return (
       <div className="crane-select-menu-container">
@@ -166,6 +178,7 @@ class SimpleSelect extends Component {
           labelKey={labelKey}
           onOptionClick={this.onOptionClick}
           optionComponent={optionComponent}
+          optionRenderer={optionRenderer}
           options={options}
           valueKey={valueKey}
         />
@@ -206,7 +219,9 @@ class SimpleSelect extends Component {
       placeholder,
       showInput,
       value,
-      valueComponent
+      valueComponent,
+      valueGroupRenderer,
+      valueRenderer
     } = this.props
     const ValueGroupComponent = this.props.valueGroupComponent
     const selectClassName = classNames('crane-select', { open: isOpen, focus: isFocused })
@@ -224,7 +239,9 @@ class SimpleSelect extends Component {
             placeholder={placeholder}
             showInput={showInput}
             value={value}
+            valueRenderer={valueRenderer}
             valueComponent={valueComponent}
+            valueGroupRenderer={valueGroupRenderer}
           />
           {this.renderInput(isOpen)}
           <Arrow />

@@ -4,19 +4,28 @@ import PropType from 'prop-types'
 class Value extends Component {
   static propTypes = {
     labelKey: PropType.string,
-    value: PropType.object
+    value: PropType.object,
+    valueRenderer: PropType.func
   }
 
   static defaultProps = {
     labelKey: 'label',
-    value: null
+    value: null,
+    valueRenderer: null
   }
 
   render() {
-    const { value, labelKey } = this.props
+    const { value, labelKey, valueRenderer } = this.props
 
-    const label = value[labelKey]
-    return <div>{label}</div>
+    if (!value) {
+      return null
+    }
+
+    const renderer = valueRenderer
+      ? valueRenderer({ value, labelKey })
+      : value[labelKey]
+
+    return <div>{renderer}</div>
   }
 }
 

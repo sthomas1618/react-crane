@@ -21,9 +21,16 @@ class Menu extends Component {
   }
 
   renderOptions(optionProps) {
-    const { options } = this.props
+    const { options, valueKey } = this.props
     const OptionComponent = this.props.optionComponent
-    return options.map(option => (<OptionComponent {...optionProps} option={option} />))
+
+    return options.map(option => (
+      <OptionComponent
+        {...optionProps}
+        key={option[valueKey]}
+        option={option}
+      />
+    ))
   }
 
   render() {

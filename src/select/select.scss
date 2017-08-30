@@ -28,7 +28,7 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
       border-top: 0;
 
       &:hover {
-        border-top: 5px solid darken($crane-select-arrow-color, 25%);
+        border-bottom: 5px solid darken($crane-select-arrow-color, 25%);
       }
     }
   }

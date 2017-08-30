@@ -10,7 +10,7 @@ class Menu extends Component {
     optionRenderer: PropType.func,
     options: PropType.array,
     valueKey: PropType.string,
-    value: PropType.oneOfType([PropType.string, PropType.array])
+    value: PropType.oneOfType([PropType.object, PropType.array])
   }
 
   static defaultProps = {

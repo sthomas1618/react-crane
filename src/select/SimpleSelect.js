@@ -31,7 +31,7 @@ class SimpleSelect extends Component {
     options: PropType.array,
     placeholder: PropType.string,
     showInput: PropType.bool,
-    value: PropType.object,
+    value: PropType.oneOfType([PropType.object, PropType.array]),
     valueComponent: PropType.func,
     valueRenderer: PropType.func,
     valueGroupComponent: PropType.func,
@@ -169,6 +169,7 @@ class SimpleSelect extends Component {
       optionComponent,
       optionRenderer,
       options,
+      value,
       valueKey
     } = this.props
     const MenuComponent = this.props.menuComponent
@@ -180,6 +181,7 @@ class SimpleSelect extends Component {
           optionComponent={optionComponent}
           optionRenderer={optionRenderer}
           options={options}
+          value={value}
           valueKey={valueKey}
         />
       </div>

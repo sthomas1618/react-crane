@@ -9,7 +9,7 @@ class ValueGroup extends Component {
     onMouseDown: PropType.func,
     placeholder: PropType.string,
     showInput: PropType.bool,
-    value: PropType.object,
+    value: PropType.oneOfType([PropType.object, PropType.array]),
     valueComponent: PropType.func,
     valueGroupRenderer: PropType.func
   }
@@ -47,8 +47,9 @@ class ValueGroup extends Component {
     }
 
     const rendererProps = _.omit(this.props, 'valueGroupRenderer', 'placeholder')
+    const showValue = _.isArray(value) ? value.length : value
 
-    const renderer = value
+    const renderer = showValue
       ? <ValueRenderer {...rendererProps} />
       : <span className="crane-select-placeholder">{placeholder}</span>
 

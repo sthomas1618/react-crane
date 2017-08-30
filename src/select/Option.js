@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import PropType from 'prop-types'
 
@@ -5,12 +6,11 @@ class Option extends Component {
   static propTypes = {
     labelKey: PropType.string,
     onOptionClick: PropType.func.isRequired,
-    option: PropType.object,
+    option: PropType.object.isRequired,
     optionRenderer: PropType.func
   }
 
   static defaultProps = {
-    option: null,
     optionRenderer: null,
     labelKey: 'label'
   }
@@ -27,7 +27,7 @@ class Option extends Component {
     }
 
     const renderer = optionRenderer
-      ? optionRenderer({ option, labelKey })
+      ? optionRenderer(_.omit(this.props), 'optionRenderer', 'onOptionClick')
       : option[labelKey]
 
     return (

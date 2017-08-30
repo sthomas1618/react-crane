@@ -104,11 +104,6 @@ class SimpleSelect extends Component {
       return
     }
 
-    if (event.target.tagName === 'INPUT') {
-      // allow user to select input text
-      return
-    }
-
     const isOpen = this.props.isOpen || this.props.showInput ? true : !this.state.isOpen
 
     event.stopPropagation()

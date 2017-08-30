@@ -18,8 +18,8 @@ import './select.scss'
 class SimpleSelect extends Component {
   static propTypes = {
     autoCloseMenu: PropType.bool,
-    arrowComponent: PropType.arrowComponent,
-    arrowRenderer: PropType.arrowRenderer,
+    arrowComponent: PropType.func,
+    arrowRenderer: PropType.func,
     clearable: PropType.bool,
     clearComponent: PropType.func,
     clearRenderer: PropType.func,

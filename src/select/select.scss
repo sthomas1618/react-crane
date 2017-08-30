@@ -14,6 +14,10 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
   position: relative;
 
   &.open {
+    .crane-select-input > input {
+      cursor: text;
+    }
+
     .crane-select-input-group {
       border-bottom: 0;
       border-bottom-left-radius: 0;
@@ -38,6 +42,10 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
     .crane-select-input-group {
       border: 1px solid $crane-select-focus-color;
       box-shadow: $crane-select-box-shadow;
+    }
+
+    &.outer-focus .crane-select-input > input {
+      opacity: 0;
     }
   }
 }

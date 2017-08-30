@@ -125,7 +125,8 @@ class SimpleSelect extends Component {
 
     this.setState({
       isOpen: false,
-      isFocused: false
+      isFocused: false,
+      isOuterFocused: false
     })
   }
 
@@ -149,9 +150,14 @@ class SimpleSelect extends Component {
       return
     }
 
-    if (this.props.onInputChange) {
-      this.props.onInputChange(inputValue, event)
-    }
+    this.setState({
+      isOpen: true,
+      isOuterFocused: false
+    }, () => {
+      if (this.props.onInputChange) {
+        this.props.onInputChange(inputValue, event)
+      }
+    })
   }
 
   onArrowClick = (event) => {
@@ -168,7 +174,7 @@ class SimpleSelect extends Component {
     event.preventDefault()
 
     // we know we are closing menu
-    this.closeMenu()
+    this.setState({ isOpen: false }, this.focus)
   }
 
   onClearClick = (event) => {
@@ -179,8 +185,7 @@ class SimpleSelect extends Component {
     event.stopPropagation()
     event.preventDefault()
 
-    this.closeMenu()
-    this.emitValueChange(null)
+    this.setState({ isOpen: false, isOuterFocused: false }, this.emitValueChange(null))
   }
 
   onOptionClick = (event, option) => {
@@ -191,8 +196,9 @@ class SimpleSelect extends Component {
     event.stopPropagation()
     event.preventDefault()
 
-    this.closeMenu(!this.props.autoCloseMenu)
-    this.emitValueChange(option)
+    const isOpen = !this.props.autoCloseMenu
+    const newState = { isOpen, isOuterFocused: !isOpen }
+    this.setState(newState, this.emitValueChange(option))
   }
 
   emitValueChange = (option) => {
@@ -211,10 +217,6 @@ class SimpleSelect extends Component {
     if (this.props.autoCloseMenu) {
       this.focus()
     }
-  }
-
-  closeMenu = (isOpen = false) => {
-    this.setState({ isOpen }, this.focus)
   }
 
   // check for right-clicks, etc
@@ -299,7 +301,7 @@ class SimpleSelect extends Component {
   }
 
   render() {
-    const isFocused = this.state.isFocused
+    const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
     const {
       inputValue,
@@ -312,7 +314,9 @@ class SimpleSelect extends Component {
       valueRenderer
     } = this.props
     const ValueGroupComponent = this.props.valueGroupComponent
-    const selectClassName = classNames('crane-select', { open: isOpen, focus: isFocused })
+    const selectClassName = classNames('crane-select', {
+      open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused
+    })
 
     return (
       <div className={selectClassName} ref={(container) => { this.container = container }}>

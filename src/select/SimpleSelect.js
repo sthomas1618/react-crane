@@ -18,6 +18,8 @@ import './select.scss'
 class SimpleSelect extends Component {
   static propTypes = {
     autoCloseMenu: PropType.bool,
+    arrowComponent: PropType.arrowComponent,
+    arrowRenderer: PropType.arrowRenderer,
     clearable: PropType.bool,
     clearComponent: PropType.func,
     clearRenderer: PropType.func,
@@ -46,6 +48,8 @@ class SimpleSelect extends Component {
 
   static defaultProps = {
     autoCloseMenu: PropType.bool,
+    arrowComponent: Arrow,
+    arrowRenderer: null,
     clearable: false,
     clearComponent: Clear,
     clearRenderer: null,
@@ -226,6 +230,25 @@ class SimpleSelect extends Component {
     }
   }
 
+  renderArrow() {
+    const ArrowComponent = this.props.arrowComponent
+    const { arrowRenderer } = this.props
+
+    return <ArrowComponent arrowRenderer={arrowRenderer} onArrowClick={this.onArrowClick} />
+  }
+
+  renderClear() {
+    const ClearComponent = this.props.clearComponent
+    const { clearable, clearRenderer, value } = this.props
+    const hasValue = _.isArray(value) ? value.length : value
+
+    if (!clearable || !hasValue) {
+      return null
+    }
+
+    return <ClearComponent clearRenderer={clearRenderer} onClearClick={this.onClearClick} />
+  }
+
   renderMenu() {
     const {
       labelKey,
@@ -275,18 +298,6 @@ class SimpleSelect extends Component {
     return <FocusPlaceholderComponent {...props} />
   }
 
-  renderClear() {
-    const ClearComponent = this.props.clearComponent
-    const { clearable, clearRenderer, value } = this.props
-    const hasValue = _.isArray(value) ? value.length : value
-
-    if (!clearable || !hasValue) {
-      return null
-    }
-
-    return <ClearComponent clearRenderer={clearRenderer} onClearClick={this.onClearClick} />
-  }
-
   render() {
     const isFocused = this.state.isFocused
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -322,7 +333,7 @@ class SimpleSelect extends Component {
           />
           {this.renderInput(isOpen)}
           {this.renderClear()}
-          <Arrow onArrowClick={this.onArrowClick} />
+          {this.renderArrow()}
         </div>
 
         {isOpen && this.renderMenu()}

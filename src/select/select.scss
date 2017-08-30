@@ -56,6 +56,8 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
   line-height: $crane-select-height;
   width: 100%;
   padding-left: 10px;
+  padding-right: 44px;
+  box-sizing: border-box;
 }
 
 .crane-select-focus-placeholder,

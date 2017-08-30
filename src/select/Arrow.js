@@ -5,18 +5,25 @@ const Arrow = (props) => {
   const renderer = props.arrowRenderer || <span className="crane-select-arrow" />
 
   return (
-    <div className="crane-select-arrow-container">
+    <div
+      role="button"
+      tabIndex={-1}
+      className="crane-select-arrow-container"
+      onMouseDown={props.onArrowClick}
+    >
       {renderer}
     </div>
   )
 }
 
 Arrow.propTypes = {
-  arrowRenderer: PropType.func
+  arrowRenderer: PropType.func,
+  onArrowClick: PropType.func
 }
 
 Arrow.defaultProps = {
-  arrowRenderer: null
+  arrowRenderer: null,
+  onArrowClick: null
 }
 
 export default Arrow

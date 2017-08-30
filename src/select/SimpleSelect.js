@@ -143,6 +143,24 @@ class SimpleSelect extends Component {
     }
   }
 
+  onArrowClick = (event) => {
+    if (this.isSecondayClick(event)) {
+      return
+    }
+
+    if (this.props.isOpen || !this.state.isOpen) {
+      // let it bubble up
+      return
+    }
+
+    // we know we are closing menu
+    event.stopPropagation()
+    event.preventDefault()
+
+    this.setState({ isOpen: false })
+    this.focus()
+  }
+
   onOptionClick = (event, option) => {
     if (this.isSecondayClick(event)) {
       return
@@ -259,7 +277,7 @@ class SimpleSelect extends Component {
             valueGroupRenderer={valueGroupRenderer}
           />
           {this.renderInput(isOpen)}
-          <Arrow />
+          <Arrow onArrowClick={this.onArrowClick} />
         </div>
 
         {isOpen && this.renderMenu()}

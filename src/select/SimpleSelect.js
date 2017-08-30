@@ -16,6 +16,7 @@ import './select.scss'
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {
+    autoCloseMenu: PropType.bool,
     focusPlaceholderComponent: PropType.func,
     inputComponent: PropType.func,
     inputValue: PropType.string,
@@ -40,6 +41,7 @@ class SimpleSelect extends Component {
   }
 
   static defaultProps = {
+    autoCloseMenu: PropType.bool,
     focusPlaceholderComponent: FocusPlaceholder,
     inputComponent: Input,
     inputValue: '',
@@ -121,7 +123,12 @@ class SimpleSelect extends Component {
       this.props.onFocus(event)
     }
 
-    this.setState({ isFocused: true })
+    const isOpen = this.props.isOpen || this.state.isOpen
+
+    this.setState({
+      isOpen,
+      isFocused: true
+    })
   }
 
   onInputChange = (event) => {
@@ -141,13 +148,19 @@ class SimpleSelect extends Component {
       return
     }
 
-    this.setState({ isOpen: false })
-
     if (this.props.onChange) {
       this.props.onChange(option)
     }
 
     this.clearInputValue()
+    this.setState({ isOpen: !this.props.autoCloseMenu })
+
+    event.stopPropagation()
+    event.preventDefault()
+
+    if (this.props.autoCloseMenu) {
+      this.focus()
+    }
   }
 
   // check for right-clicks, etc

@@ -8,6 +8,7 @@ import ValueGroupRenderer from './ValueGroupRenderer'
 
 class MultiSelect extends Component {
   static propTypes = {
+    autoCloseMenu: PropType.bool,
     value: PropType.array,
     onChange: PropType.func,
     labelKey: PropType.string,
@@ -16,6 +17,7 @@ class MultiSelect extends Component {
   }
 
   static defaultProps = {
+    autoCloseMenu: false,
     value: [],
     onChange: null,
     labelKey: 'label',

@@ -1,4 +1,5 @@
 export Arrow from './Arrow'
+export Clear from './Clear'
 export FocusPlaceholder from './FocusPlaceholder'
 export Input from './Input'
 export Menu from './Menu'

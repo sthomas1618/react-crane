@@ -1,5 +1,6 @@
 // credit to https://github.com/JedWatson/react-select for many css patterns used here
 $crane-select-arrow-color: #666;
+$crane-select-clear-color: #666;
 $crane-select-border-color: #ddd;
 $crane-select-border-radius: 5px;
 $crane-select-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
@@ -143,3 +144,21 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
   }
 }
 
+.crane-select-clear-container {
+  cursor: pointer;
+  width: 25px;
+  text-align: center;
+  top: 4px;
+  right: 15px;
+  position: absolute;
+  padding-right: 10px;
+}
+
+.crane-select-clear {
+  font-size: 18px;
+  color: $crane-select-clear-color;
+
+  &:hover {
+    color: darken($crane-select-clear-color, 25%);
+  }
+}

@@ -26,6 +26,13 @@ class MultiSelect extends Component {
   }
 
   onChange = (option) => {
+    if (option === null) {
+      if (this.props.onChange) {
+        this.props.onChange([])
+      }
+      return
+    }
+
     let newValues = []
     const { value, labelKey, valueKey } = this.props
 

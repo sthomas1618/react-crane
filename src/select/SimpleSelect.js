@@ -4,6 +4,7 @@ import PropType from 'prop-types'
 import classNames from 'classnames'
 
 import Arrow from './Arrow'
+import Clear from './Clear'
 import FocusPlaceholder from './FocusPlaceholder'
 import Input from './Input'
 import Menu from './Menu'
@@ -17,6 +18,9 @@ import './select.scss'
 class SimpleSelect extends Component {
   static propTypes = {
     autoCloseMenu: PropType.bool,
+    clearable: PropType.bool,
+    clearComponent: PropType.func,
+    clearRenderer: PropType.func,
     focusPlaceholderComponent: PropType.func,
     inputComponent: PropType.func,
     inputValue: PropType.string,
@@ -42,6 +46,9 @@ class SimpleSelect extends Component {
 
   static defaultProps = {
     autoCloseMenu: PropType.bool,
+    clearable: false,
+    clearComponent: Clear,
+    clearRenderer: null,
     focusPlaceholderComponent: FocusPlaceholder,
     inputComponent: Input,
     inputValue: '',
@@ -153,12 +160,23 @@ class SimpleSelect extends Component {
       return
     }
 
-    // we know we are closing menu
     event.stopPropagation()
     event.preventDefault()
 
-    this.setState({ isOpen: false })
-    this.focus()
+    // we know we are closing menu
+    this.closeMenu()
+  }
+
+  onClearClick = (event) => {
+    if (this.isSecondayClick(event)) {
+      return
+    }
+
+    event.stopPropagation()
+    event.preventDefault()
+
+    this.closeMenu()
+    this.emitValueChange(null)
   }
 
   onOptionClick = (event, option) => {
@@ -166,19 +184,33 @@ class SimpleSelect extends Component {
       return
     }
 
-    if (this.props.onChange) {
+    event.stopPropagation()
+    event.preventDefault()
+
+    this.closeMenu(!this.props.autoCloseMenu)
+    this.emitValueChange(option)
+  }
+
+  emitValueChange = (option) => {
+    const { value, valueKey } = this.props
+    const valueSelected = (option === null || value === null) && option !== value
+    const valueChanged = _.isArray(value)
+      ? true
+      : value && option && value[valueKey] !== option[valueKey]
+
+    if ((valueSelected || valueChanged) && this.props.onChange) {
       this.props.onChange(option)
     }
 
     this.clearInputValue()
-    this.setState({ isOpen: !this.props.autoCloseMenu })
-
-    event.stopPropagation()
-    event.preventDefault()
 
     if (this.props.autoCloseMenu) {
       this.focus()
     }
+  }
+
+  closeMenu = (isOpen = false) => {
+    this.setState({ isOpen }, this.focus)
   }
 
   // check for right-clicks, etc
@@ -243,6 +275,18 @@ class SimpleSelect extends Component {
     return <FocusPlaceholderComponent {...props} />
   }
 
+  renderClear() {
+    const ClearComponent = this.props.clearComponent
+    const { clearable, clearRenderer, value } = this.props
+    const hasValue = _.isArray(value) ? value.length : value
+
+    if (!clearable || !hasValue) {
+      return null
+    }
+
+    return <ClearComponent clearRenderer={clearRenderer} onClearClick={this.onClearClick} />
+  }
+
   render() {
     const isFocused = this.state.isFocused
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -277,6 +321,7 @@ class SimpleSelect extends Component {
             valueGroupRenderer={valueGroupRenderer}
           />
           {this.renderInput(isOpen)}
+          {this.renderClear()}
           <Arrow onArrowClick={this.onArrowClick} />
         </div>
 

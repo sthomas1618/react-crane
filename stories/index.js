@@ -17,6 +17,7 @@ stories.add('with SimpleSelect', () => (
     showInput={boolean('Show Input', false)}
     isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
   />
 ))
 
@@ -28,5 +29,6 @@ stories.add('with MultiSelect', () => (
     isOpen={boolean('Is Open', false)}
     valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
   />
 ))

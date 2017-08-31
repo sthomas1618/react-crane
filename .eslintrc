@@ -1,11 +1,12 @@
 {
-  "extends": "eslint-config-airbnb",
+  "extends": ["eslint-config-airbnb", "plugin:jest/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
-  "plugins": ["import", "jsx-a11y", "react"],
+  "plugins": ["import", "jsx-a11y", "react", "jest"],
   "parserOptions": {
     "ecmaFeatures": {
       "ecmaVersion": 6,

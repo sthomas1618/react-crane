@@ -42,6 +42,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-plugin-dynamic-import-node": "^1.0.2",
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -55,18 +56,54 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.0.5",
+    "enzyme": "^2.9.1",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.2.1",
     "extract-text-webpack-plugin": "^3.0.0",
+    "jest": "^20.0.4",
+    "jest-enzyme": "^3.8.1",
     "node-sass": "^4.5.3",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.6",
+    "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.6",
     "webpack": "^3.5.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js}"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTests.js",
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
+    ],
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "cobertura",
+      "text"
+    ]
   }
 }

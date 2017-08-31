@@ -11,8 +11,8 @@ class BasicSearchSelect extends Component {
     }
   }
 
-  onInputChange = (inputValue) => {
-    this.setState({ inputValue })
+  onInputChange = (event) => {
+    this.setState({ inputValue: event.value })
   }
 
   render() {

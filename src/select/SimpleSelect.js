@@ -29,6 +29,7 @@ class SimpleSelect extends Component {
     inputValue: PropType.string,
     isOpen: PropType.bool,
     labelKey: PropType.string,
+    name: PropType.string,
     menuComponent: PropType.func,
     onBlur: PropType.func,
     onChange: PropType.func,
@@ -60,6 +61,7 @@ class SimpleSelect extends Component {
     inputValue: '',
     isOpen: false,
     labelKey: 'label',
+    name: null,
     menuComponent: Menu,
     onBlur: null,
     onChange: null,
@@ -128,7 +130,7 @@ class SimpleSelect extends Component {
 
   onInputBlur = (event) => {
     if (this.props.onBlur) {
-      this.props.onBlur(event)
+      this.props.onBlur({ name: this.props.name }, event)
     }
 
     this.setState({
@@ -140,7 +142,7 @@ class SimpleSelect extends Component {
 
   onInputFocus = (event) => {
     if (this.props.onFocus) {
-      this.props.onFocus(event)
+      this.props.onFocus({ name: this.props.name }, event)
     }
 
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -217,7 +219,8 @@ class SimpleSelect extends Component {
 
   setInputValue = (event, inputVal) => {
     if (this.props.onInputChange) {
-      this.props.onInputChange(inputVal, event)
+      const eventContext = { name: this.props.name, value: inputVal }
+      this.props.onInputChange(eventContext, event)
     }
   }
 
@@ -229,7 +232,9 @@ class SimpleSelect extends Component {
       : value && option && value[valueKey] !== option[valueKey]
 
     if ((valueSelected || valueChanged) && this.props.onChange) {
-      this.props.onChange(option)
+      const eventContext = { name: this.props.name, value: option }
+      this.props.onChange(eventContext, event)
+
       const newInputVal = !autoClearInput && option !== null ? option[labelKey] : ''
       this.setInputValue(event, newInputVal)
     }

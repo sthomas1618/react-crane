@@ -25,7 +25,9 @@ class MultiSelect extends Component {
     valueLabelLimit: 3
   }
 
-  onChange = (option) => {
+  onChange = (eventContext, event) => {
+    const option = eventContext.value
+
     if (option === null) {
       if (this.props.onChange) {
         this.props.onChange([])
@@ -47,7 +49,8 @@ class MultiSelect extends Component {
     newValues = _.sortBy(newValues, val => (val[labelKey]))
 
     if (this.props.onChange) {
-      this.props.onChange(newValues)
+      const newEventContext = { ...eventContext, value: newValues }
+      this.props.onChange(newEventContext, event)
     }
   }
 

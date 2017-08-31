@@ -23,11 +23,11 @@ class SearchSelect extends Component {
     this.state = { value: null }
   }
 
-  onChange = (option) => {
-    this.setState({ value: option })
+  onChange = (eventContext, event) => {
+    this.setState({ value: eventContext.value })
 
     if (this.props.onChange) {
-      this.props.onChange(option)
+      this.props.onChange(eventContext, event)
     }
   }
 

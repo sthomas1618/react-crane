@@ -11,8 +11,8 @@ class BasicMultiSelect extends Component {
     }
   }
 
-  onChange = (option) => {
-    this.setState({ value: option })
+  onChange = (event) => {
+    this.setState({ value: event.value })
   }
 
   render() {

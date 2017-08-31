@@ -113,7 +113,10 @@ class SimpleSelect extends Component {
     const isOpen = this.props.isOpen || this.props.showInput ? true : !this.state.isOpen
 
     event.stopPropagation()
-    event.preventDefault()
+
+    if (event.target.tagName !== 'INPUT') {
+      event.preventDefault()
+    }
 
     this.focus()
 

@@ -10,6 +10,7 @@ const Arrow = (props) => {
       tabIndex={-1}
       className="crane-select-arrow-container"
       onMouseDown={props.onArrowClick}
+      onTouchEnd={props.onArrowTouchEnd}
     >
       {renderer}
     </div>
@@ -18,12 +19,14 @@ const Arrow = (props) => {
 
 Arrow.propTypes = {
   arrowRenderer: PropType.func,
-  onArrowClick: PropType.func
+  onArrowClick: PropType.func,
+  onArrowTouchEnd: PropType.func
 }
 
 Arrow.defaultProps = {
   arrowRenderer: null,
-  onArrowClick: null
+  onArrowClick: null,
+  onArrowTouchEnd: null
 }
 
 export default Arrow

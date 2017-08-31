@@ -10,6 +10,7 @@ const Clear = (props) => {
       tabIndex={-1}
       className="crane-select-clear-container"
       onMouseDown={props.onClearClick}
+      onTouchEnd={props.onClearTouchEnd}
     >
       {renderer}
     </div>
@@ -18,12 +19,14 @@ const Clear = (props) => {
 
 Clear.propTypes = {
   clearRenderer: PropType.func,
-  onClearClick: PropType.func
+  onClearClick: PropType.func,
+  onClearTouchEnd: PropType.func
 }
 
 Clear.defaultProps = {
   clearRenderer: null,
-  onClearClick: null
+  onClearClick: null,
+  onClearTouchEnd: null
 }
 
 export default Clear

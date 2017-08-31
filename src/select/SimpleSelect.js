@@ -99,6 +99,10 @@ class SimpleSelect extends Component {
     }
   }
 
+  onValueTouchEnd = (event) => {
+    this.onValueMouseDown(event)
+  }
+
   onValueMouseDown = (event) => {
     if (this.isSecondayClick(event)) {
       return
@@ -177,6 +181,10 @@ class SimpleSelect extends Component {
     })
   }
 
+  onArrowTouchEnd = (event) => {
+    this.onArrowClick(event)
+  }
+
   onArrowClick = (event) => {
     if (this.isSecondayClick(event)) {
       return
@@ -192,6 +200,10 @@ class SimpleSelect extends Component {
 
     // we know we are closing menu
     this.setState({ isOpen: false }, this.focus)
+  }
+
+  onClearTouchEnd = (event) => {
+    this.onClearClick(event)
   }
 
   onClearClick = (event) => {
@@ -253,7 +265,11 @@ class SimpleSelect extends Component {
     const ArrowComponent = this.props.arrowComponent
     const { arrowRenderer } = this.props
 
-    return <ArrowComponent arrowRenderer={arrowRenderer} onArrowClick={this.onArrowClick} />
+    return (<ArrowComponent
+      arrowRenderer={arrowRenderer}
+      onArrowClick={this.onArrowClick}
+      onArrowTouchEnd={this.onArrowTouchEnd}
+    />)
   }
 
   renderClear() {
@@ -265,7 +281,11 @@ class SimpleSelect extends Component {
       return null
     }
 
-    return <ClearComponent clearRenderer={clearRenderer} onClearClick={this.onClearClick} />
+    return (<ClearComponent
+      clearRenderer={clearRenderer}
+      onClearClick={this.onClearClick}
+      onClearTouchEnd={this.onClearTouchEnd}
+    />)
   }
 
   renderMenu() {
@@ -340,6 +360,7 @@ class SimpleSelect extends Component {
         <div
           className="crane-select-input-group"
           onMouseDown={this.onValueMouseDown}
+          onTouchEnd={this.onValueTouchEnd}
           role="presentation"
         >
           <ValueGroupComponent

@@ -109,7 +109,8 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
 
 .crane-select-menu {
 	max-height: $crane-select-menu-max-height - 2px;
-	overflow-y: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .crane-select-option {

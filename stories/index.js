@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, number } from '@storybook/addon-knobs'
+import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
 
 import { BasicSelect, BasicMultiSelect, BasicSearchSelect } from './components'
 import states from './fixtures/states'
@@ -19,6 +19,7 @@ stories.add('with SimpleSelect', () => (
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
     autoClearInput={boolean('Auto Clear Input', true)}
+    placeholder={text('Placeholder', 'Select value...')}
   />
 ))
 
@@ -31,6 +32,7 @@ stories.add('with MultiSelect', () => (
     valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
+    placeholder={text('Placeholder', 'Select value...')}
   />
 ))
 
@@ -42,5 +44,6 @@ stories.add('with SearchSelect', () => (
     isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
+    placeholder={text('Placeholder', 'Select value...')}
   />
 ))

@@ -18,6 +18,7 @@ stories.add('with SimpleSelect', () => (
     isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
+    autoClearInput={boolean('Auto Clear Input', true)}
   />
 ))
 

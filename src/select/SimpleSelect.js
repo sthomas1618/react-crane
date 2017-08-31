@@ -17,6 +17,7 @@ import './select.scss'
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {
+    autoClearInput: PropType.bool,
     autoCloseMenu: PropType.bool,
     arrowComponent: PropType.func,
     arrowRenderer: PropType.func,
@@ -47,7 +48,8 @@ class SimpleSelect extends Component {
   }
 
   static defaultProps = {
-    autoCloseMenu: PropType.bool,
+    autoClearInput: true,
+    autoCloseMenu: true,
     arrowComponent: Arrow,
     arrowRenderer: null,
     clearable: false,
@@ -123,10 +125,10 @@ class SimpleSelect extends Component {
     // thanks https://github.com/JedWatson/react-select/blob/master/src/Select.js#L238
     if (this.state.isFocused) {
       // On iOS, we can get into a state where we think the input is focused but it isn't really,
-      // since iOS ignores programmatic calls to input.focus() that weren't triggered by a click event.
-      // Call focus() again here to be safe.
+      // since iOS ignores programmatic calls to input.focus() that weren't
+      // triggered by a click event. Call focus() again here to be safe.
 
-      // clears the value so that the cursor will be at the end of input when the component re-renders
+      // clears the value so that the cursor will be at the end of input this re-renders
       this.input.value = ''
 
       // if the input is focused, ensure the menu is open
@@ -175,9 +177,7 @@ class SimpleSelect extends Component {
       isOpen: true,
       isOuterFocused: false
     }, () => {
-      if (this.props.onInputChange) {
-        this.props.onInputChange(inputValue, event)
-      }
+      this.setInputValue(event, inputValue)
     })
   }
 
@@ -214,7 +214,7 @@ class SimpleSelect extends Component {
     event.stopPropagation()
     event.preventDefault()
 
-    this.setState({ isOpen: false, isOuterFocused: false }, this.emitValueChange(null))
+    this.setState({ isOpen: false, isOuterFocused: false }, this.emitValueChange(null, event))
   }
 
   onOptionClick = (event, option) => {
@@ -226,12 +226,18 @@ class SimpleSelect extends Component {
     event.preventDefault()
 
     const isOpen = !this.props.autoCloseMenu
-    const newState = { isOpen, isOuterFocused: !isOpen }
-    this.setState(newState, this.emitValueChange(option))
+    const newState = { isOpen, isOuterFocused: !isOpen && this.props.autoClearInput }
+    this.setState(newState, this.emitValueChange(option, event))
   }
 
-  emitValueChange = (option) => {
-    const { value, valueKey } = this.props
+  setInputValue = (event, inputVal) => {
+    if (this.props.onInputChange) {
+      this.props.onInputChange(inputVal, event)
+    }
+  }
+
+  emitValueChange = (option, event) => {
+    const { autoClearInput, value, valueKey, labelKey } = this.props
     const valueSelected = (option === null || value === null) && option !== value
     const valueChanged = _.isArray(value)
       ? true
@@ -239,9 +245,9 @@ class SimpleSelect extends Component {
 
     if ((valueSelected || valueChanged) && this.props.onChange) {
       this.props.onChange(option)
+      const newInputVal = !autoClearInput && option !== null ? option[labelKey] : ''
+      this.setInputValue(event, newInputVal)
     }
-
-    this.clearInputValue()
 
     if (this.props.autoCloseMenu) {
       this.focus()
@@ -254,12 +260,6 @@ class SimpleSelect extends Component {
   focus = () => { this.input.focus() }
 
   blur = () => { this.input.blur() }
-
-  clearInputValue = (event) => {
-    if (this.props.onInputChange) {
-      this.props.onInputChange('', event)
-    }
-  }
 
   renderArrow() {
     const ArrowComponent = this.props.arrowComponent
@@ -289,26 +289,11 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const {
-      labelKey,
-      optionComponent,
-      optionRenderer,
-      options,
-      value,
-      valueKey
-    } = this.props
+    const menuProps = _.omit(this.props, 'menuComponent')
     const MenuComponent = this.props.menuComponent
     return (
       <div className="crane-select-menu-container">
-        <MenuComponent
-          labelKey={labelKey}
-          onOptionClick={this.onOptionClick}
-          optionComponent={optionComponent}
-          optionRenderer={optionRenderer}
-          options={options}
-          value={value}
-          valueKey={valueKey}
-        />
+        <MenuComponent {...menuProps} onOptionClick={this.onOptionClick} />
       </div>
     )
   }
@@ -340,16 +325,7 @@ class SimpleSelect extends Component {
   render() {
     const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
-    const {
-      inputValue,
-      labelKey,
-      placeholder,
-      showInput,
-      value,
-      valueComponent,
-      valueGroupRenderer,
-      valueRenderer
-    } = this.props
+    const valueGroupProps = _.omit(this.props, 'valueGroupComponent')
     const ValueGroupComponent = this.props.valueGroupComponent
     const selectClassName = classNames('crane-select', {
       open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused
@@ -363,16 +339,7 @@ class SimpleSelect extends Component {
           onTouchEnd={this.onValueTouchEnd}
           role="presentation"
         >
-          <ValueGroupComponent
-            inputValue={inputValue}
-            labelKey={labelKey}
-            placeholder={placeholder}
-            showInput={showInput}
-            value={value}
-            valueRenderer={valueRenderer}
-            valueComponent={valueComponent}
-            valueGroupRenderer={valueGroupRenderer}
-          />
+          <ValueGroupComponent {...valueGroupProps} />
           {this.renderInput(isOpen)}
           {this.renderClear()}
           {this.renderArrow()}

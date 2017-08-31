@@ -87,20 +87,6 @@ class SimpleSelect extends Component {
     }
   }
 
-  componentDidMount() {
-    document.addEventListener('touchstart', this.onDocumentClick, false)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('touchstart', this.onDocumentClick, false)
-  }
-
-  onDocumentClick = (event) => {
-    if (this.container && !this.container.contains(event.target)) {
-      this.setState({ isOpen: false })
-    }
-  }
-
   onValueTouchEnd = (event) => {
     this.onValueMouseDown(event)
   }

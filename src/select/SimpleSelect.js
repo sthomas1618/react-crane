@@ -127,10 +127,6 @@ class SimpleSelect extends Component {
 
     // thanks https://github.com/JedWatson/react-select/blob/master/src/Select.js#L238
     if (this.state.isFocused) {
-      // On iOS, we can get into a state where we think the input is focused but it isn't really,
-      // since iOS ignores programmatic calls to input.focus() that weren't
-      // triggered by a click event. Call focus() again here to be safe.
-
       // clears the value so that the cursor will be at the end of input this re-renders
       this.input.value = ''
 

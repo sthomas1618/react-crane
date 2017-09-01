@@ -2,7 +2,9 @@ import React from 'react'
 import PropType from 'prop-types'
 
 const Clear = (props) => {
-  const renderer = props.clearRenderer || <span className="crane-select-clear">&times;</span>
+  const renderer = props.clearRenderer
+    ? props.clearRenderer()
+    : <span className="crane-select-clear">&times;</span>
 
   return (
     <div
@@ -19,14 +21,12 @@ const Clear = (props) => {
 
 Clear.propTypes = {
   clearRenderer: PropType.func,
-  onClearClick: PropType.func,
-  onClearTouchEnd: PropType.func
+  onClearClick: PropType.func.isRequired,
+  onClearTouchEnd: PropType.func.isRequired
 }
 
 Clear.defaultProps = {
-  clearRenderer: null,
-  onClearClick: null,
-  onClearTouchEnd: null
+  clearRenderer: null
 }
 
 export default Clear

@@ -254,7 +254,7 @@ class SimpleSelect extends Component {
 
   blur = () => { this.input.blur() }
 
-  renderArrow() {
+  renderArrow(isOpen) {
     const ArrowComponent = this.props.arrowComponent
     const { arrowRenderer } = this.props
 
@@ -262,6 +262,7 @@ class SimpleSelect extends Component {
       arrowRenderer={arrowRenderer}
       onArrowClick={this.onArrowClick}
       onArrowTouchEnd={this.onArrowTouchEnd}
+      isOpen={isOpen}
     />)
   }
 
@@ -335,7 +336,7 @@ class SimpleSelect extends Component {
           <ValueGroupComponent {...valueGroupProps} />
           {this.renderInput(isOpen)}
           {this.renderClear()}
-          {this.renderArrow()}
+          {this.renderArrow(isOpen)}
         </div>
 
         {isOpen && this.renderMenu()}

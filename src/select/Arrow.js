@@ -2,7 +2,9 @@ import React from 'react'
 import PropType from 'prop-types'
 
 const Arrow = (props) => {
-  const renderer = props.arrowRenderer || <span className="crane-select-arrow" />
+  const renderer = props.arrowRenderer
+    ? props.arrowRenderer({ isOpen: props.isOpen })
+    : <span className="crane-select-arrow" />
 
   return (
     <div
@@ -19,14 +21,13 @@ const Arrow = (props) => {
 
 Arrow.propTypes = {
   arrowRenderer: PropType.func,
-  onArrowClick: PropType.func,
-  onArrowTouchEnd: PropType.func
+  onArrowClick: PropType.func.isRequired,
+  onArrowTouchEnd: PropType.func.isRequired,
+  isOpen: PropType.bool.isRequired
 }
 
 Arrow.defaultProps = {
-  arrowRenderer: null,
-  onArrowClick: null,
-  onArrowTouchEnd: null
+  arrowRenderer: null
 }
 
 export default Arrow

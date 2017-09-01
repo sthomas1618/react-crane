@@ -8,7 +8,8 @@ const ValueGroupRenderer = (props) => {
   const { value, valueKey, labelKey, valueLabelLimit, options } = props
 
   if (valueLabelLimit > 0 && value.length > valueLabelLimit) {
-    return <span>{`${value.length} selected`}</span>
+    const count = value.length === options.length ? 'All' : value.length
+    return <span>{`${count} selected`}</span>
   }
 
   const values = value.map((val, i) => {

@@ -81,8 +81,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js}",
-      "!src/**/index.js"
+      "src/**/*.{js}"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTests.js",
     "testMatch": [

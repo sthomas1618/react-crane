@@ -36,7 +36,7 @@
       "plugins": [
         "transform-class-properties",
         "transform-react-jsx",
-        "transform-runtime",
+        ["transform-runtime", { "polyfill": false }],
         "transform-export-extensions",
         "transform-object-rest-spread",
         "dynamic-import-node",

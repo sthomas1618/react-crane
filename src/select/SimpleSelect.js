@@ -21,6 +21,7 @@ class SimpleSelect extends Component {
     autoCloseMenu: PropType.bool,
     arrowComponent: PropType.func,
     arrowRenderer: PropType.func,
+    className: PropType.string,
     clearable: PropType.bool,
     clearComponent: PropType.func,
     clearRenderer: PropType.func,
@@ -53,6 +54,7 @@ class SimpleSelect extends Component {
     autoCloseMenu: true,
     arrowComponent: Arrow,
     arrowRenderer: null,
+    className: null,
     clearable: false,
     clearComponent: Clear,
     clearRenderer: null,
@@ -318,7 +320,7 @@ class SimpleSelect extends Component {
     const isOpen = this.props.isOpen || this.state.isOpen
     const valueGroupProps = _.omit(this.props, 'valueGroupComponent')
     const ValueGroupComponent = this.props.valueGroupComponent
-    const selectClassName = classNames('crane-select', {
+    const selectClassName = classNames('crane-select', this.props.className, {
       open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused
     })
 

@@ -2,7 +2,7 @@
   "name": "react-crane",
   "version": "0.2.0",
   "description": "A React Components Library",
-  "main": "dist/module/module.js",
+  "main": "dist/module/index.js",
   "scripts": {
     "test": "node scripts/test.js",
     "start": "cross-env NODE_ENV=development start-storybook -p 6006",

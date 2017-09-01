@@ -227,7 +227,7 @@ class SimpleSelect extends Component {
   }
 
   emitValueChange = (option, event) => {
-    const { autoClearInput, value, valueKey, labelKey } = this.props
+    const { autoClearInput, value, valueKey, labelKey, inputValue } = this.props
     const valueSelected = (option === null || value === null) && option !== value
     const valueObj = getSelectValue(this.props)
     const valueChanged = _.isArray(value)
@@ -237,8 +237,10 @@ class SimpleSelect extends Component {
     if ((valueSelected || valueChanged) && this.props.onChange) {
       const eventContext = { name: this.props.name, value: option }
       this.props.onChange(eventContext, event)
+    }
 
-      const newInputVal = !autoClearInput && option !== null ? option[labelKey] : ''
+    const newInputVal = !autoClearInput && option !== null ? option[labelKey] : ''
+    if (newInputVal !== inputValue) {
       this.setInputValue(event, newInputVal)
     }
 

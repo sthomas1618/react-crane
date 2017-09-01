@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index.js',
+  entry: ['./src/index.js', './scss/crane.scss'],
   output: {
     path: `${__dirname}/dist/umd/`,
     filename: 'crane.js',

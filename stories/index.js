@@ -5,6 +5,8 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
 import { BasicSelect, BasicMultiSelect, BasicSearchSelect } from './components'
 import states from './fixtures/states'
 
+import '../scss/crane.scss'
+
 const stories = storiesOf('Select', module)
 
 stories.addDecorator(withKnobs)

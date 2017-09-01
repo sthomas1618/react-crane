@@ -12,8 +12,6 @@ import Option from './Option'
 import Value from './Value'
 import ValueGroup from './ValueGroup'
 
-import '../../scss/select.scss'
-
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {

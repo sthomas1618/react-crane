@@ -21,9 +21,9 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
 
     .crane-select-input-group {
       border-bottom: 0;
+      padding-bottom: 1px;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      background-color: $crane-select-bg-color;
     }
 
     .crane-select-arrow {
@@ -55,6 +55,7 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
 .crane-select-input-group {
   border: 1px solid $crane-select-border-color;
   border-radius: $crane-select-border-radius;
+  background-color: $crane-select-bg-color;
 }
 
 .crane-select-value-group {

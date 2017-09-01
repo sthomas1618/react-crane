@@ -1,6 +1,6 @@
 {
   "name": "react-crane",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A React Components Library",
   "main": "dist/module/index.js",
   "scripts": {

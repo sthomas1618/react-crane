@@ -6,6 +6,8 @@ import SimpleSelect from '../SimpleSelect'
 import OptionRenderer from './OptionRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
+import { getSelectValue } from '../utils'
+
 class MultiSelect extends Component {
   static propTypes = {
     autoCloseMenu: PropType.bool,
@@ -13,7 +15,8 @@ class MultiSelect extends Component {
     onChange: PropType.func,
     labelKey: PropType.string,
     valueKey: PropType.string,
-    valueLabelLimit: PropType.number
+    valueLabelLimit: PropType.number,
+    options: PropType.array
   }
 
   static defaultProps = {
@@ -22,7 +25,8 @@ class MultiSelect extends Component {
     onChange: null,
     labelKey: 'label',
     valueKey: 'value',
-    valueLabelLimit: 3
+    valueLabelLimit: 3,
+    options: []
   }
 
   onChange = (eventContext, event) => {
@@ -36,17 +40,18 @@ class MultiSelect extends Component {
     }
 
     let newValues = []
-    const { value, labelKey, valueKey } = this.props
-
-    const containsVal = _.some(value, val => (val[valueKey] === option[valueKey]))
+    const { value, labelKey, valueKey, options } = this.props
+    const getVal = val => (getSelectValue({ options, valueKey, value: val }))
+    const valueObjs = value.map(val => (getVal(val)))
+    const containsVal = _.some(valueObjs, val => (val[valueKey] === option[valueKey]))
 
     if (containsVal) {
-      newValues = _.filter(value, val => (val[valueKey] !== option[valueKey]))
+      newValues = _.filter(valueObjs, val => (val[valueKey] !== option[valueKey]))
     } else {
-      newValues = [...value, option]
+      newValues = [...valueObjs, option]
     }
 
-    newValues = _.sortBy(newValues, val => (val[labelKey]))
+    newValues = _.sortBy(newValues, val => (_.isString(val) ? val : val[labelKey]))
 
     if (this.props.onChange) {
       const newEventContext = { ...eventContext, value: newValues }

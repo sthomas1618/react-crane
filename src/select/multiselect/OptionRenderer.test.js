@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import OptionRenderer from './OptionRenderer'
 
 it('does not explode', () => {
-  const renderer = <OptionRenderer option={{}} valueKey="" value={{}} labelKey="" />
+  const renderer = <OptionRenderer option={{}} options={[]} valueKey="" value={{}} labelKey="" />
   const wrapper = shallow(renderer)
 
   expect(wrapper).not.toBeEmpty()

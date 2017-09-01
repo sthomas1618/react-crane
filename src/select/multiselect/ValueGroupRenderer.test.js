@@ -10,7 +10,9 @@ it('does not explode', () => {
     <ValueGroupRenderer
       valueComponent={valueComponent}
       value={[]}
+      valueKey=""
       labelKey=""
+      options={[]}
     />
   )
   const wrapper = shallow(renderer)

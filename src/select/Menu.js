@@ -10,7 +10,7 @@ class Menu extends Component {
     optionRenderer: PropType.func,
     options: PropType.array,
     valueKey: PropType.string,
-    value: PropType.oneOfType([PropType.object, PropType.array])
+    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string])
   }
 
   static defaultProps = {
@@ -36,7 +36,7 @@ class Menu extends Component {
   }
 
   render() {
-    const optionProps = _.omit(this.props, 'optionComponent', 'options')
+    const optionProps = _.omit(this.props, 'optionComponent')
 
     return (
       <div className="crane-select-menu">

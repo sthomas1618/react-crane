@@ -12,6 +12,8 @@ import Option from './Option'
 import Value from './Value'
 import ValueGroup from './ValueGroup'
 
+import { getSelectValue } from './utils'
+
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {
@@ -38,7 +40,7 @@ class SimpleSelect extends Component {
     options: PropType.array,
     placeholder: PropType.string,
     showInput: PropType.bool,
-    value: PropType.oneOfType([PropType.object, PropType.array]),
+    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string]),
     valueComponent: PropType.func,
     valueRenderer: PropType.func,
     valueGroupComponent: PropType.func,
@@ -225,9 +227,10 @@ class SimpleSelect extends Component {
   emitValueChange = (option, event) => {
     const { autoClearInput, value, valueKey, labelKey } = this.props
     const valueSelected = (option === null || value === null) && option !== value
+    const valueObj = getSelectValue(this.props)
     const valueChanged = _.isArray(value)
       ? true
-      : value && option && value[valueKey] !== option[valueKey]
+      : value && option && valueObj[valueKey] !== option[valueKey]
 
     if ((valueSelected || valueChanged) && this.props.onChange) {
       const eventContext = { name: this.props.name, value: option }

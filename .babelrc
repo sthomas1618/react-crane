@@ -4,6 +4,7 @@
     "transform-react-jsx",
     "transform-runtime",
     "transform-export-extensions",
+    "transform-object-rest-spread",
     "syntax-dynamic-import",
     "lodash"
   ],
@@ -37,6 +38,7 @@
         "transform-react-jsx",
         "transform-runtime",
         "transform-export-extensions",
+        "transform-object-rest-spread",
         "dynamic-import-node",
         "lodash"
       ]

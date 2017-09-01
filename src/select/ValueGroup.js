@@ -10,7 +10,7 @@ class ValueGroup extends Component {
     onMouseDown: PropType.func,
     placeholder: PropType.string,
     showInput: PropType.bool,
-    value: PropType.oneOfType([PropType.object, PropType.array]),
+    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string]),
     valueComponent: PropType.func,
     valueGroupRenderer: PropType.func
   }

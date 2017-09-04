@@ -23,6 +23,7 @@ class SimpleSelect extends Component {
     className: PropType.string,
     clearable: PropType.bool,
     clearComponent: PropType.func,
+    clearInputOnBlur: PropType.bool,
     clearInputOnSelect: PropType.bool,
     clearRenderer: PropType.func,
     focusPlaceholderComponent: PropType.func,
@@ -56,6 +57,7 @@ class SimpleSelect extends Component {
     className: null,
     clearable: false,
     clearComponent: Clear,
+    clearInputOnBlur: true,
     clearInputOnSelect: true,
     clearRenderer: null,
     focusPlaceholderComponent: FocusPlaceholder,
@@ -133,6 +135,10 @@ class SimpleSelect extends Component {
   onInputBlur = (event) => {
     if (this.props.onBlur) {
       this.props.onBlur({ name: this.props.name }, event)
+    }
+
+    if (this.props.clearInputOnBlur && this.props.inputValue) {
+      this.setInputValue(event, '')
     }
 
     this.setState({

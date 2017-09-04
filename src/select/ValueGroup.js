@@ -4,7 +4,7 @@ import PropType from 'prop-types'
 
 class ValueGroup extends Component {
   static propTypes = {
-    autoClearInput: PropType.bool,
+    clearInputOnSelect: PropType.bool,
     inputValue: PropType.string,
     labelKey: PropType.string,
     onMouseDown: PropType.func,
@@ -16,7 +16,7 @@ class ValueGroup extends Component {
   }
 
   static defaultProps = {
-    autoClearInput: true,
+    clearInputOnSelect: true,
     inputValue: '',
     labelKey: '',
     onMouseDown: null,
@@ -35,7 +35,7 @@ class ValueGroup extends Component {
 
   render() {
     const {
-      autoClearInput,
+      clearInputOnSelect,
       inputValue,
       placeholder,
       showInput,
@@ -52,7 +52,7 @@ class ValueGroup extends Component {
     const rendererProps = _.omit(this.props, 'valueGroupRenderer', 'placeholder')
     const showValue = _.isArray(value) ? value.length : value
 
-    const renderer = autoClearInput && showValue
+    const renderer = clearInputOnSelect && showValue
       ? <ValueRenderer {...rendererProps} />
       : <span className="crane-select-placeholder">{placeholder}</span>
 

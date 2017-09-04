@@ -40,7 +40,7 @@ class SearchSelect extends Component {
         {...props}
         value={value}
         onChange={this.onChange}
-        autoClearInput={false}
+        clearInputOnSelect={false}
         showInput
       />
     )

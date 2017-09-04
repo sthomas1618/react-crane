@@ -17,13 +17,13 @@ import { getSelectValue } from './utils'
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {
-    autoClearInput: PropType.bool,
     autoCloseMenu: PropType.bool,
     arrowComponent: PropType.func,
     arrowRenderer: PropType.func,
     className: PropType.string,
     clearable: PropType.bool,
     clearComponent: PropType.func,
+    clearInputOnSelect: PropType.bool,
     clearRenderer: PropType.func,
     focusPlaceholderComponent: PropType.func,
     inputComponent: PropType.func,
@@ -50,13 +50,13 @@ class SimpleSelect extends Component {
   }
 
   static defaultProps = {
-    autoClearInput: true,
     autoCloseMenu: true,
     arrowComponent: Arrow,
     arrowRenderer: null,
     className: null,
     clearable: false,
     clearComponent: Clear,
+    clearInputOnSelect: true,
     clearRenderer: null,
     focusPlaceholderComponent: FocusPlaceholder,
     inputComponent: Input,
@@ -215,7 +215,7 @@ class SimpleSelect extends Component {
     event.preventDefault()
 
     const isOpen = !this.props.autoCloseMenu
-    const newState = { isOpen, isOuterFocused: !isOpen && this.props.autoClearInput }
+    const newState = { isOpen, isOuterFocused: !isOpen && this.props.clearInputOnSelect }
     this.setState(newState, this.emitValueChange(option, event))
   }
 
@@ -227,7 +227,7 @@ class SimpleSelect extends Component {
   }
 
   emitValueChange = (option, event) => {
-    const { autoClearInput, value, valueKey, labelKey, inputValue } = this.props
+    const { clearInputOnSelect, value, valueKey, labelKey, inputValue } = this.props
     const valueSelected = (option === null || value === null) && option !== value
     const valueObj = getSelectValue(this.props)
     const valueChanged = _.isArray(value)
@@ -239,7 +239,7 @@ class SimpleSelect extends Component {
       this.props.onChange(eventContext, event)
     }
 
-    const newInputVal = !autoClearInput && option !== null ? option[labelKey] : ''
+    const newInputVal = !clearInputOnSelect && option !== null ? option[labelKey] : ''
     if (newInputVal !== inputValue) {
       this.setInputValue(event, newInputVal)
     }

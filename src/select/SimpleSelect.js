@@ -32,6 +32,7 @@ class SimpleSelect extends Component {
     isOpen: PropType.bool,
     labelKey: PropType.string,
     name: PropType.string,
+    noResultsText: PropType.string,
     menuComponent: PropType.func,
     onBlur: PropType.func,
     onChange: PropType.func,
@@ -66,6 +67,7 @@ class SimpleSelect extends Component {
     isOpen: false,
     labelKey: 'label',
     name: null,
+    noResultsText: 'No Results Found',
     menuComponent: Menu,
     onBlur: null,
     onChange: null,
@@ -291,13 +293,25 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
+    const { options, noResultsText } = this.props
     const menuProps = _.omit(this.props, 'menuComponent')
-    const MenuComponent = this.props.menuComponent
-    return (
-      <div className="crane-select-menu-container">
-        <MenuComponent {...menuProps} onOptionClick={this.onOptionClick} />
-      </div>
-    )
+
+    let menu = null
+
+    if (options.length) {
+      const MenuComponent = this.props.menuComponent
+      menu = (
+        <div className="crane-select-menu-container">
+          <MenuComponent {...menuProps} onOptionClick={this.onOptionClick} />
+        </div>
+      )
+    } else if (noResultsText) {
+      menu = <div className="crane-select-no-results">{noResultsText}</div>
+    } else {
+      menu = <div className="crane-select-empty-divider" />
+    }
+
+    return menu
   }
 
   renderInput(isOpen) {

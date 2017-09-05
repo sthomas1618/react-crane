@@ -10,6 +10,8 @@ $crane-select-height: 34px;
 $crane-select-menu-max-height: 250px;
 $crane-select-option-hover-bg-color: #e7eff7;
 $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color, 10%);
+$crane-select-placeholder-color: #999;
+$crane-select-no-results-color: #999;
 
 .crane-select {
   position: relative;
@@ -137,7 +139,7 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
 }
 
 .crane-select-placeholder {
-  color:#999;
+  color: $crane-select-placeholder-color;
 }
 
 .crane-select-arrow-container {
@@ -184,4 +186,17 @@ $crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color,
   &:hover {
     color: darken($crane-select-clear-color, 25%);
   }
+}
+
+.crane-select-empty-divider {
+  border-top: 1px solid $crane-select-border-color;
+}
+
+.crane-select-no-results {
+  border: 1px solid $crane-select-border-color;
+  border-bottom-left-radius: $crane-select-border-radius;
+  border-bottom-right-radius: $crane-select-border-radius;
+  padding: 10px;
+  vertical-align: middle;
+  color: $crane-select-no-results-color;
 }

@@ -199,4 +199,10 @@ $crane-select-no-results-color: #999;
   padding: 10px;
   vertical-align: middle;
   color: $crane-select-no-results-color;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+  z-index: 9000;
+  box-sizing: border-box;
+  background-color: $crane-select-bg-color;
 }

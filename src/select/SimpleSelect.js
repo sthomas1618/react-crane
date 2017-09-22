@@ -31,8 +31,15 @@ class SimpleSelect extends Component {
     if (this.isSecondayClick(event)) {
       return
     }
+    const {
+      isOpen,
+      showInput,
+      openOnClick,
+      openOnEmptyInput,
+      inputValue
+    } = this.props
 
-    const isOpen = this.props.isOpen || this.props.showInput ? true : !this.state.isOpen
+    const setOpen = isOpen || (openOnClick && (showInput ? true : !this.state.isOpen))
 
     event.stopPropagation()
 
@@ -42,10 +49,12 @@ class SimpleSelect extends Component {
 
     this.focus()
 
-    if (!this.props.showInput) {
-      this.setState({ isOpen })
+    if (!showInput) {
+      this.setState({ isOpen: setOpen })
       return
     }
+
+    const openInput = openOnClick && (openOnEmptyInput || inputValue)
 
     // thanks https://github.com/JedWatson/react-select/blob/master/src/Select.js#L238
     if (this.state.isFocused) {
@@ -54,11 +63,11 @@ class SimpleSelect extends Component {
 
       // if the input is focused, ensure the menu is open
       this.setState({
-        isOpen: true,
+        isOpen: !!openInput,
         isOuterFocused: false
       })
     } else {
-      this.setState({ isOpen })
+      this.setState({ isOpen: !!openInput })
     }
   }
 
@@ -92,17 +101,20 @@ class SimpleSelect extends Component {
   }
 
   onInputChange = (event) => {
-    const inputValue = event.target.value
+    const newInputValue = event.target.value
+    const { inputValue, openOnEmptyInput } = this.props
 
-    if (this.props.inputValue === inputValue) {
+    if (inputValue === newInputValue) {
       return
     }
 
+    const isOpen = openOnEmptyInput || newInputValue
+
     this.setState({
-      isOpen: true,
+      isOpen,
       isOuterFocused: false
     }, () => {
-      this.setInputValue(event, inputValue)
+      this.setInputValue(event, newInputValue)
     })
   }
 

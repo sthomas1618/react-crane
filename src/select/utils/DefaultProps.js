@@ -29,6 +29,8 @@ export const simpleSelectDefaults = {
   onChange: null,
   onFocus: null,
   onInputChange: null,
+  openOnClick: true,
+  openOnEmptyInput: true,
   optionComponent: Option,
   optionRenderer: null,
   options: [],

@@ -29,6 +29,8 @@ stories.add('with SimpleSelect', () => (
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
     placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
   />
 ))
 
@@ -44,6 +46,8 @@ stories.add('with SimpleSelect and string value', () => (
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
     placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
   />
 ))
 
@@ -57,6 +61,7 @@ stories.add('with MultiSelect', () => (
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
   />
 ))
 
@@ -70,6 +75,7 @@ stories.add('with MultiSelect and string values', () => (
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
   />
 ))
 
@@ -82,5 +88,7 @@ stories.add('with SearchSelect', () => (
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
   />
 ))

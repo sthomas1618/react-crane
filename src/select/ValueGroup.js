@@ -1,18 +1,18 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 class ValueGroup extends Component {
   static propTypes = {
-    clearInputOnSelect: PropType.bool,
-    inputValue: PropType.string,
-    labelKey: PropType.string,
-    onMouseDown: PropType.func,
-    placeholder: PropType.string,
-    showInput: PropType.bool,
-    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string]),
-    valueComponent: PropType.func,
-    valueGroupRenderer: PropType.func
+    clearInputOnSelect: PropTypes.bool,
+    inputValue: PropTypes.string,
+    labelKey: PropTypes.string,
+    onMouseDown: PropTypes.func,
+    placeholder: PropTypes.string,
+    showInput: PropTypes.bool,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
+    valueComponent: PropTypes.func,
+    valueGroupRenderer: PropTypes.func
   }
 
   static defaultProps = {

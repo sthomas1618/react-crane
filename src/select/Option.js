@@ -1,13 +1,13 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 class Option extends Component {
   static propTypes = {
-    labelKey: PropType.string,
-    onOptionClick: PropType.func.isRequired,
-    option: PropType.object.isRequired,
-    optionRenderer: PropType.func
+    labelKey: PropTypes.string,
+    onOptionClick: PropTypes.func.isRequired,
+    option: PropTypes.object.isRequired,
+    optionRenderer: PropTypes.func
   }
 
   static defaultProps = {

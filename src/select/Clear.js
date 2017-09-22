@@ -1,5 +1,5 @@
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 const Clear = (props) => {
   const renderer = props.clearRenderer
@@ -20,9 +20,9 @@ const Clear = (props) => {
 }
 
 Clear.propTypes = {
-  clearRenderer: PropType.func,
-  onClearClick: PropType.func.isRequired,
-  onClearTouchEnd: PropType.func.isRequired
+  clearRenderer: PropTypes.func,
+  onClearClick: PropTypes.func.isRequired,
+  onClearTouchEnd: PropTypes.func.isRequired
 }
 
 Clear.defaultProps = {

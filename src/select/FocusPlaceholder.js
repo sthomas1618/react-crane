@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 class FocusPlaceholder extends Component {
   static propTypes = {
-    ariaControls: PropType.string.isRequired,
-    ariaExpanded: PropType.string.isRequired,
-    getRef: PropType.func.isRequired,
-    onBlur: PropType.func.isRequired,
-    onFocus: PropType.func.isRequired
+    ariaControls: PropTypes.string.isRequired,
+    ariaExpanded: PropTypes.string.isRequired,
+    getRef: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired
   }
 
   static defaultProps = {

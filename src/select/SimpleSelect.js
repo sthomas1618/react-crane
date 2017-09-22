@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
 import classNames from 'classnames'
 
 import Arrow from './Arrow'
@@ -12,43 +11,12 @@ import Option from './Option'
 import Value from './Value'
 import ValueGroup from './ValueGroup'
 
-import { getSelectValue } from './utils'
+import { getSelectValue, simpleSelectProps } from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
   static propTypes = {
-    autoCloseMenu: PropType.bool,
-    arrowComponent: PropType.func,
-    arrowRenderer: PropType.func,
-    className: PropType.string,
-    clearable: PropType.bool,
-    clearComponent: PropType.func,
-    clearInputOnBlur: PropType.bool,
-    clearInputOnSelect: PropType.bool,
-    clearRenderer: PropType.func,
-    focusPlaceholderComponent: PropType.func,
-    inputComponent: PropType.func,
-    inputValue: PropType.string,
-    isOpen: PropType.bool,
-    labelKey: PropType.string,
-    name: PropType.string,
-    noResultsText: PropType.string,
-    menuComponent: PropType.func,
-    onBlur: PropType.func,
-    onChange: PropType.func,
-    onFocus: PropType.func,
-    onInputChange: PropType.func,
-    optionComponent: PropType.func,
-    optionRenderer: PropType.func,
-    options: PropType.array,
-    placeholder: PropType.string,
-    showInput: PropType.bool,
-    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string]),
-    valueComponent: PropType.func,
-    valueRenderer: PropType.func,
-    valueGroupComponent: PropType.func,
-    valueGroupRenderer: PropType.func,
-    valueKey: PropType.string
+    ...simpleSelectProps
   }
 
   static defaultProps = {

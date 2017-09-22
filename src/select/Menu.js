@@ -1,16 +1,16 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 class Menu extends Component {
   static propTypes = {
-    labelKey: PropType.string,
-    onOptionClick: PropType.func.isRequired,
-    optionComponent: PropType.func,
-    optionRenderer: PropType.func,
-    options: PropType.array,
-    valueKey: PropType.string,
-    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string])
+    labelKey: PropTypes.string,
+    onOptionClick: PropTypes.func.isRequired,
+    optionComponent: PropTypes.func,
+    optionRenderer: PropTypes.func,
+    options: PropTypes.array,
+    valueKey: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string])
   }
 
   static defaultProps = {

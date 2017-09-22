@@ -1,22 +1,15 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
 
 import SimpleSelect from '../SimpleSelect'
 import OptionRenderer from './OptionRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
-import { getSelectValue } from '../utils'
+import { getSelectValue, multiSelectPropTypes } from '../utils'
 
 class MultiSelect extends Component {
   static propTypes = {
-    autoCloseMenu: PropType.bool,
-    value: PropType.array,
-    onChange: PropType.func,
-    labelKey: PropType.string,
-    valueKey: PropType.string,
-    valueLabelLimit: PropType.number,
-    options: PropType.array
+    ...multiSelectPropTypes
   }
 
   static defaultProps = {

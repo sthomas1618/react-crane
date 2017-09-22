@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { SimpleSelect } from '../../src'
 
 class SimpleSelectWithStringValue extends Component {
   static propTypes = {
-    valueKey: PropType.string.isRequired
+    valueKey: PropTypes.string.isRequired
   }
 
   constructor(props) {

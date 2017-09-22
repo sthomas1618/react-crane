@@ -1,5 +1,5 @@
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 const Arrow = (props) => {
   const renderer = props.arrowRenderer
@@ -20,10 +20,10 @@ const Arrow = (props) => {
 }
 
 Arrow.propTypes = {
-  arrowRenderer: PropType.func,
-  onArrowClick: PropType.func.isRequired,
-  onArrowTouchEnd: PropType.func.isRequired,
-  isOpen: PropType.bool.isRequired
+  arrowRenderer: PropTypes.func,
+  onArrowClick: PropTypes.func.isRequired,
+  onArrowTouchEnd: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired
 }
 
 Arrow.defaultProps = {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { SearchSelect } from '../../src'
 
 class BasicSearchSelect extends Component {
   static propTypes = {
-    options: PropType.array.isRequired,
-    labelKey: PropType.string.isRequired
+    options: PropTypes.array.isRequired,
+    labelKey: PropTypes.string.isRequired
   }
 
   constructor(props) {

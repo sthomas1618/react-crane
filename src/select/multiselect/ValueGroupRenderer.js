@@ -1,5 +1,5 @@
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { getSelectValue } from '../utils'
 
@@ -31,12 +31,12 @@ const ValueGroupRenderer = (props) => {
 }
 
 ValueGroupRenderer.propTypes = {
-  options: PropType.array.isRequired,
-  valueComponent: PropType.func.isRequired,
-  value: PropType.array.isRequired,
-  valueKey: PropType.string.isRequired,
-  labelKey: PropType.string.isRequired,
-  valueLabelLimit: PropType.number
+  options: PropTypes.array.isRequired,
+  valueComponent: PropTypes.func.isRequired,
+  value: PropTypes.array.isRequired,
+  valueKey: PropTypes.string.isRequired,
+  labelKey: PropTypes.string.isRequired,
+  valueLabelLimit: PropTypes.number
 }
 
 ValueGroupRenderer.defaultProps = {

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { getSelectValue } from '../utils'
 
@@ -21,11 +21,11 @@ const OptionRenderer = (props) => {
 }
 
 OptionRenderer.propTypes = {
-  option: PropType.object.isRequired,
-  options: PropType.array.isRequired,
-  valueKey: PropType.string.isRequired,
-  value: PropType.oneOfType([PropType.array, PropType.object, PropType.string]).isRequired,
-  labelKey: PropType.string.isRequired
+  option: PropTypes.object.isRequired,
+  options: PropTypes.array.isRequired,
+  valueKey: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
+  labelKey: PropTypes.string.isRequired
 }
 
 export default OptionRenderer

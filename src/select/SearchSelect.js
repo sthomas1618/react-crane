@@ -1,15 +1,15 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import SimpleSelect from './SimpleSelect'
 
 class SearchSelect extends Component {
   static propTypes = {
-    value: PropType.object,
-    inputValue: PropType.string.isRequired,
-    onChange: PropType.func,
-    onInputChange: PropType.func.isRequired
+    value: PropTypes.object,
+    inputValue: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    onInputChange: PropTypes.func.isRequired
   }
 
   static defaultProps = {

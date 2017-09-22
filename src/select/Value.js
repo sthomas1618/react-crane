@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { getSelectValue } from './utils'
 
 class Value extends Component {
   static propTypes = {
-    labelKey: PropType.string.isRequired,
-    value: PropType.oneOfType([PropType.object, PropType.array, PropType.string]),
-    valueRenderer: PropType.func,
-    valueKey: PropType.string.isRequired,
-    options: PropType.array.isRequired
+    labelKey: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
+    valueRenderer: PropTypes.func,
+    valueKey: PropTypes.string.isRequired,
+    options: PropTypes.array.isRequired
   }
 
   static defaultProps = {

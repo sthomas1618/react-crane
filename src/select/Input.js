@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import PropType from 'prop-types'
+import PropTypes from 'prop-types'
 
 class Input extends Component {
   static propTypes = {
-    ariaControls: PropType.string.isRequired,
-    ariaExpanded: PropType.string.isRequired,
-    getRef: PropType.func.isRequired,
-    inputValue: PropType.string,
-    onBlur: PropType.func.isRequired,
-    onChange: PropType.func.isRequired,
-    onFocus: PropType.func.isRequired
+    ariaControls: PropTypes.string.isRequired,
+    ariaExpanded: PropTypes.string.isRequired,
+    getRef: PropTypes.func.isRequired,
+    inputValue: PropTypes.string,
+    onBlur: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired
   }
 
   static defaultProps = {

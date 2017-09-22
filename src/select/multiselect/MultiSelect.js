@@ -5,7 +5,7 @@ import SimpleSelect from '../SimpleSelect'
 import OptionRenderer from './OptionRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
-import { getSelectValue, multiSelectPropTypes } from '../utils'
+import { getSelectValue, multiSelectPropTypes, multiSelectDefaults } from '../utils'
 
 class MultiSelect extends Component {
   static propTypes = {
@@ -13,13 +13,7 @@ class MultiSelect extends Component {
   }
 
   static defaultProps = {
-    autoCloseMenu: false,
-    value: [],
-    onChange: null,
-    labelKey: 'label',
-    valueKey: 'value',
-    valueLabelLimit: 3,
-    options: []
+    ...multiSelectDefaults
   }
 
   onChange = (eventContext, event) => {

@@ -2,16 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
-import Arrow from './Arrow'
-import Clear from './Clear'
-import FocusPlaceholder from './FocusPlaceholder'
-import Input from './Input'
-import Menu from './Menu'
-import Option from './Option'
-import Value from './Value'
-import ValueGroup from './ValueGroup'
-
-import { getSelectValue, simpleSelectProps } from './utils'
+import { getSelectValue, simpleSelectProps, simpleSelectDefaults } from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
@@ -20,38 +11,7 @@ class SimpleSelect extends Component {
   }
 
   static defaultProps = {
-    autoCloseMenu: true,
-    arrowComponent: Arrow,
-    arrowRenderer: null,
-    className: null,
-    clearable: false,
-    clearComponent: Clear,
-    clearInputOnBlur: true,
-    clearInputOnSelect: true,
-    clearRenderer: null,
-    focusPlaceholderComponent: FocusPlaceholder,
-    inputComponent: Input,
-    inputValue: '',
-    isOpen: false,
-    labelKey: 'label',
-    name: null,
-    noResultsText: 'No Results Found',
-    menuComponent: Menu,
-    onBlur: null,
-    onChange: null,
-    onFocus: null,
-    onInputChange: null,
-    optionComponent: Option,
-    optionRenderer: null,
-    options: [],
-    placeholder: 'Select value...',
-    showInput: false,
-    value: null,
-    valueComponent: Value,
-    valueRenderer: null,
-    valueGroupComponent: ValueGroup,
-    valueGroupRenderer: null,
-    valueKey: 'value'
+    ...simpleSelectDefaults
   }
 
   constructor(props) {

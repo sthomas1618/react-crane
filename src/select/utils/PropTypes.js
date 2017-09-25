@@ -46,6 +46,6 @@ export const multiSelectPropTypes = {
 export const filterSelectPropTypes = {
   ...simpleSelectPropTypes,
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  onInputChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func,
   filterOptions: PropTypes.func
 }

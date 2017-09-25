@@ -111,7 +111,7 @@ class SimpleSelect extends Component {
     const isOpen = openOnEmptyInput || newInputValue
 
     this.setState({
-      isOpen,
+      isOpen: !!isOpen,
       isOuterFocused: false
     }, () => {
       this.setInputValue(event, newInputValue)

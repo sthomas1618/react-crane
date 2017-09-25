@@ -42,3 +42,10 @@ export const multiSelectPropTypes = {
   value: PropTypes.array,
   valueLabelLimit: PropTypes.number
 }
+
+export const filterSelectPropTypes = {
+  ...simpleSelectPropTypes,
+  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  onInputChange: PropTypes.func.isRequired,
+  filterOptions: PropTypes.func
+}

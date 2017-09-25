@@ -6,6 +6,7 @@ import {
   BasicSelect,
   BasicMultiSelect,
   BasicSearchSelect,
+  BasicFilterSelect,
   SimpleSelectWithStringValue,
   MultiSelectWithStringValues
 } from './components'
@@ -81,6 +82,20 @@ stories.add('with MultiSelect and string values', () => (
 
 stories.add('with SearchSelect', () => (
   <BasicSearchSelect
+    options={states}
+    labelKey="name"
+    valueKey="abbreviation"
+    isOpen={boolean('Is Open', false)}
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+  />
+))
+
+stories.add('with FilterSelect', () => (
+  <BasicFilterSelect
     options={states}
     labelKey="name"
     valueKey="abbreviation"

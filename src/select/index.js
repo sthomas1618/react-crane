@@ -1,6 +1,7 @@
 export Arrow from './Arrow'
 export Clear from './Clear'
 export FocusPlaceholder from './FocusPlaceholder'
+export FilterSelect from './FilterSelect'
 export Input from './Input'
 export Menu from './Menu'
 export MultiSelect from './multiselect/MultiSelect'

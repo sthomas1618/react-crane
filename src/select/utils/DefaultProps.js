@@ -7,6 +7,9 @@ import Option from '../Option'
 import Value from '../Value'
 import ValueGroup from '../ValueGroup'
 
+import filterOptions from './filterOptions'
+import getSelectValue from './getSelectValue'
+
 export const simpleSelectDefaults = {
   autoCloseMenu: true,
   arrowComponent: Arrow,
@@ -41,7 +44,8 @@ export const simpleSelectDefaults = {
   valueRenderer: null,
   valueGroupComponent: ValueGroup,
   valueGroupRenderer: null,
-  valueKey: 'value'
+  valueKey: 'value',
+  getSelectValue
 }
 
 export const multiSelectDefaults = {
@@ -49,5 +53,10 @@ export const multiSelectDefaults = {
   autoCloseMenu: false,
   value: [],
   valueLabelLimit: 3
+}
+
+export const filterSelectDefaults = {
+  ...simpleSelectDefaults,
+  filterOptions
 }
 

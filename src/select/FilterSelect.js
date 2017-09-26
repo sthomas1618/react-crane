@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import SimpleSelect from './SimpleSelect'
 
-import { filterSelectPropTypes, filterOptions } from './utils'
+import { filterSelectPropTypes, filterSelectDefaults, getSelectValue } from './utils'
 
 class FilterSelect extends Component {
   static propTypes = {
@@ -11,9 +11,7 @@ class FilterSelect extends Component {
   }
 
   static defaultProps = {
-    inputValue: null,
-    onInputChange: null,
-    filterOptions
+    ...filterSelectDefaults
   }
 
   constructor(props) {
@@ -30,6 +28,14 @@ class FilterSelect extends Component {
     }
   }
 
+  getSelectValue = (props) => {
+    const selectValueProps = {
+      ...props,
+      options: this.props.options
+    }
+    return getSelectValue(selectValueProps)
+  }
+
   render() {
     const props = _.omit(this.props, 'onInputChange', 'options')
     const inputValue = this.props.inputValue || this.state.inputValue
@@ -41,6 +47,7 @@ class FilterSelect extends Component {
         options={options}
         inputValue={inputValue}
         onInputChange={this.onInputChange}
+        getSelectValue={this.getSelectValue}
         showInput
       />
     )

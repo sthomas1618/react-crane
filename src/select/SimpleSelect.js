@@ -177,7 +177,8 @@ class SimpleSelect extends Component {
   emitValueChange = (option, event) => {
     const { clearInputOnSelect, value, valueKey, labelKey, inputValue } = this.props
     const valueSelected = (option === null || value === null) && option !== value
-    const valueObj = getSelectValue(this.props)
+    const selectValueProps = _.omit(this.props, 'getSelectValue')
+    const valueObj = this.props.getSelectValue(selectValueProps)
     const valueChanged = _.isArray(value)
       ? true
       : value && option && valueObj[valueKey] !== option[valueKey]

@@ -2,12 +2,10 @@ import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { getSelectValue } from '../utils'
-
 const OptionRenderer = (props) => {
   const { option, options, labelKey, value, valueKey } = props
   const checked = _.some(value, (val) => {
-    const valueObj = getSelectValue({ options, valueKey, value: val })
+    const valueObj = props.getSelectValue({ options, valueKey, value: val })
     return valueObj[valueKey] === option[valueKey]
   })
   const onChange = (e) => { e.preventDefault() }
@@ -21,6 +19,7 @@ const OptionRenderer = (props) => {
 }
 
 OptionRenderer.propTypes = {
+  getSelectValue: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,

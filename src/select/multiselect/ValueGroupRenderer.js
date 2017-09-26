@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { getSelectValue } from '../utils'
-
 const ValueGroupRenderer = (props) => {
   const ValueComponent = props.valueComponent
   const { value, valueKey, labelKey, valueLabelLimit, options } = props
@@ -13,7 +11,7 @@ const ValueGroupRenderer = (props) => {
   }
 
   const values = value.map((val, i) => {
-    const valueObj = getSelectValue({ options, valueKey, value: val })
+    const valueObj = props.getSelectValue({ options, valueKey, value: val })
     const label = valueObj[labelKey]
     const delimiter = (i + 1) === value.length ? '' : ', '
     return (
@@ -31,6 +29,7 @@ const ValueGroupRenderer = (props) => {
 }
 
 ValueGroupRenderer.propTypes = {
+  getSelectValue: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   valueComponent: PropTypes.func.isRequired,
   value: PropTypes.array.isRequired,

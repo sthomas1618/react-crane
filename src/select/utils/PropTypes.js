@@ -11,6 +11,7 @@ export const simpleSelectPropTypes = {
   clearInputOnSelect: PropTypes.bool,
   clearRenderer: PropTypes.func,
   focusPlaceholderComponent: PropTypes.func,
+  getSelectValue: PropTypes.func,
   inputComponent: PropTypes.func,
   inputValue: PropTypes.string,
   isOpen: PropTypes.bool,

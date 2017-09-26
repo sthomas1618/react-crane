@@ -1,11 +1,21 @@
 const filterOptions = (options, inputValue, props) => {
-  const { labelKey } = props
+  const { labelKey, ignoreCase } = props
+
+  let searchText = inputValue || ''
+
+  if (ignoreCase) {
+    searchText = searchText.toLowerCase()
+  }
 
   // TODO strip diatrics, other options
   return options.filter((option) => {
-    const label = String(option[labelKey])
+    let label = String(option[labelKey]) || ''
 
-    return label.indexOf(inputValue) > -1
+    if (ignoreCase) {
+      label = label.toLowerCase()
+    }
+
+    return label.indexOf(searchText) > -1
   })
 }
 

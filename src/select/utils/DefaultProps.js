@@ -57,6 +57,7 @@ export const multiSelectDefaults = {
 
 export const filterSelectDefaults = {
   ...simpleSelectDefaults,
+  ignoreCase: true,
   filterOptions
 }
 

@@ -48,5 +48,6 @@ export const filterSelectPropTypes = {
   ...simpleSelectPropTypes,
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   onInputChange: PropTypes.func,
-  filterOptions: PropTypes.func
+  filterOptions: PropTypes.func,
+  ignoreCase: PropTypes.bool
 }

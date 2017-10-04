@@ -318,7 +318,7 @@ class SimpleSelect extends Component {
     const valueObj = this.props.getSelectValue(selectValueProps)
     const valueChanged = _.isArray(value)
       ? true
-      : value && option && valueObj[valueKey] !== option[valueKey]
+      : (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey]))
 
     if ((valueSelected || valueChanged) && this.props.onChange) {
       const eventContext = { name: this.props.name, value: option }

@@ -12,18 +12,22 @@ const ValueGroupRenderer = (props) => {
 
   const values = value.map((val, i) => {
     const valueObj = props.getSelectValue({ options, valueKey, value: val })
-    const label = valueObj[labelKey]
-    const delimiter = (i + 1) === value.length ? '' : ', '
-    return (
-      <span key={label}>
-        <ValueComponent
-          {...props}
-          valueClassName="crane-multi-select-value"
-          value={valueObj}
-        />
-        {delimiter}
-      </span>
-    )
+
+    if (valueObj) {
+      const label = valueObj[labelKey]
+      const delimiter = (i + 1) === value.length ? '' : ', '
+      return (
+        <span key={label}>
+          <ValueComponent
+            {...props}
+            valueClassName="crane-multi-select-value"
+            value={valueObj}
+          />
+          {delimiter}
+        </span>
+      )
+    }
+    return null
   })
   return <span>{values}</span>
 }

@@ -29,7 +29,7 @@ class MultiSelect extends Component {
     let newValues = []
     const { value, labelKey, valueKey, options } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
-    const valueObjs = value.map(val => (getVal(val)))
+    const valueObjs = value.map(val => (getVal(val))).filter(val => val)
     const containsVal = _.some(valueObjs, val => (val[valueKey] === option[valueKey]))
 
     if (containsVal) {

@@ -29,11 +29,13 @@ class SimpleSelect extends Component {
     const prevIsOpen = prevProps.isOpen || prevState.isOpen
     const isOpen = this.props.isOpen || this.state.isOpen
 
-    if (!prevIsOpen && isOpen && this.state.focusedOption) {
+    if (!prevIsOpen && isOpen && this.state.focusedOption && this.menuRef) {
       const { valueKey } = this.props
       const key = this.state.focusedOption[valueKey]
       const optionNode = this.optionRefs[key]
-      this.menuRef.scrollTop = optionNode.offsetTop
+      if (optionNode) {
+        this.menuRef.scrollTop = optionNode.offsetTop
+      }
     }
   }
 

@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
-import { getSelectValue, simpleSelectProps, simpleSelectDefaults } from './utils'
+import { simpleSelectProps, simpleSelectDefaults } from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
@@ -20,6 +20,20 @@ class SimpleSelect extends Component {
     this.state = {
       isOpen: false,
       isFocused: false
+    }
+
+    this.optionRefs = []
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevIsOpen = prevProps.isOpen || prevState.isOpen
+    const isOpen = this.props.isOpen || this.state.isOpen
+
+    if (!prevIsOpen && isOpen && this.state.focusedOption) {
+      const { valueKey } = this.props
+      const key = this.state.focusedOption[valueKey]
+      const optionNode = this.optionRefs[key]
+      this.menuRef.scrollTop = optionNode.offsetTop
     }
   }
 
@@ -118,6 +132,52 @@ class SimpleSelect extends Component {
     })
   }
 
+  onKeyDown = (event) => {
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(event)
+
+      if (event.defaultPrevented) {
+        return
+      }
+    }
+
+    switch (event.keyCode) {
+      case 9:
+        // tab
+        if (event.shiftKey || !this.state.isOpen) {
+          return
+        }
+        this.selectFocusedOption(event)
+        return
+      case 13:
+        // enter
+        if (!this.state.isOpen) {
+          return
+        }
+
+        event.stopPropagation()
+        this.selectFocusedOption(event)
+        break
+      case 27:
+        // escape
+        if (this.state.isOpen) {
+          event.stopPropagation()
+          this.closeMenu()
+        }
+        break
+      case 38:
+        // up
+        this.focusOnOption('prev')
+        break
+      case 40:
+        // down
+        this.focusOnOption('next')
+        break
+      default: return
+    }
+    event.preventDefault()
+  }
+
   onArrowTouchEnd = (event) => {
     this.onArrowClick(event)
   }
@@ -136,7 +196,7 @@ class SimpleSelect extends Component {
     event.preventDefault()
 
     // we know we are closing menu
-    this.setState({ isOpen: false }, this.focus)
+    this.closeMenu()
   }
 
   onClearTouchEnd = (event) => {
@@ -162,15 +222,92 @@ class SimpleSelect extends Component {
     event.stopPropagation()
     event.preventDefault()
 
-    const isOpen = !this.props.autoCloseMenu
-    const newState = { isOpen, isOuterFocused: !isOpen && this.props.clearInputOnSelect }
-    this.setState(newState, this.emitValueChange(option, event))
+    this.selectOption(event, option)
+  }
+
+  onOptionFocus = (event, option) => {
+    this.setState({ focusedOption: option })
   }
 
   setInputValue = (event, inputVal) => {
     if (this.props.onInputChange) {
       const eventContext = { name: this.props.name, value: inputVal }
       this.props.onInputChange(eventContext, event)
+    }
+  }
+
+  getFocusedOption(direction, options) {
+    const isOpen = this.props.isOpen || this.state.isOpen
+    const { valueKey } = this.props
+    const { focusedOption } = this.state
+    let currentIndex = focusedOption
+      ? _.findIndex(options, option => (option[valueKey] === focusedOption[valueKey]))
+      : -1
+
+    if (!isOpen && currentIndex > -1) {
+      currentIndex -= 1
+    }
+
+    switch (direction) {
+      case 'prev':
+        return currentIndex > 0 ? options[currentIndex - 1] : options[options.length - 1]
+      case 'next':
+        return currentIndex === options.length - 1 ? options[0] : options[currentIndex + 1]
+      default:
+        return null
+    }
+  }
+
+  focusOnOption = (direction) => {
+    const { options } = this.props
+    const newFocusedOption = options.length ? this.getFocusedOption(direction, options) : null
+
+    this.setState({
+      isOpen: true,
+      inputValue: '',
+      focusedOption: newFocusedOption
+    }, () => { this.scrollToOption(newFocusedOption) })
+  }
+
+  selectOption = (event, option) => {
+    const isOpen = !this.props.autoCloseMenu
+    const newState = { isOpen, isOuterFocused: !isOpen && this.props.clearInputOnSelect }
+    this.setState(newState, this.emitValueChange(option, event))
+  }
+
+  selectFocusedOption = (event) => {
+    const { focusedOption } = this.state
+
+    if (focusedOption) {
+      this.selectOption(event, focusedOption)
+    }
+  }
+
+  closeMenu = () => {
+    this.setState({ isOpen: false }, this.focus)
+  }
+
+  scrollToOption = (option) => {
+    if (!option || !this.menuRef) {
+      return
+    }
+
+    const { valueKey } = this.props
+    const key = option[valueKey]
+    const optionNode = this.optionRefs[key]
+
+    if (!optionNode) {
+      return
+    }
+
+    const optionRect = optionNode.getBoundingClientRect()
+    const menuRect = this.menuRef.getBoundingClientRect()
+
+    if (optionRect.bottom > menuRect.bottom) {
+      const totalHeight = optionNode.offsetTop + optionNode.clientHeight
+      this.menuRef.scrollTop = (totalHeight - this.menuRef.offsetHeight)
+    } else if (optionRect.top < menuRect.top) {
+      this.menuRef.scrollTop = optionNode.offsetTop
     }
   }
 
@@ -235,7 +372,15 @@ class SimpleSelect extends Component {
 
   renderMenu() {
     const { options, noResultsText } = this.props
-    const menuProps = _.omit(this.props, 'menuComponent')
+    const { focusedOption } = this.state
+    const menuProps = {
+      ..._.omit(this.props, 'menuComponent'),
+      onOptionClick: this.onOptionClick,
+      onOptionFocus: this.onOptionFocus,
+      optionRef: (el, key) => { this.optionRefs[key] = el },
+      menuRef: (el) => { this.menuRef = el },
+      focusedOption
+    }
 
     let menu = null
 
@@ -243,7 +388,7 @@ class SimpleSelect extends Component {
       const MenuComponent = this.props.menuComponent
       menu = (
         <div className="crane-select-menu-container">
-          <MenuComponent {...menuProps} onOptionClick={this.onOptionClick} />
+          <MenuComponent {...menuProps} />
         </div>
       )
     } else if (noResultsText) {
@@ -294,6 +439,7 @@ class SimpleSelect extends Component {
           className="crane-select-input-group"
           onMouseDown={this.onValueMouseDown}
           onTouchEnd={this.onValueTouchEnd}
+          onKeyDown={this.onKeyDown}
           role="presentation"
         >
           <ValueGroupComponent {...valueGroupProps} />

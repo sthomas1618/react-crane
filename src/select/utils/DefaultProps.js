@@ -31,6 +31,7 @@ export const simpleSelectDefaults = {
   onBlur: null,
   onChange: null,
   onFocus: null,
+  onKeyDown: null,
   onInputChange: null,
   openOnClick: true,
   openOnEmptyInput: true,

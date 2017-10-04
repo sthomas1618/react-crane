@@ -22,6 +22,7 @@ export const simpleSelectPropTypes = {
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
   onInputChange: PropTypes.func,
   openOnClick: PropTypes.bool,
   openOnEmptyInput: PropTypes.bool,

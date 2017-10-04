@@ -8,8 +8,7 @@ $crane-select-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 17
 $crane-select-focus-color: rgb(94, 158, 214);
 $crane-select-height: 34px;
 $crane-select-menu-max-height: 250px;
-$crane-select-option-hover-bg-color: #e7eff7;
-$crane-select-option-focus-bg-color: darken($crane-select-option-hover-bg-color, 10%);
+$crane-select-option-focus-bg-color: #e7eff7;
 $crane-select-placeholder-color: #999;
 $crane-select-no-results-color: #999;
 
@@ -128,11 +127,7 @@ $crane-select-no-results-color: #999;
   padding: 10px;
   vertical-align: middle;
 
-  &:hover {
-    background: $crane-select-option-hover-bg-color;
-  }
-
-  &:focus {
+  &.focused {
     background: $crane-select-option-focus-bg-color;
     outline: none;
   }

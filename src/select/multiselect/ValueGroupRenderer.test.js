@@ -13,6 +13,7 @@ it('does not explode', () => {
       valueKey=""
       labelKey=""
       options={[]}
+      getSelectValue={() => {}}
     />
   )
   const wrapper = shallow(renderer)

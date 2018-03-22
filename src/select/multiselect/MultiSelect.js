@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 
 import SimpleSelect from '../SimpleSelect'
 import OptionRenderer from './OptionRenderer'
+import OptionGroupRenderer from './OptionGroupRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
-import { getSelectValue, multiSelectPropTypes, multiSelectDefaults } from '../utils'
+import { flattenOptions, getSelectValue, multiSelectPropTypes, multiSelectDefaults } from '../utils'
 
 class MultiSelect extends Component {
   static propTypes = {
@@ -27,18 +28,41 @@ class MultiSelect extends Component {
     }
 
     let newValues = []
-    const { value, labelKey, valueKey, options } = this.props
+    const { allOption,
+      allowSelectAll,
+      value,
+      labelKey,
+      valueKey,
+      options,
+      groupValueKey,
+      sort } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
-    const containsVal = _.some(valueObjs, val => (val[valueKey] === option[valueKey]))
+    const isGroup = _.isArray(option.options)
+    const valKey = isGroup ? groupValueKey : valueKey
+    const containsVal = _.some(valueObjs, val => (val[valKey] === option[valKey]))
+    const flatOptions = flattenOptions(options, allowSelectAll, allOption)
 
     if (containsVal) {
-      newValues = _.filter(valueObjs, val => (val[valueKey] !== option[valueKey]))
+      newValues = option === allOption ? [] :
+        _.filter(valueObjs, val => (allowSelectAll ?
+          val[valKey] !== option[valKey] && val !== allOption : val[valKey] !== option[valKey]))
+    } else if (isGroup) {
+      newValues = [...valueObjs, ...option.options]
+    } else if (option === allOption) {
+      newValues = flatOptions
     } else {
       newValues = [...valueObjs, option]
     }
 
-    newValues = _.sortBy(newValues, val => (_.isString(val) ? val : val[labelKey]))
+    // Check the 'Select All' checkbox if all other values in the dropdown are selected
+    if (!containsVal && allowSelectAll && newValues.length === flatOptions.length - 1) {
+      newValues = [...flatOptions]
+    }
+
+    if (sort) {
+      newValues = _.sortBy(newValues, val => (_.isString(val) ? val : val[labelKey]))
+    }
 
     if (this.props.onChange) {
       const newEventContext = { ...eventContext, value: newValues }
@@ -48,7 +72,12 @@ class MultiSelect extends Component {
 
   render() {
     const multiSelectProps = _.omit(this.props, 'onChange')
-    const { valueLabelLimit } = this.props
+    const { allOption, allowSelectAll, options, valueLabelLimit, valueGroupRenderer } = this.props
+    const Renderer = valueGroupRenderer || ValueGroupRenderer
+
+    if (allowSelectAll && !_.includes(options, allOption)) {
+      options.unshift(allOption)
+    }
 
     return (
       <SimpleSelect
@@ -56,8 +85,9 @@ class MultiSelect extends Component {
         onChange={this.onChange}
         showInput={false}
         optionRenderer={OptionRenderer}
+        optionGroupRenderer={OptionGroupRenderer}
         valueGroupRenderer={props => (
-          <ValueGroupRenderer {...props} valueLabelLimit={valueLabelLimit} />
+          <Renderer {...props} valueLabelLimit={valueLabelLimit} />
         )}
       />
     )

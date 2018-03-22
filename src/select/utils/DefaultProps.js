@@ -4,6 +4,7 @@ import FocusPlaceholder from '../FocusPlaceholder'
 import Input from '../Input'
 import Menu from '../Menu'
 import Option from '../Option'
+import OptionGroup from '../OptionGroup'
 import Value from '../Value'
 import ValueGroup from '../ValueGroup'
 
@@ -21,6 +22,10 @@ export const simpleSelectDefaults = {
   clearInputOnSelect: true,
   clearRenderer: null,
   focusPlaceholderComponent: FocusPlaceholder,
+  groupByKey: null,
+  groups: [],
+  groupTitle: null,
+  groupValueKey: null,
   inputComponent: Input,
   inputValue: '',
   isOpen: false,
@@ -36,7 +41,9 @@ export const simpleSelectDefaults = {
   openOnClick: true,
   openOnEmptyInput: true,
   optionComponent: Option,
+  optionGroupComponent: OptionGroup,
   optionRenderer: null,
+  optionGroupRenderer: null,
   options: [],
   placeholder: 'Select value...',
   showInput: false,
@@ -53,7 +60,13 @@ export const multiSelectDefaults = {
   ...simpleSelectDefaults,
   autoCloseMenu: false,
   value: [],
-  valueLabelLimit: 3
+  valueLabelLimit: 3,
+  sort: true,
+  allowSelectAll: false,
+  allOption: {
+    value: 'Select All',
+    id: '*'
+  }
 }
 
 export const filterSelectDefaults = {

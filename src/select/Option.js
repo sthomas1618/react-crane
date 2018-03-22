@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 class Option extends Component {
   static propTypes = {
+    allowSelectAll: PropTypes.bool,
+    allOption: PropTypes.object,
     labelKey: PropTypes.string,
     valueKey: PropTypes.string,
     onOptionClick: PropTypes.func.isRequired,
@@ -15,6 +17,8 @@ class Option extends Component {
   }
 
   static defaultProps = {
+    allowSelectAll: false,
+    allOption: null,
     optionRenderer: null,
     labelKey: 'label',
     valueKey: 'value',
@@ -32,7 +36,14 @@ class Option extends Component {
   }
 
   render() {
-    const { option, labelKey, valueKey, optionRenderer, optionRef, isFocused } = this.props
+    const { allowSelectAll,
+      allOption,
+      option,
+      labelKey,
+      valueKey,
+      optionRenderer,
+      optionRef,
+      isFocused } = this.props
 
     if (!option) {
       return null
@@ -42,7 +53,7 @@ class Option extends Component {
       ? optionRenderer(_.omit(this.props), 'optionRenderer', 'onOptionClick')
       : option[labelKey]
 
-    const className = `crane-select-option${isFocused ? ' focused' : ''}`
+    const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option === allOption ? ' crane-select-group-header' : ''}`
 
     return (
       <div

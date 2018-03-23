@@ -8,7 +8,7 @@ const CustomValueRenderer = (props) => {
   const { allowSelectAll,
     allOption,
     getSelectValue,
-    groupTitle,
+    groupTitleKey,
     labelKey,
     options,
     value,
@@ -23,7 +23,7 @@ const CustomValueRenderer = (props) => {
     if (opt.options && _.isArray(opt.options) && opt.options.length > 0) {
       // If all of the options in a group are selected, show the group title
       if (_.difference(opt.options, value).length === 0) {
-        const groupLabel = `${opt[groupTitle]} (`
+        const groupLabel = `${opt[groupTitleKey]} (`
         const groupOps = opt.options.map((val, i) => {
           addCount += 1
           const label = val[labelKey]
@@ -58,7 +58,7 @@ CustomValueRenderer.propTypes = {
   getSelectValue: PropTypes.func.isRequired,
   allowSelectAll: PropTypes.bool,
   allOption: PropTypes.object,
-  groupTitle: PropTypes.string.isRequired,
+  groupTitleKey: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   value: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,

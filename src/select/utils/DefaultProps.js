@@ -24,7 +24,7 @@ export const simpleSelectDefaults = {
   focusPlaceholderComponent: FocusPlaceholder,
   groupByKey: null,
   groups: [],
-  groupTitle: null,
+  groupTitleKey: null,
   groupValueKey: null,
   inputComponent: Input,
   inputValue: '',

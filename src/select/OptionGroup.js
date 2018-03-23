@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 class OptionGroup extends Component {
   static propTypes = {
-    groupTitle: PropTypes.string,
+    groupTitleKey: PropTypes.string,
     valueKey: PropTypes.string,
     onOptionClick: PropTypes.func.isRequired,
     option: PropTypes.object.isRequired,
@@ -15,7 +15,7 @@ class OptionGroup extends Component {
 
   static defaultProps = {
     optionGroupRenderer: null,
-    groupTitle: 'label',
+    groupTitleKey: 'label',
     valueKey: 'value'
   }
 
@@ -29,7 +29,7 @@ class OptionGroup extends Component {
       optionGroupRenderer,
       optionRef,
       children,
-      groupTitle } = this.props
+      groupTitleKey } = this.props
 
     if (!option) {
       return null
@@ -37,7 +37,7 @@ class OptionGroup extends Component {
 
     const renderer = optionGroupRenderer
       ? optionGroupRenderer(_.omit(this.props), 'optionGroupRenderer', 'onOptionClick')
-      : option[groupTitle]
+      : option[groupTitleKey]
 
     return (
       <div

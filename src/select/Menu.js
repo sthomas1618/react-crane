@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 
 class Menu extends Component {
   static propTypes = {
-    allowSelectAll: PropTypes.bool,
-    allOption: PropTypes.object,
     labelKey: PropTypes.string,
     focusedOption: PropTypes.object,
     groupValueKey: PropTypes.string,
@@ -21,8 +19,6 @@ class Menu extends Component {
   }
 
   static defaultProps = {
-    allowSelectAll: false,
-    allOption: null,
     options: [],
     focusedOption: null,
     groupValueKey: '',

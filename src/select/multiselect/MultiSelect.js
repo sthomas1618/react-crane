@@ -75,13 +75,17 @@ class MultiSelect extends Component {
     const { allOption, allowSelectAll, options, valueLabelLimit, valueGroupRenderer } = this.props
     const Renderer = valueGroupRenderer || ValueGroupRenderer
 
+    let opts = options
     if (allowSelectAll && !_.includes(options, allOption)) {
-      options.unshift(allOption)
+      opts.unshift(allOption)
+    } else if (!allowSelectAll && _.includes(options, allOption)) {
+      opts = _.filter(options, val => val !== allOption)
     }
 
     return (
       <SimpleSelect
         {...multiSelectProps}
+        options={opts}
         onChange={this.onChange}
         showInput={false}
         optionRenderer={OptionRenderer}

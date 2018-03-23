@@ -18,7 +18,7 @@ const groups = [
 it('does not explode', () => {
   const renderer = (
     <OptionGroup
-      groupTitle=""
+      groupTitleKey=""
       valueKey=""
       optionGroupRenderer={() => {}}
       option={{}}
@@ -37,7 +37,7 @@ it('does not explode', () => {
 it('renders non-multiselect correctly', () => {
   const component = mount(
     <OptionGroup
-      groupTitle="title"
+      groupTitleKey="title"
       valueKey="id"
       optionGroupRenderer={null}
       option={groups[0]}
@@ -54,7 +54,7 @@ it('renders non-multiselect correctly', () => {
 it('renders multiselect correctly', () => {
   const component = mount(
     <OptionGroup
-      groupTitle="title"
+      groupTitleKey="title"
       valueKey="id"
       optionGroupRenderer={OptionGroupRenderer}
       option={groups[0]}

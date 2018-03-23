@@ -44,7 +44,7 @@ it('does not explode', () => {
     <OptionGroupRenderer
       option={{}}
       options={[]}
-      groupTitle=""
+      groupTitleKey=""
       groupValueKey=""
       value=""
       getSelectValue={() => {}}
@@ -60,7 +60,7 @@ it('renders group title correctly', () => {
     <OptionGroupRenderer
       option={groupedOptions[0]}
       options={groupedOptions}
-      groupTitle="title"
+      groupTitleKey="title"
       groupValueKey="groupId"
       value={[]}
       getSelectValue={getSelectValue}
@@ -74,7 +74,7 @@ it('renders group checkbox correctly', () => {
     <OptionGroupRenderer
       option={groupedOptions[0]}
       options={groupedOptions}
-      groupTitle="title"
+      groupTitleKey="title"
       groupValueKey="groupId"
       value={[groupedOptions[0]]}
       getSelectValue={getSelectValue}

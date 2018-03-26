@@ -12,6 +12,10 @@ export const simpleSelectPropTypes = {
   clearRenderer: PropTypes.func,
   focusPlaceholderComponent: PropTypes.func,
   getSelectValue: PropTypes.func,
+  groupByKey: PropTypes.string,
+  groups: PropTypes.array,
+  groupTitleKey: PropTypes.string,
+  groupValueKey: PropTypes.string,
   inputComponent: PropTypes.func,
   inputValue: PropTypes.string,
   isOpen: PropTypes.bool,
@@ -27,7 +31,9 @@ export const simpleSelectPropTypes = {
   openOnClick: PropTypes.bool,
   openOnEmptyInput: PropTypes.bool,
   optionComponent: PropTypes.func,
+  optionGroupComponent: PropTypes.func,
   optionRenderer: PropTypes.func,
+  optionGroupRenderer: PropTypes.func,
   options: PropTypes.array,
   placeholder: PropTypes.string,
   showInput: PropTypes.bool,
@@ -42,7 +48,13 @@ export const simpleSelectPropTypes = {
 export const multiSelectPropTypes = {
   ...simpleSelectPropTypes,
   value: PropTypes.array,
-  valueLabelLimit: PropTypes.number
+  valueLabelLimit: PropTypes.number,
+  sort: PropTypes.bool,
+  allowSelectAll: PropTypes.bool,
+  allOption: PropTypes.shape({
+    value: PropTypes.string,
+    id: PropTypes.string
+  })
 }
 
 export const filterSelectPropTypes = {

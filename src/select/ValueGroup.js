@@ -50,8 +50,16 @@ class ValueGroup extends Component {
     }
 
     const rendererProps = _.omit(this.props, 'valueGroupRenderer', 'placeholder')
-    const showValue = _.isArray(value) ? value.length : value
 
+    // Don't include group headers or select all in the count
+    let newValue = value
+
+    if (_.isArray(newValue)) {
+      newValue = _.filter(value, val => (!val.options))
+      rendererProps.value = newValue
+    }
+
+    const showValue = _.isArray(newValue) ? newValue.length : newValue
     const renderer = clearInputOnSelect && showValue
       ? <ValueRenderer {...rendererProps} />
       : <span className="crane-select-placeholder">{placeholder}</span>

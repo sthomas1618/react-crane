@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
-import { simpleSelectProps, simpleSelectDefaults } from './utils'
+import { flattenOptions, simpleSelectProps, simpleSelectDefaults } from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
@@ -240,10 +240,13 @@ class SimpleSelect extends Component {
 
   getFocusedOption(direction, options) {
     const isOpen = this.props.isOpen || this.state.isOpen
-    const { valueKey } = this.props
+    const { allowSelectAll, allOption, valueKey } = this.props
     const { focusedOption } = this.state
+
+    const flatOptions = flattenOptions(options, allowSelectAll, allOption)
+
     let currentIndex = focusedOption
-      ? _.findIndex(options, option => (option[valueKey] === focusedOption[valueKey]))
+      ? _.findIndex(flatOptions, option => (option[valueKey] === focusedOption[valueKey]))
       : -1
 
     if (!isOpen && currentIndex > -1) {
@@ -252,9 +255,11 @@ class SimpleSelect extends Component {
 
     switch (direction) {
       case 'prev':
-        return currentIndex > 0 ? options[currentIndex - 1] : options[options.length - 1]
+        return currentIndex > 0 ? flatOptions[currentIndex - 1] :
+          flatOptions[flatOptions.length - 1]
       case 'next':
-        return currentIndex === options.length - 1 ? options[0] : options[currentIndex + 1]
+        return currentIndex === flatOptions.length - 1 ? flatOptions[0] :
+          flatOptions[currentIndex + 1]
       default:
         return null
     }
@@ -344,6 +349,27 @@ class SimpleSelect extends Component {
 
   blur = () => { this.input.blur() }
 
+  groupOptions() {
+    const { groups, groupByKey, options } = this.props
+
+    if (groups && groups.length > 0 && groupByKey) {
+      const orderedOptions = _.orderBy(options, groupByKey)
+      const parentGroups = []
+
+      orderedOptions.forEach((option) => {
+        const group = _.find(groups, [groupByKey, option[groupByKey]])
+        if (!_.includes(parentGroups, group)) {
+          group.options = []
+          parentGroups.push(group)
+        }
+
+        group.options.push(option)
+      })
+      return parentGroups
+    }
+    return options
+  }
+
   renderArrow(isOpen) {
     const ArrowComponent = this.props.arrowComponent
     const { arrowRenderer } = this.props
@@ -373,7 +399,7 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { options, noResultsText } = this.props
+    const { noResultsText } = this.props
     const { focusedOption } = this.state
     const menuProps = {
       ..._.omit(this.props, 'menuComponent'),
@@ -384,13 +410,15 @@ class SimpleSelect extends Component {
       focusedOption
     }
 
+    const opts = this.groupOptions()
+
     let menu = null
 
-    if (options.length) {
+    if (opts.length) {
       const MenuComponent = this.props.menuComponent
       menu = (
         <div className="crane-select-menu-container">
-          <MenuComponent {...menuProps} />
+          <MenuComponent {...menuProps} options={opts} />
         </div>
       )
     } else if (noResultsText) {

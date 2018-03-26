@@ -1,4 +1,5 @@
 export getSelectValue from './getSelectValue'
 export filterOptions from './filterOptions'
+export flattenOptions from './flattenOptions'
 export * from './PropTypes'
 export * from './DefaultProps'

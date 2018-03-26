@@ -77,6 +77,10 @@ $crane-select-no-results-color: #999;
   box-sizing: border-box;
 }
 
+.crane-select-group-header {
+  font-weight: bold;
+}
+
 .crane-select-focus-placeholder,
 .crane-select-input > input {
   height: ($crane-select-height - 2);

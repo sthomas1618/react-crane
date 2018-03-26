@@ -1,7 +1,9 @@
-export BasicMultiSelect from './BasicMultiSelect'
-export BasicSearchSelect from './BasicSearchSelect'
-export BasicFilterSelect from './BasicFilterSelect'
-export BasicSelect from './BasicSelect'
+export { default as BasicMultiSelect } from './BasicMultiSelect'
+export { default as BasicSearchSelect } from './BasicSearchSelect'
+export { default as BasicFilterSelect } from './BasicFilterSelect'
+export { default as BasicSelect } from './BasicSelect'
 
-export SimpleSelectWithStringValue from './SimpleSelectWithStringValue'
-export MultiSelectWithStringValues from './MultiSelectWithStringValues'
+export { default as SimpleSelectWithStringValue } from './SimpleSelectWithStringValue'
+export { default as MultiSelectWithStringValues } from './MultiSelectWithStringValues'
+
+export { default as CustomValueRenderer } from './CustomValueRenderer'

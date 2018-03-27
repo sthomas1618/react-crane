@@ -350,20 +350,25 @@ class SimpleSelect extends Component {
   blur = () => { this.input.blur() }
 
   groupOptions() {
-    const { groups, groupByKey, options } = this.props
+    const { allOption, allowSelectAll, groups, groupByKey, options } = this.props
 
     if (groups && groups.length > 0 && groupByKey) {
       const orderedOptions = _.orderBy(options, groupByKey)
       const parentGroups = []
 
+      if (allowSelectAll && !_.includes(parentGroups, allOption)) {
+        parentGroups.push(allOption)
+      }
+
       orderedOptions.forEach((option) => {
         const group = _.find(groups, [groupByKey, option[groupByKey]])
-        if (!_.includes(parentGroups, group)) {
-          group.options = []
-          parentGroups.push(group)
+        if (group) {
+          if (!_.includes(parentGroups, group)) {
+            group.options = []
+            parentGroups.push(group)
+          }
+          group.options.push(option)
         }
-
-        group.options.push(option)
       })
       return parentGroups
     }

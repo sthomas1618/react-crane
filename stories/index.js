@@ -135,7 +135,7 @@ stories.add('with MultiSelect and pre-formed grouping', () => (
   />
 ))
 
-stories.add('with MultiSelect and calculated grouping', () => (
+stories.add('with MultiSelect and calculated grouping and select all', () => (
   <BasicMultiSelect
     options={terms}
     labelKey="value"
@@ -150,6 +150,7 @@ stories.add('with MultiSelect and calculated grouping', () => (
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
+    allowSelectAll={boolean('Allow Select All', true)}
   />
 ))
 

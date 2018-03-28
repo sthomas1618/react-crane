@@ -45,8 +45,9 @@ class MultiSelect extends Component {
 
     if (containsVal) {
       newValues = option === allOption ? [] :
-        _.filter(valueObjs, val => (allowSelectAll ?
-          val[valKey] !== option[valKey] && val !== allOption : val[valKey] !== option[valKey]))
+      _.filter(valueObjs, val => (
+        allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
+          : val[valKey] !== option[valKey]))
     } else if (isGroup) {
       newValues = [...valueObjs, ...option.options]
     } else if (option === allOption) {

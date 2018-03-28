@@ -4,11 +4,19 @@ import { flattenOptions } from '../utils'
 
 const ValueGroupRenderer = (props) => {
   const ValueComponent = props.valueComponent
-  const { allowSelectAll, allOption, value, valueKey, labelKey, valueLabelLimit, options } = props
+  const { allowSelectAll,
+    allOption,
+    allSelectedText,
+    value,
+    valueKey,
+    labelKey,
+    valueLabelLimit,
+    options } = props
 
   if (valueLabelLimit > 0 && value.length > valueLabelLimit) {
-    const count = value.length === flattenOptions(options, allowSelectAll, allOption).length ? 'All' : value.length
-    return <span>{`${count} selected`}</span>
+    const count = value.length === flattenOptions(options, allowSelectAll, allOption).length
+      ? allSelectedText : `${value.length} Selected`
+    return <span>{count}</span>
   }
 
   const values = value.map((val, i) => {
@@ -36,6 +44,7 @@ const ValueGroupRenderer = (props) => {
 ValueGroupRenderer.propTypes = {
   allowSelectAll: PropTypes.bool,
   allOption: PropTypes.object,
+  allSelectedText: PropTypes.string,
   getSelectValue: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   valueComponent: PropTypes.func.isRequired,
@@ -48,6 +57,7 @@ ValueGroupRenderer.propTypes = {
 ValueGroupRenderer.defaultProps = {
   allowSelectAll: false,
   allOption: null,
+  allSelectedText: 'All Selected',
   valueLabelLimit: 0
 }
 

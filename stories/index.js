@@ -115,6 +115,7 @@ stories.add('with MultiSelect and select all option', () => (
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
     allowSelectAll={boolean('Allow Select All', true)}
+    allSelectedText={text('All Selected Text', 'All Terms Selected')}
   />
 ))
 

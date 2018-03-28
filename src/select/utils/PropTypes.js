@@ -54,7 +54,8 @@ export const multiSelectPropTypes = {
   allOption: PropTypes.shape({
     value: PropTypes.string,
     id: PropTypes.string
-  })
+  }),
+  allSelectedText: PropTypes.string
 }
 
 export const filterSelectPropTypes = {

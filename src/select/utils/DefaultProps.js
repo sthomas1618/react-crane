@@ -66,7 +66,8 @@ export const multiSelectDefaults = {
   allOption: {
     value: 'Select All',
     id: '*'
-  }
+  },
+  allOptionText: 'All Selected'
 }
 
 export const filterSelectDefaults = {

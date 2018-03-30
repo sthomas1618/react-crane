@@ -7,6 +7,7 @@ import {
   BasicMultiSelect,
   BasicSearchSelect,
   BasicFilterSelect,
+  FilterMultiSelect,
   SimpleSelectWithStringValue,
   MultiSelectWithStringValues,
   CustomValueRenderer
@@ -101,6 +102,21 @@ stories.add('with MultiSelect and string values', () => (
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
+  />
+))
+
+stories.add('with MultiSelect and filtering', () => (
+  <FilterMultiSelect
+    options={terms}
+    labelKey="value"
+    valueKey="id"
+    isOpen={boolean('Is Open', false)}
+    valueLabelLimit={number('Value Label Limit', 3)}
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
+    placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    ignoreCase={boolean('Ignore Case in Filter', true)}
   />
 ))
 

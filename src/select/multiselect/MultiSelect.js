@@ -6,7 +6,7 @@ import OptionRenderer from './OptionRenderer'
 import OptionGroupRenderer from './OptionGroupRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
-import { flattenOptions, getSelectValue, multiSelectPropTypes, multiSelectDefaults } from '../utils'
+import { flattenOptions, multiSelectPropTypes, multiSelectDefaults } from '../utils'
 
 class MultiSelect extends Component {
   static propTypes = {
@@ -34,6 +34,7 @@ class MultiSelect extends Component {
       labelKey,
       valueKey,
       options,
+      getSelectValue,
       groupValueKey,
       sort } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
@@ -45,9 +46,9 @@ class MultiSelect extends Component {
 
     if (containsVal) {
       newValues = option === allOption ? [] :
-      _.filter(valueObjs, val => (
-        allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
-          : val[valKey] !== option[valKey]))
+        _.filter(valueObjs, val => (
+          allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
+            : val[valKey] !== option[valKey]))
     } else if (isGroup) {
       newValues = [...valueObjs, ...option.options]
     } else if (option === allOption) {
@@ -88,7 +89,6 @@ class MultiSelect extends Component {
         {...multiSelectProps}
         options={opts}
         onChange={this.onChange}
-        showInput={false}
         optionRenderer={OptionRenderer}
         optionGroupRenderer={OptionGroupRenderer}
         valueGroupRenderer={props => (

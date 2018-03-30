@@ -8,7 +8,7 @@ const getSelectValue = (props) => {
   }
 
   const getValue = (valueObj) => {
-    if (_.isString(valueObj)) {
+    if (_.isString(valueObj) || _.isNumber(valueObj)) {
       return _.find(options, { [valueKey]: valueObj })
     }
 

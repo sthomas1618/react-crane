@@ -21,6 +21,7 @@ export const simpleSelectDefaults = {
   clearInputOnBlur: true,
   clearInputOnSelect: true,
   clearRenderer: null,
+  disabled: false,
   focusPlaceholderComponent: FocusPlaceholder,
   groupByKey: null,
   groups: [],

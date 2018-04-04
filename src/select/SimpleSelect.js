@@ -47,13 +47,19 @@ class SimpleSelect extends Component {
     if (this.isSecondayClick(event)) {
       return
     }
+
     const {
+      disabled,
       isOpen,
       showInput,
       openOnClick,
       openOnEmptyInput,
       inputValue
     } = this.props
+
+    if (disabled) {
+      return
+    }
 
     const setOpen = isOpen || (openOnClick && (showInput ? true : !this.state.isOpen))
 
@@ -104,8 +110,14 @@ class SimpleSelect extends Component {
   }
 
   onInputFocus = (event) => {
-    if (this.props.onFocus) {
-      this.props.onFocus({ name: this.props.name }, event)
+    const { disabled, name, onFocus } = this.props
+
+    if (disabled) {
+      return
+    }
+
+    if (onFocus) {
+      onFocus({ name }, event)
     }
 
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -135,8 +147,14 @@ class SimpleSelect extends Component {
   }
 
   onKeyDown = (event) => {
-    if (this.props.onKeyDown) {
-      this.props.onKeyDown(event)
+    const { disabled, onKeyDown } = this.props
+
+    if (disabled) {
+      return
+    }
+
+    if (onKeyDown) {
+      onKeyDown(event)
 
       if (event.defaultPrevented) {
         return
@@ -389,7 +407,7 @@ class SimpleSelect extends Component {
 
   renderClear() {
     const ClearComponent = this.props.clearComponent
-    const { clearable, clearRenderer, value } = this.props
+    const { clearable, clearRenderer, disabled, value } = this.props
     const hasValue = _.isArray(value) ? value.length : value
 
     if (!clearable || !hasValue) {
@@ -398,6 +416,7 @@ class SimpleSelect extends Component {
 
     return (<ClearComponent
       clearRenderer={clearRenderer}
+      disabled={disabled}
       onClearClick={this.onClearClick}
       onClearTouchEnd={this.onClearTouchEnd}
     />)
@@ -460,12 +479,13 @@ class SimpleSelect extends Component {
   }
 
   render() {
+    const { disabled, valueGroupComponent } = this.props
     const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
     const valueGroupProps = _.omit(this.props, 'valueGroupComponent')
-    const ValueGroupComponent = this.props.valueGroupComponent
+    const ValueGroupComponent = valueGroupComponent
     const selectClassName = classNames('crane-select', this.props.className, {
-      open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused
+      open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused, disabled
     })
 
     return (

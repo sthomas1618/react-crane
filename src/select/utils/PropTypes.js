@@ -10,6 +10,7 @@ export const simpleSelectPropTypes = {
   clearInputOnBlur: PropTypes.bool,
   clearInputOnSelect: PropTypes.bool,
   clearRenderer: PropTypes.func,
+  disabled: PropTypes.bool,
   focusPlaceholderComponent: PropTypes.func,
   getSelectValue: PropTypes.func,
   groupByKey: PropTypes.string,

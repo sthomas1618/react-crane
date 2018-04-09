@@ -130,9 +130,9 @@ class SimpleSelect extends Component {
 
   onInputChange = (event) => {
     const newInputValue = event.target.value
-    const { inputValue, openOnEmptyInput } = this.props
+    const { disabled, inputValue, openOnEmptyInput } = this.props
 
-    if (inputValue === newInputValue) {
+    if (inputValue === newInputValue || disabled) {
       return
     }
 

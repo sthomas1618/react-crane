@@ -47,6 +47,7 @@ it('does not explode', () => {
       groupTitleKey=""
       groupValueKey=""
       value=""
+      valueKey="id"
       getSelectValue={() => {}}
     />
   )
@@ -63,6 +64,7 @@ it('renders group title correctly', () => {
       groupTitleKey="title"
       groupValueKey="groupId"
       value={[]}
+      valueKey="id"
       getSelectValue={getSelectValue}
     />)
 
@@ -77,6 +79,7 @@ it('renders group checkbox correctly', () => {
       groupTitleKey="title"
       groupValueKey="groupId"
       value={[groupedOptions[0]]}
+      valueKey="id"
       getSelectValue={getSelectValue}
     />)
 

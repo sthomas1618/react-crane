@@ -25,7 +25,7 @@ OptionRenderer.propTypes = {
   options: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
-  unfilteredOptions: PropTypes.arra,
+  unfilteredOptions: PropTypes.array,
   labelKey: PropTypes.string.isRequired
 }
 

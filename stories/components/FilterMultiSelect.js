@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MultiSelect } from '../../src'
-import { filterOptions, getSelectValue } from '../../src/select/utils'
+import { filterOptions, flattenOptions, getSelectValue } from '../../src/select/utils'
 
 export default class FilterMultiSelect extends React.Component {
   static propTypes = {
@@ -59,9 +59,11 @@ export default class FilterMultiSelect extends React.Component {
   }
 
   getSelectValue = (props) => {
+    const { allOption, allowSelectAll, options } = props
+    const flatOpts = flattenOptions(options, allowSelectAll, allOption)
     const selectValueProps = {
       ...props,
-      options: this.props.options
+      options: flatOpts
     }
     return getSelectValue(selectValueProps)
   }
@@ -69,6 +71,7 @@ export default class FilterMultiSelect extends React.Component {
   render() {
     const { options } = this.props
     const { inputValue, value } = this.state
+    const filtered = inputValue !== ''
     const controlProps = _.omit(this.props, 'onInputChange', 'options')
     const opts = filterOptions(options, inputValue, this.props)
 
@@ -76,6 +79,7 @@ export default class FilterMultiSelect extends React.Component {
       <MultiSelect
         {...controlProps}
         inputValue={inputValue}
+        unfilteredOptions={options}
         options={opts}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
@@ -83,6 +87,7 @@ export default class FilterMultiSelect extends React.Component {
         value={value}
         showInput
         ignoreCase
+        filtered={filtered}
       />
     )
   }

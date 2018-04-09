@@ -36,8 +36,10 @@ class MultiSelect extends Component {
       options,
       getSelectValue,
       groupValueKey,
-      sort } = this.props
-    const getVal = val => (getSelectValue({ options, valueKey, value: val }))
+      sort,
+      unfilteredOptions } = this.props
+    const opts = unfilteredOptions.length > 0 ? unfilteredOptions : options
+    const getVal = val => (getSelectValue({ options: opts, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
     const isGroup = _.isArray(option.options)
     const valKey = isGroup ? groupValueKey : valueKey
@@ -58,7 +60,7 @@ class MultiSelect extends Component {
     }
 
     // Check the 'Select All' checkbox if all other values in the dropdown are selected
-    if (!containsVal && allowSelectAll && newValues.length === flatOptions.length - 1) {
+    if (!containsVal && allowSelectAll && newValues.length === unfilteredOptions.length - 1) {
       newValues = [...flatOptions]
     }
 
@@ -73,12 +75,18 @@ class MultiSelect extends Component {
   }
 
   render() {
+    const {
+      allOption,
+      allowSelectAll,
+      filtered,
+      options,
+      valueLabelLimit,
+      valueGroupRenderer } = this.props
     const multiSelectProps = _.omit(this.props, 'onChange')
-    const { allOption, allowSelectAll, options, valueLabelLimit, valueGroupRenderer } = this.props
     const Renderer = valueGroupRenderer || ValueGroupRenderer
 
     let opts = options
-    if (allowSelectAll && !_.includes(options, allOption)) {
+    if (!filtered && allowSelectAll && !_.includes(options, allOption)) {
       opts.unshift(allOption)
     } else if (!allowSelectAll && _.includes(options, allOption)) {
       opts = _.filter(options, val => val !== allOption)

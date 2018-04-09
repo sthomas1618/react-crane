@@ -22,6 +22,7 @@ export const simpleSelectDefaults = {
   clearInputOnSelect: true,
   clearRenderer: null,
   disabled: false,
+  filtered: false,
   focusPlaceholderComponent: FocusPlaceholder,
   groupByKey: null,
   groups: [],
@@ -60,15 +61,16 @@ export const simpleSelectDefaults = {
 export const multiSelectDefaults = {
   ...simpleSelectDefaults,
   autoCloseMenu: false,
-  value: [],
-  valueLabelLimit: 3,
-  sort: true,
-  allowSelectAll: false,
   allOption: {
     value: 'Select All',
     id: '*'
   },
-  allOptionText: 'All Selected'
+  allowSelectAll: false,
+  allSelectedText: 'All Selected',
+  sort: true,
+  unfilteredOptions: [],
+  value: [],
+  valueLabelLimit: 3
 }
 
 export const filterSelectDefaults = {

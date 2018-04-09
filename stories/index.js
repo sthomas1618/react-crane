@@ -120,11 +120,12 @@ stories.add('with MultiSelect and filtering', () => (
   />
 ))
 
-stories.add('with MultiSelect and select all option', () => (
-  <BasicMultiSelect
+stories.add('with MultiSelect, filtering, and select all option', () => (
+  <FilterMultiSelect
     options={terms}
     labelKey="value"
     valueKey="id"
+    ignoreCase
     isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
@@ -152,8 +153,8 @@ stories.add('with MultiSelect and pre-formed grouping', () => (
   />
 ))
 
-stories.add('with MultiSelect and calculated grouping and select all', () => (
-  <BasicMultiSelect
+stories.add('with MultiSelect, filtering, calculated grouping, and select all', () => (
+  <FilterMultiSelect
     options={terms}
     labelKey="value"
     valueKey="id"
@@ -161,6 +162,7 @@ stories.add('with MultiSelect and calculated grouping and select all', () => (
     groupByKey="groupId"
     groupTitleKey="title"
     groupValueKey="groupId"
+    ignoreCase
     isOpen={boolean('Is Open', false)}
     valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}

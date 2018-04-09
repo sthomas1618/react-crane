@@ -368,13 +368,13 @@ class SimpleSelect extends Component {
   blur = () => { this.input.blur() }
 
   groupOptions() {
-    const { allOption, allowSelectAll, groups, groupByKey, options } = this.props
+    const { allOption, allowSelectAll, filtered, groups, groupByKey, options } = this.props
 
     if (groups && groups.length > 0 && groupByKey) {
       const orderedOptions = _.orderBy(options, groupByKey)
       const parentGroups = []
 
-      if (allowSelectAll && !_.includes(parentGroups, allOption)) {
+      if (!filtered && allowSelectAll && !_.includes(parentGroups, allOption)) {
         parentGroups.push(allOption)
       }
 

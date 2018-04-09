@@ -11,6 +11,7 @@ export const simpleSelectPropTypes = {
   clearInputOnSelect: PropTypes.bool,
   clearRenderer: PropTypes.func,
   disabled: PropTypes.bool,
+  filtered: PropTypes.bool,
   focusPlaceholderComponent: PropTypes.func,
   getSelectValue: PropTypes.func,
   groupByKey: PropTypes.string,
@@ -48,15 +49,16 @@ export const simpleSelectPropTypes = {
 
 export const multiSelectPropTypes = {
   ...simpleSelectPropTypes,
-  value: PropTypes.array,
-  valueLabelLimit: PropTypes.number,
-  sort: PropTypes.bool,
-  allowSelectAll: PropTypes.bool,
   allOption: PropTypes.shape({
     value: PropTypes.string,
     id: PropTypes.string
   }),
-  allSelectedText: PropTypes.string
+  allowSelectAll: PropTypes.bool,
+  allSelectedText: PropTypes.string,
+  sort: PropTypes.bool,
+  unfilteredOptions: PropTypes.array,
+  value: PropTypes.array,
+  valueLabelLimit: PropTypes.number
 }
 
 export const filterSelectPropTypes = {

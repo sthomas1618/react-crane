@@ -78,7 +78,7 @@ class MultiSelect extends Component {
     const {
       allOption,
       allowSelectAll,
-      filtered,
+      inputValue,
       options,
       valueLabelLimit,
       valueGroupRenderer } = this.props
@@ -86,7 +86,7 @@ class MultiSelect extends Component {
     const Renderer = valueGroupRenderer || ValueGroupRenderer
 
     let opts = options
-    if (!filtered && allowSelectAll && !_.includes(options, allOption)) {
+    if (inputValue === '' && allowSelectAll && !_.includes(options, allOption)) {
       opts.unshift(allOption)
     } else if (!allowSelectAll && _.includes(options, allOption)) {
       opts = _.filter(options, val => val !== allOption)

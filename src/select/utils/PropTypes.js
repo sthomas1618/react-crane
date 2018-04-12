@@ -55,7 +55,6 @@ export const multiSelectPropTypes = {
   allowSelectAll: PropTypes.bool,
   allSelectedText: PropTypes.string,
   sort: PropTypes.bool,
-  unfilteredOptions: PropTypes.array,
   value: PropTypes.array,
   valueLabelLimit: PropTypes.number
 }
@@ -65,5 +64,6 @@ export const filterSelectPropTypes = {
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   onInputChange: PropTypes.func,
   filterOptions: PropTypes.func,
-  ignoreCase: PropTypes.bool
+  ignoreCase: PropTypes.bool,
+  isAllSelected: PropTypes.func
 }

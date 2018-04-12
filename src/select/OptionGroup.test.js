@@ -58,7 +58,6 @@ it('renders multiselect correctly', () => {
       valueKey="id"
       optionGroupRenderer={OptionGroupRenderer}
       option={groups[0]}
-      unfilteredOptions={[]}
       onOptionClick={() => {}}
       optionRef={() => {}}
     >

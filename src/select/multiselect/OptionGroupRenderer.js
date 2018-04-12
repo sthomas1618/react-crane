@@ -3,17 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const OptionGroupRenderer = (props) => {
-  const {
-    groupTitleKey,
-    groupValueKey,
-    option,
-    options,
-    unfilteredOptions,
-    value,
-    valueKey } = props
-  const opts = unfilteredOptions.length > 0 ? unfilteredOptions : options
+  const { groupTitleKey, groupValueKey, option, options, value } = props
   const checked = _.some(value, (val) => {
-    const valueObj = props.getSelectValue({ options: opts, groupValueKey, value: val, valueKey })
+    const valueObj = props.getSelectValue({ options, groupValueKey, value: val })
     return valueObj[groupValueKey] === option[groupValueKey]
   })
   const onChange = (e) => {
@@ -34,13 +26,7 @@ OptionGroupRenderer.propTypes = {
   groupValueKey: PropTypes.string.isRequired,
   option: PropTypes.object.isRequired,
   options: PropTypes.array.isRequired,
-  unfilteredOptions: PropTypes.array,
-  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
-  valueKey: PropTypes.string.isRequired
-}
-
-OptionGroupRenderer.defaultProps = {
-  unfilteredOptions: []
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired
 }
 
 export default OptionGroupRenderer

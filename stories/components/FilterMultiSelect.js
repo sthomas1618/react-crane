@@ -58,14 +58,22 @@ export default class FilterMultiSelect extends React.Component {
     this.setState({ inputValue: event.value })
   }
 
-  getSelectValue = (props) => {
-    const { allOption, allowSelectAll, options } = props
+  getSelectValue = (vals) => {
+    const { value } = vals
+    const { allOption, allowSelectAll, options } = this.props
     const flatOpts = flattenOptions(options, allowSelectAll, allOption)
     const selectValueProps = {
-      ...props,
+      ...this.props,
+      value,
       options: flatOpts
     }
     return getSelectValue(selectValueProps)
+  }
+
+  isAllSelected = (values) => {
+    const { allOption, allowSelectAll, options } = this.props
+    const flatOpts = flattenOptions(options, allowSelectAll, allOption)
+    return values.length === flatOpts.length - 1
   }
 
   render() {
@@ -78,11 +86,11 @@ export default class FilterMultiSelect extends React.Component {
       <MultiSelect
         {...controlProps}
         inputValue={inputValue}
-        unfilteredOptions={options}
         options={opts}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
         getSelectValue={this.getSelectValue}
+        isAllSelected={this.isAllSelected}
         value={value}
         showInput
         ignoreCase

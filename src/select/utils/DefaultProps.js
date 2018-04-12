@@ -67,7 +67,6 @@ export const multiSelectDefaults = {
   allowSelectAll: false,
   allSelectedText: 'All Selected',
   sort: true,
-  unfilteredOptions: [],
   value: [],
   valueLabelLimit: 3
 }

@@ -30,16 +30,15 @@ class MultiSelect extends Component {
     let newValues = []
     const { allOption,
       allowSelectAll,
+      isAllSelected,
       value,
       labelKey,
       valueKey,
       options,
       getSelectValue,
       groupValueKey,
-      sort,
-      unfilteredOptions } = this.props
-    const opts = unfilteredOptions.length > 0 ? unfilteredOptions : options
-    const getVal = val => (getSelectValue({ options: opts, valueKey, value: val }))
+      sort } = this.props
+    const getVal = val => (getSelectValue({ options, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
     const isGroup = _.isArray(option.options)
     const valKey = isGroup ? groupValueKey : valueKey
@@ -59,8 +58,11 @@ class MultiSelect extends Component {
       newValues = [...valueObjs, option]
     }
 
+    const allSelected = isAllSelected ? isAllSelected(newValues)
+      : newValues.length === options.length - 1
+
     // Check the 'Select All' checkbox if all other values in the dropdown are selected
-    if (!containsVal && allowSelectAll && newValues.length === unfilteredOptions.length - 1) {
+    if (!containsVal && allowSelectAll && allSelected) {
       newValues = [...flatOptions]
     }
 

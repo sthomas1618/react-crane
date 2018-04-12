@@ -3,10 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const OptionRenderer = (props) => {
-  const { option, options, labelKey, unfilteredOptions, value, valueKey } = props
-  const opts = unfilteredOptions.length > 0 ? unfilteredOptions : options
+  const { option, options, labelKey, value, valueKey } = props
   const checked = _.some(value, (val) => {
-    const valueObj = props.getSelectValue({ options: opts, valueKey, value: val })
+    const valueObj = props.getSelectValue({ options, valueKey, value: val })
     return valueObj[valueKey] === option[valueKey]
   })
   const onChange = (e) => { e.preventDefault() }
@@ -25,12 +24,7 @@ OptionRenderer.propTypes = {
   options: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
-  unfilteredOptions: PropTypes.array,
   labelKey: PropTypes.string.isRequired
-}
-
-OptionRenderer.defaultProps = {
-  unfilteredOptions: []
 }
 
 export default OptionRenderer

@@ -71,7 +71,6 @@ export default class FilterMultiSelect extends React.Component {
   render() {
     const { options } = this.props
     const { inputValue, value } = this.state
-    const filtered = inputValue !== ''
     const controlProps = _.omit(this.props, 'onInputChange', 'options')
     const opts = filterOptions(options, inputValue, this.props)
 
@@ -87,7 +86,6 @@ export default class FilterMultiSelect extends React.Component {
         value={value}
         showInput
         ignoreCase
-        filtered={filtered}
       />
     )
   }

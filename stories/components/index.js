@@ -9,3 +9,5 @@ export { default as SimpleSelectWithStringValue } from './SimpleSelectWithString
 export { default as MultiSelectWithStringValues } from './MultiSelectWithStringValues'
 
 export { default as CustomValueRenderer } from './CustomValueRenderer'
+export { default as UserNameOptionRenderer } from './UserNameOptionRenderer'
+export { default as UserNameValueRenderer } from './UserNameValueRenderer'

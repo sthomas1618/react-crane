@@ -10,12 +10,15 @@ import {
   FilterMultiSelect,
   SimpleSelectWithStringValue,
   MultiSelectWithStringValues,
-  CustomValueRenderer
+  CustomValueRenderer,
+  UserNameOptionRenderer,
+  UserNameValueRenderer
 } from './components'
 import states from './fixtures/states'
 import groupedTerms from './fixtures/groupedTerms'
 import terms from './fixtures/terms'
 import termTypes from './fixtures/termTypes'
+import userNames from './fixtures/userNames'
 
 import '../scss/crane.scss'
 
@@ -102,21 +105,6 @@ stories.add('with MultiSelect and string values', () => (
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
-  />
-))
-
-stories.add('with MultiSelect and filtering', () => (
-  <FilterMultiSelect
-    options={terms}
-    labelKey="value"
-    valueKey="id"
-    isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
-    autoCloseMenu={boolean('Auto Close Menu', false)}
-    clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
-    openOnClick={boolean('Open On Click', true)}
-    ignoreCase={boolean('Ignore Case in Filter', true)}
   />
 ))
 
@@ -209,6 +197,22 @@ stories.add('with MultiSelect, grouping, and select all option', () => (
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
     allowSelectAll={boolean('Select All Option', true)}
+  />
+))
+
+stories.add('with MultiSelect, filtering, and custom option renderer', () => (
+  <FilterMultiSelect
+    options={userNames}
+    valueKey="id"
+    ignoreCase
+    isOpen={boolean('Is Open', false)}
+    valueLabelLimit={number('Value Label Limit', 3)}
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
+    placeholder={text('Placeholder', 'Select value...')}
+    openOnClick={boolean('Open On Click', true)}
+    optionRenderer={UserNameOptionRenderer}
+    valueGroupRenderer={UserNameValueRenderer}
   />
 ))
 

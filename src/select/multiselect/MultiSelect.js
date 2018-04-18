@@ -81,11 +81,15 @@ class MultiSelect extends Component {
       allOption,
       allowSelectAll,
       inputValue,
+      optionGroupRenderer,
+      optionRenderer,
       options,
       valueLabelLimit,
       valueGroupRenderer } = this.props
     const multiSelectProps = _.omit(this.props, 'onChange')
-    const Renderer = valueGroupRenderer || ValueGroupRenderer
+    const ValGroupRenderer = valueGroupRenderer || ValueGroupRenderer
+    const OptRenderer = optionRenderer || OptionRenderer
+    const OptGroupRenderer = optionGroupRenderer || OptionGroupRenderer
 
     let opts = options
     if (inputValue === '' && allowSelectAll && !_.includes(options, allOption)) {
@@ -99,10 +103,10 @@ class MultiSelect extends Component {
         {...multiSelectProps}
         options={opts}
         onChange={this.onChange}
-        optionRenderer={OptionRenderer}
-        optionGroupRenderer={OptionGroupRenderer}
+        optionRenderer={OptRenderer}
+        optionGroupRenderer={OptGroupRenderer}
         valueGroupRenderer={props => (
-          <Renderer {...props} valueLabelLimit={valueLabelLimit} />
+          <ValGroupRenderer {...props} valueLabelLimit={valueLabelLimit} />
         )}
       />
     )

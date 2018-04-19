@@ -9,6 +9,7 @@ import Value from '../Value'
 import ValueGroup from '../ValueGroup'
 
 import filterOptions from './filterOptions'
+import getLabel from './getLabel'
 import getSelectValue from './getSelectValue'
 
 export const simpleSelectDefaults = {
@@ -23,6 +24,9 @@ export const simpleSelectDefaults = {
   clearRenderer: null,
   disabled: false,
   focusPlaceholderComponent: FocusPlaceholder,
+  getLabel,
+  getOptionLabel: getLabel,
+  getSelectValue,
   groupByKey: null,
   groups: [],
   groupTitleKey: null,
@@ -53,8 +57,7 @@ export const simpleSelectDefaults = {
   valueRenderer: null,
   valueGroupComponent: ValueGroup,
   valueGroupRenderer: null,
-  valueKey: 'value',
-  getSelectValue
+  valueKey: 'value'
 }
 
 export const multiSelectDefaults = {

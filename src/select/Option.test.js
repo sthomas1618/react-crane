@@ -10,6 +10,7 @@ it('does not explode', () => {
       onOptionClick={() => {}}
       onOptionFocus={() => {}}
       optionRef={() => {}}
+      getOptionLabel={() => {}}
     />
   )
   const wrapper = shallow(option)

@@ -70,31 +70,6 @@ export default class FilterMultiSelect extends React.Component {
     return getSelectValue(selectValueProps)
   }
 
-  filterOptions = (inputValue) => {
-    const { allOption, allowSelectAll, options, valueKey } = this.props
-
-    let searchText = inputValue || ''
-
-    if (searchText === '') {
-      return options
-    }
-
-    searchText = searchText.toLowerCase()
-
-    return options.filter((option) => {
-      // Don't include the select all option in filtered results
-      if (allowSelectAll && allOption[valueKey] === option[valueKey]) {
-        return false
-      }
-
-      let label = String(`${option.lastName}, ${option.firstName}`) || ''
-
-      label = label.toLowerCase()
-
-      return label.indexOf(searchText) > -1
-    })
-  }
-
   isAllSelected = (values) => {
     const { allOption, allowSelectAll, options } = this.props
     const flatOpts = flattenOptions(options, allowSelectAll, allOption)
@@ -102,9 +77,10 @@ export default class FilterMultiSelect extends React.Component {
   }
 
   render() {
+    const { options } = this.props
     const { inputValue, value } = this.state
     const controlProps = _.omit(this.props, 'onInputChange', 'options')
-    const opts = this.filterOptions(inputValue)
+    const opts = filterOptions(options, inputValue, this.props)
 
     return (
       <MultiSelect

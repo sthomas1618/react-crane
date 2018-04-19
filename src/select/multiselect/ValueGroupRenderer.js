@@ -7,9 +7,9 @@ const ValueGroupRenderer = (props) => {
   const { allowSelectAll,
     allOption,
     allSelectedText,
+    getLabel,
     value,
     valueKey,
-    labelKey,
     valueLabelLimit,
     options } = props
 
@@ -23,7 +23,7 @@ const ValueGroupRenderer = (props) => {
     const valueObj = props.getSelectValue({ options, valueKey, value: val })
 
     if (valueObj) {
-      const label = valueObj[labelKey]
+      const label = getLabel({ props, option: valueObj })
       const delimiter = (i + 1) === value.length ? '' : ', '
       return (
         <span key={label}>
@@ -45,12 +45,12 @@ ValueGroupRenderer.propTypes = {
   allowSelectAll: PropTypes.bool,
   allOption: PropTypes.object,
   allSelectedText: PropTypes.string,
+  getLabel: PropTypes.func.isRequired,
   getSelectValue: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   valueComponent: PropTypes.func.isRequired,
   value: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,
-  labelKey: PropTypes.string.isRequired,
   valueLabelLimit: PropTypes.number
 }
 

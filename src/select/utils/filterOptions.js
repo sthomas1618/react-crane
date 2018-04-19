@@ -1,5 +1,5 @@
 const filterOptions = (options, inputValue, props) => {
-  const { allOption, allowSelectAll, labelKey, ignoreCase, valueKey } = props
+  const { allOption, allowSelectAll, getOptionLabel, ignoreCase, valueKey } = props
 
   let searchText = inputValue || ''
 
@@ -18,7 +18,7 @@ const filterOptions = (options, inputValue, props) => {
       return false
     }
 
-    let label = String(option[labelKey]) || ''
+    let label = getOptionLabel({ ...props, option }) || ''
 
     if (ignoreCase) {
       label = label.toLowerCase()

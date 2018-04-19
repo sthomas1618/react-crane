@@ -11,8 +11,7 @@ import {
   SimpleSelectWithStringValue,
   MultiSelectWithStringValues,
   CustomValueRenderer,
-  UserNameOptionRenderer,
-  UserNameValueRenderer
+  GetUserNameLabel
 } from './components'
 import states from './fixtures/states'
 import groupedTerms from './fixtures/groupedTerms'
@@ -200,7 +199,7 @@ stories.add('with MultiSelect, grouping, and select all option', () => (
   />
 ))
 
-stories.add('with MultiSelect, filtering, and custom option renderer', () => (
+stories.add('with MultiSelect, filtering, and custom label renderer', () => (
   <FilterMultiSelect
     options={userNames}
     valueKey="id"
@@ -211,8 +210,8 @@ stories.add('with MultiSelect, filtering, and custom option renderer', () => (
     clearable={boolean('Clearable', false)}
     placeholder={text('Placeholder', 'Select value...')}
     openOnClick={boolean('Open On Click', true)}
-    optionRenderer={UserNameOptionRenderer}
-    valueGroupRenderer={UserNameValueRenderer}
+    getLabel={GetUserNameLabel}
+    getOptionLabel={GetUserNameLabel}
   />
 ))
 

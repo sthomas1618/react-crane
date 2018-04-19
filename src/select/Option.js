@@ -6,7 +6,7 @@ class Option extends Component {
   static propTypes = {
     allowSelectAll: PropTypes.bool,
     allOption: PropTypes.object,
-    labelKey: PropTypes.string,
+    getOptionLabel: PropTypes.func.isRequired,
     valueKey: PropTypes.string,
     onOptionClick: PropTypes.func.isRequired,
     onOptionFocus: PropTypes.func.isRequired,
@@ -38,8 +38,8 @@ class Option extends Component {
   render() {
     const { allowSelectAll,
       allOption,
+      getOptionLabel,
       option,
-      labelKey,
       valueKey,
       optionRenderer,
       optionRef,
@@ -51,7 +51,7 @@ class Option extends Component {
 
     const renderer = optionRenderer
       ? optionRenderer(_.omit(this.props), 'optionRenderer', 'onOptionClick')
-      : option[labelKey]
+      : getOptionLabel(this.props)
 
     const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option === allOption ? ' crane-select-group-header' : ''}`
 

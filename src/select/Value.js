@@ -5,6 +5,7 @@ import { getSelectValue } from './utils'
 
 class Value extends Component {
   static propTypes = {
+    getLabel: PropTypes.func.isRequired,
     labelKey: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
     valueRenderer: PropTypes.func,
@@ -18,7 +19,7 @@ class Value extends Component {
   }
 
   render() {
-    const { value, labelKey, valueRenderer, valueKey, options } = this.props
+    const { value, labelKey, valueRenderer, valueKey, options, getLabel } = this.props
 
     if (!value) {
       return null
@@ -28,7 +29,7 @@ class Value extends Component {
 
     const renderer = valueRenderer
       ? valueRenderer({ valueObj, labelKey })
-      : valueObj[labelKey]
+      : getLabel({ ...this.props, option: valueObj })
 
     return <span>{renderer}</span>
   }

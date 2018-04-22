@@ -34,9 +34,9 @@
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
-    "@storybook/addon-knobs": "^3.2.8",
-    "@storybook/react": "^3.2.5",
-    "@storybook/storybook-deployer": "^2.0.0",
+    "@storybook/addon-knobs": "^3.4.2",
+    "@storybook/react": "^3.4.2",
+    "@storybook/storybook-deployer": "^2.3.0",
     "autoprefixer": "^7.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

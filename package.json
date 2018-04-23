@@ -24,6 +24,10 @@
   ],
   "author": "Stephen Thomas",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sthomas1618/react-crane.git"
+  },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0",
     "react-dom": "^0.14.9 || ^15.3.0 || ^16.0"

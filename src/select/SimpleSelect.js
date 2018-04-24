@@ -33,8 +33,18 @@ class SimpleSelect extends Component {
       const { valueKey } = this.props
       const key = this.state.focusedOption[valueKey]
       const optionNode = this.optionRefs[key]
+
       if (optionNode) {
         this.menuRef.scrollTop = optionNode.offsetTop
+      }
+    }
+
+    if (prevIsOpen !== isOpen) {
+      const { onOpen, onClose } = this.props
+      const eventProp = isOpen ? onOpen : onClose
+
+      if (eventProp) {
+        eventProp()
       }
     }
   }

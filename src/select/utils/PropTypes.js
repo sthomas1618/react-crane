@@ -28,9 +28,11 @@ export const simpleSelectPropTypes = {
   menuComponent: PropTypes.func,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onClose: PropTypes.func, // event emitted when Select is closed
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   onInputChange: PropTypes.func,
+  onOpen: PropTypes.func, // event emitted when Select is opened
   openOnClick: PropTypes.bool,
   openOnEmptyInput: PropTypes.bool,
   optionComponent: PropTypes.func,

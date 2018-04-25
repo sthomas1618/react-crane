@@ -8,5 +8,7 @@ export { default as FilterMultiSelect } from './FilterMultiSelect'
 export { default as SimpleSelectWithStringValue } from './SimpleSelectWithStringValue'
 export { default as MultiSelectWithStringValues } from './MultiSelectWithStringValues'
 
+export { default as SwapiAsyncSelect } from './SwapiAsyncSelect'
+
 export { default as CustomValueRenderer } from './CustomValueRenderer'
 export { default as GetUserNameLabel } from './GetUserNameLabel'

@@ -10,6 +10,7 @@ import {
   FilterMultiSelect,
   SimpleSelectWithStringValue,
   MultiSelectWithStringValues,
+  SwapiAsyncSelect,
   CustomValueRenderer,
   GetUserNameLabel
 } from './components'
@@ -241,4 +242,18 @@ stories.add('with FilterSelect', () => (
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
   />
+))
+
+stories.add('with Async Select using SWAPI', () => (
+  <SwapiAsyncSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearInputOnBlur={boolean('Clear Input on Blur', false)}
+    clearInputOnSelect={boolean('Clear Input on Select', false)}
+    clearable={boolean('Clearable', false)}
+    isOpen={boolean('Is Open', false)}
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', true)}
+   />
 ))

@@ -299,7 +299,6 @@ class SimpleSelect extends Component {
 
     this.setState({
       isOpen: true,
-      inputValue: '',
       focusedOption: newFocusedOption
     }, () => { this.scrollToOption(newFocusedOption) })
   }
@@ -347,7 +346,14 @@ class SimpleSelect extends Component {
   }
 
   emitValueChange = (option, event) => {
-    const { clearInputOnSelect, value, valueKey, getLabel, inputValue, options } = this.props
+    const {
+      clearInputOnSelect,
+      value,
+      valueKey,
+      getLabel,
+      inputValue,
+      options
+    } = this.props
     const hasOptions = options && options.length > 0
     const valueSelected = hasOptions && (option === null || value === null) && option !== value
     const selectValueProps = _.omit(this.props, 'getSelectValue')
@@ -379,7 +385,14 @@ class SimpleSelect extends Component {
   blur = () => { this.input.blur() }
 
   groupOptions() {
-    const { allOption, allowSelectAll, inputValue, groups, groupByKey, options } = this.props
+    const {
+      allOption,
+      allowSelectAll,
+      inputValue,
+      groups,
+      groupByKey,
+      options
+    } = this.props
 
     if (groups && groups.length > 0 && groupByKey) {
       const orderedOptions = _.orderBy(options, groupByKey)
@@ -418,7 +431,12 @@ class SimpleSelect extends Component {
 
   renderClear() {
     const ClearComponent = this.props.clearComponent
-    const { clearable, clearRenderer, disabled, value } = this.props
+    const {
+      clearable,
+      clearRenderer,
+      disabled,
+      value
+    } = this.props
     const hasValue = _.isArray(value) ? value.length : value
 
     if (!clearable || !hasValue) {

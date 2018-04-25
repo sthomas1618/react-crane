@@ -9,18 +9,20 @@ class SwapiAsyncSelect extends React.Component {
     this.state = {
       value: null,
       inputValue: '',
-      options: []
+      options: [],
+      isLoading: false
     }
   }
 
   onChange = event => (this.setState({ value: event.value }))
 
   onInputChange = (event) => {
-    this.setState({ inputValue: event.value })
+    this.setState({ inputValue: event.value, isLoading: true })
     this.fetchOptions(event.value)
   }
 
   onOpen = () => {
+    this.setState({ isLoading: true })
     this.fetchOptions()
   }
 
@@ -32,24 +34,25 @@ class SwapiAsyncSelect extends React.Component {
       .then(results => results.json())
       .then((data) => {
         const people = data.results
-        this.setState({ options: people })
+        this.setState({ options: people, isLoading: false })
       })
   }
 
   render() {
-    const { options, value, inputValue } = this.state
+    const { options, value, inputValue, isLoading } = this.state
 
     return (
       <SimpleSelect
         {...this.props}
+        inputValue={inputValue}
+        isLoading={isLoading}
         labelKey="name"
-        valueKey="name"
         onChange={this.onChange}
         onInputChange={this.onInputChange}
         onOpen={this.onOpen}
-        value={value}
-        inputValue={inputValue}
         options={options}
+        value={value}
+        valueKey="name"
       />
     )
   }

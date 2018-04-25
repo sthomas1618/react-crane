@@ -2,6 +2,7 @@ import Arrow from '../Arrow'
 import Clear from '../Clear'
 import FocusPlaceholder from '../FocusPlaceholder'
 import Input from '../Input'
+import Loading from '../Loading'
 import Menu from '../Menu'
 import Option from '../Option'
 import OptionGroup from '../OptionGroup'
@@ -13,53 +14,56 @@ import getLabel from './getLabel'
 import getSelectValue from './getSelectValue'
 
 export const simpleSelectDefaults = {
-  autoCloseMenu: true,
   arrowComponent: Arrow,
   arrowRenderer: null,
+  autoCloseMenu: true,
   className: null,
-  clearable: false,
   clearComponent: Clear,
   clearInputOnBlur: true,
   clearInputOnSelect: true,
   clearRenderer: null,
+  clearable: false,
   disabled: false,
   focusPlaceholderComponent: FocusPlaceholder,
   getLabel,
   getOptionLabel: getLabel,
   getSelectValue,
   groupByKey: null,
-  groups: [],
   groupTitleKey: null,
   groupValueKey: null,
+  groups: [],
   inputComponent: Input,
   inputValue: '',
+  isLoading: false,
   isOpen: false,
   labelKey: 'label',
+  loadingComponent: Loading,
+  loadingRenderer: null,
+  menuComponent: Menu,
   name: null,
   noResultsText: 'No Results Found',
-  menuComponent: Menu,
   onBlur: null,
   onChange: null,
   onClose: null,
   onFocus: null,
-  onKeyDown: null,
   onInputChange: null,
+  onKeyDown: null,
   onOpen: null,
   openOnClick: true,
   openOnEmptyInput: true,
   optionComponent: Option,
   optionGroupComponent: OptionGroup,
-  optionRenderer: null,
   optionGroupRenderer: null,
+  optionRenderer: null,
   options: [],
   placeholder: 'Select value...',
   showInput: false,
   value: null,
   valueComponent: Value,
-  valueRenderer: null,
   valueGroupComponent: ValueGroup,
   valueGroupRenderer: null,
-  valueKey: 'value'
+  valueKey: 'value',
+  valueRenderer: null
 }
 
 export const multiSelectDefaults = {

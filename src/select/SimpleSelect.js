@@ -451,6 +451,16 @@ class SimpleSelect extends Component {
     />)
   }
 
+  renderLoading() {
+    const LoadingComponent = this.props.loadingComponent
+    const { loadingRenderer, isLoading } = this.props
+
+    return (<LoadingComponent
+      loadingRenderer={loadingRenderer}
+      isLoading={isLoading}
+    />)
+  }
+
   renderMenu() {
     const { noResultsText } = this.props
     const { focusedOption } = this.state
@@ -528,6 +538,7 @@ class SimpleSelect extends Component {
         >
           <ValueGroupComponent {...valueGroupProps} />
           {this.renderInput(isOpen)}
+          {this.renderLoading()}
           {this.renderClear()}
           {this.renderArrow(isOpen)}
         </div>

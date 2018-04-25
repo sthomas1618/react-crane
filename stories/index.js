@@ -28,18 +28,19 @@ stories.addDecorator(withKnobs)
 
 stories.add('with SimpleSelect', () => (
   <BasicSelect
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    showInput={boolean('Show Input', false)}
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
-    clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
-    placeholder={text('Placeholder', 'Select value...')}
+    clearable={boolean('Clearable', false)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="abbreviation"
   />
 ))
 

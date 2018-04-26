@@ -2,12 +2,14 @@ import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MultiSelect } from '../../src'
-import { filterOptions, flattenOptions, getSelectValue } from '../../src/select/utils'
+import { filterOptions, flattenOptions, getLabel, getSelectValue } from '../../src/select/utils'
 
 export default class FilterMultiSelect extends React.Component {
   static propTypes = {
     allowSelectAll: PropTypes.bool,
     allOption: PropTypes.object,
+    getLabel: PropTypes.func,
+    getOptionLabel: PropTypes.func,
     groupByKey: PropTypes.string,
     groupTitleKey: PropTypes.string,
     groupValueKey: PropTypes.string,
@@ -25,6 +27,8 @@ export default class FilterMultiSelect extends React.Component {
       value: 'Select All',
       id: '*'
     },
+    getLabel,
+    getOptionLabel: getLabel,
     groupByKey: '',
     groupTitleKey: 'title',
     groupValueKey: 'groupId',

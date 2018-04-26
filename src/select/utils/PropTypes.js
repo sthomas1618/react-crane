@@ -26,6 +26,7 @@ export const simpleSelectPropTypes = {
   labelKey: PropTypes.string,
   loadingComponent: PropTypes.func,
   loadingRenderer: PropTypes.func,
+  loadingText: PropTypes.string,
   menuComponent: PropTypes.func,
   name: PropTypes.string,
   noResultsText: PropTypes.string,

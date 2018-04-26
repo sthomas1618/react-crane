@@ -462,7 +462,7 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { noResultsText } = this.props
+    const { noResultsText, isLoading, loadingText } = this.props
     const { focusedOption } = this.state
     const menuProps = {
       ..._.omit(this.props, 'menuComponent'),
@@ -484,7 +484,9 @@ class SimpleSelect extends Component {
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
-    } else if (noResultsText) {
+    } else if (isLoading && loadingText) {
+      menu = <div className="crane-select-loading-text">{loadingText}</div>
+    } else if (!isLoading && noResultsText) {
       menu = <div className="crane-select-no-results">{noResultsText}</div>
     } else {
       menu = <div className="crane-select-empty-divider" />

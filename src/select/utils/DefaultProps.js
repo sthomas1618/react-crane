@@ -39,6 +39,7 @@ export const simpleSelectDefaults = {
   labelKey: 'label',
   loadingComponent: Loading,
   loadingRenderer: null,
+  loadingText: 'Loading...',
   menuComponent: Menu,
   name: null,
   noResultsText: 'No Results Found',

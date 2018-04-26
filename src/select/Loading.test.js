@@ -14,7 +14,7 @@ it('does not render anything is not loading', () => {
   const renderer = <Loading isLoading={false} />
   const wrapper = shallow(renderer)
 
-  expect(wrapper.find('.crane-select-loading-container')).toBeEmpty()
+  expect(wrapper.html()).toBeNull()
 })
 
 it('does render loading when is loading', () => {

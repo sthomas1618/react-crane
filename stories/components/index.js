@@ -9,6 +9,7 @@ export { default as SimpleSelectWithStringValue } from './SimpleSelectWithString
 export { default as MultiSelectWithStringValues } from './MultiSelectWithStringValues'
 
 export { default as SwapiAsyncSelect } from './SwapiAsyncSelect'
+export { default as LargeDataAsyncSelect } from './LargeDataAsyncSelect'
 
 export { default as CustomValueRenderer } from './CustomValueRenderer'
 export { default as GetUserNameLabel } from './GetUserNameLabel'

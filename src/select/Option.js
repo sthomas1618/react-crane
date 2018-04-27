@@ -20,7 +20,6 @@ class Option extends Component {
     allowSelectAll: false,
     allOption: null,
     optionRenderer: null,
-    labelKey: 'label',
     valueKey: 'value',
     isFocused: false
   }

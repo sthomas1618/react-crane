@@ -10,12 +10,14 @@ class FocusPlaceholder extends Component {
     onFocus: PropTypes.func.isRequired
   }
 
-  static defaultProps = {
-    inputValue: ''
-  }
-
   render() {
-    const { onBlur, onFocus, ariaExpanded, ariaControls, getRef } = this.props
+    const {
+      onBlur,
+      onFocus,
+      ariaExpanded,
+      ariaControls,
+      getRef
+    } = this.props
 
     return (
       <div

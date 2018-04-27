@@ -43,7 +43,7 @@ class OptionGroup extends Component {
       <div
         ref={el => optionRef(el, option[valueKey])}
         aria-selected="false"
-        className={'crane-select-option'}
+        className="crane-select-option"
         onMouseDown={this.onMouseDown}
         onMouseEnter={this.onFocus}
         onMouseMove={this.onFocus}

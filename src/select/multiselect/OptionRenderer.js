@@ -3,7 +3,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const OptionRenderer = (props) => {
-  const { getOptionLabel, option, options, value, valueKey } = props
+  const {
+    getOptionLabel,
+    option,
+    options,
+    value,
+    valueKey
+  } = props
   const checked = _.some(value, (val) => {
     const valueObj = props.getSelectValue({ options, valueKey, value: val })
     return valueObj[valueKey] === option[valueKey]

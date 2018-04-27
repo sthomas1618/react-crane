@@ -3,7 +3,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const OptionGroupRenderer = (props) => {
-  const { groupTitleKey, groupValueKey, option, options, value } = props
+  const {
+    groupTitleKey,
+    groupValueKey,
+    option,
+    options,
+    value
+  } = props
   const checked = _.some(value, (val) => {
     const valueObj = props.getSelectValue({ options, groupValueKey, value: val })
     return valueObj[groupValueKey] === option[groupValueKey]

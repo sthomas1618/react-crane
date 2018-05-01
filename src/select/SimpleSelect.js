@@ -465,7 +465,7 @@ class SimpleSelect extends Component {
     const { noResultsText, isLoading, loadingText } = this.props
     const { focusedOption } = this.state
     const menuProps = {
-      ..._.omit(this.props, 'menuComponent'),
+      ..._.omit(this.props, 'menuComponent', 'options'),
       onOptionClick: this.onOptionClick,
       onOptionFocus: this.onOptionFocus,
       optionRef: (el, key) => { this.optionRefs[key] = el },

@@ -24,12 +24,14 @@ class OptionGroup extends Component {
   }
 
   render() {
-    const { option,
+    const {
+      option,
       valueKey,
       optionGroupRenderer,
       optionRef,
       children,
-      groupTitleKey } = this.props
+      groupTitleKey
+    } = this.props
 
     if (!option) {
       return null

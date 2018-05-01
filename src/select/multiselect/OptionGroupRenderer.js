@@ -1,19 +1,25 @@
-import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import { isValueEqual } from '../utils'
 
 const OptionGroupRenderer = (props) => {
   const {
     groupTitleKey,
     groupValueKey,
     option,
-    options,
-    value
+    value,
+    valueKey
   } = props
-  const checked = _.some(value, (val) => {
-    const valueObj = props.getSelectValue({ options, groupValueKey, value: val })
-    return valueObj[groupValueKey] === option[groupValueKey]
-  })
+  const checked = value && value.length &&
+    value.some(val => (
+      isValueEqual(option, val, groupValueKey) ||
+      (
+        option.options &&
+        option.options.length &&
+        option.options.some(opt => isValueEqual(opt, val, valueKey))
+      )
+    ))
   const onChange = (e) => {
     e.preventDefault()
   }
@@ -27,12 +33,11 @@ const OptionGroupRenderer = (props) => {
 }
 
 OptionGroupRenderer.propTypes = {
-  getSelectValue: PropTypes.func.isRequired,
   groupTitleKey: PropTypes.string.isRequired,
   groupValueKey: PropTypes.string.isRequired,
   option: PropTypes.object.isRequired,
-  options: PropTypes.array.isRequired,
-  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
+  valueKey: PropTypes.string.isRequired
 }
 
 export default OptionGroupRenderer

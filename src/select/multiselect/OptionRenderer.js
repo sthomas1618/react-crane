@@ -1,19 +1,16 @@
-import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import { isValueEqual } from '../utils'
 
 const OptionRenderer = (props) => {
   const {
     getOptionLabel,
     option,
-    options,
     value,
     valueKey
   } = props
-  const checked = _.some(value, (val) => {
-    const valueObj = props.getSelectValue({ options, valueKey, value: val })
-    return valueObj[valueKey] === option[valueKey]
-  })
+  const checked = value.length && value.some(val => isValueEqual(option, val, valueKey))
   const onChange = (e) => { e.preventDefault() }
 
   return (
@@ -26,9 +23,7 @@ const OptionRenderer = (props) => {
 
 OptionRenderer.propTypes = {
   getOptionLabel: PropTypes.func.isRequired,
-  getSelectValue: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
-  options: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired
 }

@@ -32,12 +32,14 @@ class Menu extends Component {
   }
 
   renderOptions(options) {
-    const { groupValueKey,
+    const {
+      groupValueKey,
       valueKey,
       focusedOption,
       optionComponent,
-      optionGroupComponent } = this.props
-    const optionProps = _.omit(this.props, 'optionComponent')
+      optionGroupComponent
+    } = this.props
+    const optionProps = _.omit(this.props, 'optionComponent', 'options')
     const OptionComponent = optionComponent
     const OptionGroupComponent = optionGroupComponent
 

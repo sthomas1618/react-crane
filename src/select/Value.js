@@ -19,7 +19,14 @@ class Value extends Component {
   }
 
   render() {
-    const { value, labelKey, valueRenderer, valueKey, options, getLabel } = this.props
+    const {
+      value,
+      labelKey,
+      valueRenderer,
+      valueKey,
+      options,
+      getLabel
+    } = this.props
 
     if (!value) {
       return null

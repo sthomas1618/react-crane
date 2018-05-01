@@ -28,7 +28,8 @@ class MultiSelect extends Component {
     }
 
     let newValues = []
-    const { allOption,
+    const {
+      allOption,
       allowSelectAll,
       isAllSelected,
       value,
@@ -37,12 +38,13 @@ class MultiSelect extends Component {
       options,
       getSelectValue,
       groupValueKey,
-      sort } = this.props
+      sort
+    } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
     const isGroup = _.isArray(option.options)
     const valKey = isGroup ? groupValueKey : valueKey
-    const containsVal = _.some(valueObjs, val => (val[valKey] === option[valKey]))
+    const containsVal = valueObjs.some(val => (val[valKey] === option[valKey]))
     const flatOptions = flattenOptions(options, allowSelectAll, allOption)
 
     if (containsVal) {
@@ -85,7 +87,8 @@ class MultiSelect extends Component {
       optionRenderer,
       options,
       valueLabelLimit,
-      valueGroupRenderer } = this.props
+      valueGroupRenderer
+    } = this.props
     const multiSelectProps = _.omit(this.props, 'onChange')
     const ValGroupRenderer = valueGroupRenderer || ValueGroupRenderer
     const OptRenderer = optionRenderer || OptionRenderer

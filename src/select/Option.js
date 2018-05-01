@@ -35,14 +35,16 @@ class Option extends Component {
   }
 
   render() {
-    const { allowSelectAll,
+    const {
+      allowSelectAll,
       allOption,
       getOptionLabel,
       option,
       valueKey,
       optionRenderer,
       optionRef,
-      isFocused } = this.props
+      isFocused
+    } = this.props
 
     if (!option) {
       return null

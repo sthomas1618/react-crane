@@ -43,7 +43,7 @@ export const simpleSelectPropTypes = {
   optionGroupRenderer: PropTypes.func,
   optionRenderer: PropTypes.func,
   options: PropTypes.array,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   showInput: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
   valueComponent: PropTypes.func,

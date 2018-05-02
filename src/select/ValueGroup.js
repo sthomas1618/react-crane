@@ -8,7 +8,7 @@ class ValueGroup extends Component {
     inputValue: PropTypes.string,
     labelKey: PropTypes.string,
     onMouseDown: PropTypes.func,
-    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     showInput: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
     valueComponent: PropTypes.func,

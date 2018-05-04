@@ -1,7 +1,11 @@
 import React from 'react'
 
-import { SimpleSelect, filterOptions } from '../../src'
+import { SimpleSelect } from '../../src'
 import names from '../fixtures/largeData'
+
+const delay = result => new Promise(resolve => setTimeout(() => {
+  resolve(result())
+}, 250))
 
 class LargeDataAsyncSelect extends React.Component {
   constructor(props) {
@@ -17,25 +21,31 @@ class LargeDataAsyncSelect extends React.Component {
 
   onChange = event => (this.setState({ value: event.value }))
 
-  onInputChange = (event) => {
+  onInputChange = async (event) => {
     this.setState({ inputValue: event.value, isLoading: true })
-    this.fetchOptions(event.value)
+    await this.fetchOptions(event.value)
   }
 
-  onOpen = () => {
+  onOpen = async () => {
     this.setState({ isLoading: true })
-    this.fetchOptions()
+    await this.fetchOptions()
   }
 
-  fetchOptions(search) {
-    setTimeout(() => {
-      const people = search ? names.filter(person => person.name.toLowerCase().indexOf(search.toLowerCase()) > -1) : names
-      this.setState({ options: people, isLoading: false })
-    }, 150)
+  async fetchOptions(search) {
+    const people = await delay(() => (search
+      ? names.filter(person => person.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
+      : names
+    ))
+    this.setState({ options: people, isLoading: false })
   }
 
   render() {
-    const { options, value, inputValue, isLoading } = this.state
+    const {
+      options,
+      value,
+      inputValue,
+      isLoading
+    } = this.state
 
     return (
       <SimpleSelect

@@ -5,14 +5,16 @@ import { flattenOptions } from '../utils'
 const ValueGroupRenderer = (props) => {
   const ValueComponent = props.valueComponent
   const {
-    allowSelectAll,
     allOption,
     allSelectedText,
+    allowSelectAll,
     getLabel,
+    labelKey,
+    options,
     value,
     valueKey,
     valueLabelLimit,
-    options
+    valueRenderer
   } = props
 
   if (valueLabelLimit > 0 && value.length > valueLabelLimit) {
@@ -22,17 +24,21 @@ const ValueGroupRenderer = (props) => {
   }
 
   const values = value.map((val, i) => {
-    const valueObj = props.getSelectValue({ options, valueKey, value: val })
+    const option = props.getSelectValue({ options, valueKey, value: val })
 
-    if (valueObj) {
-      const label = getLabel({ ...props, option: valueObj })
+    if (option) {
+      const label = getLabel({ ...props, option })
       const delimiter = (i + 1) === value.length ? '' : ', '
       return (
         <span key={label}>
           <ValueComponent
-            {...props}
+            getLabel={getLabel}
+            labelKey={labelKey}
+            option={option}
+            value={value}
             valueClassName="crane-multi-select-value"
-            value={valueObj}
+            valueKey={valueKey}
+            valueRenderer={valueRenderer}
           />
           {delimiter}
         </span>
@@ -49,18 +55,22 @@ ValueGroupRenderer.propTypes = {
   allSelectedText: PropTypes.string,
   getLabel: PropTypes.func.isRequired,
   getSelectValue: PropTypes.func.isRequired,
+  labelKey: PropTypes.string,
   options: PropTypes.array.isRequired,
   valueComponent: PropTypes.func.isRequired,
   value: PropTypes.array.isRequired,
   valueKey: PropTypes.string.isRequired,
-  valueLabelLimit: PropTypes.number
+  valueLabelLimit: PropTypes.number,
+  valueRenderer: PropTypes.func
 }
 
 ValueGroupRenderer.defaultProps = {
   allowSelectAll: false,
   allOption: null,
   allSelectedText: 'All Selected',
-  valueLabelLimit: 0
+  labelKey: '',
+  valueLabelLimit: 0,
+  valueRenderer: null
 }
 
 export default ValueGroupRenderer

@@ -2,17 +2,23 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { getSelectValue } from './utils'
+
 class ValueGroup extends Component {
   static propTypes = {
     clearInputOnSelect: PropTypes.bool,
+    getLabel: PropTypes.func.isRequired,
     inputValue: PropTypes.string,
     labelKey: PropTypes.string,
+    options: PropTypes.array.isRequired,
     onMouseDown: PropTypes.func,
     placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     showInput: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
     valueComponent: PropTypes.func,
-    valueGroupRenderer: PropTypes.func
+    valueKey: PropTypes.string.isRequired,
+    valueGroupRenderer: PropTypes.func,
+    valueRenderer: PropTypes.func
   }
 
   static defaultProps = {
@@ -24,7 +30,8 @@ class ValueGroup extends Component {
     showInput: false,
     value: null,
     valueComponent: null,
-    valueGroupRenderer: null
+    valueGroupRenderer: null,
+    valueRenderer: null
   }
 
   onMouseDown = (event) => {
@@ -36,14 +43,33 @@ class ValueGroup extends Component {
   render() {
     const {
       clearInputOnSelect,
+      getLabel,
       inputValue,
+      labelKey,
+      options,
       placeholder,
       showInput,
       value,
       valueComponent,
-      valueGroupRenderer
+      valueKey,
+      valueGroupRenderer,
+      valueRenderer
     } = this.props
-    const ValueRenderer = valueGroupRenderer || valueComponent
+    const defaultRenderer = () => {
+      const option = getSelectValue({ value, valueKey, options })
+      const ValueComponent = valueComponent
+      return (
+        <ValueComponent
+          getLabel={getLabel}
+          labelKey={labelKey}
+          option={option}
+          value={value}
+          valueKey={valueKey}
+          valueRenderer={valueRenderer}
+        />
+      )
+    }
+    const ValueRenderer = valueGroupRenderer || defaultRenderer
 
     if (showInput && inputValue) {
       return null

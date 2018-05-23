@@ -5,17 +5,19 @@ import { flattenOptions } from '../../src/select/utils'
 
 
 const CustomValueRenderer = (props) => {
-  const { allowSelectAll,
+  const {
+    allowSelectAll,
     allOption,
     getSelectValue,
     groupTitleKey,
     labelKey,
     options,
     value,
-    valueKey } = props
+    valueKey
+  } = props
 
   if (value.length === flattenOptions(options, allowSelectAll, allOption).length) {
-    return <span>{'All Terms'}</span>
+    return <span>All Terms</span>
   }
 
   let addCount = 0

@@ -398,7 +398,7 @@ class SimpleSelect extends Component {
       const orderedOptions = _.orderBy(options, groupByKey)
       const parentGroups = []
 
-      if (inputValue === '' && allowSelectAll && !_.includes(parentGroups, allOption)) {
+      if (inputValue === '' && allowSelectAll && !_.some(parentGroups, allOption)) {
         parentGroups.push(allOption)
       }
 

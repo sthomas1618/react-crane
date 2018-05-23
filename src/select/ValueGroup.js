@@ -12,7 +12,7 @@ class ValueGroup extends Component {
     labelKey: PropTypes.string,
     options: PropTypes.array.isRequired,
     onMouseDown: PropTypes.func,
-    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
     showInput: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
     valueComponent: PropTypes.func,

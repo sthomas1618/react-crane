@@ -31,14 +31,14 @@ class MultiSelect extends Component {
     const {
       allOption,
       allowSelectAll,
-      isAllSelected,
-      value,
-      labelKey,
-      valueKey,
-      options,
       getSelectValue,
       groupValueKey,
-      sort
+      isAllSelected,
+      labelKey,
+      options,
+      sort,
+      value,
+      valueKey
     } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
@@ -48,13 +48,13 @@ class MultiSelect extends Component {
     const flatOptions = flattenOptions(options, allowSelectAll, allOption)
 
     if (containsVal) {
-      newValues = option === allOption ? [] :
+      newValues = option[valueKey] === allOption[valueKey] ? [] :
         _.filter(valueObjs, val => (
           allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
             : val[valKey] !== option[valKey]))
     } else if (isGroup) {
       newValues = [...valueObjs, ...option.options]
-    } else if (option === allOption) {
+    } else if (option[valueKey] === allOption[valueKey]) {
       newValues = flatOptions
     } else {
       newValues = [...valueObjs, option]
@@ -87,7 +87,8 @@ class MultiSelect extends Component {
       optionRenderer,
       options,
       valueLabelLimit,
-      valueGroupRenderer
+      valueGroupRenderer,
+      valueKey
     } = this.props
     const multiSelectProps = _.omit(this.props, 'onChange')
     const ValGroupRenderer = valueGroupRenderer || ValueGroupRenderer
@@ -95,10 +96,10 @@ class MultiSelect extends Component {
     const OptGroupRenderer = optionGroupRenderer || OptionGroupRenderer
 
     let opts = options
-    if (inputValue === '' && allowSelectAll && !_.includes(options, allOption)) {
+    if (inputValue === '' && allowSelectAll && !_.some(options, allOption)) {
       opts.unshift(allOption)
-    } else if (!allowSelectAll && _.includes(options, allOption)) {
-      opts = _.filter(options, val => val !== allOption)
+    } else if (!allowSelectAll && _.some(options, allOption)) {
+      opts = _.filter(options, val => val[valueKey] !== allOption[valueKey])
     }
 
     return (

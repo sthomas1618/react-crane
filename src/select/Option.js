@@ -54,7 +54,7 @@ class Option extends Component {
       ? optionRenderer(_.omit(this.props), 'optionRenderer', 'onOptionClick')
       : getOptionLabel(this.props)
 
-    const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option === allOption ? ' crane-select-group-header' : ''}`
+    const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
 
     return (
       <div

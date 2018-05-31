@@ -83,6 +83,7 @@ class MultiSelect extends Component {
       allOption,
       allowSelectAll,
       inputValue,
+      simpleSelectRef,
       optionGroupRenderer,
       optionRenderer,
       options,
@@ -112,6 +113,7 @@ class MultiSelect extends Component {
         valueGroupRenderer={props => (
           <ValGroupRenderer {...props} valueLabelLimit={valueLabelLimit} />
         )}
+        ref={simpleSelectRef}
       />
     )
   }

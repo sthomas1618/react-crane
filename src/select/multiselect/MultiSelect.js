@@ -78,12 +78,19 @@ class MultiSelect extends Component {
     }
   }
 
+  blur = () => {
+    this.simpleSelectRef.blur()
+  }
+
+  focus = () => {
+    this.simpleSelectRef.focus()
+  }
+
   render() {
     const {
       allOption,
       allowSelectAll,
       inputValue,
-      simpleSelectRef,
       optionGroupRenderer,
       optionRenderer,
       options,
@@ -113,7 +120,7 @@ class MultiSelect extends Component {
         valueGroupRenderer={props => (
           <ValGroupRenderer {...props} valueLabelLimit={valueLabelLimit} />
         )}
-        ref={simpleSelectRef}
+        ref={(ref) => { this.simpleSelectRef = ref }}
       />
     )
   }

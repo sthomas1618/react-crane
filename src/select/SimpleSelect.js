@@ -151,9 +151,9 @@ class SimpleSelect extends Component {
     this.setState({
       isOpen: !!isOpen,
       isOuterFocused: false
-    }, () => {
-      this.setInputValue(event, newInputValue)
     })
+
+    this.setInputValue(event, newInputValue)
   }
 
   onKeyDown = (event) => {

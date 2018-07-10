@@ -50,6 +50,7 @@ export const simpleSelectDefaults = {
   onInputChange: null,
   onKeyDown: null,
   onOpen: null,
+  onSelect: null,
   openOnClick: true,
   openOnEmptyInput: true,
   optionComponent: Option,

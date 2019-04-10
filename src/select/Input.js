@@ -30,6 +30,7 @@ class Input extends Component {
       <div className="crane-select-input">
         <input
           aria-controls={ariaControls}
+          aria-label="select input"
           aria-expanded={ariaExpanded}
           onBlur={onBlur}
           onChange={onChange}

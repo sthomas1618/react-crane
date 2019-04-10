@@ -6,8 +6,11 @@ const Arrow = (props) => {
     ? props.arrowRenderer({ isOpen: props.isOpen })
     : <span className="crane-select-arrow" />
 
+  const label = props.isOpen ? 'collapse' : 'expand'
+
   return (
     <div
+      aria-label={label}
       role="button"
       tabIndex={-1}
       className="crane-select-arrow-container"

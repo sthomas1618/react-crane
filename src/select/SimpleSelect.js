@@ -466,7 +466,7 @@ class SimpleSelect extends Component {
     />)
   }
 
-  renderMenu() {
+  renderMenu(isOpen) {
     const { noResultsText, isLoading, loadingText } = this.props
     const { focusedOption } = this.state
     const menuProps = {
@@ -480,12 +480,15 @@ class SimpleSelect extends Component {
 
     const opts = this.groupOptions()
 
-    let menu = null
+    let menu = <div id="crane-select-menu-container" />
+    if (!isOpen) {
+      return menu
+    }
 
     if (opts.length) {
       const MenuComponent = this.props.menuComponent
       menu = (
-        <div className="crane-select-menu-container">
+        <div className="crane-select-menu-container" id="crane-select-menu-container">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
@@ -503,7 +506,7 @@ class SimpleSelect extends Component {
   renderInput(isOpen) {
     const inputProps = {
       // TODO implement static list of select ids
-      ariaControls: '',
+      ariaControls: 'crane-select-menu-container',
       ariaExpanded: isOpen ? 'true' : 'false',
       getRef: (ref) => { this.input = ref },
       inputValue: this.props.inputValue,
@@ -550,7 +553,7 @@ class SimpleSelect extends Component {
           {this.renderArrow(isOpen)}
         </div>
 
-        {isOpen && this.renderMenu()}
+        {this.renderMenu(isOpen)}
       </div>
     )
   }

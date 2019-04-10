@@ -41,7 +41,7 @@
     "@storybook/addon-a11y": "^3.4.10",
     "@storybook/addon-knobs": "^3.4.10",
     "@storybook/react": "^3.4.10",
-    "@storybook/storybook-deployer": "^2.3.0",
+    "@storybook/storybook-deployer": "^2.8.1",
     "autoprefixer": "^7.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

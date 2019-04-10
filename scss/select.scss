@@ -10,8 +10,8 @@ $crane-select-focus-color: rgb(94, 158, 214);
 $crane-select-height: 34px;
 $crane-select-menu-max-height: 250px;
 $crane-select-option-focus-bg-color: #e7eff7;
-$crane-select-placeholder-color: #999;
-$crane-select-no-results-color: #999;
+$crane-select-placeholder-color: #757575;
+$crane-select-no-results-color: #757575;
 
 .crane-select {
   position: relative;
@@ -124,6 +124,7 @@ $crane-select-no-results-color: #999;
 .crane-select-focus-placeholder {
   border: 0;
   width: 1px;
+  background: none;
 }
 
 @keyframes spinner {

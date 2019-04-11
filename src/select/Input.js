@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 
 class Input extends Component {
   static propTypes = {
-    ariaControls: PropTypes.string.isRequired,
-    ariaExpanded: PropTypes.string.isRequired,
     getRef: PropTypes.func.isRequired,
     inputValue: PropTypes.string,
     onBlur: PropTypes.func.isRequired,
@@ -18,8 +16,6 @@ class Input extends Component {
 
   render() {
     const {
-      ariaControls,
-      ariaExpanded,
       getRef,
       inputValue,
       onBlur,
@@ -29,14 +25,11 @@ class Input extends Component {
     return (
       <div className="crane-select-input">
         <input
-          aria-controls={ariaControls}
           aria-label="select input"
-          aria-expanded={ariaExpanded}
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
           ref={getRef}
-          role="combobox"
           type="text"
           value={inputValue}
         />

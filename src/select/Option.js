@@ -1,27 +1,30 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { isValueEqual } from './utils'
 
 class Option extends Component {
   static propTypes = {
     allowSelectAll: PropTypes.bool,
     allOption: PropTypes.object,
     getOptionLabel: PropTypes.func.isRequired,
-    valueKey: PropTypes.string,
+    isFocused: PropTypes.bool,
     onOptionClick: PropTypes.func.isRequired,
     onOptionFocus: PropTypes.func.isRequired,
     option: PropTypes.object.isRequired,
-    optionRenderer: PropTypes.func,
     optionRef: PropTypes.func.isRequired,
-    isFocused: PropTypes.bool
+    optionRenderer: PropTypes.func,
+    value: PropTypes.any,
+    valueKey: PropTypes.string
   }
 
   static defaultProps = {
     allowSelectAll: false,
     allOption: null,
+    isFocused: false,
     optionRenderer: null,
-    valueKey: 'value',
-    isFocused: false
+    value: null,
+    valueKey: 'value'
   }
 
   onMouseDown = (event) => {
@@ -39,11 +42,12 @@ class Option extends Component {
       allowSelectAll,
       allOption,
       getOptionLabel,
+      isFocused,
       option,
-      valueKey,
-      optionRenderer,
       optionRef,
-      isFocused
+      optionRenderer,
+      value,
+      valueKey
     } = this.props
 
     if (!option) {
@@ -56,10 +60,13 @@ class Option extends Component {
 
     const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
 
+    const selected = value && value.length > 0
+      && value.some(val => isValueEqual(option, val, valueKey))
+
     return (
       <div
         ref={el => optionRef(el, option[valueKey])}
-        aria-selected="false"
+        aria-selected={selected}
         className={className}
         onMouseDown={this.onMouseDown}
         onMouseEnter={this.onFocus}

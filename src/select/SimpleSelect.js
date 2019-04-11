@@ -173,7 +173,8 @@ class SimpleSelect extends Component {
 
     switch (event.keyCode) {
       case 9:
-        // tab
+      case 32:
+        // tab or space
         if (event.shiftKey || !this.state.isOpen) {
           return
         }
@@ -466,7 +467,7 @@ class SimpleSelect extends Component {
     />)
   }
 
-  renderMenu(isOpen) {
+  renderMenu() {
     const { noResultsText, isLoading, loadingText } = this.props
     const { focusedOption } = this.state
     const menuProps = {
@@ -480,15 +481,12 @@ class SimpleSelect extends Component {
 
     const opts = this.groupOptions()
 
-    let menu = <div id="crane-select-menu-container" />
-    if (!isOpen) {
-      return menu
-    }
+    let menu = null
 
     if (opts.length) {
       const MenuComponent = this.props.menuComponent
       menu = (
-        <div className="crane-select-menu-container" id="crane-select-menu-container">
+        <div className="crane-select-menu-container">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
@@ -505,9 +503,6 @@ class SimpleSelect extends Component {
 
   renderInput(isOpen) {
     const inputProps = {
-      // TODO implement static list of select ids
-      ariaControls: 'crane-select-menu-container',
-      ariaExpanded: isOpen ? 'true' : 'false',
       getRef: (ref) => { this.input = ref },
       inputValue: this.props.inputValue,
       onBlur: this.onInputBlur,
@@ -553,7 +548,7 @@ class SimpleSelect extends Component {
           {this.renderArrow(isOpen)}
         </div>
 
-        {this.renderMenu(isOpen)}
+        {isOpen && this.renderMenu()}
       </div>
     )
   }

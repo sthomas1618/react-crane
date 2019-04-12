@@ -1,21 +1,26 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { isValueEqual } from './utils'
 
 class OptionGroup extends Component {
   static propTypes = {
+    children: PropTypes.array.isRequired,
     groupTitleKey: PropTypes.string,
-    valueKey: PropTypes.string,
+    groupValueKey: PropTypes.string,
     onOptionClick: PropTypes.func.isRequired,
     option: PropTypes.object.isRequired,
     optionGroupRenderer: PropTypes.func,
     optionRef: PropTypes.func.isRequired,
-    children: PropTypes.array.isRequired
+    value: PropTypes.any,
+    valueKey: PropTypes.string
   }
 
   static defaultProps = {
     optionGroupRenderer: null,
     groupTitleKey: 'label',
+    groupValueKey: 'groupId',
+    value: null,
     valueKey: 'value'
   }
 
@@ -25,12 +30,14 @@ class OptionGroup extends Component {
 
   render() {
     const {
+      children,
       option,
-      valueKey,
       optionGroupRenderer,
       optionRef,
-      children,
-      groupTitleKey
+      groupTitleKey,
+      groupValueKey,
+      value,
+      valueKey
     } = this.props
 
     if (!option) {
@@ -41,10 +48,20 @@ class OptionGroup extends Component {
       ? optionGroupRenderer(_.omit(this.props), 'optionGroupRenderer', 'onOptionClick')
       : option[groupTitleKey]
 
+    const selected = value && value.length > 0 &&
+    value.some(val => (
+      isValueEqual(option, val, groupValueKey) ||
+      (
+        option.options &&
+        option.options.length > 0 &&
+        option.options.some(opt => isValueEqual(opt, val, valueKey))
+      )
+    ))
+
     return (
       <div
         ref={el => optionRef(el, option[valueKey])}
-        aria-selected="false"
+        aria-selected={selected}
         className="crane-select-option"
         onMouseDown={this.onMouseDown}
         onMouseEnter={this.onFocus}

@@ -63,11 +63,13 @@ class Option extends Component {
     let selected = false
 
     if (value !== null) {
-      if (typeof(value) === 'string') {
-        if (value === option[valueKey]) {
+      if (Array.isArray(value)) {
+        if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
           selected = true
         }
-      } else if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
+      } else if (typeof(value) === 'object' && value[valueKey] === option[valueKey]) {
+        selected = true
+      } else if (value === option[valueKey]) {
         selected = true
       }
     }

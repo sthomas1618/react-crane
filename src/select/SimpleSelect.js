@@ -157,7 +157,7 @@ class SimpleSelect extends Component {
   }
 
   onKeyDown = (event) => {
-    const { disabled, onKeyDown } = this.props
+    const { disabled, inputValue, onKeyDown } = this.props
 
     if (disabled) {
       return
@@ -197,11 +197,9 @@ class SimpleSelect extends Component {
         break
       case 32:
         // space
-        if (!this.state.isOpen) {
+        if (!this.state.isOpen || inputValue) {
           return
         }
-        // Make sure it doesn't override filter text, but select the value
-        event.stopPropagation()
         this.selectFocusedOption(event)
         break
       case 38:

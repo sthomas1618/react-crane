@@ -507,9 +507,12 @@ class SimpleSelect extends Component {
     return menu
   }
 
-  renderInput(isOpen) {
+  renderInput() {
     const inputProps = {
+      'aria-label': this.props['aria-label'],
+      'aria-labelledby': this.props['aria-labelledby'],
       getRef: (ref) => { this.input = ref },
+      id: this.props.inputId,
       inputValue: this.props.inputValue,
       onBlur: this.onInputBlur,
       onChange: this.onInputChange,
@@ -529,7 +532,7 @@ class SimpleSelect extends Component {
   }
 
   render() {
-    const { disabled, valueGroupComponent } = this.props
+    const { disabled, id, valueGroupComponent } = this.props
     const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
     const valueGroupProps = _.omit(this.props, 'valueGroupComponent')
@@ -542,13 +545,14 @@ class SimpleSelect extends Component {
       <div className={selectClassName} ref={(container) => { this.container = container }}>
         <div
           className="crane-select-input-group"
+          id={id}
+          onKeyDown={this.onKeyDown}
           onMouseDown={this.onValueMouseDown}
           onTouchEnd={this.onValueTouchEnd}
-          onKeyDown={this.onKeyDown}
           role="presentation"
         >
           <ValueGroupComponent {...valueGroupProps} />
-          {this.renderInput(isOpen)}
+          {this.renderInput()}
           {this.renderLoading()}
           {this.renderClear()}
           {this.renderArrow(isOpen)}

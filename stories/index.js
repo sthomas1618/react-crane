@@ -31,9 +31,9 @@ stories.addDecorator(withKnobs)
 stories.add('with SimpleSelect', () => (
   <BasicSelect
     autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
-    clearable={boolean('Clearable', false)}
     isLoading={boolean('Is Loading', false)}
     isOpen={boolean('Is Open', false)}
     labelKey="name"
@@ -48,219 +48,219 @@ stories.add('with SimpleSelect', () => (
 
 stories.add('with SimpleSelect and string value', () => (
   <SimpleSelectWithStringValue
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    showInput={boolean('Show Input', false)}
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="abbreviation"
   />
 ))
 
 stories.add('with SimpleSelect and number value', () => (
   <SimpleSelectWithStringValue
-    options={numbers}
-    labelKey="label"
-    valueKey="value"
-    showInput={boolean('Show Input', false)}
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="label"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={numbers}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="value"
   />
 ))
 
 stories.add('with SimpleSelect and grouping', () => (
   <BasicSelect
-    options={groupedTerms}
-    labelKey="value"
-    valueKey="id"
-    groupByKey="groupId"
-    groupTitleKey="title"
-    groupValueKey="groupId"
-    showInput={boolean('Show Input', false)}
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
-    placeholder={text('Placeholder', 'Select value...')}
+    groupByKey="groupId"
+    groupTitleKey="title"
+    groupValueKey="groupId"
+    isOpen={boolean('Is Open', false)}
+    labelKey="value"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={groupedTerms}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="id"
   />
 ))
 
 stories.add('with MultiSelect', () => (
   <BasicMultiSelect
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="abbreviation"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with MultiSelect and string values', () => (
   <MultiSelectWithStringValues
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="abbreviation"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with MultiSelect, filtering, and select all option', () => (
   <FilterMultiSelect
-    options={terms}
-    labelKey="value"
-    valueKey="id"
-    ignoreCase
-    isOpen={boolean('Is Open', false)}
-    autoCloseMenu={boolean('Auto Close Menu', false)}
-    clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
-    openOnClick={boolean('Open On Click', true)}
     allowSelectAll={boolean('Allow Select All', true)}
     allSelectedText={text('All Selected Text', 'All Terms Selected')}
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
+    ignoreCase
+    isOpen={boolean('Is Open', false)}
+    labelKey="value"
+    openOnClick={boolean('Open On Click', true)}
+    options={terms}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
   />
 ))
 
 stories.add('with MultiSelect and pre-formed grouping', () => (
   <BasicMultiSelect
-    options={groupedTerms}
-    labelKey="value"
-    valueKey="id"
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
     groupByKey="groupId"
     groupTitleKey="title"
     groupValueKey="groupId"
     isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
-    autoCloseMenu={boolean('Auto Close Menu', false)}
-    clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    labelKey="value"
     openOnClick={boolean('Open On Click', true)}
+    options={groupedTerms}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with MultiSelect, filtering, calculated grouping, and select all', () => (
   <FilterMultiSelect
-    options={terms}
-    labelKey="value"
-    valueKey="id"
-    groups={termTypes}
+    allowSelectAll={boolean('Allow Select All', true)}
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
     groupByKey="groupId"
+    groups={termTypes}
     groupTitleKey="title"
     groupValueKey="groupId"
     ignoreCase
     isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
-    autoCloseMenu={boolean('Auto Close Menu', false)}
-    clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    labelKey="value"
     openOnClick={boolean('Open On Click', true)}
-    allowSelectAll={boolean('Allow Select All', true)}
+    options={terms}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with MultiSelect and custom value renderer', () => (
   <div style={{ width: '600px' }} >
     <BasicMultiSelect
-      options={groupedTerms}
-      labelKey="value"
-      valueKey="id"
+      allowSelectAll={boolean('Allow Select All', true)}
+      autoCloseMenu={boolean('Auto Close Menu', false)}
+      clearable={boolean('Clearable', false)}
       groupByKey="groupId"
       groupTitleKey="title"
       groupValueKey="groupId"
       isOpen={boolean('Is Open', false)}
-      autoCloseMenu={boolean('Auto Close Menu', false)}
-      clearable={boolean('Clearable', false)}
-      placeholder={text('Placeholder', 'Select value...')}
+      labelKey="value"
       openOnClick={boolean('Open On Click', true)}
-      valueGroupRenderer={CustomValueRenderer}
+      options={groupedTerms}
+      placeholder={text('Placeholder', 'Select value...')}
       sort={boolean('Sort Options in Display', false)}
-      allowSelectAll={boolean('Allow Select All', true)}
+      valueGroupRenderer={CustomValueRenderer}
+      valueKey="id"
     />
   </div>
 ))
 
 stories.add('with MultiSelect, grouping, and select all option', () => (
   <BasicMultiSelect
-    options={groupedTerms}
-    labelKey="value"
-    valueKey="id"
+    allowSelectAll={boolean('Select All Option', true)}
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    clearable={boolean('Clearable', false)}
     groupByKey="groupId"
     groupTitleKey="title"
     groupValueKey="groupId"
     isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
-    autoCloseMenu={boolean('Auto Close Menu', false)}
-    clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    labelKey="value"
     openOnClick={boolean('Open On Click', true)}
-    allowSelectAll={boolean('Select All Option', true)}
+    options={groupedTerms}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with MultiSelect, filtering, and custom label renderer', () => (
   <FilterMultiSelect
-    options={userNames}
-    valueKey="id"
-    ignoreCase
-    isOpen={boolean('Is Open', false)}
-    valueLabelLimit={number('Value Label Limit', 3)}
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
-    openOnClick={boolean('Open On Click', true)}
     getLabel={GetUserNameLabel}
     getOptionLabel={GetUserNameLabel}
+    ignoreCase
+    isOpen={boolean('Is Open', false)}
+    openOnClick={boolean('Open On Click', true)}
+    options={userNames}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
+    valueLabelLimit={number('Value Label Limit', 3)}
   />
 ))
 
 stories.add('with SearchSelect', () => (
   <BasicSearchSelect
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="abbreviation"
   />
 ))
 
 stories.add('with FilterSelect', () => (
   <BasicFilterSelect
-    options={states}
-    labelKey="name"
-    valueKey="abbreviation"
-    isOpen={boolean('Is Open', false)}
     autoCloseMenu={boolean('Auto Close Menu', true)}
     clearable={boolean('Clearable', false)}
-    placeholder={text('Placeholder', 'Select value...')}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="abbreviation"
   />
 ))
 
@@ -283,9 +283,9 @@ stories.add('with FilterSelect using grouped data', () => (
 stories.add('with Async Select using SWAPI', () => (
   <SwapiAsyncSelect
     autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', false)}
     clearInputOnSelect={boolean('Clear Input on Select', false)}
-    clearable={boolean('Clearable', false)}
     isOpen={boolean('Is Open', false)}
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}
@@ -297,9 +297,9 @@ stories.add('with Async Select using SWAPI', () => (
 stories.add('with Async Select a whole lot of options', () => (
   <LargeDataAsyncSelect
     autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', false)}
     clearInputOnSelect={boolean('Clear Input on Select', false)}
-    clearable={boolean('Clearable', false)}
     isOpen={boolean('Is Open', false)}
     openOnClick={boolean('Open On Click', true)}
     openOnEmptyInput={boolean('Open On Empty Input', true)}

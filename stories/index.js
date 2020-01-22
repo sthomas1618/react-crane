@@ -264,6 +264,22 @@ stories.add('with FilterSelect', () => (
   />
 ))
 
+stories.add('with FilterSelect using grouped data', () => (
+  <BasicFilterSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    groupTitleKey="title"
+    groupValueKey="groupId"
+    isOpen={boolean('Is Open', false)}
+    labelKey="value"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={groupedTerms}
+    placeholder={text('Placeholder', 'Select value...')}
+    valueKey="id"
+  />
+))
+
 stories.add('with Async Select using SWAPI', () => (
   <SwapiAsyncSelect
     autoCloseMenu={boolean('Auto Close Menu', true)}

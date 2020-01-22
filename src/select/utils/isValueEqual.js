@@ -10,7 +10,7 @@ const isValueEqual = (option, value, valueKey) => {
   )
 
   const optValue = option[valueKey]
-  const testVal = _.isArray(value) ? getVal(value[0]) : getVal(value)
+  const testVal = Array.isArray(value) ? getVal(value[0]) : getVal(value)
 
   return optValue === testVal
 }

@@ -7,7 +7,7 @@ const flattenOptions = (options, allowSelectAll, allOption) => {
 
   let flatOptions = []
   options.forEach((option) => {
-    if (option.options && _.isArray(option.options)) {
+    if (option.options && Array.isArray(option.options)) {
       flatOptions = _.concat(flatOptions, option.options)
     }
   })

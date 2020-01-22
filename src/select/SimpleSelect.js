@@ -365,7 +365,7 @@ class SimpleSelect extends Component {
     const valueSelected = hasOptions && (option === null || value === null) && option !== value
     const selectValueProps = _.omit(this.props, 'getSelectValue')
     const valueObj = this.props.getSelectValue(selectValueProps)
-    const valueChanged = (_.isArray(value) && hasOptions)
+    const valueChanged = (Array.isArray(value) && hasOptions)
       ? true
       : (hasOptions && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
 
@@ -449,7 +449,7 @@ class SimpleSelect extends Component {
       disabled,
       value
     } = this.props
-    const hasValue = _.isArray(value) ? value.length : value
+    const hasValue = Array.isArray(value) ? value.length : value
 
     if (!clearable || !hasValue) {
       return null

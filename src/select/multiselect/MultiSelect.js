@@ -42,7 +42,7 @@ class MultiSelect extends Component {
     } = this.props
     const getVal = val => (getSelectValue({ options, valueKey, value: val }))
     const valueObjs = value.map(val => (getVal(val))).filter(val => val)
-    const isGroup = _.isArray(option.options)
+    const isGroup = Array.isArray(option.options)
     const valKey = isGroup ? groupValueKey : valueKey
     const containsVal = valueObjs.some(val => (val[valKey] === option[valKey]))
     const flatOptions = flattenOptions(options, allowSelectAll, allOption)

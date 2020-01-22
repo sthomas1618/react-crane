@@ -50,7 +50,7 @@ class Menu extends Component {
     return options.map((option) => {
       const isFocused = option === focusedOption
 
-      if (option.options && _.isArray(option.options)) {
+      if (option.options && Array.isArray(option.options)) {
         return (
           <OptionGroupComponent
             {...optionProps}

@@ -22,7 +22,7 @@ const CustomValueRenderer = (props) => {
 
   let addCount = 0
   const values = options.map((opt, pos) => {
-    if (opt.options && _.isArray(opt.options) && opt.options.length > 0) {
+    if (opt.options && Array.isArray(opt.options) && opt.options.length > 0) {
       // If all of the options in a group are selected, show the group title
       if (_.difference(opt.options, value).length === 0) {
         const groupLabel = `${opt[groupTitleKey]} (`

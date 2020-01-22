@@ -15,7 +15,7 @@ const getSelectValue = (props) => {
     return valueObj
   }
 
-  if (_.isArray(value)) {
+  if (Array.isArray(value)) {
     return getValue(value[0])
   }
 

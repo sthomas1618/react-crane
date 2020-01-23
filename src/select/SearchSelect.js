@@ -6,10 +6,15 @@ import SimpleSelect from './SimpleSelect'
 
 class SearchSelect extends Component {
   static propTypes = {
-    value: PropTypes.object,
     inputValue: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    onInputChange: PropTypes.func.isRequired
+    onInputChange: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string
+    ])
   }
 
   static defaultProps = {

@@ -14,7 +14,12 @@ class ValueGroup extends Component {
     onMouseDown: PropTypes.func,
     placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
     showInput: PropTypes.bool,
-    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     valueComponent: PropTypes.func,
     valueKey: PropTypes.string.isRequired,
     valueGroupRenderer: PropTypes.func,

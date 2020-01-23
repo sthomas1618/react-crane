@@ -14,7 +14,12 @@ class Menu extends Component {
     optionGroupRenderer: PropTypes.func,
     options: PropTypes.array,
     valueKey: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.string]),
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     menuRef: PropTypes.func.isRequired
   }
 

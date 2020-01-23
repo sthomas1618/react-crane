@@ -36,7 +36,12 @@ OptionGroupRenderer.propTypes = {
   groupTitleKey: PropTypes.string.isRequired,
   groupValueKey: PropTypes.string.isRequired,
   option: PropTypes.object.isRequired,
-  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.string
+  ]).isRequired,
   valueKey: PropTypes.string.isRequired
 }
 

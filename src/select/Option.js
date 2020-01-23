@@ -14,7 +14,12 @@ class Option extends Component {
     option: PropTypes.object.isRequired,
     optionRef: PropTypes.func.isRequired,
     optionRenderer: PropTypes.func,
-    value: PropTypes.any,
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     valueKey: PropTypes.string
   }
 

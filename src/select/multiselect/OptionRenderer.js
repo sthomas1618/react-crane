@@ -25,7 +25,12 @@ OptionRenderer.propTypes = {
   getOptionLabel: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
   valueKey: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.array, PropTypes.object, PropTypes.string]).isRequired
+  value: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.string
+  ]).isRequired
 }
 
 export default OptionRenderer

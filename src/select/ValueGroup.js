@@ -75,7 +75,11 @@ class ValueGroup extends Component {
       return null
     }
 
-    const rendererProps = _.omit(this.props, 'valueGroupRenderer', 'placeholder')
+    const {
+      valueGroupRenderer: _valueGroupRenderer,
+      placeholder: _placeholder,
+      ...rendererProps
+    } = this.props
 
     // Don't include group headers or select all in the count
     let newValue = value

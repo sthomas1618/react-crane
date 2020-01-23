@@ -44,8 +44,13 @@ class OptionGroup extends Component {
       return null
     }
 
+    const {
+      optionGroupRenderer: _optionGroupRenderer,
+      onOptionClick,
+      ...optionGroupRendererProps
+    } = this.props
     const renderer = optionGroupRenderer
-      ? optionGroupRenderer(_.omit(this.props), 'optionGroupRenderer', 'onOptionClick')
+      ? optionGroupRenderer(optionGroupRendererProps)
       : option[groupTitleKey]
 
     const selected = value && value.length > 0 &&

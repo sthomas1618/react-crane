@@ -37,15 +37,21 @@ class FilterSelect extends Component {
   }
 
   render() {
-    const props = _.omit(this.props, 'onInputChange', 'options')
-    const inputValue = this.props.inputValue || this.state.inputValue
-    const options = this.props.filterOptions(this.props.options, inputValue, this.props)
+    const {
+      inputValue,
+      filterOptions,
+      options,
+      onInputChange,
+      ...selectProps
+    } = this.props
+    const currentInputValue = inputValue || this.state.inputValue
+    const filteredOptions = filterOptions(this.props.options, currentInputValue, this.props)
 
     return (
       <SimpleSelect
-        {...props}
-        options={options}
-        inputValue={inputValue}
+        {...selectProps}
+        options={filteredOptions}
+        inputValue={currentInputValue}
         onInputChange={this.onInputChange}
         getSelectValue={this.getSelectValue}
         showInput

@@ -98,7 +98,7 @@ class MultiSelect extends Component {
       valueGroupRenderer,
       valueKey
     } = this.props
-    const multiSelectProps = _.omit(this.props, 'onChange')
+    const { onChange, ...multiSelectProps } = this.props
     const ValGroupRenderer = valueGroupRenderer || ValueGroupRenderer
     const OptRenderer = optionRenderer || OptionRenderer
     const OptGroupRenderer = optionGroupRenderer || OptionGroupRenderer

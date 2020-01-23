@@ -32,13 +32,17 @@ class SearchSelect extends Component {
   }
 
   render() {
-    const props = _.omit(this.props, 'onChange')
-    const value = this.props.value || this.state.value
+    const {
+      onChange,
+      value,
+      ...selectProps
+    } = this.props
+    const currentValue = value || this.state.value
 
     return (
       <SimpleSelect
-        {...props}
-        value={value}
+        {...selectProps}
+        value={currentValue}
         onChange={this.onChange}
         clearInputOnBlur={false}
         clearInputOnSelect={false}

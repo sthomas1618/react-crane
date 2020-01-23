@@ -39,7 +39,12 @@ class Menu extends Component {
       optionComponent,
       optionGroupComponent
     } = this.props
-    const optionProps = _.omit(this.props, 'optionComponent', 'options')
+
+    const {
+      options: _options,
+      optionComponent: _optionComponent,
+      ...optionProps
+    } = this.props
     const OptionComponent = optionComponent
     const OptionGroupComponent = optionGroupComponent
 

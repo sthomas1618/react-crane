@@ -81,9 +81,13 @@ export default class FilterMultiSelect extends React.Component {
   }
 
   render() {
-    const { options } = this.props
+    const {
+      // eslint-disable-next-line react/prop-types
+      onInputChange,
+      options,
+      ...controlProps
+    } = this.props
     const { inputValue, value } = this.state
-    const controlProps = _.omit(this.props, 'onInputChange', 'options')
     const opts = filterOptions(options, inputValue, this.props)
 
     return (

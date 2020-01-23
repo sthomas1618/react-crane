@@ -54,10 +54,14 @@ class Option extends Component {
       return null
     }
 
+    const {
+      optionRenderer: _optionRenderer,
+      onOptionClick,
+      ...optionRendererProps
+    } = this.props
     const renderer = optionRenderer
-      ? optionRenderer(_.omit(this.props), 'optionRenderer', 'onOptionClick')
+      ? optionRenderer(optionRendererProps)
       : getOptionLabel(this.props)
-
     const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
 
     let selected = false
@@ -67,7 +71,7 @@ class Option extends Component {
         if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
           selected = true
         }
-      } else if (typeof(value) === 'object' && value[valueKey] === option[valueKey]) {
+      } else if (typeof value === 'object' && value[valueKey] === option[valueKey]) {
         selected = true
       } else if (value === option[valueKey]) {
         selected = true

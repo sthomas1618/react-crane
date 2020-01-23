@@ -355,16 +355,20 @@ class SimpleSelect extends Component {
   emitValueChange = (option, event) => {
     const {
       clearInputOnSelect,
-      value,
-      valueKey,
       getLabel,
+      getSelectValue,
       inputValue,
-      options
+      options,
+      value,
+      valueKey
     } = this.props
     const hasOptions = options && options.length > 0
     const valueSelected = hasOptions && (option === null || value === null) && option !== value
-    const selectValueProps = _.omit(this.props, 'getSelectValue')
-    const valueObj = this.props.getSelectValue(selectValueProps)
+    const {
+      getSelectValue: _getSelectValue,
+      ...selectValueProps
+    } = this.props
+    const valueObj = getSelectValue(selectValueProps)
     const valueChanged = (Array.isArray(value) && hasOptions)
       ? true
       : (hasOptions && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
@@ -476,8 +480,13 @@ class SimpleSelect extends Component {
   renderMenu() {
     const { noResultsText, isLoading, loadingText } = this.props
     const { focusedOption } = this.state
+    const {
+      menuComponent,
+      options,
+      ...otherProps
+    } = this.props
     const menuProps = {
-      ..._.omit(this.props, 'menuComponent', 'options'),
+      ...otherProps,
       onOptionClick: this.onOptionClick,
       onOptionFocus: this.onOptionFocus,
       optionRef: (el, key) => { this.optionRefs[key] = el },
@@ -527,15 +536,22 @@ class SimpleSelect extends Component {
 
   renderFocusPlaceholder(inputProps) {
     const FocusPlaceholderComponent = this.props.focusPlaceholderComponent
-    const props = _.omit(inputProps, 'onChange', 'inputValue')
-    return <FocusPlaceholderComponent {...props} />
+    const {
+      onChange,
+      inputValue,
+      ...placeholderProps
+    } = inputProps
+    return <FocusPlaceholderComponent {...placeholderProps} />
   }
 
   render() {
     const { disabled, id, valueGroupComponent } = this.props
     const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
-    const valueGroupProps = _.omit(this.props, 'valueGroupComponent')
+    const {
+      valueGroupComponent: _valueGroupComponent,
+      ...valueGroupProps
+    } = this.props
     const ValueGroupComponent = valueGroupComponent
     const selectClassName = classNames('crane-select', this.props.className, {
       open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused, disabled

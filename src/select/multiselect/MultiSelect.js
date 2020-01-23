@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
 
 import SimpleSelect from '../SimpleSelect'
@@ -6,7 +5,12 @@ import OptionRenderer from './OptionRenderer'
 import OptionGroupRenderer from './OptionGroupRenderer'
 import ValueGroupRenderer from './ValueGroupRenderer'
 
-import { flattenOptions, multiSelectPropTypes, multiSelectDefaults } from '../utils'
+import {
+  flattenOptions,
+  multiSelectPropTypes,
+  multiSelectDefaults,
+  sortBy
+} from '../utils'
 
 class MultiSelect extends Component {
   static propTypes = {
@@ -49,7 +53,7 @@ class MultiSelect extends Component {
 
     if (containsVal) {
       newValues = option[valueKey] === allOption[valueKey] ? [] :
-        _.filter(valueObjs, val => (
+        valueObjs.filter(val => (
           allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
             : val[valKey] !== option[valKey]))
     } else if (isGroup) {
@@ -69,7 +73,7 @@ class MultiSelect extends Component {
     }
 
     if (sort) {
-      newValues = _.sortBy(newValues, val => (_.isString(val) ? val : val[labelKey]))
+      newValues = newValues.map(v => v).sort(sortBy(labelKey))
     }
 
     if (this.props.onChange) {
@@ -104,10 +108,10 @@ class MultiSelect extends Component {
     const OptGroupRenderer = optionGroupRenderer || OptionGroupRenderer
 
     let opts = options
-    if (inputValue === '' && allowSelectAll && !_.some(options, allOption)) {
+    if (inputValue === '' && allowSelectAll && options.every(o => o[valueKey] !== allOption[valueKey])) {
       opts.unshift(allOption)
-    } else if (!allowSelectAll && _.some(options, allOption)) {
-      opts = _.filter(options, val => val[valueKey] !== allOption[valueKey])
+    } else if (!allowSelectAll && options.some(o => o[valueKey] === allOption[valueKey])) {
+      opts = options.filter(val => val[valueKey] !== allOption[valueKey])
     }
 
     return (

@@ -9,7 +9,7 @@ const getSelectValue = (props) => {
 
   const getValue = (valueObj) => {
     if (_.isString(valueObj) || _.isNumber(valueObj)) {
-      return _.find(options, { [valueKey]: valueObj })
+      return options.find(o => o[valueKey] === valueObj)
     }
 
     return valueObj

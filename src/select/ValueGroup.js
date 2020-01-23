@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -90,7 +89,7 @@ class ValueGroup extends Component {
     let newValue = value
 
     if (Array.isArray(newValue)) {
-      newValue = _.filter(value, val => (!val.options))
+      newValue = value.filter(val => (!val.options))
       rendererProps.value = newValue
     }
 

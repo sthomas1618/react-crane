@@ -1,8 +1,12 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
 import classNames from 'classnames'
 
-import { flattenOptions, simpleSelectProps, simpleSelectDefaults } from './utils'
+import {
+  flattenOptions,
+  simpleSelectDefaults,
+  simpleSelectProps,
+  sortBy
+} from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
 class SimpleSelect extends Component {
@@ -281,7 +285,7 @@ class SimpleSelect extends Component {
     const flatOptions = flattenOptions(options, allowSelectAll, allOption)
 
     let currentIndex = focusedOption
-      ? _.findIndex(flatOptions, option => (option[valueKey] === focusedOption[valueKey]))
+      ? flatOptions.findIndex(option => (option[valueKey] === focusedOption[valueKey]))
       : -1
 
     if (!isOpen && currentIndex > -1) {
@@ -411,20 +415,22 @@ class SimpleSelect extends Component {
     } = this.props
 
     if (groups && groups.length > 0 && groupByKey) {
-      const orderedOptions = _.orderBy(options, groupByKey)
+      const orderedOptions = options.map(o => o).sort(sortBy(groupByKey))
       const parentGroups = []
 
-      if (inputValue === '' && allowSelectAll && !_.some(parentGroups, allOption)) {
+      if (inputValue === '' && allowSelectAll && parentGroups.every(p => p !== allOption)) {
         parentGroups.push(allOption)
       }
 
       orderedOptions.forEach((option) => {
-        const group = _.find(groups, [groupByKey, option[groupByKey]])
+        const group = groups.find(g => g[groupByKey] === option[groupByKey])
+
         if (group) {
-          if (!_.includes(parentGroups, group)) {
+          if (!parentGroups.find(p => p === group)) {
             group.options = []
             parentGroups.push(group)
           }
+
           group.options.push(option)
         }
       })

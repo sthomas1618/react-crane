@@ -24,7 +24,15 @@ class OptionGroup extends Component {
   }
 
   onMouseDown = (event) => {
-    this.props.onOptionClick(event, this.props.option)
+    const { option, value } = this.props
+    const isGroup = Array.isArray(option.options)
+    const isMulti = Array.isArray(value)
+    // when the current option is a parent of a group and
+    // it is not in multi mode, then return the previous value.
+    // this prevents returning a invalid "parent" value in non-multi mode.
+    const newValue = !isMulti && isGroup ? value : option
+
+    this.props.onOptionClick(event, newValue)
   }
 
   render() {

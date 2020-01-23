@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 const getSelectValue = (props) => {
   const { value, valueKey, options } = props
 
@@ -8,7 +6,10 @@ const getSelectValue = (props) => {
   }
 
   const getValue = (valueObj) => {
-    if (_.isString(valueObj) || _.isNumber(valueObj)) {
+    if (typeof valueObj === 'string'
+      || valueObj instanceof String
+      || typeof valueObj === 'number'
+      || valueObj instanceof Number) {
       return options.find(o => o[valueKey] === valueObj)
     }
 

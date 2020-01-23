@@ -1,12 +1,15 @@
-import _ from 'lodash'
-
 const isValueEqual = (option, value, valueKey) => {
   if (value === undefined || !option) {
     return false
   }
 
   const getVal = val => (
-    _.isString(val) || _.isNumber(val) ? val : val[valueKey]
+    typeof val === 'string'
+      || val instanceof String
+      || typeof val === 'number'
+      || val instanceof Number
+      ? val
+      : val[valueKey]
   )
 
   const optValue = option[valueKey]

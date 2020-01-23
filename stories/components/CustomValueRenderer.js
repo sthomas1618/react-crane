@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flattenOptions } from '../../src/select/utils'
@@ -23,8 +22,10 @@ const CustomValueRenderer = (props) => {
   let addCount = 0
   const values = options.map((opt, pos) => {
     if (opt.options && Array.isArray(opt.options) && opt.options.length > 0) {
+      const difference = [opt.options, value].reduce((a, b) => a.filter(v => !b.includes(v)))
+
       // If all of the options in a group are selected, show the group title
-      if (_.difference(opt.options, value).length === 0) {
+      if (difference.length === 0) {
         const groupLabel = `${opt[groupTitleKey]} (`
         const groupOps = opt.options.map((val, i) => {
           addCount += 1

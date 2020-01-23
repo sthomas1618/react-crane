@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 const flattenOptions = (options, allowSelectAll, allOption) => {
   if (!options) {
     return null
@@ -8,7 +6,7 @@ const flattenOptions = (options, allowSelectAll, allOption) => {
   let flatOptions = []
   options.forEach((option) => {
     if (option.options && Array.isArray(option.options)) {
-      flatOptions = _.concat(flatOptions, option.options)
+      flatOptions = flatOptions.concat(option.options)
     }
   })
 

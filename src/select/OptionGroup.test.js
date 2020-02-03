@@ -15,55 +15,53 @@ const groups = [
   }
 ]
 
-it('does not explode', () => {
-  const renderer = (
-    <OptionGroup
-      groupTitleKey=""
-      valueKey=""
-      optionGroupRenderer={() => {}}
-      option={{}}
-      onOptionClick={() => {}}
-      optionRef={() => {}}
-    >
-      children={[]}
-    </OptionGroup>
+const testProps = {
+  getOptionLabel: () => {},
+  onOptionClick: () => {},
+  onOptionFocus: () => {},
+  option: {},
+  optionRef: () => {}
+}
 
-  )
+it('does not explode', () => {
+  const children = []
+  const renderer = <OptionGroup {...testProps}>{children}</OptionGroup>
   const wrapper = shallow(renderer)
 
   expect(wrapper).not.toBeEmpty()
 })
 
 it('renders non-multiselect correctly', () => {
-  const component = mount(
+  const children = []
+  const renderer = (
     <OptionGroup
+      {...testProps}
       groupTitleKey="title"
       valueKey="id"
-      optionGroupRenderer={null}
       option={groups[0]}
-      onOptionClick={() => {}}
-      optionRef={() => {}}
     >
-      children={[]}
+      {children}
     </OptionGroup>
   )
+  const component = mount(renderer)
 
   expect(component.find('span')).toHaveText('Group 1')
 })
 
 it('renders multiselect correctly', () => {
-  const component = mount(
+  const children = []
+  const renderer = (
     <OptionGroup
+      {...testProps}
       groupTitleKey="title"
       valueKey="id"
       optionGroupRenderer={OptionGroupRenderer}
       option={groups[0]}
-      onOptionClick={() => {}}
-      optionRef={() => {}}
     >
-      children={[]}
+      {children}
     </OptionGroup>
   )
+  const component = mount(renderer)
 
   expect(component.find('span .crane-select-group-header')).toHaveText('Group 1')
 })

@@ -1,30 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import { isValueEqual } from './utils'
 
 class OptionGroup extends Component {
-  static propTypes = {
-    children: PropTypes.array.isRequired,
-    groupTitleKey: PropTypes.string,
-    groupValueKey: PropTypes.string,
-    onOptionClick: PropTypes.func.isRequired,
-    option: PropTypes.object.isRequired,
-    optionGroupRenderer: PropTypes.func,
-    optionRef: PropTypes.func.isRequired,
-    value: PropTypes.any,
-    valueKey: PropTypes.string
-  }
-
-  static defaultProps = {
-    optionGroupRenderer: null,
-    groupTitleKey: 'label',
-    groupValueKey: 'groupId',
-    value: null,
-    valueKey: 'value'
-  }
-
   onMouseDown = (event) => {
-    const { option, value } = this.props
+    const { onOptionClick, option, value } = this.props
     const isGroup = Array.isArray(option.options)
     const isMulti = Array.isArray(value)
     // when the current option is a parent of a group and
@@ -32,7 +13,14 @@ class OptionGroup extends Component {
     // this prevents returning a invalid "parent" value in non-multi mode.
     const newValue = !isMulti && isGroup ? value : option
 
-    this.props.onOptionClick(event, newValue)
+    onOptionClick(event, newValue)
+  }
+
+  onFocus = (event) => {
+    const { isFocused, onOptionFocus, option } = this.props
+    if (!isFocused) {
+      onOptionFocus(event, option)
+    }
   }
 
   render() {
@@ -51,11 +39,13 @@ class OptionGroup extends Component {
       return null
     }
 
-    const {
-      optionGroupRenderer: _optionGroupRenderer,
-      onOptionClick,
-      ...optionGroupRendererProps
-    } = this.props
+    const optionGroupRendererProps = {
+      groupTitleKey,
+      groupValueKey,
+      option,
+      value,
+      valueKey
+    }
     const renderer = optionGroupRenderer
       ? optionGroupRenderer(optionGroupRendererProps)
       : option[groupTitleKey]
@@ -88,6 +78,34 @@ class OptionGroup extends Component {
       </div>
     )
   }
+}
+
+OptionGroup.propTypes = {
+  children: PropTypes.array.isRequired,
+  groupTitleKey: PropTypes.string,
+  groupValueKey: PropTypes.string,
+  isFocused: PropTypes.bool,
+  onOptionClick: PropTypes.func.isRequired,
+  onOptionFocus: PropTypes.func.isRequired,
+  option: PropTypes.object.isRequired,
+  optionGroupRenderer: PropTypes.func,
+  optionRef: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.string
+  ]),
+  valueKey: PropTypes.string
+}
+
+OptionGroup.defaultProps = {
+  groupTitleKey: 'label',
+  groupValueKey: 'groupId',
+  isFocused: false,
+  optionGroupRenderer: null,
+  value: null,
+  valueKey: 'value'
 }
 
 export default OptionGroup

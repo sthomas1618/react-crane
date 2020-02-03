@@ -1,43 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { isValueEqual } from './utils'
 
 class Option extends Component {
-  static propTypes = {
-    allowSelectAll: PropTypes.bool,
-    allOption: PropTypes.object,
-    getOptionLabel: PropTypes.func.isRequired,
-    isFocused: PropTypes.bool,
-    onOptionClick: PropTypes.func.isRequired,
-    onOptionFocus: PropTypes.func.isRequired,
-    option: PropTypes.object.isRequired,
-    optionRef: PropTypes.func.isRequired,
-    optionRenderer: PropTypes.func,
-    value: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-      PropTypes.string
-    ]),
-    valueKey: PropTypes.string
-  }
-
-  static defaultProps = {
-    allowSelectAll: false,
-    allOption: null,
-    isFocused: false,
-    optionRenderer: null,
-    value: null,
-    valueKey: 'value'
-  }
-
   onMouseDown = (event) => {
-    this.props.onOptionClick(event, this.props.option)
+    const { onOptionClick, option } = this.props
+    onOptionClick(event, option)
   }
 
   onFocus = (event) => {
-    if (!this.props.isFocused) {
-      this.props.onOptionFocus(event, this.props.option)
+    const { isFocused, onOptionFocus, option } = this.props
+    if (!isFocused) {
+      onOptionFocus(event, option)
     }
   }
 
@@ -47,10 +20,11 @@ class Option extends Component {
       allOption,
       getOptionLabel,
       isFocused,
+      labelKey,
       option,
       optionRef,
       optionRenderer,
-      value,
+      selected,
       valueKey
     } = this.props
 
@@ -58,29 +32,16 @@ class Option extends Component {
       return null
     }
 
-    const {
-      optionRenderer: _optionRenderer,
-      onOptionClick,
-      ...optionRendererProps
-    } = this.props
+    const optionRendererProps = {
+      getOptionLabel,
+      labelKey,
+      option,
+      selected
+    }
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
-      : getOptionLabel(this.props)
+      : getOptionLabel({ labelKey, option, selected })
     const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
-
-    let selected = false
-
-    if (value !== null) {
-      if (Array.isArray(value)) {
-        if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
-          selected = true
-        }
-      } else if (typeof value === 'object' && value[valueKey] === option[valueKey]) {
-        selected = true
-      } else if (value === option[valueKey]) {
-        selected = true
-      }
-    }
 
     return (
       <div
@@ -98,6 +59,31 @@ class Option extends Component {
       </div>
     )
   }
+}
+
+Option.propTypes = {
+  allOption: PropTypes.object,
+  allowSelectAll: PropTypes.bool,
+  getOptionLabel: PropTypes.func.isRequired,
+  isFocused: PropTypes.bool,
+  labelKey: PropTypes.string,
+  onOptionClick: PropTypes.func.isRequired,
+  onOptionFocus: PropTypes.func.isRequired,
+  option: PropTypes.object.isRequired,
+  optionRef: PropTypes.func.isRequired,
+  optionRenderer: PropTypes.func,
+  selected: PropTypes.bool,
+  valueKey: PropTypes.string
+}
+
+Option.defaultProps = {
+  allowSelectAll: false,
+  allOption: null,
+  isFocused: false,
+  labelKey: '',
+  optionRenderer: null,
+  selected: false,
+  valueKey: 'value'
 }
 
 export default Option

@@ -6,10 +6,10 @@ import OptionRenderer from './OptionRenderer'
 it('does not explode', () => {
   const renderer = (
     <OptionRenderer
-      option={{}}
-      valueKey=""
-      value={{}}
       getOptionLabel={() => {}}
+      option={{}}
+      value={{}}
+      valueKey=""
     />
   )
   const wrapper = shallow(renderer)
@@ -19,10 +19,10 @@ it('does not explode', () => {
 
 it('renders title correctly', () => {
   const component = shallow(<OptionRenderer
+    getOptionLabel={() => ('Foo')}
     option={{ id: 1 }}
     value={[]}
     valueKey="id"
-    getOptionLabel={() => ('Foo')}
   />)
 
   expect(component.find('span')).toHaveText('Foo')
@@ -30,10 +30,11 @@ it('renders title correctly', () => {
 
 it('toggles checkbox if selected', () => {
   const component = shallow(<OptionRenderer
+    getOptionLabel={() => {}}
     option={{ id: 1 }}
+    selected
     value={[{ id: 1 }]}
     valueKey="id"
-    getOptionLabel={() => {}}
   />)
 
   expect(component.find('input').props().checked).toBeTruthy()
@@ -48,15 +49,4 @@ it('toggles does not checkbox if not selected', () => {
   />)
 
   expect(component.find('input').props().checked).toBeFalsy()
-})
-
-it('toggles checkbox if selected with flat value', () => {
-  const component = shallow(<OptionRenderer
-    option={{ id: 1 }}
-    value={[1]}
-    valueKey="id"
-    getOptionLabel={() => {}}
-  />)
-
-  expect(component.find('input').props().checked).toBeTruthy()
 })

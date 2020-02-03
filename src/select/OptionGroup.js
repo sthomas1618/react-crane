@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { isValueEqual } from './utils'
 
-class OptionGroup extends Component {
+// TODO: FUTURE convert to function component and use React.Memo
+class OptionGroup extends PureComponent {
   onMouseDown = (event) => {
     const { onOptionClick, option, value } = this.props
     const isGroup = Array.isArray(option.options)

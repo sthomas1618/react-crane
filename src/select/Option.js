@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class Option extends Component {
+// TODO: FUTURE convert to function component and use React.Memo
+class Option extends PureComponent {
   onMouseDown = (event) => {
     const { onOptionClick, option } = this.props
     onOptionClick(event, option)

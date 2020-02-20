@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Clear = (props) => {
-  if (props.disabled) {
+const Clear = ({
+  clearRenderer,
+  disabled,
+  onClearClick,
+  onClearTouchEnd
+}) => {
+  if (disabled) {
     return null
   }
 
-  const renderer = props.clearRenderer
-    ? props.clearRenderer()
+  const renderer = clearRenderer
+    ? clearRenderer({ disabled })
     : <span className="crane-select-clear">&times;</span>
 
   return (
@@ -15,8 +20,8 @@ const Clear = (props) => {
       role="button"
       tabIndex={-1}
       className="crane-select-clear-container"
-      onMouseDown={props.onClearClick}
-      onTouchEnd={props.onClearTouchEnd}
+      onMouseDown={onClearClick}
+      onTouchEnd={onClearTouchEnd}
     >
       {renderer}
     </div>

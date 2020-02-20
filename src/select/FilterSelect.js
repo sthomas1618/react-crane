@@ -28,9 +28,12 @@ class FilterSelect extends Component {
   }
 
   getSelectValue = (props) => {
+    const { value, valueKey } = props
+    const { options } = this.props
     const selectValueProps = {
-      ...props,
-      options: this.props.options
+      options,
+      value,
+      valueKey
     }
     return getSelectValue(selectValueProps)
   }

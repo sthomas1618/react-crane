@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Loading = (props) => {
-  if (!props.isLoading) {
+const Loading = ({
+  isLoading,
+  loadingRenderer
+}) => {
+  if (!isLoading) {
     return null
   }
 
-  const renderer = props.loadingRenderer
-    ? props.loadingRenderer({ isLoading: props.isLoading })
+  const renderer = loadingRenderer
+    ? loadingRenderer({ isLoading })
     : <div className="crane-select-loading" />
 
   return (
@@ -16,11 +19,12 @@ const Loading = (props) => {
 }
 
 Loading.propTypes = {
-  loadingRenderer: PropTypes.func,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool,
+  loadingRenderer: PropTypes.func
 }
 
 Loading.defaultProps = {
+  isLoading: false,
   loadingRenderer: null
 }
 

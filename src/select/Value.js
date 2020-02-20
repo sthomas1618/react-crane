@@ -1,19 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class Value extends Component {
-  static propTypes = {
-    getLabel: PropTypes.func.isRequired,
-    labelKey: PropTypes.string.isRequired,
-    option: PropTypes.object,
-    valueRenderer: PropTypes.func
-  }
-
-  static defaultProps = {
-    option: null,
-    valueRenderer: null
-  }
-
+class Value extends PureComponent {
   render() {
     const {
       labelKey,
@@ -32,6 +20,18 @@ class Value extends Component {
 
     return <span>{renderer}</span>
   }
+}
+
+Value.propTypes = {
+  getLabel: PropTypes.func.isRequired,
+  labelKey: PropTypes.string.isRequired,
+  option: PropTypes.object,
+  valueRenderer: PropTypes.func
+}
+
+Value.defaultProps = {
+  option: null,
+  valueRenderer: null
 }
 
 export default Value

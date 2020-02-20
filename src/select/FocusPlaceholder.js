@@ -1,13 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class FocusPlaceholder extends Component {
-  static propTypes = {
-    getRef: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
-    onFocus: PropTypes.func.isRequired
-  }
-
+class FocusPlaceholder extends PureComponent {
   render() {
     const {
       onBlur,
@@ -26,6 +20,12 @@ class FocusPlaceholder extends Component {
       />
     )
   }
+}
+
+FocusPlaceholder.propTypes = {
+  getRef: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired
 }
 
 export default FocusPlaceholder

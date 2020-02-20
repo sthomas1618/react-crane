@@ -1,11 +1,3 @@
-const getLabel = (props) => {
-  const { labelKey, option } = props
-
-  if (!option) {
-    return null
-  }
-
-  return option[labelKey]
-}
+const getLabel = (option, labelKey) => (option ? option[labelKey] : null)
 
 export default getLabel

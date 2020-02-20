@@ -27,7 +27,7 @@ const ValueGroupRenderer = (props) => {
     const option = props.getSelectValue({ options, valueKey, value: val })
 
     if (option) {
-      const label = getLabel({ ...props, option })
+      const label = getLabel(option, labelKey)
       const delimiter = (i + 1) === value.length ? '' : ', '
       return (
         <span key={label}>
@@ -35,9 +35,6 @@ const ValueGroupRenderer = (props) => {
             getLabel={getLabel}
             labelKey={labelKey}
             option={option}
-            value={value}
-            valueClassName="crane-multi-select-value"
-            valueKey={valueKey}
             valueRenderer={valueRenderer}
           />
           {delimiter}

@@ -41,7 +41,7 @@ class Option extends PureComponent {
     }
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
-      : getOptionLabel({ labelKey, option, selected })
+      : getOptionLabel({ option, labelKey, selected })
     const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
 
     return (

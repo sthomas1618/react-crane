@@ -28,7 +28,7 @@ class Value extends Component {
 
     const renderer = valueRenderer
       ? valueRenderer({ option, labelKey })
-      : getLabel({ ...this.props, option })
+      : getLabel(option, labelKey)
 
     return <span>{renderer}</span>
   }

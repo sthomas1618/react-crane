@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { MultiSelect } from '../../src'
-import { filterOptions, flattenOptions, getLabel, getSelectValue } from '../../src/select/utils'
+import {
+  filterOptions,
+  flattenOptions,
+  getLabel,
+  getOptionLabel,
+  getSelectValue
+} from '../../src/select/utils'
 
 export default class FilterMultiSelect extends React.Component {
   static propTypes = {
@@ -27,7 +33,7 @@ export default class FilterMultiSelect extends React.Component {
       id: '*'
     },
     getLabel,
-    getOptionLabel: getLabel,
+    getOptionLabel,
     groupByKey: '',
     groupTitleKey: 'title',
     groupValueKey: 'groupId',
@@ -63,10 +69,15 @@ export default class FilterMultiSelect extends React.Component {
 
   getSelectValue = (vals) => {
     const { value } = vals
-    const { allOption, allowSelectAll, options } = this.props
+    const {
+      allOption,
+      allowSelectAll,
+      options,
+      valueKey
+    } = this.props
     const flatOpts = flattenOptions(options, allowSelectAll, allOption)
     const selectValueProps = {
-      ...this.props,
+      valueKey,
       value,
       options: flatOpts
     }

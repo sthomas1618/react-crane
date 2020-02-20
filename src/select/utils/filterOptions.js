@@ -4,6 +4,7 @@ const filterOptions = (options, inputValue, props) => {
     allowSelectAll,
     getOptionLabel,
     ignoreCase,
+    labelKey,
     valueKey
   } = props
 
@@ -18,7 +19,7 @@ const filterOptions = (options, inputValue, props) => {
   }
 
   const matchOption = (option) => {
-    let label = getOptionLabel({ ...props, option }) || ''
+    let label = getOptionLabel({ option, labelKey }) || ''
 
     if (ignoreCase) {
       label = label.toLowerCase()

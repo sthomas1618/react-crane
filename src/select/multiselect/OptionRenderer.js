@@ -11,7 +11,7 @@ const OptionRenderer = ({
   return (
     <span>
       <input type="checkbox" checked={selected} onChange={onChange} />
-      {getOptionLabel({ labelKey, option, selected })}
+      {getOptionLabel({ option, labelKey, selected })}
     </span>
   )
 }

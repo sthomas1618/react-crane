@@ -1,6 +1,4 @@
-const getSelectValue = (props) => {
-  const { value, valueKey, options } = props
-
+const getSelectValue = ({ value, valueKey, options }) => {
   if (!value) {
     return null
   }

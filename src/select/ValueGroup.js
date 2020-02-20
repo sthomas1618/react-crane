@@ -4,40 +4,6 @@ import PropTypes from 'prop-types'
 import { getSelectValue } from './utils'
 
 class ValueGroup extends Component {
-  static propTypes = {
-    clearInputOnSelect: PropTypes.bool,
-    getLabel: PropTypes.func.isRequired,
-    inputValue: PropTypes.string,
-    labelKey: PropTypes.string,
-    options: PropTypes.array.isRequired,
-    onMouseDown: PropTypes.func,
-    placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-    showInput: PropTypes.bool,
-    value: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-      PropTypes.string
-    ]),
-    valueComponent: PropTypes.func,
-    valueKey: PropTypes.string.isRequired,
-    valueGroupRenderer: PropTypes.func,
-    valueRenderer: PropTypes.func
-  }
-
-  static defaultProps = {
-    clearInputOnSelect: true,
-    inputValue: '',
-    labelKey: '',
-    onMouseDown: null,
-    placeholder: '',
-    showInput: false,
-    value: null,
-    valueComponent: null,
-    valueGroupRenderer: null,
-    valueRenderer: null
-  }
-
   onMouseDown = (event) => {
     if (this.props.onMouseDown) {
       this.props.onMouseDown(this.props.value, event)
@@ -100,6 +66,40 @@ class ValueGroup extends Component {
 
     return <div className="crane-select-value-group">{renderer}</div>
   }
+}
+
+ValueGroup.propTypes = {
+  clearInputOnSelect: PropTypes.bool,
+  getLabel: PropTypes.func.isRequired,
+  inputValue: PropTypes.string,
+  labelKey: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onMouseDown: PropTypes.func,
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
+  showInput: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.string
+  ]),
+  valueComponent: PropTypes.func,
+  valueKey: PropTypes.string.isRequired,
+  valueGroupRenderer: PropTypes.func,
+  valueRenderer: PropTypes.func
+}
+
+ValueGroup.defaultProps = {
+  clearInputOnSelect: true,
+  inputValue: '',
+  labelKey: '',
+  onMouseDown: null,
+  placeholder: '',
+  showInput: false,
+  value: null,
+  valueComponent: null,
+  valueGroupRenderer: null,
+  valueRenderer: null
 }
 
 export default ValueGroup

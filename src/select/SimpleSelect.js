@@ -362,16 +362,18 @@ class SimpleSelect extends Component {
       getLabel,
       getSelectValue,
       inputValue,
+      labelKey,
       options,
       value,
       valueKey
     } = this.props
     const hasOptions = options && options.length > 0
     const valueSelected = hasOptions && (option === null || value === null) && option !== value
-    const {
-      getSelectValue: _getSelectValue,
-      ...selectValueProps
-    } = this.props
+    const selectValueProps = {
+      options,
+      value,
+      valueKey
+    }
     const valueObj = getSelectValue(selectValueProps)
     const valueChanged = (Array.isArray(value) && hasOptions)
       ? true
@@ -387,7 +389,7 @@ class SimpleSelect extends Component {
       this.props.onChange(eventContext, event)
     }
 
-    const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel({ ...this.props, option }) : ''
+    const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(options, labelKey) : ''
     if (newInputVal !== inputValue) {
       this.setInputValue(event, newInputVal)
     }

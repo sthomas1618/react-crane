@@ -11,6 +11,7 @@ import ValueGroup from '../ValueGroup'
 
 import filterOptions from './filterOptions'
 import getLabel from './getLabel'
+import getOptionLabel from './getOptionLabel'
 import getSelectValue from './getSelectValue'
 
 export const simpleSelectDefaults = {
@@ -26,7 +27,7 @@ export const simpleSelectDefaults = {
   disabled: false,
   focusPlaceholderComponent: FocusPlaceholder,
   getLabel,
-  getOptionLabel: getLabel,
+  getOptionLabel,
   getSelectValue,
   groupByKey: null,
   groupTitleKey: null,

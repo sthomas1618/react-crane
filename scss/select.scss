@@ -267,6 +267,10 @@ $crane-select-no-results-color: #757575;
   border-top: 1px solid $crane-select-border-color;
 }
 
+.crane-select-static-divider {
+  border-top: 1px solid $crane-select-border-color;
+}
+
 .crane-select-loading-text,
 .crane-select-no-results {
   border: 1px solid $crane-select-border-color;

@@ -3,6 +3,22 @@ import PropTypes from 'prop-types'
 
 import { isValueEqual } from './utils'
 
+const isSelected = (option, value, valueKey) => {
+  if (value !== null) {
+    if (Array.isArray(value)) {
+      if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
+        return true
+      }
+    } else if (typeof value === 'object' && value[valueKey] === option[valueKey]) {
+      return true
+    } else if (value === option[valueKey]) {
+      return true
+    }
+  }
+
+  return false
+}
+
 class Menu extends Component {
   renderOptions(options) {
     const {
@@ -70,19 +86,7 @@ class Menu extends Component {
         )
       }
 
-      let selected = false
-
-      if (value !== null) {
-        if (Array.isArray(value)) {
-          if (value.length > 0 && value.some(val => isValueEqual(option, val, valueKey))) {
-            selected = true
-          }
-        } else if (typeof value === 'object' && value[valueKey] === option[valueKey]) {
-          selected = true
-        } else if (value === option[valueKey]) {
-          selected = true
-        }
-      }
+      const selected = isSelected(option, value, valueKey)
 
       return (
         <OptionComponent
@@ -97,11 +101,48 @@ class Menu extends Component {
   }
 
   render() {
-    const { menuRef, options } = this.props
+    const {
+      allOption,
+      allowSelectAll,
+      focusedOption,
+      getOptionLabel,
+      labelKey,
+      menuRef,
+      onOptionClick,
+      onOptionFocus,
+      optionComponent,
+      optionRef,
+      optionRenderer,
+      options,
+      staticOption,
+      value,
+      valueKey
+    } = this.props
+
+    const OptionComponent = optionComponent
+    const selected = staticOption && isSelected(staticOption, value, valueKey)
+    const isFocused = staticOption && staticOption === focusedOption
 
     return (
       <div className="crane-select-menu" ref={menuRef}>
         {this.renderOptions(options)}
+        {!!staticOption && <div className="crane-select-static-divider" />}
+        {!!staticOption && (
+          <OptionComponent
+            onOptionClick={onOptionClick}
+            onOptionFocus={onOptionFocus}
+            allowSelectAll={allowSelectAll}
+            allOption={allOption}
+            getOptionLabel={getOptionLabel}
+            labelKey={labelKey}
+            optionRef={optionRef}
+            optionRenderer={optionRenderer}
+            valueKey={valueKey}
+            option={staticOption}
+            isFocused={isFocused}
+            selected={selected}
+          />
+        )}
       </div>
     )
   }
@@ -124,6 +165,7 @@ Menu.propTypes = {
   optionRef: PropTypes.func.isRequired,
   optionRenderer: PropTypes.func,
   options: PropTypes.array,
+  staticOption: PropTypes.object,
   value: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
@@ -145,6 +187,7 @@ Menu.defaultProps = {
   optionGroupRenderer: null,
   optionRenderer: null,
   options: [],
+  staticOption: null,
   value: null,
   valueKey: ''
 }

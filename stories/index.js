@@ -1,6 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 
 import {
   BasicSelect,
@@ -97,6 +98,26 @@ stories.add('with SimpleSelect and grouping', () => (
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
     valueKey="id"
+  />
+))
+
+stories.add('with SimpleSelect and Static Option', () => (
+  <BasicSelect
+    utoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    onStaticOptionClick={action('static option')}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    staticOption={{ name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }}
+    valueKey="abbreviation"
   />
 ))
 

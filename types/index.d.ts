@@ -143,6 +143,7 @@ export interface OptionProps {
   option: object,
   optionRef: (element: HTMLElement) => void,
   optionRenderer?: React.ReactNode,
+  staticOption?: object,
   selected?: boolean,
   valueKey?: string
 }
@@ -242,6 +243,7 @@ export interface SimpleSelectProps {
   onKeyDown?: (eventContext: OnChangeEventContext, event: React.SyntheticEvent<SimpleSelect>) => void,
   onOpen?: () => void,
   onSelect?: (event: React.KeyboardEvent<SimpleSelect>) => void,
+  onStaticOptionClick: (event: React.SyntheticEvent<Option>) => void,
   openOnClick?: boolean,
   openOnEmptyInput?: boolean,
   optionComponent?: React.ReactNode,
@@ -251,6 +253,7 @@ export interface SimpleSelectProps {
   options?: object[],
   placeholder?: React.ReactNode,
   showInput?: boolean,
+  staticOption?: object,
   value?: ValueLike,
   valueComponent?: React.ReactNode,
   valueGroupComponent?: React.ReactNode,

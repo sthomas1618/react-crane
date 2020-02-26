@@ -42,6 +42,7 @@ export const simpleSelectPropTypes = {
   onKeyDown: PropTypes.func,
   onOpen: PropTypes.func, // event emitted when Select is opened
   onSelect: PropTypes.func,
+  onStaticOptionClick: PropTypes.func,
   openOnClick: PropTypes.bool,
   openOnEmptyInput: PropTypes.bool,
   optionComponent: PropTypes.func,
@@ -49,6 +50,7 @@ export const simpleSelectPropTypes = {
   optionGroupRenderer: PropTypes.func,
   optionRenderer: PropTypes.func,
   options: PropTypes.array,
+  staticOption: PropTypes.object,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   showInput: PropTypes.bool,
   value: PropTypes.oneOfType([

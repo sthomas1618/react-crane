@@ -358,44 +358,57 @@ class SimpleSelect extends Component {
 
   emitValueChange = (option, event) => {
     const {
+      autoCloseMenu,
       clearInputOnSelect,
       getLabel,
       getSelectValue,
       inputValue,
       labelKey,
+      name,
+      onChange,
+      onSelect,
+      onStaticOptionClick,
       options,
+      staticOption,
       value,
       valueKey
     } = this.props
-    const hasOptions = options && options.length > 0
-    const valueSelected = hasOptions && (option === null || value === null) && option !== value
-    const selectValueProps = {
-      options,
-      value,
-      valueKey
-    }
-    const valueObj = getSelectValue(selectValueProps)
-    const valueChanged = (Array.isArray(value) && hasOptions)
-      ? true
-      : (hasOptions && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
+    const isStatic = option[valueKey] === staticOption[valueKey]
+    const eventContext = { name, value: option }
 
-    if (this.props.onSelect) {
-      const eventContext = { name: this.props.name, value: option }
-      this.props.onSelect(eventContext, event)
-    }
+    if (isStatic && onStaticOptionClick) {
+      onStaticOptionClick(eventContext, event)
+    } else {
+      if (onSelect) {
+        onSelect(eventContext, event)
+      }
 
-    if ((valueSelected || valueChanged) && this.props.onChange) {
-      const eventContext = { name: this.props.name, value: option }
-      this.props.onChange(eventContext, event)
-    }
+      const hasOptions = options && options.length > 0
+      const valueSelected = hasOptions && (option === null || value === null) && option !== value
+      const selectValueProps = {
+        options,
+        value,
+        valueKey
+      }
 
-    const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(options, labelKey) : ''
-    if (newInputVal !== inputValue) {
-      this.setInputValue(event, newInputVal)
-    }
+      const valueObj = getSelectValue(selectValueProps)
+      const valueChanged = (Array.isArray(value) && hasOptions)
+        ? true
+        : (hasOptions
+            && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
 
-    if (this.props.autoCloseMenu) {
-      this.focus()
+      if ((valueSelected || valueChanged) && onChange) {
+        onChange(eventContext, event)
+      }
+
+      const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(options, labelKey) : ''
+      if (newInputVal !== inputValue) {
+        this.setInputValue(event, newInputVal)
+      }
+
+      if (autoCloseMenu) {
+        this.focus()
+      }
     }
   }
 

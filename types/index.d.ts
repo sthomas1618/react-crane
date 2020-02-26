@@ -243,7 +243,7 @@ export interface SimpleSelectProps {
   onKeyDown?: (eventContext: OnChangeEventContext, event: React.SyntheticEvent<SimpleSelect>) => void,
   onOpen?: () => void,
   onSelect?: (event: React.KeyboardEvent<SimpleSelect>) => void,
-  onStaticOptionClick: (event: React.SyntheticEvent<Option>) => void,
+  onStaticOptionClick?: (event: React.SyntheticEvent<Option>) => void,
   openOnClick?: boolean,
   openOnEmptyInput?: boolean,
   optionComponent?: React.ReactNode,

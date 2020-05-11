@@ -3,9 +3,13 @@ import classNames from 'classnames'
 
 import {
   flattenOptions,
+  instructionsAriaMessage,
+  isSelected,
+  resultsAriaMessage,
   simpleSelectDefaults,
   simpleSelectProps,
-  sortBy
+  sortBy,
+  valueEventAriaMessage
 } from './utils'
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
@@ -22,6 +26,8 @@ class SimpleSelect extends Component {
     super(props)
 
     this.state = {
+      ariaLiveContext: '',
+      ariaLiveSelection: '',
       isOpen: false,
       isFocused: false
     }
@@ -44,12 +50,31 @@ class SimpleSelect extends Component {
     }
 
     if (prevIsOpen !== isOpen) {
-      const { onOpen, onClose } = this.props
-      const eventProp = isOpen ? onOpen : onClose
+      const eventProp = isOpen ? this.onMenuOpen : this.onMenuClose
 
       if (eventProp) {
         eventProp()
       }
+    }
+  }
+
+  onMenuOpen = () => {
+    const { onOpen } = this.props
+
+    this.announceAriaLiveContext('menu', null)
+
+    if (onOpen) {
+      onOpen()
+    }
+  }
+
+  onMenuClose = () => {
+    const { onClose } = this.props
+
+    this.announceAriaLiveContext('input', null)
+
+    if (onClose) {
+      onClose()
     }
   }
 
@@ -124,7 +149,13 @@ class SimpleSelect extends Component {
   }
 
   onInputFocus = (event) => {
-    const { disabled, name, onFocus } = this.props
+    const {
+      disabled,
+      isMulti,
+      isSearchable,
+      name,
+      onFocus
+    } = this.props
 
     if (disabled) {
       return
@@ -135,6 +166,11 @@ class SimpleSelect extends Component {
     }
 
     const isOpen = this.props.isOpen || this.state.isOpen
+
+    this.announceAriaLiveContext(
+      'input',
+      { isSearchable, isMulti, label: this.props['aria-label'] }
+    )
 
     this.setState({
       isOpen,
@@ -267,7 +303,9 @@ class SimpleSelect extends Component {
   }
 
   onOptionFocus = (event, option) => {
+    const { labelKey, options } = this.props
     this.setState({ focusedOption: option })
+    this.announceAriaLiveContext('focus', { focusedOption: option, labelKey, options })
   }
 
   setInputValue = (event, inputVal) => {
@@ -304,14 +342,46 @@ class SimpleSelect extends Component {
     }
   }
 
+  getIsSelected = (option) => {
+    const { isMulti, value, valueKey } = this.props
+
+    if (!isMulti) {
+      return true
+    }
+
+    // If this returns true, then it was previously selected
+    // and now it's unselected
+    if (isSelected(option, value, valueKey)) {
+      return false
+    }
+    return true
+  }
+
+  announceAriaLiveSelection = (event, context) => {
+    this.setState({
+      ariaLiveSelection: valueEventAriaMessage(event, context)
+    })
+  }
+
+  announceAriaLiveContext = (event, context) => {
+    this.setState({
+      ariaLiveContext: instructionsAriaMessage(event, {
+        ...context,
+        label: this.props['aria-label']
+      })
+    })
+  }
+
   focusOnOption = (direction) => {
-    const { options } = this.props
+    const { labelKey, options } = this.props
     const newFocusedOption = options.length ? this.getFocusedOption(direction, options) : null
 
     this.setState({
       isOpen: true,
       focusedOption: newFocusedOption
     }, () => { this.scrollToOption(newFocusedOption) })
+
+    this.announceAriaLiveContext('focus', { focusedOption: newFocusedOption, labelKey, options })
   }
 
   selectOption = (event, option) => {
@@ -329,6 +399,11 @@ class SimpleSelect extends Component {
   }
 
   closeMenu = () => {
+    const { isMulti, isSearchable } = this.props
+    this.announceAriaLiveContext(
+      'input',
+      { isSearchable, isMulti }
+    )
     this.setState({ isOpen: false }, this.focus)
   }
 
@@ -373,7 +448,7 @@ class SimpleSelect extends Component {
       value,
       valueKey
     } = this.props
-    const isStatic = option[valueKey] === staticOption[valueKey]
+    const isStatic = staticOption && option[valueKey] === staticOption[valueKey]
     const eventContext = { name, value: option }
 
     if (isStatic && onStaticOptionClick) {
@@ -404,6 +479,14 @@ class SimpleSelect extends Component {
       const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(options, labelKey) : ''
       if (newInputVal !== inputValue) {
         this.setInputValue(event, newInputVal)
+      }
+
+      if (valueChanged) {
+        const announceEvent = this.getIsSelected(option) ? 'select-option' : 'deselect-option'
+        this.announceAriaLiveSelection(
+          announceEvent,
+          { value: option[labelKey] }
+        )
       }
 
       if (autoCloseMenu) {
@@ -452,6 +535,23 @@ class SimpleSelect extends Component {
       return parentGroups
     }
     return options
+  }
+
+  constructAriaLiveMessage() {
+    const {
+      ariaLiveContext
+    } = this.state
+    const {
+      inputValue,
+      options
+    } = this.props
+    // An aria live message representing the set of focusable results and
+    // current searchterm/inputvalue.
+    const count = options.length
+    const screenMsg = `${count} result${count !== 1 ? 's' : ''} available`
+    const resultsMsg = resultsAriaMessage(inputValue, screenMsg)
+
+    return `${resultsMsg} ${ariaLiveContext}`
   }
 
   renderArrow(isOpen) {
@@ -537,6 +637,17 @@ class SimpleSelect extends Component {
     return menu
   }
 
+  // Used to announce updates to screen reader content
+  renderLiveRegion() {
+    if (!this.state.isFocused) return null
+    return (
+      <div className="sr-only" aria-live="polite">
+        <p id="aria-selection-event">&nbsp;{this.state.ariaLiveSelection}</p>
+        <p id="aria-context">&nbsp;{this.constructAriaLiveMessage()}</p>
+      </div>
+    )
+  }
+
   renderInput() {
     const inputProps = {
       'aria-label': this.props['aria-label'],
@@ -588,6 +699,7 @@ class SimpleSelect extends Component {
           onTouchEnd={this.onValueTouchEnd}
           role="presentation"
         >
+          {this.renderLiveRegion()}
           <ValueGroupComponent {...valueGroupProps} />
           {this.renderInput()}
           {this.renderLoading()}

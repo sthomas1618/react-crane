@@ -117,6 +117,7 @@ class MultiSelect extends Component {
     return (
       <SimpleSelect
         {...multiSelectProps}
+        isMulti
         options={opts}
         onChange={this.onChange}
         optionRenderer={OptRenderer}

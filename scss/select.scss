@@ -286,3 +286,15 @@ $crane-select-no-results-color: #757575;
   box-sizing: border-box;
   background-color: $crane-select-bg-color;
 }
+
+.sr-only {
+  z-index: 9999;
+  border: 0;
+  clip: 'rect(1px, 1px, 1px, 1px)';
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+}

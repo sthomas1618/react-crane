@@ -50,6 +50,7 @@ class SearchSelect extends Component {
         onChange={this.onChange}
         clearInputOnBlur={false}
         clearInputOnSelect={false}
+        isSearchable
         showInput
       />
     )

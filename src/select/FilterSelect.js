@@ -54,6 +54,7 @@ class FilterSelect extends Component {
         {...selectProps}
         options={filteredOptions}
         inputValue={currentInputValue}
+        isSearchable
         onInputChange={this.onInputChange}
         getSelectValue={this.getSelectValue}
         showInput

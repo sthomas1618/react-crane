@@ -110,7 +110,7 @@ class Menu extends Component {
     return (
       <div className="crane-select-menu" ref={menuRef}>
         {this.renderOptions(options)}
-        {!!staticOption && <div className="crane-select-static-divider" />}
+        {!!options.length && !!staticOption && <div className="crane-select-static-divider" />}
         {!!staticOption && (
           <OptionComponent
             onOptionClick={onOptionClick}

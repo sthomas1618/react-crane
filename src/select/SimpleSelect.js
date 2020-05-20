@@ -599,7 +599,7 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { noResultsText, isLoading, loadingText } = this.props
+    const { noResultsText, isLoading, loadingText, staticOption } = this.props
     const { focusedOption } = this.state
     const {
       menuComponent,
@@ -619,7 +619,7 @@ class SimpleSelect extends Component {
 
     let menu = null
 
-    if (opts.length) {
+    if (opts.length || !!staticOption) {
       const MenuComponent = this.props.menuComponent
       menu = (
         <div className="crane-select-menu-container">

@@ -317,10 +317,17 @@ class SimpleSelect extends Component {
 
   getFocusedOption(direction, options) {
     const isOpen = this.props.isOpen || this.state.isOpen
-    const { allowSelectAll, allOption, valueKey } = this.props
+    const {
+      allowSelectAll,
+      allOption,
+      staticOption,
+      valueKey
+    } = this.props
     const { focusedOption } = this.state
 
-    const flatOptions = flattenOptions(options, allowSelectAll, allOption)
+    const flatOptions = staticOption
+      ? flattenOptions([...options, staticOption], allowSelectAll, allOption)
+      : flattenOptions(options, allowSelectAll, allOption)
 
     let currentIndex = focusedOption
       ? flatOptions.findIndex(option => (option[valueKey] === focusedOption[valueKey]))

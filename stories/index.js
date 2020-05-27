@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs'
+import { withKnobs, boolean, number, text, object } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
 import {
@@ -116,7 +116,7 @@ stories.add('with SimpleSelect and Static Option', () => (
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
-    staticOption={{ name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }}
+    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
     valueKey="abbreviation"
   />
 ))
@@ -301,6 +301,21 @@ stories.add('with FilterSelect', () => (
     openOnEmptyInput={boolean('Open On Empty Input', true)}
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
+    valueKey="abbreviation"
+  />
+))
+
+stories.add('with FilterSelect and static option', () => (
+  <BasicFilterSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
     valueKey="abbreviation"
   />
 ))

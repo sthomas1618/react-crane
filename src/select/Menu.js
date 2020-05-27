@@ -24,12 +24,12 @@ class Menu extends Component {
       valueKey
     } = this.props
 
-    const OptionComponent = optionComponent
-    const OptionGroupComponent = optionGroupComponent
-
     if (!options) {
       return null
     }
+
+    const OptionComponent = optionComponent
+    const OptionGroupComponent = optionGroupComponent
 
     const optionProps = {
       onOptionClick,
@@ -56,6 +56,7 @@ class Menu extends Component {
     return options.map((option) => {
       const isFocused = option === focusedOption
 
+      // Nested options
       if (option.options && Array.isArray(option.options)) {
         // TODO: undo the recursion so we can convert this to a function component
         return (

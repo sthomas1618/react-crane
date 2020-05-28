@@ -380,8 +380,10 @@ class SimpleSelect extends Component {
   }
 
   focusOnOption = (direction) => {
-    const { labelKey, options } = this.props
-    const newFocusedOption = options.length ? this.getFocusedOption(direction, options) : null
+    const { labelKey, options, staticOption } = this.props
+    const newFocusedOption = options.length
+      ? this.getFocusedOption(direction, options)
+      : staticOption || null
 
     this.setState({
       isOpen: true,

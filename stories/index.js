@@ -363,3 +363,25 @@ stories.add('with Async Select a whole lot of options', () => (
     showInput={boolean('Show Input', true)}
   />
 ))
+
+const before = () => <span style={{ marginLeft: '8px' }}>$</span>
+const after = () => <span>%</span>
+
+stories.add('with before component', () => (
+  <BasicSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    beforeInput={before}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="abbreviation"
+  />
+))

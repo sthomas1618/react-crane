@@ -608,7 +608,12 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { noResultsText, isLoading, loadingText, staticOption } = this.props
+    const {
+      isLoading,
+      loadingText,
+      noResultsText,
+      staticOption
+    } = this.props
     const { focusedOption } = this.state
     const {
       menuComponent,
@@ -686,7 +691,12 @@ class SimpleSelect extends Component {
   }
 
   render() {
-    const { disabled, id, valueGroupComponent } = this.props
+    const {
+      beforeInput,
+      disabled,
+      id,
+      valueGroupComponent
+    } = this.props
     const { isFocused, isOuterFocused } = this.state
     const isOpen = this.props.isOpen || this.state.isOpen
     const {
@@ -697,6 +707,8 @@ class SimpleSelect extends Component {
     const selectClassName = classNames('crane-select', this.props.className, {
       open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused, disabled
     })
+
+    const BeforeInput = beforeInput
 
     return (
       <div className={selectClassName} ref={(container) => { this.container = container }}>
@@ -709,13 +721,17 @@ class SimpleSelect extends Component {
           role="presentation"
         >
           {this.renderLiveRegion()}
-          <ValueGroupComponent {...valueGroupProps} />
-          {this.renderInput()}
+          <div className="crane-select-outer-input">
+            {BeforeInput && <BeforeInput />}
+            <div className="crane-select-inner-input">
+              <ValueGroupComponent {...valueGroupProps} />
+              {this.renderInput()}
+            </div>
+          </div>
           {this.renderLoading()}
           {this.renderClear()}
           {this.renderArrow(isOpen)}
         </div>
-
         {isOpen && this.renderMenu()}
       </div>
     )

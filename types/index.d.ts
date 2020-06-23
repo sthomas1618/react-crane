@@ -207,6 +207,7 @@ export interface SimpleSelectProps {
   arrowComponent?: React.ReactNode,
   arrowRenderer?: React.ReactNode,
   autoCloseMenu?: boolean,
+  beforeInput?: React.ReactNode,
   className?: string,
   clearable?: boolean,
   clearComponent?: React.ReactNode,

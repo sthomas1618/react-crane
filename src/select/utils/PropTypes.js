@@ -6,6 +6,8 @@ export const simpleSelectPropTypes = {
   arrowComponent: PropTypes.func,
   arrowRenderer: PropTypes.func,
   autoCloseMenu: PropTypes.bool,
+  /** Optionally rendered before the value/input */
+  beforeInput: PropTypes.func,
   className: PropTypes.string,
   clearable: PropTypes.bool,
   clearComponent: PropTypes.func,

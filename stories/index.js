@@ -364,13 +364,12 @@ stories.add('with Async Select a whole lot of options', () => (
   />
 ))
 
-const before = () => <span style={{ marginLeft: '8px' }}>$</span>
-const after = () => <span>%</span>
+const Before = () => <span style={{ marginLeft: '8px' }}>$</span>
 
 stories.add('with before component', () => (
   <BasicSelect
     autoCloseMenu={boolean('Auto Close Menu', true)}
-    beforeInput={before}
+    beforeInput={<Before />}
     clearable={boolean('Clearable', false)}
     clearInputOnBlur={boolean('Clear Input on Blur', true)}
     clearInputOnSelect={boolean('Clear Input on Select', true)}
@@ -382,6 +381,21 @@ stories.add('with before component', () => (
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
+    valueKey="abbreviation"
+  />
+))
+
+stories.add('with before component and placeholder', () => (
+  <BasicFilterSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    beforeInput={<Before />}
+    clearable={boolean('Clearable', false)}
+    isOpen={boolean('Is Open', false)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
     valueKey="abbreviation"
   />
 ))

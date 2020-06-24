@@ -708,8 +708,6 @@ class SimpleSelect extends Component {
       open: isOpen, focus: isFocused, 'outer-focus': isOuterFocused, disabled
     })
 
-    const BeforeInput = beforeInput
-
     return (
       <div className={selectClassName} ref={(container) => { this.container = container }}>
         <div
@@ -722,7 +720,7 @@ class SimpleSelect extends Component {
         >
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">
-            {BeforeInput && <BeforeInput />}
+            {beforeInput}
             <div className="crane-select-inner-input">
               <ValueGroupComponent {...valueGroupProps} />
               {this.renderInput()}

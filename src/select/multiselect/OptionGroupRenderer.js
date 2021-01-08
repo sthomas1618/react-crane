@@ -26,8 +26,10 @@ const OptionGroupRenderer = (props) => {
 
   return (
     <span>
-      <input type="checkbox" checked={checked} onChange={onChange} />
-      {option[groupTitleKey]}
+      <label>
+        <input type="checkbox" checked={checked} onChange={onChange} />
+        {option[groupTitleKey]}
+      </label>
     </span>
   )
 }

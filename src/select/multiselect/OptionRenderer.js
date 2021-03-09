@@ -10,8 +10,10 @@ const OptionRenderer = ({
   const onChange = (e) => { e.preventDefault() }
   return (
     <span aria-selected={selected}>
-      <input type="checkbox" checked={selected} onChange={onChange} />
-      {getOptionLabel({ option, labelKey, selected })}
+      <label>
+        <input type="checkbox" checked={selected} onChange={onChange} />
+        {getOptionLabel({ option, labelKey, selected })}
+      </label>
     </span>
   )
 }

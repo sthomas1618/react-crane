@@ -109,7 +109,7 @@ class Menu extends Component {
     const isFocused = staticOption && staticOption === focusedOption
 
     return (
-      <div className="crane-select-menu" ref={menuRef}>
+      <div className="crane-select-menu" ref={menuRef} role="listbox">
         {this.renderOptions(options)}
         {!!options.length && !!staticOption && <div className="crane-select-static-divider" />}
         {!!staticOption && (

@@ -16,6 +16,8 @@ jobs:
         run: |
           npm install
           npm run build-storybook
+        with:
+          node-version: '8.x'
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.0

@@ -37,8 +37,8 @@
     "url": "git://github.com/sthomas1618/react-crane.git"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0 || ^16.0",
-    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0"
+    "react": "^0.14.9 || ^15.3.0 || ^16.0|| 17.0.0",
+    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0 || 17.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",

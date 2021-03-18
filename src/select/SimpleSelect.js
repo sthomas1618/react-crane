@@ -485,7 +485,7 @@ class SimpleSelect extends Component {
         onChange(eventContext, event)
       }
 
-      const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(options, labelKey) : ''
+      const newInputVal = !clearInputOnSelect && hasOptions && option !== null ? getLabel(option, labelKey) : ''
       if (newInputVal !== inputValue) {
         this.setInputValue(event, newInputVal)
       }

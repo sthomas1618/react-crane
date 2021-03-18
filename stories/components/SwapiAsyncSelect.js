@@ -28,7 +28,7 @@ class SwapiAsyncSelect extends React.Component {
 
   fetchOptions(search) {
     const searchQuery = search ? `?search=${search}` : ''
-    const url = `https://swapi.co/api/people${searchQuery}`
+    const url = `https://swapi.dev/api/people${searchQuery}`
 
     fetch(url)
       .then(results => results.json())

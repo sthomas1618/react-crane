@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: 'source-map',
-  entry: ['./src/index.js', './scss/crane.scss'],
+  entry: ['./src/index.js', './less/crane.less'],
   output: {
     path: `${__dirname}/dist/umd/`,
     filename: 'crane.js',
@@ -30,7 +30,7 @@ module.exports = {
         }
       },
       {
-        test: /\.scss?$/,
+        test: /\.less?$/,
         loader: ExtractTextPlugin.extract({
           fallback: require.resolve('style-loader'),
           use: [
@@ -62,7 +62,7 @@ module.exports = {
               }
             },
             {
-              loader: require.resolve('sass-loader')
+              loader: require.resolve('less-loader')
             }
           ]
         })

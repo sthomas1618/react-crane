@@ -23,7 +23,7 @@ import terms from './fixtures/terms'
 import termTypes from './fixtures/termTypes'
 import userNames from './fixtures/userNames'
 
-import '../scss/crane.scss'
+import '../less/crane.less'
 
 const stories = storiesOf('Select', module)
 

@@ -20,8 +20,7 @@
   "files": [
     "dist",
     "types",
-    "less",
-    "scss"
+    "less"
   ],
   "keywords": [
     "select",
@@ -85,7 +84,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "jest": "^22.4.3",
     "jest-enzyme": "^4.2.0",
-    "node-sass": "^4.5.3",
+    "less": "^3.0.0",
+    "less-loader": "^5.0.0",
     "nyc": "^11.7.1",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.6",
@@ -93,7 +93,6 @@
     "react-dom": "^15.6.2",
     "react-test-renderer": "^15.6.2",
     "rimraf": "^2.6.2",
-    "sass-loader": "^6.0.6",
     "webpack": "^3.5.5"
   },
   "jest": {

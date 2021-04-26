@@ -120,6 +120,25 @@ stories.add('with SimpleSelect and Static Option', () => (
     valueKey="abbreviation"
   />
 ))
+stories.add('with SimpleSelect and Two Static Options', () => (
+  <BasicSelect
+    utoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', true)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    onStaticOptionClick={action('static option')}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }), object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })]}
+    valueKey="abbreviation"
+  />
+))
 
 stories.add('with SimpleSelect and Static Option and empty options', () => (
   <BasicSelect
@@ -137,6 +156,26 @@ stories.add('with SimpleSelect and Static Option and empty options', () => (
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
     staticOption={{ name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }}
+    valueKey="abbreviation"
+  />
+))
+
+stories.add('with SimpleSelect and Two Static Option and empty options', () => (
+  <BasicSelect
+    utoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', true)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    onStaticOptionClick={action('static option')}
+    options={[]}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }), object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })]}
     valueKey="abbreviation"
   />
 ))
@@ -315,7 +354,7 @@ stories.add('with FilterSelect and static option', () => (
     openOnEmptyInput={boolean('Open On Empty Input', true)}
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
-    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
+    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE', action: action('static option') })]}
     valueKey="abbreviation"
   />
 ))

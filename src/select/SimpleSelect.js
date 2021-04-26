@@ -325,9 +325,14 @@ class SimpleSelect extends Component {
     } = this.props
     const { focusedOption } = this.state
 
-    const flatOptions = staticOption
-      ? flattenOptions([...options, staticOption], allowSelectAll, allOption)
-      : flattenOptions(options, allowSelectAll, allOption)
+    let flatOptions = flattenOptions(options, allowSelectAll, allOption)
+
+    const multiStaticOptions = Array.isArray(staticOption)
+    if (staticOption && !multiStaticOptions) {
+      flatOptions = flattenOptions([...options, staticOption], allowSelectAll, allOption)
+    } else if (staticOption && multiStaticOptions) {
+      flatOptions = flattenOptions([...options, ...staticOption], allowSelectAll, allOption)
+    }
 
     let currentIndex = focusedOption
       ? flatOptions.findIndex(option => (option[valueKey] === focusedOption[valueKey]))
@@ -457,7 +462,15 @@ class SimpleSelect extends Component {
       value,
       valueKey
     } = this.props
-    const isStatic = staticOption && option[valueKey] === staticOption[valueKey]
+
+    const multiStaticOptions = Array.isArray(staticOption)
+
+    let isStatic = false
+    if (staticOption && !multiStaticOptions) {
+      isStatic = option[valueKey] === staticOption[valueKey]
+    } else if (staticOption && multiStaticOptions) {
+      isStatic = !!staticOption.find((o => option[valueKey] === o[valueKey]))
+    }
     const eventContext = { name, value: option }
 
     if (isStatic && onStaticOptionClick) {
@@ -479,7 +492,7 @@ class SimpleSelect extends Component {
       const valueChanged = (Array.isArray(value) && hasOptions)
         ? true
         : (hasOptions
-            && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
+          && (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey])))
 
       if ((valueSelected || valueChanged) && onChange) {
         onChange(eventContext, event)
@@ -633,7 +646,7 @@ class SimpleSelect extends Component {
 
     let menu = null
 
-    if (opts.length || !!staticOption) {
+    if (opts.length || staticOption) {
       const MenuComponent = this.props.menuComponent
       menu = (
         <div className="crane-select-menu-container">

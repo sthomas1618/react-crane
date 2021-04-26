@@ -354,7 +354,7 @@ stories.add('with FilterSelect and static option', () => (
     openOnEmptyInput={boolean('Open On Empty Input', true)}
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
-    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE', action: action('static option') })]}
+    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
     valueKey="abbreviation"
   />
 ))

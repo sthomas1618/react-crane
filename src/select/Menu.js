@@ -118,8 +118,8 @@ class Menu extends Component {
     return (
       <div className="crane-select-menu" ref={menuRef} role="listbox">
         {this.renderOptions(options)}
-        {!!options.length && staticOption && <div className="crane-select-static-divider" />}
-        {multiStaticOptions && multiStaticOptions.map((option) => {
+        {!!options.length && !!multiStaticOptions.length && <div className="crane-select-static-divider" />}
+        {!!multiStaticOptions.length && multiStaticOptions.map((option) => {
           const selected = option && isSelected(option, value, valueKey)
           const isFocused = option && option === focusedOption
           return (

@@ -105,29 +105,42 @@ class Menu extends Component {
     } = this.props
 
     const OptionComponent = optionComponent
-    const selected = staticOption && isSelected(staticOption, value, valueKey)
-    const isFocused = staticOption && staticOption === focusedOption
+
+    let multiStaticOptions = []
+    const isMulti = Array.isArray(staticOption)
+    if (staticOption && isMulti) {
+      multiStaticOptions = staticOption
+    } else if (staticOption && !isMulti) {
+      multiStaticOptions.push(staticOption)
+    }
+
 
     return (
       <div className="crane-select-menu" ref={menuRef} role="listbox">
         {this.renderOptions(options)}
-        {!!options.length && !!staticOption && <div className="crane-select-static-divider" />}
-        {!!staticOption && (
-          <OptionComponent
-            onOptionClick={onOptionClick}
-            onOptionFocus={onOptionFocus}
-            allowSelectAll={allowSelectAll}
-            allOption={allOption}
-            getOptionLabel={getOptionLabel}
-            labelKey={labelKey}
-            optionRef={optionRef}
-            optionRenderer={optionRenderer}
-            valueKey={valueKey}
-            option={staticOption}
-            isFocused={isFocused}
-            selected={selected}
-          />
-        )}
+        {!!options.length && staticOption && <div className="crane-select-static-divider" />}
+        {multiStaticOptions && multiStaticOptions.map((option) => {
+          const selected = option && isSelected(option, value, valueKey)
+          const isFocused = option && option === focusedOption
+          return (
+            <OptionComponent
+              key={option[valueKey]}
+              onOptionClick={onOptionClick}
+              onOptionFocus={onOptionFocus}
+              allowSelectAll={allowSelectAll}
+              allOption={allOption}
+              getOptionLabel={getOptionLabel}
+              labelKey={labelKey}
+              optionRef={optionRef}
+              optionRenderer={optionRenderer}
+              valueKey={valueKey}
+              option={option}
+              isFocused={isFocused}
+              selected={selected}
+            />
+          )
+        })}
+
       </div>
     )
   }
@@ -150,7 +163,7 @@ Menu.propTypes = {
   optionRef: PropTypes.func.isRequired,
   optionRenderer: PropTypes.func,
   options: PropTypes.array,
-  staticOption: PropTypes.object,
+  staticOption: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   value: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,

@@ -143,7 +143,7 @@ export interface OptionProps {
   option: object,
   optionRef: (element: HTMLElement) => void,
   optionRenderer?: React.ReactNode,
-  staticOption?: object,
+  staticOptions?: object | object[],
   selected?: boolean,
   valueKey?: string
 }
@@ -256,7 +256,7 @@ export interface SimpleSelectProps {
   options?: object[],
   placeholder?: React.ReactNode,
   showInput?: boolean,
-  staticOption?: object,
+  staticOptions?: object | object[],
   value?: ValueLike,
   valueComponent?: React.ReactNode,
   valueGroupComponent?: React.ReactNode,

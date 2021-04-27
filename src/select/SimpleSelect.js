@@ -645,8 +645,9 @@ class SimpleSelect extends Component {
     const opts = this.groupOptions()
 
     let menu = null
-
-    if (opts.length || !!staticOption || !!staticOption.length) {
+    const hasStaticOptions =
+      (Array.isArray(staticOption) && !!staticOption.length) || !!staticOption
+    if (opts.length || hasStaticOptions) {
       const MenuComponent = this.props.menuComponent
       menu = (
         <div className="crane-select-menu-container">

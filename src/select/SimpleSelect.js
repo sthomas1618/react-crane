@@ -680,6 +680,7 @@ class SimpleSelect extends Component {
     const inputProps = {
       'aria-label': this.props['aria-label'],
       'aria-labelledby': this.props['aria-labelledby'],
+      disabled: this.props.disabled,
       getRef: (ref) => { this.input = ref },
       id: this.props.inputId,
       inputValue: this.props.inputValue,

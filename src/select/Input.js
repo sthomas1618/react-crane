@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Input = ({
+  disabled,
   getRef,
   id,
   inputValue,
@@ -18,6 +19,7 @@ const Input = ({
       autoCapitalize="none"
       autoComplete="off"
       autoCorrect="off"
+      disabled={disabled}
       onBlur={onBlur}
       onChange={onChange}
       onFocus={onFocus}
@@ -32,6 +34,7 @@ const Input = ({
 Input.propTypes = {
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
+  disabled: PropTypes.bool,
   getRef: PropTypes.func.isRequired,
   id: PropTypes.string,
   inputValue: PropTypes.string,
@@ -43,6 +46,7 @@ Input.propTypes = {
 Input.defaultProps = {
   'aria-label': 'select input',
   'aria-labelledby': '',
+  disabled: false,
   id: null,
   inputValue: ''
 }

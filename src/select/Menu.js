@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { isSelected } from "./utils";
+import { isSelected } from './utils'
 
 class Menu extends Component {
   renderOptions(options) {
@@ -22,15 +22,15 @@ class Menu extends Component {
       optionRef,
       optionRenderer,
       value,
-      valueKey,
-    } = this.props;
+      valueKey
+    } = this.props
 
     if (!options) {
-      return null;
+      return null
     }
 
-    const OptionComponent = optionComponent;
-    const OptionGroupComponent = optionGroupComponent;
+    const OptionComponent = optionComponent
+    const OptionGroupComponent = optionGroupComponent
 
     const optionProps = {
       allowSelectAll,
@@ -42,8 +42,8 @@ class Menu extends Component {
       onOptionFocus,
       optionRef,
       optionRenderer,
-      valueKey,
-    };
+      valueKey
+    }
 
     const optionGroupProps = {
       groupTitleKey,
@@ -52,11 +52,11 @@ class Menu extends Component {
       optionRef,
       value,
       valueKey,
-      ...optionProps,
-    };
+      ...optionProps
+    }
 
     return options.map((option) => {
-      const isFocused = option === focusedOption;
+      const isFocused = option === focusedOption
 
       // Nested options
       if (option.options && Array.isArray(option.options)) {
@@ -70,10 +70,10 @@ class Menu extends Component {
           >
             {this.renderOptions(option.options)}
           </OptionGroupComponent>
-        );
+        )
       }
 
-      const selected = isSelected(option, value, valueKey);
+      const selected = isSelected(option, value, valueKey)
 
       return (
         <OptionComponent
@@ -84,8 +84,8 @@ class Menu extends Component {
           option={option}
           selected={selected}
         />
-      );
-    });
+      )
+    })
   }
 
   render() {
@@ -105,17 +105,17 @@ class Menu extends Component {
       options,
       staticOption,
       value,
-      valueKey,
-    } = this.props;
+      valueKey
+    } = this.props
 
-    const OptionComponent = optionComponent;
+    const OptionComponent = optionComponent
 
-    let multiStaticOptions = [];
-    const isMulti = Array.isArray(staticOption);
+    let multiStaticOptions = []
+    const isMulti = Array.isArray(staticOption)
     if (staticOption && isMulti) {
-      multiStaticOptions = staticOption;
+      multiStaticOptions = staticOption
     } else if (staticOption && !isMulti) {
-      multiStaticOptions.push(staticOption);
+      multiStaticOptions.push(staticOption)
     }
 
     return (
@@ -131,8 +131,8 @@ class Menu extends Component {
         )}
         {!!multiStaticOptions.length &&
           multiStaticOptions.map((option) => {
-            const selected = option && isSelected(option, value, valueKey);
-            const isFocused = option && option === focusedOption;
+            const selected = option && isSelected(option, value, valueKey)
+            const isFocused = option && option === focusedOption
             return (
               <OptionComponent
                 key={option[valueKey]}
@@ -150,10 +150,10 @@ class Menu extends Component {
                 isFocused={isFocused}
                 selected={selected}
               />
-            );
+            )
           })}
       </div>
-    );
+    )
   }
 }
 
@@ -180,19 +180,19 @@ Menu.propTypes = {
     PropTypes.array,
     PropTypes.number,
     PropTypes.object,
-    PropTypes.string,
+    PropTypes.string
   ]),
-  valueKey: PropTypes.string,
-};
+  valueKey: PropTypes.string
+}
 
 Menu.defaultProps = {
   allOption: null,
   allowSelectAll: false,
   hideCheckboxes: false,
   focusedOption: null,
-  groupTitleKey: "",
-  groupValueKey: "",
-  labelKey: "",
+  groupTitleKey: '',
+  groupValueKey: '',
+  labelKey: '',
   optionComponent: null,
   optionGroupComponent: null,
   optionGroupRenderer: null,
@@ -200,7 +200,7 @@ Menu.defaultProps = {
   options: [],
   staticOption: null,
   value: null,
-  valueKey: "",
-};
+  valueKey: ''
+}
 
-export default Menu;
+export default Menu

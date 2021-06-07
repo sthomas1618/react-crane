@@ -12,6 +12,7 @@ class Menu extends Component {
       getOptionLabel,
       groupTitleKey,
       groupValueKey,
+      hideCheckboxes,
       labelKey,
       onOptionClick,
       onOptionFocus,
@@ -32,22 +33,23 @@ class Menu extends Component {
     const OptionGroupComponent = optionGroupComponent
 
     const optionProps = {
-      onOptionClick,
-      onOptionFocus,
       allowSelectAll,
       allOption,
       getOptionLabel,
+      hideCheckboxes,
       labelKey,
+      onOptionClick,
+      onOptionFocus,
       optionRef,
       optionRenderer,
       valueKey
     }
 
     const optionGroupProps = {
-      optionGroupRenderer,
-      optionRef,
       groupTitleKey,
       groupValueKey,
+      optionGroupRenderer,
+      optionRef,
       value,
       valueKey,
       ...optionProps
@@ -77,8 +79,9 @@ class Menu extends Component {
         <OptionComponent
           {...optionProps}
           key={option[valueKey]}
-          option={option}
+          hideCheckboxes={hideCheckboxes}
           isFocused={isFocused}
+          option={option}
           selected={selected}
         />
       )
@@ -91,6 +94,7 @@ class Menu extends Component {
       allowSelectAll,
       focusedOption,
       getOptionLabel,
+      hideCheckboxes,
       labelKey,
       menuRef,
       onOptionClick,
@@ -125,12 +129,13 @@ class Menu extends Component {
           return (
             <OptionComponent
               key={option[valueKey]}
-              onOptionClick={onOptionClick}
-              onOptionFocus={onOptionFocus}
               allowSelectAll={allowSelectAll}
               allOption={allOption}
               getOptionLabel={getOptionLabel}
+              hideCheckboxes={hideCheckboxes}
               labelKey={labelKey}
+              onOptionClick={onOptionClick}
+              onOptionFocus={onOptionFocus}
               optionRef={optionRef}
               optionRenderer={optionRenderer}
               valueKey={valueKey}
@@ -153,6 +158,7 @@ Menu.propTypes = {
   getOptionLabel: PropTypes.func.isRequired,
   groupTitleKey: PropTypes.string,
   groupValueKey: PropTypes.string,
+  hideCheckboxes: PropTypes.bool,
   labelKey: PropTypes.string,
   menuRef: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
@@ -176,6 +182,7 @@ Menu.propTypes = {
 Menu.defaultProps = {
   allOption: null,
   allowSelectAll: false,
+  hideCheckboxes: false,
   focusedOption: null,
   groupTitleKey: '',
   groupValueKey: '',

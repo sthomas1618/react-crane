@@ -21,3 +21,21 @@ it('does not explode', () => {
 
   expect(wrapper).not.toBeEmpty()
 })
+
+it('displays custom customDelimiter', () => {
+  const renderer = (
+    <ValueGroupRenderer
+      valueComponent={valueComponent}
+      value={[]}
+      valueKey=""
+      customDelimiter=":::"
+      labelKey=""
+      options={['one', 'two']}
+      getSelectValue={() => {}}
+      getLabel={() => {}}
+    />
+  )
+  const wrapper = shallow(renderer)
+
+  console.log(wrapper)
+})

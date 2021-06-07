@@ -194,6 +194,25 @@ stories.add('with MultiSelect', () => (
   />
 ))
 
+stories.add('with MultiSelect, hidden checkboxes, custom delimiter, and custom input', () => (
+  <FilterMultiSelect
+    autoCloseMenu={boolean('Auto Close Menu', false)}
+    customDelimiter=":::"
+    getOptionLabel={GetUserNameLabel}
+    hideCheckboxes={boolean('Hide Checkboxes', true)}
+    ignoreCase
+    isOpen={boolean('Is Open', false)}
+    labelKey="firstName"
+    openOnClick={boolean('Open On Click', true)}
+    options={userNames}
+    placeholder={text('Placeholder', 'Select value...')}
+    showValuesWhileFocused={boolean('Show Values while Focused', true)}
+    valueKey="id"
+    valueLabelLimit={number('Value Label Limit', 3)}
+    showInput
+  />
+))
+
 stories.add('with MultiSelect and string values', () => (
   <MultiSelectWithStringValues
     autoCloseMenu={boolean('Auto Close Menu', false)}
@@ -304,10 +323,10 @@ stories.add('with MultiSelect, filtering, and custom label renderer', () => (
   <FilterMultiSelect
     autoCloseMenu={boolean('Auto Close Menu', false)}
     clearable={boolean('Clearable', false)}
-    getLabel={GetUserNameLabel}
     getOptionLabel={GetUserNameLabel}
     ignoreCase
     isOpen={boolean('Is Open', false)}
+    labelKey="firstName"
     openOnClick={boolean('Open On Click', true)}
     options={userNames}
     placeholder={text('Placeholder', 'Select value...')}

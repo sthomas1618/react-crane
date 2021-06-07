@@ -1,7 +1,7 @@
 import 'jest-enzyme'
 
-import Enzyme from 'enzyme' // eslint-disable-line
-import Adapter from 'enzyme-adapter-react-15' // eslint-disable-line
+import Enzyme from 'enzyme'
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17'
 
 Enzyme.configure({ adapter: new Adapter() })
 

@@ -63,5 +63,5 @@ it('renders multiselect correctly', () => {
   )
   const component = mount(renderer)
 
-  expect(component.find('span .crane-select-group-header')).toHaveText('Group 1')
+  expect(component.find('.crane-select-group-header')).toHaveText('Group 1')
 })

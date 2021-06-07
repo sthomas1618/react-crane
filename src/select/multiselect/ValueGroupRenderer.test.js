@@ -2,6 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import ValueGroupRenderer from './ValueGroupRenderer'
+import { getLabel, getSelectValue } from '../utils'
+import userNames from '../../../stories/fixtures/userNames'
 
 const valueComponent = () => {}
 
@@ -26,16 +28,16 @@ it('displays custom customDelimiter', () => {
   const renderer = (
     <ValueGroupRenderer
       valueComponent={valueComponent}
-      value={[]}
-      valueKey=""
+      value={[userNames[0].id, userNames[1].id]}
+      valueKey="id"
       customDelimiter=":::"
-      labelKey=""
-      options={['one', 'two']}
-      getSelectValue={() => {}}
-      getLabel={() => {}}
+      labelKey="id"
+      options={userNames}
+      getSelectValue={getSelectValue}
+      getLabel={getLabel}
     />
   )
   const wrapper = shallow(renderer)
 
-  console.log(wrapper)
+  expect(wrapper).toHaveText('<valueComponent />:::<valueComponent />')
 })

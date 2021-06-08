@@ -12,7 +12,7 @@ const OptionRenderer = ({
 
   if (hideCheckboxes) {
     return (
-      <span aria-selected={selected}>
+      <span aria-selected={selected} className={selected ? 'crane-option-selected' : 'crane-option'}>
         {optionLabel}
       </span>
     )

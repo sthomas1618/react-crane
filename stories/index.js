@@ -24,6 +24,7 @@ import termTypes from './fixtures/termTypes'
 import userNames from './fixtures/userNames'
 
 import '../less/crane.less'
+import '../less/storybook.less'
 
 const stories = storiesOf('Select', module)
 

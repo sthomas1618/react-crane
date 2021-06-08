@@ -24,13 +24,13 @@ it('does not explode', () => {
   expect(wrapper).not.toBeEmpty()
 })
 
-it('displays custom customDelimiter', () => {
+it('displays custom delimiter', () => {
   const renderer = (
     <ValueGroupRenderer
       valueComponent={valueComponent}
       value={[userNames[0].id, userNames[1].id]}
       valueKey="id"
-      customDelimiter=":::"
+      delimiter=":::"
       labelKey="id"
       options={userNames}
       getSelectValue={getSelectValue}

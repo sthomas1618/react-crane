@@ -197,7 +197,7 @@ stories.add('with MultiSelect', () => (
 stories.add('with MultiSelect, hidden checkboxes, custom delimiter, and custom input', () => (
   <FilterMultiSelect
     autoCloseMenu={boolean('Auto Close Menu', false)}
-    customDelimiter=":::"
+    delimiter=":::"
     getOptionLabel={GetUserNameLabel}
     hideCheckboxes={boolean('Hide Checkboxes', true)}
     ignoreCase

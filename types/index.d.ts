@@ -303,7 +303,7 @@ export interface MultiSelectProps extends SimpleSelectProps {
   allOption?: AllOption;
   allowSelectAll?: boolean;
   allSelectedText?: string;
-  customDelimiter?: React.ReactNode | string;
+  delimiter?: React.ReactNode | string;
   hideCheckboxes?: boolean;
   showValuesWhileFocused?: boolean;
   sort?: boolean;

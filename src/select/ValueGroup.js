@@ -15,10 +15,12 @@ class ValueGroup extends Component {
       clearInputOnSelect,
       getLabel,
       inputValue,
+      isFocused,
       labelKey,
       options,
       placeholder,
       showInput,
+      showValuesWhileFocused,
       value,
       valueComponent,
       valueKey,
@@ -41,7 +43,7 @@ class ValueGroup extends Component {
     }
     const ValueRenderer = valueGroupRenderer || defaultRenderer
 
-    if (showInput && inputValue) {
+    if (showInput && inputValue && !showValuesWhileFocused) {
       return null
     }
 
@@ -60,11 +62,11 @@ class ValueGroup extends Component {
     }
 
     const showValue = Array.isArray(newValue) ? newValue.length : newValue
-    const renderer = clearInputOnSelect && showValue
+    const renderer = (clearInputOnSelect && showValue) || (showValuesWhileFocused && isFocused)
       ? <ValueRenderer {...rendererProps} />
       : <span className="crane-select-placeholder">{placeholder}</span>
 
-    return <div className="crane-select-value-group">{renderer}</div>
+    return showValuesWhileFocused ? renderer : <div className="crane-select-value-group">{renderer}</div>
   }
 }
 
@@ -72,11 +74,13 @@ ValueGroup.propTypes = {
   clearInputOnSelect: PropTypes.bool,
   getLabel: PropTypes.func.isRequired,
   inputValue: PropTypes.string,
+  isFocused: PropTypes.bool.isRequired,
   labelKey: PropTypes.string,
   options: PropTypes.array.isRequired,
   onMouseDown: PropTypes.func,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   showInput: PropTypes.bool,
+  showValuesWhileFocused: PropTypes.bool,
   value: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
@@ -96,6 +100,7 @@ ValueGroup.defaultProps = {
   onMouseDown: null,
   placeholder: '',
   showInput: false,
+  showValuesWhileFocused: false,
   value: null,
   valueComponent: null,
   valueGroupRenderer: null,

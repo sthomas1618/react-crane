@@ -127,6 +127,7 @@ export interface MenuProps {
   getOptionLabel: (parameters: GetOptionLabelParameters) => string;
   groupTitleKey?: string;
   groupValueKey?: string;
+  hideCheckboxes?: boolean;
   labelKey?: string;
   menuRef: (element: HTMLElement) => void;
   onOptionClick: (event: React.SyntheticEvent<Menu>) => void;
@@ -150,6 +151,7 @@ export interface OptionProps {
   allOption?: AllOption;
   allowSelectAll?: boolean;
   getOptionLabel: (parameters: GetOptionLabelParameters) => string;
+  hideCheckboxes?: boolean;
   isFocused?: boolean;
   labelKey?: string;
   onOptionClick: (event: React.SyntheticEvent<Option>) => void;
@@ -301,6 +303,9 @@ export interface MultiSelectProps extends SimpleSelectProps {
   allOption?: AllOption;
   allowSelectAll?: boolean;
   allSelectedText?: string;
+  delimiter?: React.ReactNode | string;
+  hideCheckboxes?: boolean;
+  showValuesWhileFocused?: boolean;
   sort?: boolean;
   value?: object[];
   valueLabelLimit?: number;

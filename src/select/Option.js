@@ -20,6 +20,7 @@ class Option extends PureComponent {
       allowSelectAll,
       allOption,
       getOptionLabel,
+      hideCheckboxes,
       isFocused,
       labelKey,
       option,
@@ -35,6 +36,7 @@ class Option extends PureComponent {
 
     const optionRendererProps = {
       getOptionLabel,
+      hideCheckboxes,
       labelKey,
       option,
       selected
@@ -66,6 +68,7 @@ Option.propTypes = {
   allOption: PropTypes.object,
   allowSelectAll: PropTypes.bool,
   getOptionLabel: PropTypes.func.isRequired,
+  hideCheckboxes: PropTypes.bool,
   isFocused: PropTypes.bool,
   labelKey: PropTypes.string,
   onOptionClick: PropTypes.func.isRequired,
@@ -80,6 +83,7 @@ Option.propTypes = {
 Option.defaultProps = {
   allowSelectAll: false,
   allOption: null,
+  hideCheckboxes: false,
   isFocused: false,
   labelKey: '',
   optionRenderer: null,

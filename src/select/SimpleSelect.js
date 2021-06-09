@@ -710,6 +710,7 @@ class SimpleSelect extends Component {
       beforeInput,
       disabled,
       id,
+      showValuesWhileFocused,
       valueGroupComponent
     } = this.props
     const { isFocused, isOuterFocused } = this.state
@@ -736,8 +737,8 @@ class SimpleSelect extends Component {
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">
             {beforeInput}
-            <div className="crane-select-inner-input">
-              <ValueGroupComponent {...valueGroupProps} />
+            <div className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'}>
+              <ValueGroupComponent isFocused={isFocused} {...valueGroupProps} />
               {this.renderInput()}
             </div>
           </div>

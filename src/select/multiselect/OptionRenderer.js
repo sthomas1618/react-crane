@@ -3,16 +3,27 @@ import PropTypes from 'prop-types'
 
 const OptionRenderer = ({
   getOptionLabel,
-  option,
+  hideCheckboxes,
   labelKey,
+  option,
   selected
 }) => {
+  const optionLabel = getOptionLabel({ option, labelKey, selected })
+
+  if (hideCheckboxes) {
+    return (
+      <span aria-selected={selected} className={selected ? 'crane-option-selected' : 'crane-option'}>
+        {optionLabel}
+      </span>
+    )
+  }
+
   const onChange = (e) => { e.preventDefault() }
   return (
     <span aria-selected={selected}>
-      <label>
+      <label htmlFor={optionLabel}>
         <input type="checkbox" checked={selected} onChange={onChange} />
-        {getOptionLabel({ option, labelKey, selected })}
+        {optionLabel}
       </label>
     </span>
   )
@@ -20,12 +31,14 @@ const OptionRenderer = ({
 
 OptionRenderer.propTypes = {
   getOptionLabel: PropTypes.func.isRequired,
+  hideCheckboxes: PropTypes.bool,
   labelKey: PropTypes.string,
   option: PropTypes.object.isRequired,
   selected: PropTypes.bool
 }
 
 OptionRenderer.defaultProps = {
+  hideCheckboxes: false,
   labelKey: '',
   selected: false
 }

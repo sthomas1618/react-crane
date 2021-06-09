@@ -80,6 +80,8 @@ export const multiSelectDefaults = {
   },
   allowSelectAll: false,
   allSelectedText: 'All Selected',
+  hideCheckboxes: false,
+  showValuesWhileFocused: false,
   sort: true,
   value: [],
   valueLabelLimit: 3

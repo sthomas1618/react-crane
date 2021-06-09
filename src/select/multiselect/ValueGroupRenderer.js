@@ -8,6 +8,7 @@ const ValueGroupRenderer = (props) => {
     allOption,
     allSelectedText,
     allowSelectAll,
+    delimiter,
     getLabel,
     labelKey,
     options,
@@ -22,13 +23,14 @@ const ValueGroupRenderer = (props) => {
       ? allSelectedText : `${value.length} Selected`
     return <span>{count}</span>
   }
+  const CustomDelimiter = typeof delimiter === 'function' ? delimiter() : delimiter
 
   const values = value.map((val, i) => {
     const option = props.getSelectValue({ options, valueKey, value: val })
 
     if (option) {
       const label = getLabel(option, labelKey)
-      const delimiter = (i + 1) === value.length ? '' : ', '
+      const Delimiter = (i + 1) === value.length ? '' : CustomDelimiter || ', '
       return (
         <span key={label}>
           <ValueComponent
@@ -37,19 +39,20 @@ const ValueGroupRenderer = (props) => {
             option={option}
             valueRenderer={valueRenderer}
           />
-          {delimiter}
+          {Delimiter}
         </span>
       )
     }
     return null
   })
-  return <span>{values}</span>
+  return <React.Fragment>{values}</React.Fragment>
 }
 
 ValueGroupRenderer.propTypes = {
   allowSelectAll: PropTypes.bool,
   allOption: PropTypes.object,
   allSelectedText: PropTypes.string,
+  delimiter: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   getLabel: PropTypes.func.isRequired,
   getSelectValue: PropTypes.func.isRequired,
   labelKey: PropTypes.string,
@@ -65,6 +68,7 @@ ValueGroupRenderer.defaultProps = {
   allowSelectAll: false,
   allOption: null,
   allSelectedText: 'All Selected',
+  delimiter: null,
   labelKey: '',
   valueLabelLimit: 0,
   valueRenderer: null

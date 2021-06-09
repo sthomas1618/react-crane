@@ -50,3 +50,14 @@ it('toggles does not checkbox if not selected', () => {
 
   expect(component.find('input').props().checked).toBeFalsy()
 })
+
+it('does not render checkboxes on hideCheckboxes', () => {
+  const component = shallow(<OptionRenderer
+    hideCheckboxes
+    option={{ id: 1 }}
+    valueKey="id"
+    getOptionLabel={() => { }}
+  />)
+
+  expect(component.find('input')).toHaveLength(0)
+})

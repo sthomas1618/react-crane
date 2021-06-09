@@ -12,6 +12,7 @@ class Menu extends Component {
       getOptionLabel,
       groupTitleKey,
       groupValueKey,
+      hideCheckboxes,
       labelKey,
       onOptionClick,
       onOptionFocus,
@@ -32,22 +33,23 @@ class Menu extends Component {
     const OptionGroupComponent = optionGroupComponent
 
     const optionProps = {
-      onOptionClick,
-      onOptionFocus,
       allowSelectAll,
       allOption,
       getOptionLabel,
+      hideCheckboxes,
       labelKey,
+      onOptionClick,
+      onOptionFocus,
       optionRef,
       optionRenderer,
       valueKey
     }
 
     const optionGroupProps = {
-      optionGroupRenderer,
-      optionRef,
       groupTitleKey,
       groupValueKey,
+      optionGroupRenderer,
+      optionRef,
       value,
       valueKey,
       ...optionProps
@@ -77,8 +79,9 @@ class Menu extends Component {
         <OptionComponent
           {...optionProps}
           key={option[valueKey]}
-          option={option}
+          hideCheckboxes={hideCheckboxes}
           isFocused={isFocused}
+          option={option}
           selected={selected}
         />
       )
@@ -91,6 +94,7 @@ class Menu extends Component {
       allowSelectAll,
       focusedOption,
       getOptionLabel,
+      hideCheckboxes,
       labelKey,
       menuRef,
       onOptionClick,
@@ -114,33 +118,40 @@ class Menu extends Component {
       multiStaticOptions.push(staticOption)
     }
 
-
     return (
-      <div className="crane-select-menu" ref={menuRef} role="listbox">
+      <div
+        aria-label="menu"
+        className="crane-select-menu"
+        ref={menuRef}
+        role="listbox"
+      >
         {this.renderOptions(options)}
-        {!!options.length && !!multiStaticOptions.length && <div className="crane-select-static-divider" />}
-        {!!multiStaticOptions.length && multiStaticOptions.map((option) => {
-          const selected = option && isSelected(option, value, valueKey)
-          const isFocused = option && option === focusedOption
-          return (
-            <OptionComponent
-              key={option[valueKey]}
-              onOptionClick={onOptionClick}
-              onOptionFocus={onOptionFocus}
-              allowSelectAll={allowSelectAll}
-              allOption={allOption}
-              getOptionLabel={getOptionLabel}
-              labelKey={labelKey}
-              optionRef={optionRef}
-              optionRenderer={optionRenderer}
-              valueKey={valueKey}
-              option={option}
-              isFocused={isFocused}
-              selected={selected}
-            />
-          )
-        })}
-
+        {!!options.length && !!multiStaticOptions.length && (
+          <div className="crane-select-static-divider" />
+        )}
+        {!!multiStaticOptions.length &&
+          multiStaticOptions.map((option) => {
+            const selected = option && isSelected(option, value, valueKey)
+            const isFocused = option && option === focusedOption
+            return (
+              <OptionComponent
+                key={option[valueKey]}
+                allowSelectAll={allowSelectAll}
+                allOption={allOption}
+                getOptionLabel={getOptionLabel}
+                hideCheckboxes={hideCheckboxes}
+                labelKey={labelKey}
+                onOptionClick={onOptionClick}
+                onOptionFocus={onOptionFocus}
+                optionRef={optionRef}
+                optionRenderer={optionRenderer}
+                valueKey={valueKey}
+                option={option}
+                isFocused={isFocused}
+                selected={selected}
+              />
+            )
+          })}
       </div>
     )
   }
@@ -153,6 +164,7 @@ Menu.propTypes = {
   getOptionLabel: PropTypes.func.isRequired,
   groupTitleKey: PropTypes.string,
   groupValueKey: PropTypes.string,
+  hideCheckboxes: PropTypes.bool,
   labelKey: PropTypes.string,
   menuRef: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
@@ -176,6 +188,7 @@ Menu.propTypes = {
 Menu.defaultProps = {
   allOption: null,
   allowSelectAll: false,
+  hideCheckboxes: false,
   focusedOption: null,
   groupTitleKey: '',
   groupValueKey: '',

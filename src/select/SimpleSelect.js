@@ -727,15 +727,13 @@ class SimpleSelect extends Component {
     })
 
     return (
-      <div className={selectClassName} ref={(container) => { this.container = container }}>
+      <div aria-expanded={isOpen} className={selectClassName} ref={(container) => { this.container = container }} role="combobox">
         <div
-          aria-expanded={isOpen}
           className="crane-select-input-group"
           id={id}
           onKeyDown={this.onKeyDown}
           onMouseDown={this.onValueMouseDown}
           onTouchEnd={this.onValueTouchEnd}
-          role="combobox"
         >
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">

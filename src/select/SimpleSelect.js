@@ -650,7 +650,7 @@ class SimpleSelect extends Component {
     if (opts.length || hasStaticOptions) {
       const MenuComponent = this.props.menuComponent
       menu = (
-        <div className="crane-select-menu-container">
+        <div className="crane-select-menu-container" role="listbox">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
@@ -680,13 +680,15 @@ class SimpleSelect extends Component {
     const inputProps = {
       'aria-label': this.props['aria-label'],
       'aria-labelledby': this.props['aria-labelledby'],
+      'aria-multiline': 'false',
       disabled: this.props.disabled,
       getRef: (ref) => { this.input = ref },
       id: this.props.inputId,
       inputValue: this.props.inputValue,
       onBlur: this.onInputBlur,
       onChange: this.onInputChange,
-      onFocus: this.onInputFocus
+      onFocus: this.onInputFocus,
+      role: 'textbox'
     }
     const InputComponent = this.props.inputComponent
 
@@ -732,7 +734,7 @@ class SimpleSelect extends Component {
           onKeyDown={this.onKeyDown}
           onMouseDown={this.onValueMouseDown}
           onTouchEnd={this.onValueTouchEnd}
-          role="presentation"
+          role="combobox"
         >
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">

@@ -15,7 +15,6 @@ class FocusPlaceholder extends PureComponent {
         className="crane-select-focus-placeholder"
         onBlur={onBlur}
         onFocus={onFocus}
-        readOnly
         ref={getRef}
       />
     )

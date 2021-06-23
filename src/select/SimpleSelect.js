@@ -680,7 +680,7 @@ class SimpleSelect extends Component {
     const inputProps = {
       'aria-label': this.props['aria-label'],
       'aria-labelledby': this.props['aria-labelledby'],
-      'aria-multiline': 'false',
+      //'aria-multiline': 'false',
       disabled: this.props.disabled,
       getRef: (ref) => { this.input = ref },
       id: this.props.inputId,
@@ -688,7 +688,7 @@ class SimpleSelect extends Component {
       onBlur: this.onInputBlur,
       onChange: this.onInputChange,
       onFocus: this.onInputFocus,
-      role: 'textbox'
+      //role: 'textbox'
     }
     const InputComponent = this.props.inputComponent
 

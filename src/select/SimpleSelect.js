@@ -680,7 +680,6 @@ class SimpleSelect extends Component {
     const inputProps = {
       'aria-label': this.props['aria-label'],
       'aria-labelledby': this.props['aria-labelledby'],
-      'aria-multiline': 'false',
       disabled: this.props.disabled,
       getRef: (ref) => { this.input = ref },
       id: this.props.inputId,
@@ -688,7 +687,6 @@ class SimpleSelect extends Component {
       onBlur: this.onInputBlur,
       onChange: this.onInputChange,
       onFocus: this.onInputFocus,
-      role: 'textbox'
     }
     const InputComponent = this.props.inputComponent
 
@@ -738,7 +736,11 @@ class SimpleSelect extends Component {
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">
             {beforeInput}
-            <div className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'} role="combobox">
+            <div
+              aria-haspopup="listbox"
+              className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'} 
+              role="combobox"
+            >
               <ValueGroupComponent isFocused={isFocused} {...valueGroupProps} />
               {this.renderInput()}
             </div>

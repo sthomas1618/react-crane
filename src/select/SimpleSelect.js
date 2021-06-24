@@ -725,7 +725,7 @@ class SimpleSelect extends Component {
     })
 
     return (
-      <div aria-expanded={isOpen} className={selectClassName} ref={(container) => { this.container = container }} >
+      <div aria-expanded={isOpen} className={selectClassName} ref={(container) => { this.container = container }}>
         <div
           className="crane-select-input-group"
           id={id}

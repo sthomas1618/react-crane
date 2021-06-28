@@ -650,7 +650,7 @@ class SimpleSelect extends Component {
     if (opts.length || hasStaticOptions) {
       const MenuComponent = this.props.menuComponent
       menu = (
-        <div className="crane-select-menu-container">
+        <div className="crane-select-menu-container" role="listbox">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
@@ -725,7 +725,7 @@ class SimpleSelect extends Component {
     })
 
     return (
-      <div className={selectClassName} ref={(container) => { this.container = container }}>
+      <div aria-expanded={isOpen} className={selectClassName} ref={(container) => { this.container = container }}>
         <div
           className="crane-select-input-group"
           id={id}
@@ -737,7 +737,11 @@ class SimpleSelect extends Component {
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">
             {beforeInput}
-            <div className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'}>
+            <div
+              aria-haspopup="listbox"
+              className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'} 
+              role="combobox"
+            >
               <ValueGroupComponent isFocused={isFocused} {...valueGroupProps} />
               {this.renderInput()}
             </div>

@@ -732,6 +732,7 @@ class SimpleSelect extends Component {
           onKeyDown={this.onKeyDown}
           onMouseDown={this.onValueMouseDown}
           onTouchEnd={this.onValueTouchEnd}
+          role="presentation"
         >
           {this.renderLiveRegion()}
           <div className="crane-select-outer-input">

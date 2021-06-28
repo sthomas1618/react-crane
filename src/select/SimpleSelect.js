@@ -686,7 +686,7 @@ class SimpleSelect extends Component {
       inputValue: this.props.inputValue,
       onBlur: this.onInputBlur,
       onChange: this.onInputChange,
-      onFocus: this.onInputFocus,
+      onFocus: this.onInputFocus
     }
     const InputComponent = this.props.inputComponent
 

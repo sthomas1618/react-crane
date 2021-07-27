@@ -57,6 +57,7 @@ class Menu extends Component {
 
     return options.map((option) => {
       const isFocused = option === focusedOption
+      const { isDisabled } = option
 
       // Nested options
       if (option.options && Array.isArray(option.options)) {
@@ -80,6 +81,7 @@ class Menu extends Component {
           {...optionProps}
           key={option[valueKey]}
           hideCheckboxes={hideCheckboxes}
+          isDisabled={isDisabled}
           isFocused={isFocused}
           option={option}
           selected={selected}

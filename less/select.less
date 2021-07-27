@@ -12,6 +12,7 @@
 @crane-select-option-focus-bg-color: #e7eff7;
 @crane-select-placeholder-color: #757575;
 @crane-select-no-results-color: #757575;
+@crane-select-option-disabled-color: #5C6879;
 
 .crane-select {
   position: relative;
@@ -224,6 +225,11 @@
   &.focused {
     background: @crane-select-option-focus-bg-color;
     outline: none;
+  }
+
+  &.disabled {
+    background-color: none;
+    color: @crane-select-option-disabled-color;
   }
 }
 

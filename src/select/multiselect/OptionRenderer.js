@@ -9,6 +9,7 @@ const OptionRenderer = ({
   selected
 }) => {
   const optionLabel = getOptionLabel({ option, labelKey, selected })
+  const { isDisabled } = option
 
   if (hideCheckboxes) {
     return (
@@ -21,8 +22,8 @@ const OptionRenderer = ({
   const onChange = (e) => { e.preventDefault() }
   return (
     <span aria-selected={selected}>
-      <label htmlFor={optionLabel}>
-        <input type="checkbox" checked={selected} onChange={onChange} />
+      <label htmlFor={optionLabel} aria-disabled={isDisabled}>
+        <input type="checkbox" checked={selected} disabled={isDisabled} onChange={onChange} />
         {optionLabel}
       </label>
     </span>

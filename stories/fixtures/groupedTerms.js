@@ -37,7 +37,8 @@ const groupedTerms = [
       {
         groupId: 'P',
         id: 'F15',
-        value: 'Fall 2015'
+        value: 'Fall 2015',
+        isDisabled: true
       }
     ]
   }

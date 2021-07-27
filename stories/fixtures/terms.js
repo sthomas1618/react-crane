@@ -28,6 +28,12 @@ const terms = [
     groupId: 'P',
     id: 'F15',
     value: 'Fall 2015'
+  },
+  {
+    groupId: 'P',
+    id: 'F21A',
+    value: 'Winter Intersession 2021-2022',
+    isDisabled: true
   }
 ]
 

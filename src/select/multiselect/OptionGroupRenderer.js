@@ -20,6 +20,8 @@ const OptionGroupRenderer = (props) => {
         option.options.some(opt => isValueEqual(opt, val, valueKey))
       )
     ))
+  const { isDisabled } = option
+
   const onChange = (e) => {
     e.preventDefault()
   }
@@ -27,7 +29,7 @@ const OptionGroupRenderer = (props) => {
   return (
     <span>
       <label>
-        <input type="checkbox" checked={checked} onChange={onChange} />
+        <input type="checkbox" checked={checked} disabled={isDisabled} onChange={onChange} />
         {option[groupTitleKey]}
       </label>
     </span>

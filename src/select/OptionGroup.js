@@ -6,6 +6,10 @@ import { isValueEqual } from './utils'
 // TODO: FUTURE convert to function component and use React.Memo
 class OptionGroup extends PureComponent {
   onMouseDown = (event) => {
+    // If the label is clicked but the option is disabled, do nothing.
+    if (event && event.target && event.target.ariaDisabled === 'true') {
+      return
+    }
     const { onOptionClick, option, value } = this.props
     const isGroup = Array.isArray(option.options)
     const isMulti = Array.isArray(value)

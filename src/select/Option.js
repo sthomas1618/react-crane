@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 // TODO: FUTURE convert to function component and use React.Memo
 class Option extends PureComponent {
   onMouseDown = (event) => {
-    const { onOptionClick, option } = this.props
-    onOptionClick(event, option)
+    const { isDisabled, onOptionClick, option } = this.props
+    if (!isDisabled) {
+      onOptionClick(event, option)
+    }
   }
 
   onFocus = (event) => {
@@ -21,6 +23,7 @@ class Option extends PureComponent {
       allOption,
       getOptionLabel,
       hideCheckboxes,
+      isDisabled,
       isFocused,
       labelKey,
       option,
@@ -37,18 +40,27 @@ class Option extends PureComponent {
     const optionRendererProps = {
       getOptionLabel,
       hideCheckboxes,
+      isDisabled,
       labelKey,
       option,
       selected
     }
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
-      : getOptionLabel({ option, labelKey, selected })
-    const className = `crane-select-option${isFocused ? ' focused' : ''} ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
+      : getOptionLabel({
+        isDisabled,
+        option,
+        labelKey,
+        selected
+      })
+    const className = `crane-select-option${isFocused && !isDisabled ? ' focused' : ''}
+      ${isDisabled ? ' disabled' : ''}
+      ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
 
     return (
       <div
         ref={el => optionRef(el, option[valueKey])}
+        aria-disabled={isDisabled}
         aria-selected={selected}
         className={className}
         onMouseDown={this.onMouseDown}
@@ -69,6 +81,7 @@ Option.propTypes = {
   allowSelectAll: PropTypes.bool,
   getOptionLabel: PropTypes.func.isRequired,
   hideCheckboxes: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   isFocused: PropTypes.bool,
   labelKey: PropTypes.string,
   onOptionClick: PropTypes.func.isRequired,
@@ -84,6 +97,7 @@ Option.defaultProps = {
   allowSelectAll: false,
   allOption: null,
   hideCheckboxes: false,
+  isDisabled: false,
   isFocused: false,
   labelKey: '',
   optionRenderer: null,

@@ -200,6 +200,25 @@ stories.add('with SimpleSelect and disabled options', () => (
   />
 ))
 
+stories.add('with SimpleSelect, disabled options, and custom key', () => (
+  <BasicSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', true)}
+    labelKey="value"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    optionDisabledKey={text('Disabled Option Key', 'disabled')}
+    options={terms}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="id"
+  />
+))
+
 stories.add('with MultiSelect', () => (
   <BasicMultiSelect
     autoCloseMenu={boolean('Auto Close Menu', false)}

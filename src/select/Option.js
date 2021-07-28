@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 // TODO: FUTURE convert to function component and use React.Memo
 class Option extends PureComponent {
   onMouseDown = (event) => {
-    const { isDisabled, onOptionClick, option } = this.props
-    if (!isDisabled) {
+    const { onOptionClick, optionDisabledKey, option } = this.props
+    if (!option[optionDisabledKey]) {
       onOptionClick(event, option)
     }
   }
@@ -23,10 +23,10 @@ class Option extends PureComponent {
       allOption,
       getOptionLabel,
       hideCheckboxes,
-      isDisabled,
       isFocused,
       labelKey,
       option,
+      optionDisabledKey,
       optionRef,
       optionRenderer,
       selected,
@@ -40,17 +40,18 @@ class Option extends PureComponent {
     const optionRendererProps = {
       getOptionLabel,
       hideCheckboxes,
-      isDisabled,
       labelKey,
       option,
+      optionDisabledKey,
       selected
     }
+    const isDisabled = option[optionDisabledKey]
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
       : getOptionLabel({
-        isDisabled,
-        option,
         labelKey,
+        option,
+        optionDisabledKey,
         selected
       })
     const className = `crane-select-option${isFocused && !isDisabled ? ' focused' : ''}
@@ -81,12 +82,12 @@ Option.propTypes = {
   allowSelectAll: PropTypes.bool,
   getOptionLabel: PropTypes.func.isRequired,
   hideCheckboxes: PropTypes.bool,
-  isDisabled: PropTypes.bool,
   isFocused: PropTypes.bool,
   labelKey: PropTypes.string,
   onOptionClick: PropTypes.func.isRequired,
   onOptionFocus: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
+  optionDisabledKey: PropTypes.string,
   optionRef: PropTypes.func.isRequired,
   optionRenderer: PropTypes.func,
   selected: PropTypes.bool,
@@ -97,9 +98,9 @@ Option.defaultProps = {
   allowSelectAll: false,
   allOption: null,
   hideCheckboxes: false,
-  isDisabled: false,
   isFocused: false,
   labelKey: '',
+  optionDisabledKey: 'isDisabled',
   optionRenderer: null,
   selected: false,
   valueKey: 'value'

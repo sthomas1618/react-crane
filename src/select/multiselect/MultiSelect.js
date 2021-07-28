@@ -35,6 +35,7 @@ class MultiSelect extends Component {
     const {
       allOption,
       allowSelectAll,
+      optionDisabledKey,
       getSelectValue,
       groupValueKey,
       isAllSelected,
@@ -57,7 +58,7 @@ class MultiSelect extends Component {
           allowSelectAll ? val[valKey] !== option[valKey] && val[valueKey] !== allOption[valueKey]
             : val[valKey] !== option[valKey]))
     } else if (isGroup) {
-      newValues = [...valueObjs, ...option.options.filter(val => !val.isDisabled)]
+      newValues = [...valueObjs, ...option.options.filter(val => !val[optionDisabledKey])]
     } else if (option[valueKey] === allOption[valueKey]) {
       newValues = flatOptions
     } else {

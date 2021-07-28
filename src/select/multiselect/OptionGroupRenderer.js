@@ -8,6 +8,7 @@ const OptionGroupRenderer = (props) => {
     groupTitleKey,
     groupValueKey,
     option,
+    optionDisabledKey,
     value,
     valueKey
   } = props
@@ -20,7 +21,7 @@ const OptionGroupRenderer = (props) => {
         option.options.some(opt => isValueEqual(opt, val, valueKey))
       )
     ))
-  const { isDisabled } = option
+  const isDisabled = option[optionDisabledKey]
 
   const onChange = (e) => {
     e.preventDefault()
@@ -40,6 +41,7 @@ OptionGroupRenderer.propTypes = {
   groupTitleKey: PropTypes.string.isRequired,
   groupValueKey: PropTypes.string.isRequired,
   option: PropTypes.object.isRequired,
+  optionDisabledKey: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.number,
@@ -47,6 +49,10 @@ OptionGroupRenderer.propTypes = {
     PropTypes.string
   ]).isRequired,
   valueKey: PropTypes.string.isRequired
+}
+
+OptionGroupRenderer.defaultProps = {
+  optionDisabledKey: 'isDisabled'
 }
 
 export default OptionGroupRenderer

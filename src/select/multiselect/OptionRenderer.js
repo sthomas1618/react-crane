@@ -6,10 +6,11 @@ const OptionRenderer = ({
   hideCheckboxes,
   labelKey,
   option,
+  optionDisabledKey,
   selected
 }) => {
   const optionLabel = getOptionLabel({ option, labelKey, selected })
-  const { isDisabled } = option
+  const isDisabled = option[optionDisabledKey]
 
   if (hideCheckboxes) {
     return (
@@ -35,12 +36,14 @@ OptionRenderer.propTypes = {
   hideCheckboxes: PropTypes.bool,
   labelKey: PropTypes.string,
   option: PropTypes.object.isRequired,
+  optionDisabledKey: PropTypes.string,
   selected: PropTypes.bool
 }
 
 OptionRenderer.defaultProps = {
   hideCheckboxes: false,
   labelKey: '',
+  optionDisabledKey: 'isDisabled',
   selected: false
 }
 

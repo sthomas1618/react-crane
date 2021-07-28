@@ -157,6 +157,7 @@ export interface OptionProps {
   onOptionClick: (event: React.SyntheticEvent<Option>) => void;
   onOptionFocus: (event: React.SyntheticEvent<Option>) => void;
   option: object;
+  optionDisabledKey?: string;
   optionRef: (element: HTMLElement) => void;
   optionRenderer?: React.ReactNode;
   staticOption?: object | object[];
@@ -176,6 +177,7 @@ export interface OptionGroupProps {
   onOptionClick: (event: React.SyntheticEvent<Option>) => void;
   onOptionFocus: (event: React.SyntheticEvent<Option>) => void;
   option: object;
+  optionDisabledKey?: string;
   optionGroupRenderer?: React.ReactNode;
   optionRef: (element: HTMLElement) => void;
   value?: ValueLike;
@@ -284,6 +286,7 @@ export interface SimpleSelectProps {
   openOnClick?: boolean;
   openOnEmptyInput?: boolean;
   optionComponent?: React.ReactNode;
+  optionDisabledKey?: string;
   optionGroupComponent?: React.ReactNode;
   optionGroupRenderer?: React.ReactNode;
   optionRenderer?: React.ReactNode;

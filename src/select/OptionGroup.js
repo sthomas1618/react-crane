@@ -32,6 +32,7 @@ class OptionGroup extends PureComponent {
     const {
       children,
       option,
+      optionDisabledKey,
       optionGroupRenderer,
       optionRef,
       groupTitleKey,
@@ -48,6 +49,7 @@ class OptionGroup extends PureComponent {
       groupTitleKey,
       groupValueKey,
       option,
+      optionDisabledKey,
       value,
       valueKey
     }
@@ -93,6 +95,7 @@ OptionGroup.propTypes = {
   onOptionClick: PropTypes.func.isRequired,
   onOptionFocus: PropTypes.func.isRequired,
   option: PropTypes.object.isRequired,
+  optionDisabledKey: PropTypes.string,
   optionGroupRenderer: PropTypes.func,
   optionRef: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([
@@ -108,6 +111,7 @@ OptionGroup.defaultProps = {
   groupTitleKey: 'label',
   groupValueKey: 'groupId',
   isFocused: false,
+  optionDisabledKey: 'isDisabled',
   optionGroupRenderer: null,
   value: null,
   valueKey: 'value'

@@ -48,6 +48,7 @@ export const simpleSelectPropTypes = {
   openOnClick: PropTypes.bool,
   openOnEmptyInput: PropTypes.bool,
   optionComponent: PropTypes.func,
+  optionDisabledKey: PropTypes.string,
   optionGroupComponent: PropTypes.func,
   optionGroupRenderer: PropTypes.func,
   optionRenderer: PropTypes.func,

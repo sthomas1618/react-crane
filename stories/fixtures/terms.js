@@ -17,7 +17,8 @@ const terms = [
   {
     groupId: 'P',
     id: 'S16',
-    value: 'Spring 2016'
+    value: 'Spring 2016',
+    disabled: true
   },
   {
     groupId: 'A',

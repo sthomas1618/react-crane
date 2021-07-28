@@ -17,6 +17,7 @@ class Menu extends Component {
       onOptionClick,
       onOptionFocus,
       optionComponent,
+      optionDisabledKey,
       optionGroupComponent,
       optionGroupRenderer,
       optionRef,
@@ -40,6 +41,7 @@ class Menu extends Component {
       labelKey,
       onOptionClick,
       onOptionFocus,
+      optionDisabledKey,
       optionRef,
       optionRenderer,
       valueKey
@@ -57,7 +59,6 @@ class Menu extends Component {
 
     return options.map((option) => {
       const isFocused = option === focusedOption
-      const { isDisabled } = option
 
       // Nested options
       if (option.options && Array.isArray(option.options)) {
@@ -81,7 +82,6 @@ class Menu extends Component {
           {...optionProps}
           key={option[valueKey]}
           hideCheckboxes={hideCheckboxes}
-          isDisabled={isDisabled}
           isFocused={isFocused}
           option={option}
           selected={selected}
@@ -102,6 +102,7 @@ class Menu extends Component {
       onOptionClick,
       onOptionFocus,
       optionComponent,
+      optionDisabledKey,
       optionRef,
       optionRenderer,
       options,
@@ -145,6 +146,7 @@ class Menu extends Component {
                 labelKey={labelKey}
                 onOptionClick={onOptionClick}
                 onOptionFocus={onOptionFocus}
+                optionDisabledKey={optionDisabledKey}
                 optionRef={optionRef}
                 optionRenderer={optionRenderer}
                 valueKey={valueKey}
@@ -172,6 +174,7 @@ Menu.propTypes = {
   onOptionClick: PropTypes.func.isRequired,
   onOptionFocus: PropTypes.func.isRequired,
   optionComponent: PropTypes.func,
+  optionDisabledKey: PropTypes.string,
   optionGroupComponent: PropTypes.func,
   optionGroupRenderer: PropTypes.func,
   optionRef: PropTypes.func.isRequired,
@@ -196,6 +199,7 @@ Menu.defaultProps = {
   groupValueKey: '',
   labelKey: '',
   optionComponent: null,
+  optionDisabledKey: 'isDisabled',
   optionGroupComponent: null,
   optionGroupRenderer: null,
   optionRenderer: null,

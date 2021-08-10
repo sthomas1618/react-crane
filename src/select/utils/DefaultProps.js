@@ -57,6 +57,7 @@ export const simpleSelectDefaults = {
   openOnClick: true,
   openOnEmptyInput: true,
   optionComponent: Option,
+  optionDisabledKey: 'isDisabled',
   optionGroupComponent: OptionGroup,
   optionGroupRenderer: null,
   optionRenderer: null,

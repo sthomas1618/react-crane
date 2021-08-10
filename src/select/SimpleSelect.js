@@ -406,8 +406,9 @@ class SimpleSelect extends Component {
 
   selectFocusedOption = (event) => {
     const { focusedOption } = this.state
+    const { optionDisabledKey } = this.props
 
-    if (focusedOption) {
+    if (focusedOption && !focusedOption[optionDisabledKey]) {
       this.selectOption(event, focusedOption)
     }
   }
@@ -739,7 +740,7 @@ class SimpleSelect extends Component {
             {beforeInput}
             <div
               aria-haspopup="listbox"
-              className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'} 
+              className={showValuesWhileFocused ? 'crane-select-inner-input-flex' : 'crane-select-inner-input'}
               role="combobox"
             >
               <ValueGroupComponent isFocused={isFocused} {...valueGroupProps} />

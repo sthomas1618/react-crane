@@ -5,6 +5,7 @@
   "main": "dist/module/index.js",
   "scripts": {
     "test": "node scripts/test.js",
+    "test:coverage": "npm test -- --coverage",
     "start": "cross-env NODE_ENV=development start-storybook -p 6006",
     "build": "npm run clean-dist && npm run build-modules && npm run build-umd",
     "build-storybook": "build-storybook",
@@ -124,6 +125,7 @@
       "lcov",
       "cobertura",
       "text"
-    ]
+    ],
+    "coverageDirectory": "./coverage/"
   }
 }

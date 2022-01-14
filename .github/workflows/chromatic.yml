@@ -1,0 +1,17 @@
+name: "Chromatic"
+on: push
+
+jobs:
+  chromatic-deployment:
+    env:
+      CI: true
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: npm ci
+    - uses: chromaui/action@v1
+      with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          autoAcceptChanges: ${{ github.ref == 'refs/heads/master' }}
+          exitOnceUploaded: true

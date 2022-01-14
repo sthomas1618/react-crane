@@ -38,3 +38,5 @@ src
 .eslintignore
 .eslintrc
 .travis.yml
+.github
+storybook-static/

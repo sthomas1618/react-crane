@@ -32,3 +32,5 @@ lib/
 dist/
 
 *.tgz
+
+storybook-static/

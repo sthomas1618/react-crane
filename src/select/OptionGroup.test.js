@@ -34,12 +34,7 @@ it('does not explode', () => {
 it('renders non-multiselect correctly', () => {
   const children = []
   const renderer = (
-    <OptionGroup
-      {...testProps}
-      groupTitleKey="title"
-      valueKey="id"
-      option={groups[0]}
-    >
+    <OptionGroup {...testProps} groupTitleKey="title" valueKey="id" option={groups[0]}>
       {children}
     </OptionGroup>
   )

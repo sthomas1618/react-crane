@@ -28,7 +28,7 @@ import {
 const filterOptionParameters = {
   allOption: { value: 'ALL', id: 'ALL' },
   allowSelectAll: true,
-  getOptionLabel: () => (''),
+  getOptionLabel: () => '',
   ignoreCase: true,
   labelKey: '',
   valueKey: 'id'
@@ -56,54 +56,25 @@ getSelectValue(getSelectValueParamaters)
 isValueEqual({ id: 'foo', value: 'bar' }, 'bar', 'value')
 
 sortBy('foo')
-
-; <Arrow
-  isOpen
-  onArrowClick={() => { }}
-  onArrowTouchEnd={() => { }}
-/>
-; <Arrow
-  arrowRenderer={() => (null)}
-  onArrowClick={() => { }}
-  onArrowTouchEnd={() => { }}
-/>
-
-; <Clear
-  disabled
-  onClearClick={() => { }}
-  onClearTouchEnd={() => { }}
-/>
-; <Clear
-  clearRenderer={() => (null)}
-  onClearClick={() => { }}
-  onClearTouchEnd={() => { }}
-/>
-
-; <FocusPlaceholder
-  getRef={() => (null)}
-  onBlur={() => { }}
-  onFocus={() => { }}
-/>
-
-; <Input
+<Arrow isOpen onArrowClick={() => {}} onArrowTouchEnd={() => {}} />
+<Arrow arrowRenderer={() => null} onArrowClick={() => {}} onArrowTouchEnd={() => {}} />
+<Clear disabled onClearClick={() => {}} onClearTouchEnd={() => {}} />
+<Clear clearRenderer={() => null} onClearClick={() => {}} onClearTouchEnd={() => {}} />
+<FocusPlaceholder getRef={() => null} onBlur={() => {}} onFocus={() => {}} />
+<Input
   arial-label="foo"
   aria-labelledby="bar"
-  getRef={() => { }}
+  getRef={() => {}}
   id="foobar"
   inputValue="search_text"
-  onBlur={() => { }}
-  onChange={() => { }}
-  onFocus={() => { }}
+  onBlur={() => {}}
+  onChange={() => {}}
+  onFocus={() => {}}
 />
+<Loading isLoading loadingRenderer={() => {}} />
+const options = [{ value: 'test' }]
 
-; <Loading
-  isLoading
-  loadingRenderer={() => { }}
-/>
-
-; const options = [{ value: 'test' }]
-
-; <Menu
+<Menu
   allOption={{ id: 'foo', value: 'bar' }}
   allowSelectAll
   focusedOption={{ value: 'foobar' }}
@@ -111,88 +82,84 @@ sortBy('foo')
   groupTitleKey="group_title"
   groupValueKey="group_value"
   labelKey="label"
-  menuRef={() => { }}
-  onOptionClick={() => { }}
-  onOptionFocus={() => { }}
-  optionComponent={(<div />)}
+  menuRef={() => {}}
+  onOptionClick={() => {}}
+  onOptionFocus={() => {}}
+  optionComponent={<div />}
   optionGroupComponent={<span />}
-  optionGroupRenderer={() => { }}
-  optionRef={() => { }}
-  optionRenderer={() => { }}
+  optionGroupRenderer={() => {}}
+  optionRef={() => {}}
+  optionRenderer={() => {}}
   options={options}
   value="test"
   valueKey="value"
 />
-
-; <Option
+<Option
   allOption={{ id: 'foo', value: 'bar' }}
   allowSelectAll
   getOptionLabel={() => 'string'}
   isFocused
   labelKey="label"
-  onOptionClick={() => { }}
-  onOptionFocus={() => { }}
+  onOptionClick={() => {}}
+  onOptionFocus={() => {}}
   option={{ value: 'test' }}
-  optionRef={() => { }}
-  optionRenderer={() => { }}
+  optionRef={() => {}}
+  optionRenderer={() => {}}
   selected
   valueKey="value"
 />
-
-; <OptionGroup
+<OptionGroup
   groupTitleKey="group_title"
   groupValueKey="group_value"
   isFocused
-  onOptionClick={() => { }}
-  onOptionFocus={() => { }}
+  onOptionClick={() => {}}
+  onOptionFocus={() => {}}
   option={{ value: 'test' }}
-  optionGroupRenderer={() => { }}
-  optionRef={() => { }}
+  optionGroupRenderer={() => {}}
+  optionRef={() => {}}
   value="foo"
   valueKey="value"
 >
   foo
-</OptionGroup>
-
-; <Value
+ </OptionGroup>
+<Value
   getLabel={() => 'foo'}
   labelKey="label"
   option={{ value: 'test' }}
   valueRenderer={() => {}}
 />
-
-; <ValueGroup
+<ValueGroup
   clearInputOnSelect
   getLabel={() => 'foo'}
   inputValue="input_value"
   labelKey="label"
   options={options}
-  onMouseDown={() => { }}
+  onMouseDown={() => {}}
   placeholder={<span />}
   showInput
   value={{ value: 'test' }}
   valueComponent={<span />}
   valueKey="value"
-  valueGroupRenderer={() => { }}
-  valueRenderer={() => { }}
+  valueGroupRenderer={() => {}}
+  valueRenderer={() => {}}
 />
 
 const groups = [{ id: 'test' }]
 
-; <SimpleSelect
+<SimpleSelect
   aria-label="foo_label"
   aria-labelledby="foo_labelledby"
-  arrowComponent={() => { }}
-  arrowRenderer={() => { }}
+  arrowComponent={() => {}}
+  arrowRenderer={() => {}}
   autoCloseMenu
   className="class-name"
   clearable
-  clearComponent={() => { }}
+  clearComponent={() => {}}
   clearInputOnBlur
   clearInputOnSelect
-  clearRenderer={() => { }}
+  clearRenderer={() => {}}
   disabled
-  focusPlaceholderComponent={() => { }}
+  focusPlaceholderComponent={() => {}}
   getLabel={() => 'label'}
   getOptionLabel={() => 'option_label'}
   getSelectValue={() => ({})}
@@ -201,57 +168,56 @@ const groups = [{ id: 'test' }]
   groupTitleKey="group_title_key"
   groupValueKey="group_value_key"
   id="my_id"
-  inputComponent={() => { }}
+  inputComponent={() => {}}
   inputId="input_id"
   inputValue="input_vale"
   isLoading
   isOpen
   labelKey="label"
-  loadingComponent={() => { }}
-  loadingRenderer={() => { }}
+  loadingComponent={() => {}}
+  loadingRenderer={() => {}}
   loadingText="Loading!"
-  menuComponent={() => { }}
+  menuComponent={() => {}}
   name="field_name"
   noResultsText="No Results!"
-  onBlur={() => { }}
-  onChange={() => { }}
-  onClose={() => { }}
-  onFocus={() => { }}
-  onInputChange={() => { }}
-  onKeyDown={() => { }}
-  onOpen={() => { }}
-  onSelect={() => { }}
+  onBlur={() => {}}
+  onChange={() => {}}
+  onClose={() => {}}
+  onFocus={() => {}}
+  onInputChange={() => {}}
+  onKeyDown={() => {}}
+  onOpen={() => {}}
+  onSelect={() => {}}
   openOnClick
   openOnEmptyInput
-  optionComponent={() => { }}
-  optionGroupComponent={() => { }}
-  optionGroupRenderer={() => { }}
-  optionRenderer={() => { }}
+  optionComponent={() => {}}
+  optionGroupComponent={() => {}}
+  optionGroupRenderer={() => {}}
+  optionRenderer={() => {}}
   options={options}
   placeholder="placeholder"
   showInput
   value={1}
-  valueComponent={() => { }}
-  valueGroupComponent={() => { }}
-  valueGroupRenderer={() => { }}
+  valueComponent={() => {}}
+  valueGroupComponent={() => {}}
+  valueGroupRenderer={() => {}}
   valueKey="value"
-  valueRenderer={() => { }}
+  valueRenderer={() => {}}
 />
-
-; <SearchSelect
+<SearchSelect
   aria-label="foo_label"
   aria-labelledby="foo_labelledby"
-  arrowComponent={() => { }}
-  arrowRenderer={() => { }}
+  arrowComponent={() => {}}
+  arrowRenderer={() => {}}
   autoCloseMenu
   className="class-name"
   clearable
-  clearComponent={() => { }}
+  clearComponent={() => {}}
   clearInputOnBlur
   clearInputOnSelect
-  clearRenderer={() => { }}
+  clearRenderer={() => {}}
   disabled
-  focusPlaceholderComponent={() => { }}
+  focusPlaceholderComponent={() => {}}
   getLabel={() => 'label'}
   getOptionLabel={() => 'option_label'}
   getSelectValue={() => ({})}
@@ -260,45 +226,45 @@ const groups = [{ id: 'test' }]
   groupTitleKey="group_title_key"
   groupValueKey="group_value_key"
   id="my_id"
-  inputComponent={() => { }}
+  inputComponent={() => {}}
   inputId="input_id"
   inputValue="input_vale"
   isLoading
   isOpen
   labelKey="label"
-  loadingComponent={() => { }}
-  loadingRenderer={() => { }}
+  loadingComponent={() => {}}
+  loadingRenderer={() => {}}
   loadingText="Loading!"
-  menuComponent={() => { }}
+  menuComponent={() => {}}
   name="field_name"
   noResultsText="No Results!"
-  onBlur={() => { }}
-  onChange={() => { }}
-  onClose={() => { }}
-  onFocus={() => { }}
-  onInputChange={() => { }}
-  onKeyDown={() => { }}
-  onOpen={() => { }}
-  onSelect={() => { }}
+  onBlur={() => {}}
+  onChange={() => {}}
+  onClose={() => {}}
+  onFocus={() => {}}
+  onInputChange={() => {}}
+  onKeyDown={() => {}}
+  onOpen={() => {}}
+  onSelect={() => {}}
   openOnClick
   openOnEmptyInput
-  optionComponent={() => { }}
-  optionGroupComponent={() => { }}
-  optionGroupRenderer={() => { }}
-  optionRenderer={() => { }}
+  optionComponent={() => {}}
+  optionGroupComponent={() => {}}
+  optionGroupRenderer={() => {}}
+  optionRenderer={() => {}}
   options={options}
   placeholder="placeholder"
   showInput
   value={1}
-  valueComponent={() => { }}
-  valueGroupComponent={() => { }}
-  valueGroupRenderer={() => { }}
+  valueComponent={() => {}}
+  valueGroupComponent={() => {}}
+  valueGroupRenderer={() => {}}
   valueKey="value"
-  valueRenderer={() => { }}
+  valueRenderer={() => {}}
 />
 
 const multiSelectValues = [{ id: '1' }]
-; <MultiSelect
+<MultiSelect
   allOption={{ id: 'foo', value: 'bar' }}
   allowSelectAll
   allSelectedText="ALL"
@@ -306,11 +272,5 @@ const multiSelectValues = [{ id: '1' }]
   value={multiSelectValues}
   valueLabelLimit={10}
 />
-
-; const customFilterOptions = () => ([{ id: '1' }])
-; <FilterSelect
-  filterOptions={customFilterOptions}
-  ignoreCase
-  isAllSelected
-  value="value"
-/>
+const customFilterOptions = () => [{ id: '1' }]
+<FilterSelect filterOptions={customFilterOptions} ignoreCase isAllSelected value="value" />

@@ -49,18 +49,22 @@ class Option extends PureComponent {
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
       : getOptionLabel({
-        labelKey,
-        option,
-        optionDisabledKey,
-        selected
-      })
+          labelKey,
+          option,
+          optionDisabledKey,
+          selected
+        })
     const className = `crane-select-option${isFocused && !isDisabled ? ' focused' : ''}
       ${isDisabled ? ' disabled' : ''}
-      ${allowSelectAll && option[valueKey] === allOption[valueKey] ? ' crane-select-group-header' : ''}`
+      ${
+        allowSelectAll && option[valueKey] === allOption[valueKey]
+          ? ' crane-select-group-header'
+          : ''
+      }`
 
     return (
       <div
-        ref={el => optionRef(el, option[valueKey])}
+        ref={(el) => optionRef(el, option[valueKey])}
         aria-disabled={isDisabled}
         aria-selected={selected}
         className={className}

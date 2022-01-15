@@ -3,34 +3,35 @@ import PropTypes from 'prop-types'
 
 import { isValueEqual } from '../utils'
 
-const OptionGroupRenderer = (props) => {
-  const {
-    groupTitleKey,
-    groupValueKey,
-    option,
-    optionDisabledKey,
-    value,
-    valueKey
-  } = props
-  const checked = value && value.length &&
-    value.some(val => (
-      isValueEqual(option, val, groupValueKey) ||
-      (
-        option.options &&
-        option.options.length &&
-        option.options.some(opt => isValueEqual(opt, val, valueKey))
-      )
-    ))
+function OptionGroupRenderer(props) {
+  const { groupTitleKey, groupValueKey, option, optionDisabledKey, value, valueKey } = props
+  const checked =
+    value &&
+    value.length &&
+    value.some(
+      (val) =>
+        isValueEqual(option, val, groupValueKey) ||
+        (option.options &&
+          option.options.length &&
+          option.options.some((opt) => isValueEqual(opt, val, valueKey)))
+    )
   const isDisabled = option[optionDisabledKey]
 
   const onChange = (e) => {
     e.preventDefault()
   }
+  const controlId = `group-${option[groupValueKey]}`
 
   return (
     <span>
-      <label>
-        <input type="checkbox" checked={checked} disabled={isDisabled} onChange={onChange} />
+      <label htmlFor={controlId}>
+        <input
+          id={controlId}
+          checked={checked}
+          disabled={isDisabled}
+          onChange={onChange}
+          type="checkbox"
+        />
         {option[groupTitleKey]}
       </label>
     </span>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { isSelected } from './utils'
+// import alone to avoid dep cycle
+import isSelected from './utils/isSelected'
 
 class Menu extends Component {
   renderOptions(options) {
@@ -122,12 +123,7 @@ class Menu extends Component {
     }
 
     return (
-      <div
-        aria-label="menu"
-        className="crane-select-menu"
-        ref={menuRef}
-        role="listbox"
-      >
+      <div aria-label="menu" className="crane-select-menu" ref={menuRef} role="listbox">
         {this.renderOptions(options)}
         {!!options.length && !!multiStaticOptions.length && (
           <div className="crane-select-static-divider" />

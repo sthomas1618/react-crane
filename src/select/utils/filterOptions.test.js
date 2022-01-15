@@ -4,13 +4,17 @@ const getOptionLabel = ({ option }) => option.label
 
 it('should return all when inputValue is null', () => {
   const inputValue = null
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
@@ -22,13 +26,17 @@ it('should return all when inputValue is null', () => {
 
 it('should return all when inputValue is empty', () => {
   const inputValue = ''
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
@@ -40,13 +48,17 @@ it('should return all when inputValue is empty', () => {
 
 it('should return empty array when nothing matches', () => {
   const inputValue = 'no match'
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
@@ -58,86 +70,112 @@ it('should return empty array when nothing matches', () => {
 
 it('should match partial', () => {
   const inputValue = 'foo'
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  expect(newOptions).toEqual([{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }])
+  expect(newOptions).toEqual([
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    }
+  ])
 })
 
 it('should match exact', () => {
   const inputValue = 'foobar'
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  expect(newOptions).toEqual([{
-    label: 'foobar'
-  }])
+  expect(newOptions).toEqual([
+    {
+      label: 'foobar'
+    }
+  ])
 })
 
 it('should match case-insenstive when ignoreCase is true', () => {
   const inputValue = 'foo'
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'Foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'Foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  expect(newOptions).toEqual([{
-    label: 'foobar'
-  }, {
-    label: 'Foo'
-  }])
+  expect(newOptions).toEqual([
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'Foo'
+    }
+  ])
 })
 
 it('should match case-senstive when ignoreCase is false', () => {
   const inputValue = 'foo'
-  const options = [{
-    label: 'foobar'
-  }, {
-    label: 'Foo'
-  }, {
-    label: 'bar'
-  }]
+  const options = [
+    {
+      label: 'foobar'
+    },
+    {
+      label: 'Foo'
+    },
+    {
+      label: 'bar'
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: false
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  expect(newOptions).toEqual([{
-    label: 'foobar'
-  }])
+  expect(newOptions).toEqual([
+    {
+      label: 'foobar'
+    }
+  ])
 })
 
 it('should ignore allOption when matching', () => {
@@ -147,13 +185,17 @@ it('should ignore allOption when matching', () => {
     value: 'SELECT_ALL'
   }
   const options = [
-    allOption, {
+    allOption,
+    {
       label: 'foobar'
-    }, {
+    },
+    {
       label: 'select Foo'
-    }, {
+    },
+    {
       label: 'bar'
-    }]
+    }
+  ]
   const props = {
     allOption,
     allowSelectAll: true,
@@ -163,60 +205,86 @@ it('should ignore allOption when matching', () => {
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  expect(newOptions).toEqual([{
-    label: 'select Foo'
-  }])
+  expect(newOptions).toEqual([
+    {
+      label: 'select Foo'
+    }
+  ])
 })
 
 it('should match grouped options', () => {
   const inputValue = 'an'
-  const options = [{
-    label: 'California',
-    options: [{
-      label: 'Los Angelos'
-    }, {
-      label: 'San Francisco'
-    }, {
-      label: 'Santa Rosa'
-    }]
-  }, {
-    label: 'Oregon',
-    options: [{
-      label: 'Eugene'
-    }, {
-      label: 'Portland'
-    }, {
-      label: 'Salem'
-    }]
-  }, {
-    label: 'Washington',
-    options: [{
-      label: 'Redmond'
-    }, {
-      label: 'Seattle'
-    }]
-  }]
+  const options = [
+    {
+      label: 'California',
+      options: [
+        {
+          label: 'Los Angelos'
+        },
+        {
+          label: 'San Francisco'
+        },
+        {
+          label: 'Santa Rosa'
+        }
+      ]
+    },
+    {
+      label: 'Oregon',
+      options: [
+        {
+          label: 'Eugene'
+        },
+        {
+          label: 'Portland'
+        },
+        {
+          label: 'Salem'
+        }
+      ]
+    },
+    {
+      label: 'Washington',
+      options: [
+        {
+          label: 'Redmond'
+        },
+        {
+          label: 'Seattle'
+        }
+      ]
+    }
+  ]
   const props = {
     getOptionLabel,
     ignoreCase: true
   }
   const newOptions = filterOptions(options, inputValue, props)
 
-  const expectation = [{
-    label: 'California',
-    options: [{
-      label: 'Los Angelos'
-    }, {
-      label: 'San Francisco'
-    }, {
-      label: 'Santa Rosa'
-    }]
-  }, {
-    label: 'Oregon',
-    options: [{
-      label: 'Portland'
-    }]
-  }]
+  const expectation = [
+    {
+      label: 'California',
+      options: [
+        {
+          label: 'Los Angelos'
+        },
+        {
+          label: 'San Francisco'
+        },
+        {
+          label: 'Santa Rosa'
+        }
+      ]
+    },
+    {
+      label: 'Oregon',
+      options: [
+        {
+          label: 'Portland'
+        }
+      ]
+    }
+  ]
 
   expect(newOptions).toEqual(expectation)
 })

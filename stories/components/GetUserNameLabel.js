@@ -1,4 +1,4 @@
-const GetUserNameLabel = (props) => {
+function GetUserNameLabel(props) {
   const { option } = props
 
   if (!option) {

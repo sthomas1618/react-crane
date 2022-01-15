@@ -4,20 +4,6 @@ import { flattenOptions } from '../../src/select/utils'
 import { MultiSelect } from '../../src'
 
 class BasicMultiSelect extends Component {
-  static propTypes = {
-    allOption: PropTypes.object,
-    allowSelectAll: PropTypes.bool,
-    options: PropTypes.array.isRequired
-  }
-
-  static defaultProps = {
-    allOption: {
-      value: 'Select All',
-      id: '*'
-    },
-    allowSelectAll: false
-  }
-
   constructor(props) {
     super(props)
 
@@ -37,15 +23,29 @@ class BasicMultiSelect extends Component {
   }
 
   render() {
+    const { value } = this.state
     return (
       <MultiSelect
         {...this.props}
         isAllSelected={this.isAllSelected}
         onChange={this.onChange}
-        value={this.state.value}
+        value={value}
       />
     )
   }
 }
 
+BasicMultiSelect.propTypes = {
+  allOption: PropTypes.object,
+  allowSelectAll: PropTypes.bool,
+  options: PropTypes.array.isRequired
+}
+
+BasicMultiSelect.defaultProps = {
+  allOption: {
+    value: 'Select All',
+    id: '*'
+  },
+  allowSelectAll: false
+}
 export default BasicMultiSelect

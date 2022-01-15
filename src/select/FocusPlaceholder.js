@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 
 class FocusPlaceholder extends PureComponent {
   render() {
-    const {
-      onBlur,
-      onFocus,
-      getRef
-    } = this.props
+    const { onBlur, onFocus, getRef } = this.props
 
     return (
       <input

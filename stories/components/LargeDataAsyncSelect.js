@@ -3,9 +3,12 @@ import React from 'react'
 import { SimpleSelect } from '../../src'
 import names from '../fixtures/largeData'
 
-const delay = result => new Promise(resolve => setTimeout(() => {
-  resolve(result())
-}, 250))
+const delay = (result) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(result())
+    }, 250)
+  })
 
 class LargeDataAsyncSelect extends React.Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class LargeDataAsyncSelect extends React.Component {
     }
   }
 
-  onChange = event => (this.setState({ value: event.value }))
+  onChange = (event) => this.setState({ value: event.value })
 
   onInputChange = async (event) => {
     this.setState({ inputValue: event.value, isLoading: true })
@@ -32,20 +35,16 @@ class LargeDataAsyncSelect extends React.Component {
   }
 
   async fetchOptions(search) {
-    const people = await delay(() => (search
-      ? names.filter(person => person.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
-      : names
-    ))
+    const people = await delay(() =>
+      search
+        ? names.filter((person) => person.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
+        : names
+    )
     this.setState({ options: people, isLoading: false })
   }
 
   render() {
-    const {
-      options,
-      value,
-      inputValue,
-      isLoading
-    } = this.state
+    const { options, value, inputValue, isLoading } = this.state
 
     return (
       <SimpleSelect

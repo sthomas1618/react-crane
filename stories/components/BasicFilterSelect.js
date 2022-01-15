@@ -4,11 +4,6 @@ import PropTypes from 'prop-types'
 import { FilterSelect } from '../../src'
 
 class BasicFilterSelect extends Component {
-  static propTypes = {
-    options: PropTypes.array.isRequired,
-    labelKey: PropTypes.string.isRequired
-  }
-
   constructor(props) {
     super(props)
 
@@ -22,14 +17,14 @@ class BasicFilterSelect extends Component {
   }
 
   render() {
-    return (
-      <FilterSelect
-        {...this.props}
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-    )
+    const { value } = this.state
+    return <FilterSelect {...this.props} onChange={this.onChange} value={value} />
   }
+}
+
+BasicFilterSelect.propTypes = {
+  options: PropTypes.array.isRequired,
+  labelKey: PropTypes.string.isRequired
 }
 
 export default BasicFilterSelect

@@ -117,7 +117,10 @@ stories.add('with SimpleSelect and Static Option', () => (
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
-    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
+    staticOption={object('Static Option', {
+      name: 'Add New State',
+      abbreviation: 'STATIC_ADD_NEW_STATE'
+    })}
     valueKey="abbreviation"
   />
 ))
@@ -137,7 +140,10 @@ stories.add('with SimpleSelect and Two Static Options', () => (
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
-    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }), object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })]}
+    staticOption={[
+      object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
+      object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })
+    ]}
     valueKey="abbreviation"
   />
 ))
@@ -177,7 +183,10 @@ stories.add('with SimpleSelect and Two Static Option and empty options', () => (
     options={[]}
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
-    staticOption={[object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }), object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })]}
+    staticOption={[
+      object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
+      object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })
+    ]}
     valueKey="abbreviation"
   />
 ))
@@ -320,7 +329,7 @@ stories.add('with MultiSelect, filtering, calculated grouping, and select all', 
 ))
 
 stories.add('with MultiSelect and custom value renderer', () => (
-  <div style={{ width: '600px' }} >
+  <div style={{ width: '600px' }}>
     <BasicMultiSelect
       allowSelectAll={boolean('Allow Select All', true)}
       autoCloseMenu={boolean('Auto Close Menu', false)}
@@ -413,11 +422,13 @@ stories.add('with FilterSelect and disabled', () => (
     openOnEmptyInput={boolean('Open On Empty Input', true)}
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
-    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
+    staticOption={object('Static Option', {
+      name: 'Add New State',
+      abbreviation: 'STATIC_ADD_NEW_STATE'
+    })}
     valueKey="abbreviation"
   />
 ))
-
 
 stories.add('with FilterSelect and static option', () => (
   <BasicFilterSelect
@@ -429,7 +440,10 @@ stories.add('with FilterSelect and static option', () => (
     openOnEmptyInput={boolean('Open On Empty Input', true)}
     options={states}
     placeholder={text('Placeholder', 'Select value...')}
-    staticOption={object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' })}
+    staticOption={object('Static Option', {
+      name: 'Add New State',
+      abbreviation: 'STATIC_ADD_NEW_STATE'
+    })}
     valueKey="abbreviation"
   />
 ))
@@ -478,7 +492,9 @@ stories.add('with Async Select a whole lot of options', () => (
   />
 ))
 
-const Before = () => <span style={{ marginLeft: '8px' }}>$</span>
+function Before() {
+  return <span style={{ marginLeft: '8px' }}>$</span>
+}
 
 stories.add('with before component', () => (
   <BasicSelect

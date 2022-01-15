@@ -4,23 +4,6 @@ import PropTypes from 'prop-types'
 import SimpleSelect from './SimpleSelect'
 
 class SearchSelect extends Component {
-  static propTypes = {
-    inputValue: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    onInputChange: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.number,
-      PropTypes.object,
-      PropTypes.string
-    ])
-  }
-
-  static defaultProps = {
-    value: null,
-    onChange: null
-  }
-
   constructor(props) {
     super(props)
 
@@ -29,19 +12,17 @@ class SearchSelect extends Component {
 
   onChange = (eventContext, event) => {
     this.setState({ value: eventContext.value })
+    const { onChange } = this.props
 
-    if (this.props.onChange) {
-      this.props.onChange(eventContext, event)
+    if (onChange) {
+      onChange(eventContext, event)
     }
   }
 
   render() {
-    const {
-      onChange,
-      value,
-      ...selectProps
-    } = this.props
-    const currentValue = value || this.state.value
+    const { onChange, ...selectProps } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    const currentValue = this.props.value || this.state.value
 
     return (
       <SimpleSelect
@@ -55,6 +36,23 @@ class SearchSelect extends Component {
       />
     )
   }
+}
+
+SearchSelect.propTypes = {
+  inputValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  onInputChange: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.string
+  ])
+}
+
+SearchSelect.defaultProps = {
+  value: null,
+  onChange: null
 }
 
 export default SearchSelect

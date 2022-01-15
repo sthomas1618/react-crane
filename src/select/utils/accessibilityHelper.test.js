@@ -1,8 +1,4 @@
-import {
-  instructionsAriaMessage,
-  valueEventAriaMessage,
-  resultsAriaMessage
-} from '.'
+import { instructionsAriaMessage, valueEventAriaMessage, resultsAriaMessage } from '.'
 
 const options = [
   { id: '1', label: 'Option 1' },
@@ -23,7 +19,9 @@ const instructionsContext = {
 it('should return valid menu instructionsAriaMessage', () => {
   const msg = instructionsAriaMessage('menu', instructionsContext)
 
-  expect(msg).toEqual('Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.')
+  expect(msg).toEqual(
+    'Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu, press Tab to select the option and exit the menu.'
+  )
 })
 
 it('should return valid input instructions when label is provided and field is searchable', () => {

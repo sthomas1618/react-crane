@@ -4,12 +4,6 @@ import PropTypes from 'prop-types'
 import { getSelectValue } from './utils'
 
 class ValueGroup extends Component {
-  onMouseDown = (event) => {
-    if (this.props.onMouseDown) {
-      this.props.onMouseDown(this.props.value, event)
-    }
-  }
-
   render() {
     const {
       clearInputOnSelect,
@@ -57,16 +51,23 @@ class ValueGroup extends Component {
     let newValue = value
 
     if (Array.isArray(newValue)) {
-      newValue = value.filter(val => (!val.options))
+      newValue = value.filter((val) => !val.options)
       rendererProps.value = newValue
     }
 
     const showValue = Array.isArray(newValue) ? newValue.length : newValue
-    const renderer = (clearInputOnSelect && showValue) || (showValuesWhileFocused && isFocused)
-      ? <ValueRenderer {...rendererProps} />
-      : <span className="crane-select-placeholder">{placeholder}</span>
+    const renderer =
+      (clearInputOnSelect && showValue) || (showValuesWhileFocused && isFocused) ? (
+        <ValueRenderer {...rendererProps} />
+      ) : (
+        <span className="crane-select-placeholder">{placeholder}</span>
+      )
 
-    return showValuesWhileFocused ? renderer : <div className="crane-select-value-group">{renderer}</div>
+    return showValuesWhileFocused ? (
+      renderer
+    ) : (
+      <div className="crane-select-value-group">{renderer}</div>
+    )
   }
 }
 

@@ -57,19 +57,20 @@ class OptionGroup extends PureComponent {
       ? optionGroupRenderer(optionGroupRendererProps)
       : option[groupTitleKey]
 
-    const selected = value && value.length > 0 &&
-    value.some(val => (
-      isValueEqual(option, val, groupValueKey) ||
-      (
-        option.options &&
-        option.options.length > 0 &&
-        option.options.some(opt => isValueEqual(opt, val, valueKey))
+    const selected =
+      value &&
+      value.length > 0 &&
+      value.some(
+        (val) =>
+          isValueEqual(option, val, groupValueKey) ||
+          (option.options &&
+            option.options.length > 0 &&
+            option.options.some((opt) => isValueEqual(opt, val, valueKey)))
       )
-    ))
 
     return (
       <div
-        ref={el => optionRef(el, option[valueKey])}
+        ref={(el) => optionRef(el, option[valueKey])}
         aria-selected={selected}
         className="crane-select-option"
         onMouseDown={this.onMouseDown}
@@ -78,9 +79,7 @@ class OptionGroup extends PureComponent {
         role="option"
         tabIndex="0"
       >
-        <span className="crane-select-group-header">
-          {renderer}
-        </span>
+        <span className="crane-select-group-header">{renderer}</span>
         {children}
       </div>
     )

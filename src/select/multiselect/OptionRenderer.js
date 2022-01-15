@@ -1,26 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const OptionRenderer = ({
+function OptionRenderer({
   getOptionLabel,
   hideCheckboxes,
   labelKey,
   option,
   optionDisabledKey,
   selected
-}) => {
+}) {
   const optionLabel = getOptionLabel({ option, labelKey, selected })
   const isDisabled = option[optionDisabledKey]
 
   if (hideCheckboxes) {
     return (
-      <span aria-selected={selected} className={selected ? 'crane-option-selected' : 'crane-option'}>
+      <span
+        aria-selected={selected}
+        className={selected ? 'crane-option-selected' : 'crane-option'}
+      >
         {optionLabel}
       </span>
     )
   }
 
-  const onChange = (e) => { e.preventDefault() }
+  const onChange = (e) => {
+    e.preventDefault()
+  }
   return (
     <span aria-selected={selected}>
       <label htmlFor={optionLabel} aria-disabled={isDisabled}>

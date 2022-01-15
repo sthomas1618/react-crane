@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import { MultiSelect } from '../../src'
 
 class MultiSelectWithStringValues extends Component {
-  static propTypes = {
-    valueKey: PropTypes.string.isRequired
-  }
-
   constructor(props) {
     super(props)
 
@@ -17,18 +13,18 @@ class MultiSelectWithStringValues extends Component {
   }
 
   onChange = (event) => {
-    this.setState({ value: event.value.map(val => (val[this.props.valueKey])) })
+    const { valueKey } = this.props
+    this.setState({ value: event.value.map((val) => val[valueKey]) })
   }
 
   render() {
-    return (
-      <MultiSelect
-        {...this.props}
-        onChange={this.onChange}
-        value={this.state.value}
-      />
-    )
+    const { value } = this.state
+    return <MultiSelect {...this.props} onChange={this.onChange} value={value} />
   }
+}
+
+MultiSelectWithStringValues.propTypes = {
+  valueKey: PropTypes.string.isRequired
 }
 
 export default MultiSelectWithStringValues

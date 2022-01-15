@@ -18,10 +18,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js?$/,
-        exclude: [
-          '/node_modules/',
-          '/stories/'
-        ],
+        exclude: ['/node_modules/', '/stories/'],
         use: {
           loader: 'babel-loader',
           options: {
@@ -69,10 +66,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
-    new ExtractTextPlugin('../css/[name].min.css')
-  ],
+  plugins: [new webpack.optimize.UglifyJsPlugin(), new ExtractTextPlugin('../css/[name].min.css')],
   externals: [
     {
       react: {

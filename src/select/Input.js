@@ -1,35 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Input = ({
-  disabled,
-  getRef,
-  id,
-  inputValue,
-  onBlur,
-  onChange,
-  onFocus,
-  ...ariaProps
-}) => (
-  <div className="crane-select-input">
-    <input
-      id={id}
-      aria-label={ariaProps['aria-label'] || undefined}
-      aria-labelledby={ariaProps['aria-labelledby'] || undefined}
-      autoCapitalize="none"
-      autoComplete="off"
-      autoCorrect="off"
-      disabled={disabled}
-      onBlur={onBlur}
-      onChange={onChange}
-      onFocus={onFocus}
-      ref={getRef}
-      spellCheck="false"
-      type="text"
-      value={inputValue}
-    />
-  </div>
-)
+function Input({ disabled, getRef, id, inputValue, onBlur, onChange, onFocus, ...ariaProps }) {
+  return (
+    <div className="crane-select-input">
+      <input
+        id={id}
+        aria-label={ariaProps['aria-label'] || undefined}
+        aria-labelledby={ariaProps['aria-labelledby'] || undefined}
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect="off"
+        disabled={disabled}
+        onBlur={onBlur}
+        onChange={onChange}
+        onFocus={onFocus}
+        ref={getRef}
+        spellCheck="false"
+        type="text"
+        value={inputValue}
+      />
+    </div>
+  )
+}
 
 Input.propTypes = {
   'aria-label': PropTypes.string,

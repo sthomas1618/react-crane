@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint-config-airbnb", "plugin:jest/recommended"],
+  "extends": ["eslint-config-airbnb", "prettier", "plugin:jest/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -31,6 +31,9 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
 
     // allow forbidden propTypes such as array
-    "react/forbid-prop-types": [0]
+    "react/forbid-prop-types": [0],
+
+    // allow prop spreading
+    "react/jsx-props-no-spreading": [0]
   }
 }

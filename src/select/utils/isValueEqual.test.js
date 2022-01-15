@@ -63,4 +63,3 @@ it('should not match array value if not equal', () => {
 
   expect(result).toBeFalsy()
 })
-

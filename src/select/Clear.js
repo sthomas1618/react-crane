@@ -1,19 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Clear = ({
-  clearRenderer,
-  disabled,
-  onClearClick,
-  onClearTouchEnd
-}) => {
+function Clear({ clearRenderer, disabled, onClearClick, onClearTouchEnd }) {
   if (disabled) {
     return null
   }
 
-  const renderer = clearRenderer
-    ? clearRenderer({ disabled })
-    : <span className="crane-select-clear">&times;</span>
+  const renderer = clearRenderer ? (
+    clearRenderer({ disabled })
+  ) : (
+    <span className="crane-select-clear">&times;</span>
+  )
 
   return (
     <div

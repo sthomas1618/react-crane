@@ -24,13 +24,7 @@ const groupedOptions = [
 
 it('does not explode', () => {
   const renderer = (
-    <OptionGroupRenderer
-      option={{}}
-      groupTitleKey=""
-      groupValueKey=""
-      value=""
-      valueKey="id"
-    />
+    <OptionGroupRenderer option={{}} groupTitleKey="" groupValueKey="" value="" valueKey="id" />
   )
   const wrapper = shallow(renderer)
 
@@ -38,37 +32,43 @@ it('does not explode', () => {
 })
 
 it('renders group title correctly', () => {
-  const component = shallow(<OptionGroupRenderer
-    option={groupedOptions[0]}
-    groupTitleKey="title"
-    groupValueKey="groupId"
-    value={[]}
-    valueKey="id"
-  />)
+  const component = shallow(
+    <OptionGroupRenderer
+      option={groupedOptions[0]}
+      groupTitleKey="title"
+      groupValueKey="groupId"
+      value={[]}
+      valueKey="id"
+    />
+  )
 
   expect(component.find('span')).toHaveText('Group 1')
 })
 
 it('should toggle checkbox when item in group is selected', () => {
-  const component = shallow(<OptionGroupRenderer
-    option={groupedOptions[0]}
-    groupTitleKey="title"
-    groupValueKey="groupId"
-    value={[{ groupId: '1' }]}
-    valueKey="id"
-  />)
+  const component = shallow(
+    <OptionGroupRenderer
+      option={groupedOptions[0]}
+      groupTitleKey="title"
+      groupValueKey="groupId"
+      value={[{ groupId: '1' }]}
+      valueKey="id"
+    />
+  )
 
   expect(component.find('input').props().checked).toBeTruthy()
 })
 
 it('should not toggle checkbox when item in group is not selected', () => {
-  const component = shallow(<OptionGroupRenderer
-    option={groupedOptions[0]}
-    groupTitleKey="title"
-    groupValueKey="groupId"
-    value={[{ groupId: '2' }]}
-    valueKey="id"
-  />)
+  const component = shallow(
+    <OptionGroupRenderer
+      option={groupedOptions[0]}
+      groupTitleKey="title"
+      groupValueKey="groupId"
+      value={[{ groupId: '2' }]}
+      valueKey="id"
+    />
+  )
 
   expect(component.find('input').props().checked).toBeFalsy()
 })
@@ -86,13 +86,15 @@ it('should toggle checkbox when item in flat values is selected', () => {
 
   const value = ['U17']
 
-  const component = shallow(<OptionGroupRenderer
-    option={option}
-    groupTitleKey="title"
-    groupValueKey="groupId"
-    value={value}
-    valueKey="id"
-  />)
+  const component = shallow(
+    <OptionGroupRenderer
+      option={option}
+      groupTitleKey="title"
+      groupValueKey="groupId"
+      value={value}
+      valueKey="id"
+    />
+  )
 
   expect(component.find('input').props().checked).toBeTruthy()
 })

@@ -1,12 +1,5 @@
 const filterOptions = (options, inputValue, props) => {
-  const {
-    allOption,
-    allowSelectAll,
-    getOptionLabel,
-    ignoreCase,
-    labelKey,
-    valueKey
-  } = props
+  const { allOption, allowSelectAll, getOptionLabel, ignoreCase, labelKey, valueKey } = props
 
   let searchText = inputValue || ''
 
@@ -39,7 +32,7 @@ const filterOptions = (options, inputValue, props) => {
 
     if (Array.isArray(option.options)) {
       isGrouped = true
-      return option.options.some(o => matchOption(o))
+      return option.options.some((o) => matchOption(o))
     }
 
     return matchOption(option)
@@ -47,16 +40,16 @@ const filterOptions = (options, inputValue, props) => {
 
   const displayableOptions = isGrouped
     ? filteredOptions.map((option) => {
-      if (Array.isArray(option.options)) {
-        isGrouped = true
-        return {
-          ...option,
-          options: option.options.filter(o => matchOption(o))
+        if (Array.isArray(option.options)) {
+          isGrouped = true
+          return {
+            ...option,
+            options: option.options.filter((o) => matchOption(o))
+          }
         }
-      }
 
-      return option
-    })
+        return option
+      })
     : filteredOptions
 
   return displayableOptions

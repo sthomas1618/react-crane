@@ -14,7 +14,7 @@ class SwapiAsyncSelect extends React.Component {
     }
   }
 
-  onChange = event => (this.setState({ value: event.value }))
+  onChange = (event) => this.setState({ value: event.value })
 
   onInputChange = (event) => {
     this.setState({ inputValue: event.value, isLoading: true })
@@ -31,7 +31,7 @@ class SwapiAsyncSelect extends React.Component {
     const url = `https://swapi.dev/api/people${searchQuery}`
 
     fetch(url)
-      .then(results => results.json())
+      .then((results) => results.json())
       .then((data) => {
         const people = data.results
         this.setState({ options: people, isLoading: false })

@@ -2,35 +2,38 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { flattenOptions } from '../utils'
 
-const ValueGroupRenderer = (props) => {
-  const ValueComponent = props.valueComponent
-  const {
-    allOption,
-    allSelectedText,
-    allowSelectAll,
-    delimiter,
-    getLabel,
-    labelKey,
-    options,
-    value,
-    valueKey,
-    valueLabelLimit,
-    valueRenderer
-  } = props
+function ValueGroupRenderer({
+  allOption,
+  allowSelectAll,
+  allSelectedText,
+  delimiter,
+  getLabel,
+  getSelectValue,
+  labelKey,
+  options,
+  value,
+  valueComponent,
+  valueKey,
+  valueLabelLimit,
+  valueRenderer
+}) {
+  const ValueComponent = valueComponent
 
   if (valueLabelLimit > 0 && value.length > valueLabelLimit) {
-    const count = value.length === flattenOptions(options, allowSelectAll, allOption).length
-      ? allSelectedText : `${value.length} Selected`
+    const count =
+      value.length === flattenOptions(options, allowSelectAll, allOption).length
+        ? allSelectedText
+        : `${value.length} Selected`
     return <span>{count}</span>
   }
   const CustomDelimiter = typeof delimiter === 'function' ? delimiter() : delimiter
 
   const values = value.map((val, i) => {
-    const option = props.getSelectValue({ options, valueKey, value: val })
+    const option = getSelectValue({ options, valueKey, value: val })
 
     if (option) {
       const label = getLabel(option, labelKey)
-      const Delimiter = (i + 1) === value.length ? '' : CustomDelimiter || ', '
+      const Delimiter = i + 1 === value.length ? '' : CustomDelimiter || ', '
       return (
         <span key={label}>
           <ValueComponent
@@ -45,6 +48,9 @@ const ValueGroupRenderer = (props) => {
     }
     return null
   })
+
+  // tests fail without react.fragment
+  // eslint-disable-next-line react/jsx-no-useless-fragment, react/jsx-fragments
   return <React.Fragment>{values}</React.Fragment>
 }
 

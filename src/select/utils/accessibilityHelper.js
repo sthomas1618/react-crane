@@ -1,9 +1,7 @@
 // Adapted from https://github.com/JedWatson/react-select/blob/master/packages/react-select/src/accessibility/index.js
 
 export const instructionsAriaMessage = (event, context) => {
-  const {
-    isSearchable, focusedOption, label, labelKey, options
-  } = context
+  const { isSearchable, focusedOption, label, labelKey, options } = context
 
   switch (event) {
     case 'menu':
@@ -13,7 +11,9 @@ export const instructionsAriaMessage = (event, context) => {
         isSearchable ? ', type to refine list' : ''
       }, press Down to open the menu`
     case 'focus':
-      return `${focusedOption[labelKey]} is now currently focused. Option ${options.indexOf(focusedOption) + 1} of ${options.length}.`
+      return `${focusedOption[labelKey]} is now currently focused. Option ${
+        options.indexOf(focusedOption) + 1
+      } of ${options.length}.`
     default:
       return null
   }
@@ -26,7 +26,8 @@ export const valueEventAriaMessage = (event, context) => {
 
   if (event === 'deselect-option') {
     return `option ${value}, deselected.`
-  } else if (event === 'select-option') {
+  }
+  if (event === 'select-option') {
     return `option ${value}, selected.`
   }
 
@@ -35,7 +36,5 @@ export const valueEventAriaMessage = (event, context) => {
 
 export const resultsAriaMessage = (inputValue, screenReaderMessage) => {
   const searchTerm = inputValue && inputValue !== '' ? ` for search term ${inputValue}` : ''
-  return (
-    `${screenReaderMessage}${searchTerm}.`
-  )
+  return `${screenReaderMessage}${searchTerm}.`
 }

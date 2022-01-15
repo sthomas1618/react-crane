@@ -9,6 +9,7 @@ process.on('unhandledRejection', (err) => {
   throw err
 })
 
+// eslint-disable-next-line jest/no-jest-import
 const jest = require('jest')
 
 const argv = process.argv.slice(2)

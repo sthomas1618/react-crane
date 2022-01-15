@@ -3,12 +3,7 @@ import PropTypes from 'prop-types'
 
 class Value extends PureComponent {
   render() {
-    const {
-      labelKey,
-      valueRenderer,
-      option,
-      getLabel
-    } = this.props
+    const { labelKey, valueRenderer, option, getLabel } = this.props
 
     if (!option) {
       return null

@@ -1,21 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Loading = ({
-  isLoading,
-  loadingRenderer
-}) => {
+function Loading({ isLoading, loadingRenderer }) {
   if (!isLoading) {
     return null
   }
 
-  const renderer = loadingRenderer
-    ? loadingRenderer({ isLoading })
-    : <div className="crane-select-loading" />
-
-  return (
-    <div className="crane-select-loading-container">{renderer}</div>
+  const renderer = loadingRenderer ? (
+    loadingRenderer({ isLoading })
+  ) : (
+    <div className="crane-select-loading" />
   )
+
+  return <div className="crane-select-loading-container">{renderer}</div>
 }
 
 Loading.propTypes = {

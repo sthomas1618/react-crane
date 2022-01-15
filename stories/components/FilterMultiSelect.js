@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { MultiSelect } from '../../src'
 import {
   filterOptions,
@@ -9,41 +10,7 @@ import {
   getSelectValue
 } from '../../src/select/utils'
 
-export default class FilterMultiSelect extends React.Component {
-  static propTypes = {
-    allowSelectAll: PropTypes.bool,
-    allOption: PropTypes.object,
-    getLabel: PropTypes.func,
-    getOptionLabel: PropTypes.func,
-    groupByKey: PropTypes.string,
-    groupTitleKey: PropTypes.string,
-    groupValueKey: PropTypes.string,
-    labelKey: PropTypes.string,
-    name: PropTypes.string,
-    options: PropTypes.array.isRequired,
-    onChange: PropTypes.func,
-    value: PropTypes.array,
-    valueKey: PropTypes.string
-  }
-
-  static defaultProps = {
-    allowSelectAll: false,
-    allOption: {
-      value: 'Select All',
-      id: '*'
-    },
-    getLabel,
-    getOptionLabel,
-    groupByKey: '',
-    groupTitleKey: 'title',
-    groupValueKey: 'groupId',
-    labelKey: '',
-    name: '',
-    onChange: null,
-    value: null,
-    valueKey: 'value'
-  }
-
+class FilterMultiSelect extends React.Component {
   constructor(props) {
     super(props)
 
@@ -54,9 +21,9 @@ export default class FilterMultiSelect extends React.Component {
   }
 
   onChange = (event) => {
-    const { onChange } = this.props
+    const { onChange, valueKey } = this.props
 
-    this.setState({ value: event.value.map(val => (val[this.props.valueKey])) })
+    this.setState({ value: event.value.map((val) => val[valueKey]) })
 
     if (onChange) {
       onChange(event)
@@ -69,12 +36,7 @@ export default class FilterMultiSelect extends React.Component {
 
   getSelectValue = (vals) => {
     const { value } = vals
-    const {
-      allOption,
-      allowSelectAll,
-      options,
-      valueKey
-    } = this.props
+    const { allOption, allowSelectAll, options, valueKey } = this.props
     const flatOpts = flattenOptions(options, allowSelectAll, allOption)
     const selectValueProps = {
       valueKey,
@@ -116,3 +78,38 @@ export default class FilterMultiSelect extends React.Component {
     )
   }
 }
+
+FilterMultiSelect.propTypes = {
+  allowSelectAll: PropTypes.bool,
+  allOption: PropTypes.object,
+  getLabel: PropTypes.func,
+  getOptionLabel: PropTypes.func,
+  groupByKey: PropTypes.string,
+  groupTitleKey: PropTypes.string,
+  groupValueKey: PropTypes.string,
+  labelKey: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
+  value: PropTypes.array,
+  valueKey: PropTypes.string
+}
+FilterMultiSelect.defaultProps = {
+  allowSelectAll: false,
+  allOption: {
+    value: 'Select All',
+    id: '*'
+  },
+  getLabel,
+  getOptionLabel,
+  groupByKey: '',
+  groupTitleKey: 'title',
+  groupValueKey: 'groupId',
+  labelKey: '',
+  name: '',
+  onChange: null,
+  value: null,
+  valueKey: 'value'
+}
+
+export default FilterMultiSelect

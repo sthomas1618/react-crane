@@ -4,18 +4,18 @@
   "description": "A React Components Library",
   "main": "dist/module/index.js",
   "scripts": {
-    "test": "node scripts/test.js",
-    "test:coverage": "npm test -- --coverage",
-    "start": "cross-env NODE_ENV=development start-storybook -p 6006",
-    "build": "npm run clean-dist && npm run build-modules && npm run build-umd",
+    "build-modules": "cross-env BABEL_ENV=build babel src --out-dir dist/module ",
     "build-storybook": "build-storybook",
     "build-umd": "webpack --config webpack.config.js",
-    "build-modules": "cross-env BABEL_ENV=build babel src --out-dir dist/module ",
+    "build": "npm run clean-dist && npm run build-modules && npm run build-umd",
     "clean-dist": "rimraf dist",
-    "cover": "npm test -- --coverage",
-    "coveralls": "npm run cover && nyc report --temp-directory=coverage --reporter=text-lcov | coveralls",
     "deploy-storybook": "storybook-to-ghpages",
-    "test:typescript": "dtslint types"
+    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --ignore-pattern node_modules/",
+    "start": "cross-env NODE_ENV=development start-storybook -p 6006",
+    "test:coverage": "npm test -- --coverage",
+    "test:typescript": "dtslint types",
+    "test": "node scripts/test.js"
   },
   "types": "types/index.d.ts",
   "files": [
@@ -76,13 +76,15 @@
     "cross-env": "^5.1.4",
     "dtslint": "^2.0.6",
     "enzyme": "^3.3.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-babel": "^5.1.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^21.15.1",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "jest": "^22.4.3",
     "jest-enzyme": "^4.2.0",
@@ -91,6 +93,7 @@
     "nyc": "^11.7.1",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.6",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
@@ -128,5 +131,11 @@
       "text"
     ],
     "coverageDirectory": "./coverage/"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }

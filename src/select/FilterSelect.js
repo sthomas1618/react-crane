@@ -2,17 +2,10 @@ import React, { Component } from 'react'
 
 import SimpleSelect from './SimpleSelect'
 
-import { filterSelectPropTypes, filterSelectDefaults, getSelectValue } from './utils'
+import { filterSelectPropTypes, getSelectValue } from './utils'
+import { filterSelectDefaults } from './utils/DefaultProps'
 
 class FilterSelect extends Component {
-  static propTypes = {
-    ...filterSelectPropTypes
-  }
-
-  static defaultProps = {
-    ...filterSelectDefaults
-  }
-
   constructor(props) {
     super(props)
 
@@ -20,10 +13,11 @@ class FilterSelect extends Component {
   }
 
   onInputChange = (eventContext, event) => {
+    const { onInputChange } = this.props
     this.setState({ inputValue: eventContext.value })
 
-    if (this.props.onInputChange) {
-      this.props.onInputChange(eventContext, event)
+    if (onInputChange) {
+      onInputChange(eventContext, event)
     }
   }
 
@@ -39,15 +33,10 @@ class FilterSelect extends Component {
   }
 
   render() {
-    const {
-      inputValue,
-      filterOptions,
-      options,
-      onInputChange,
-      ...selectProps
-    } = this.props
-    const currentInputValue = inputValue || this.state.inputValue
-    const filteredOptions = filterOptions(this.props.options, currentInputValue, this.props)
+    const { inputValue, filterOptions, options, onInputChange, ...selectProps } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    const currentInputValue = this.props.inputValue || this.state.inputValue
+    const filteredOptions = filterOptions(options, currentInputValue, this.props)
 
     return (
       <SimpleSelect
@@ -61,6 +50,14 @@ class FilterSelect extends Component {
       />
     )
   }
+}
+
+FilterSelect.propTypes = {
+  ...filterSelectPropTypes
+}
+
+FilterSelect.defaultProps = {
+  ...filterSelectDefaults
 }
 
 export default FilterSelect

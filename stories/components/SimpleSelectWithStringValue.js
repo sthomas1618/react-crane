@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import { SimpleSelect } from '../../src'
 
 class SimpleSelectWithStringValue extends Component {
-  static propTypes = {
-    valueKey: PropTypes.string.isRequired
-  }
-
   constructor(props) {
     super(props)
 
@@ -17,9 +13,9 @@ class SimpleSelectWithStringValue extends Component {
     }
   }
 
-
   onChange = (event) => {
-    this.setState({ value: event.value[this.props.valueKey] })
+    const { valueKey } = this.props
+    this.setState({ value: event.value[valueKey] })
   }
 
   onInputChange = (event) => {
@@ -27,16 +23,21 @@ class SimpleSelectWithStringValue extends Component {
   }
 
   render() {
+    const { value, inputValue } = this.state
     return (
       <SimpleSelect
         {...this.props}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
-        value={this.state.value}
-        inputValue={this.state.inputValue}
+        value={value}
+        inputValue={inputValue}
       />
     )
   }
+}
+
+SimpleSelectWithStringValue.propTypes = {
+  valueKey: PropTypes.string.isRequired
 }
 
 export default SimpleSelectWithStringValue

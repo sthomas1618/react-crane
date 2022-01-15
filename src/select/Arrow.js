@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Arrow = ({
-  arrowRenderer,
-  isOpen,
-  onArrowClick,
-  onArrowTouchEnd
-}) => {
-  const renderer = arrowRenderer
-    ? arrowRenderer({ isOpen })
-    : <span className="crane-select-arrow" />
+function Arrow({ arrowRenderer, isOpen, onArrowClick, onArrowTouchEnd }) {
+  const renderer = arrowRenderer ? (
+    arrowRenderer({ isOpen })
+  ) : (
+    <span className="crane-select-arrow" />
+  )
 
   const label = isOpen ? 'collapse' : 'expand'
 

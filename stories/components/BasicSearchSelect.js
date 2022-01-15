@@ -4,11 +4,6 @@ import PropTypes from 'prop-types'
 import { SearchSelect } from '../../src'
 
 class BasicSearchSelect extends Component {
-  static propTypes = {
-    options: PropTypes.array.isRequired,
-    labelKey: PropTypes.string.isRequired
-  }
-
   constructor(props) {
     super(props)
 
@@ -22,24 +17,31 @@ class BasicSearchSelect extends Component {
   }
 
   render() {
-    let options = [...this.props.options]
+    const { labelKey, options } = this.props
+    const { inputValue } = this.state
+    let filteredOptions = [...options]
 
-    if (this.state.inputValue) {
-      options = options.filter((option) => {
-        const text = option[this.props.labelKey]
-        return text.toLowerCase().indexOf(this.state.inputValue.toLowerCase()) > -1
+    if (inputValue) {
+      filteredOptions = filteredOptions.filter((option) => {
+        const text = option[labelKey]
+        return text.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       })
     }
 
     return (
       <SearchSelect
         {...this.props}
-        options={options}
+        options={filteredOptions}
         onInputChange={this.onInputChange}
-        inputValue={this.state.inputValue}
+        inputValue={inputValue}
       />
     )
   }
+}
+
+BasicSearchSelect.propTypes = {
+  options: PropTypes.array.isRequired,
+  labelKey: PropTypes.string.isRequired
 }
 
 export default BasicSearchSelect

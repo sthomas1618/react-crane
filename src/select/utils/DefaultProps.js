@@ -93,4 +93,3 @@ export const filterSelectDefaults = {
   ignoreCase: true,
   filterOptions
 }
-

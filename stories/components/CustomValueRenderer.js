@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { flattenOptions } from '../../src/select/utils'
 
-
-const CustomValueRenderer = (props) => {
+function CustomValueRenderer(props) {
   const {
     allowSelectAll,
     allOption,
@@ -22,7 +21,7 @@ const CustomValueRenderer = (props) => {
   let addCount = 0
   const values = options.map((opt, pos) => {
     if (opt.options && Array.isArray(opt.options) && opt.options.length > 0) {
-      const difference = [opt.options, value].reduce((a, b) => a.filter(v => !b.includes(v)))
+      const difference = [opt.options, value].reduce((a, b) => a.filter((v) => !b.includes(v)))
 
       // If all of the options in a group are selected, show the group title
       if (difference.length === 0) {
@@ -31,8 +30,9 @@ const CustomValueRenderer = (props) => {
           addCount += 1
           const label = val[labelKey]
           let delimiter = ', '
-          if ((i + 1) === opt.options.length) {
-            delimiter = opt.options.length !== value.length && (pos + 1) !== options.length ? '), ' : ') '
+          if (i + 1 === opt.options.length) {
+            delimiter =
+              opt.options.length !== value.length && pos + 1 !== options.length ? '), ' : ') '
           }
           return i === 0 ? groupLabel + label + delimiter : label + delimiter
         })

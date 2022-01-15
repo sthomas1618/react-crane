@@ -21,13 +21,14 @@ class BasicSelect extends Component {
   }
 
   render() {
+    const { value, inputValue } = this.state
     return (
       <SimpleSelect
         {...this.props}
         onChange={this.onChange}
         onInputChange={this.onInputChange}
-        value={this.state.value}
-        inputValue={this.state.inputValue}
+        value={value}
+        inputValue={inputValue}
       />
     )
   }

@@ -4,11 +4,13 @@ const getSelectValue = ({ value, valueKey, options }) => {
   }
 
   const getValue = (valueObj) => {
-    if (typeof valueObj === 'string'
-      || valueObj instanceof String
-      || typeof valueObj === 'number'
-      || valueObj instanceof Number) {
-      return options.find(o => o[valueKey] === valueObj)
+    if (
+      typeof valueObj === 'string' ||
+      valueObj instanceof String ||
+      typeof valueObj === 'number' ||
+      valueObj instanceof Number
+    ) {
+      return options.find((o) => o[valueKey] === valueObj)
     }
 
     return valueObj

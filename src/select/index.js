@@ -1,14 +1,29 @@
-export Arrow from './Arrow'
-export Clear from './Clear'
-export FocusPlaceholder from './FocusPlaceholder'
-export FilterSelect from './FilterSelect'
-export Input from './Input'
-export Menu from './Menu'
-export MultiSelect from './multiselect/MultiSelect'
-export Option from './Option'
-export SearchSelect from './SearchSelect'
-export SimpleSelect from './SimpleSelect'
-export Value from './Value'
-export ValueGroup from './ValueGroup'
+import Arrow from "./Arrow";
+import Clear from "./Clear";
+import FocusPlaceholder from "./FocusPlaceholder";
+import FilterSelect from "./FilterSelect";
+import Input from "./Input";
+import Menu from "./Menu";
+import MultiSelect from "./multiselect/MultiSelect";
+import Option from "./Option";
+import SearchSelect from "./SearchSelect";
+import SimpleSelect from "./SimpleSelect";
+import Value from "./Value";
+import ValueGroup from "./ValueGroup";
 
-export * from './utils'
+export {
+  Arrow,
+  Clear,
+  FocusPlaceholder,
+  FilterSelect,
+  Input,
+  Menu,
+  MultiSelect,
+  Option,
+  SearchSelect,
+  SimpleSelect,
+  Value,
+  ValueGroup
+};
+
+export * from "./utils";

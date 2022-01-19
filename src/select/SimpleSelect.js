@@ -638,7 +638,7 @@ class SimpleSelect extends Component {
     if (opts.length || hasStaticOptions) {
       const MenuComponent = menuComponent
       menu = (
-        <div className="crane-select-menu-container" role="listbox">
+        <div id="crane-select-menu-container" className="crane-select-menu-container">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )

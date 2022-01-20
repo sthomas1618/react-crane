@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Menu from './Menu'
 
@@ -13,7 +13,7 @@ const testProps = {
 
 it('does not explode', () => {
   const menu = <Menu {...testProps} />
-  const wrapper = shallow(menu)
+  const wrapper = mount(menu)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

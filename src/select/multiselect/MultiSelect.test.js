@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import MultiSelect from './MultiSelect'
 
 it('does not explode', () => {
   const select = <MultiSelect />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

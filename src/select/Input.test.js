@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Input from './Input'
 
@@ -15,7 +15,7 @@ it('does not explode', () => {
       onFocus={() => {}}
     />
   )
-  const wrapper = shallow(input)
+  const wrapper = mount(input)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Option from './Option'
 
@@ -13,7 +13,7 @@ it('does not explode', () => {
       getOptionLabel={() => {}}
     />
   )
-  const wrapper = shallow(option)
+  const wrapper = mount(option)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

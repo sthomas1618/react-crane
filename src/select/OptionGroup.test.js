@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import OptionGroup from './OptionGroup'
 import OptionGroupRenderer from './multiselect/OptionGroupRenderer'
@@ -26,9 +26,9 @@ const testProps = {
 it('does not explode', () => {
   const children = []
   const renderer = <OptionGroup {...testProps}>{children}</OptionGroup>
-  const wrapper = shallow(renderer)
+  const wrapper = mount(renderer)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })
 
 it('renders non-multiselect correctly', () => {

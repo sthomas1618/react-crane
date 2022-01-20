@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import OptionGroupRenderer from './OptionGroupRenderer'
 
@@ -26,13 +26,13 @@ it('does not explode', () => {
   const renderer = (
     <OptionGroupRenderer option={{}} groupTitleKey="" groupValueKey="" value="" valueKey="id" />
   )
-  const wrapper = shallow(renderer)
+  const wrapper = mount(renderer)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })
 
 it('renders group title correctly', () => {
-  const component = shallow(
+  const component = mount(
     <OptionGroupRenderer
       option={groupedOptions[0]}
       groupTitleKey="title"
@@ -46,7 +46,7 @@ it('renders group title correctly', () => {
 })
 
 it('should toggle checkbox when item in group is selected', () => {
-  const component = shallow(
+  const component = mount(
     <OptionGroupRenderer
       option={groupedOptions[0]}
       groupTitleKey="title"
@@ -60,7 +60,7 @@ it('should toggle checkbox when item in group is selected', () => {
 })
 
 it('should not toggle checkbox when item in group is not selected', () => {
-  const component = shallow(
+  const component = mount(
     <OptionGroupRenderer
       option={groupedOptions[0]}
       groupTitleKey="title"
@@ -86,7 +86,7 @@ it('should toggle checkbox when item in flat values is selected', () => {
 
   const value = ['U17']
 
-  const component = shallow(
+  const component = mount(
     <OptionGroupRenderer
       option={option}
       groupTitleKey="title"

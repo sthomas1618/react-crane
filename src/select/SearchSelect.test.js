@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import SearchSelect from './SearchSelect'
 
 it('does not explode', () => {
   const select = <SearchSelect inputValue="" onInputChange={() => {}} />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Value from './Value'
 
 it('does not explode', () => {
   const value = <Value labelKey="" options={[]} getLabel={() => {}} />
-  const wrapper = shallow(value)
+  const wrapper = mount(value)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

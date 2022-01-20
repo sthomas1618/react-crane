@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import FocusPlaceholder from './FocusPlaceholder'
 
@@ -13,7 +13,7 @@ it('does not explode', () => {
       onFocus={() => {}}
     />
   )
-  const wrapper = shallow(focusPlaceholder)
+  const wrapper = mount(focusPlaceholder)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

@@ -1,13 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import SimpleSelect from './SimpleSelect'
 
 it('does not explode', () => {
   const select = <SimpleSelect />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })
 
 it('should emit onOpen and onClosed events when props change', () => {
@@ -15,7 +15,7 @@ it('should emit onOpen and onClosed events when props change', () => {
   const onClose = jest.fn().mockName('onClose')
 
   const select = <SimpleSelect onOpen={onOpen} onClose={onClose} />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
   wrapper.setProps({ isOpen: true })
 
@@ -33,7 +33,7 @@ it('should emit onOpen and onClose events when state changes', () => {
   const onClose = jest.fn().mockName('onClose')
 
   const select = <SimpleSelect onOpen={onOpen} onClose={onClose} />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
   wrapper.setState({ isOpen: true })
 
@@ -48,21 +48,21 @@ it('should emit onOpen and onClose events when state changes', () => {
 
 it('should not show loading placeholder by default when open', () => {
   const select = <SimpleSelect isOpen />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
-  expect(wrapper.find('.crane-select-loading-text')).toBeEmpty()
+  expect(wrapper.find('.crane-select-loading-text')).not.toExist()
 })
 
 it('should show no results text when open', () => {
   const select = <SimpleSelect noResultsText="Foo" isOpen />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
   expect(wrapper.find('.crane-select-no-results')).toHaveText('Foo')
 })
 
 it('should show loading placeholder when isLoading and has loadingText', () => {
   const select = <SimpleSelect isLoading loadingText="Bar" isOpen />
-  const wrapper = shallow(select)
+  const wrapper = mount(select)
 
   expect(wrapper.find('.crane-select-loading-text')).toHaveText('Bar')
 })

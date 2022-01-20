@@ -1,17 +1,17 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import OptionRenderer from './OptionRenderer'
 
 it('does not explode', () => {
   const renderer = <OptionRenderer getOptionLabel={() => {}} option={{}} value={{}} valueKey="" />
-  const wrapper = shallow(renderer)
+  const wrapper = mount(renderer)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })
 
 it('renders title correctly', () => {
-  const component = shallow(
+  const component = mount(
     <OptionRenderer getOptionLabel={() => 'Foo'} option={{ id: 1 }} value={[]} valueKey="id" />
   )
 
@@ -19,7 +19,7 @@ it('renders title correctly', () => {
 })
 
 it('toggles checkbox if selected', () => {
-  const component = shallow(
+  const component = mount(
     <OptionRenderer
       getOptionLabel={() => {}}
       option={{ id: 1 }}
@@ -33,7 +33,7 @@ it('toggles checkbox if selected', () => {
 })
 
 it('toggles does not checkbox if not selected', () => {
-  const component = shallow(
+  const component = mount(
     <OptionRenderer
       option={{ id: 1 }}
       value={[{ id: 2 }]}
@@ -46,7 +46,7 @@ it('toggles does not checkbox if not selected', () => {
 })
 
 it('does not render checkboxes on hideCheckboxes', () => {
-  const component = shallow(
+  const component = mount(
     <OptionRenderer hideCheckboxes option={{ id: 1 }} valueKey="id" getOptionLabel={() => {}} />
   )
 

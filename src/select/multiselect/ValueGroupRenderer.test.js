@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import ValueGroupRenderer from './ValueGroupRenderer'
 import { getLabel, getSelectValue } from '../utils'
 import userNames from '../../../stories/fixtures/userNames'
 
-const valueComponent = () => {}
+const valueComponent = ({ option }) => option.id
 
 it('does not explode', () => {
   const renderer = (
@@ -19,9 +19,9 @@ it('does not explode', () => {
       getLabel={() => {}}
     />
   )
-  const wrapper = shallow(renderer)
+  const wrapper = mount(renderer)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })
 
 it('displays custom delimiter', () => {
@@ -37,7 +37,7 @@ it('displays custom delimiter', () => {
       getLabel={getLabel}
     />
   )
-  const wrapper = shallow(renderer)
+  const wrapper = mount(renderer)
 
-  expect(wrapper).toHaveText('<valueComponent />:::<valueComponent />')
+  expect(wrapper).toHaveText('0NC7B66CWT:::VSHJDS9787')
 })

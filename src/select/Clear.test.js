@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Clear from './Clear'
 
 it('does not explode', () => {
   const clear = <Clear onClearClick={() => {}} onClearTouchEnd={() => {}} />
-  const wrapper = shallow(clear)
+  const wrapper = mount(clear)
 
-  expect(wrapper).not.toBeEmpty()
+  expect(wrapper).toExist()
 })

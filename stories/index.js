@@ -141,8 +141,11 @@ stories.add('with SimpleSelect and Two Static Options', () => (
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
     staticOption={[
-      object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
-      object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })
+      object('Static Option 1', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
+      object('Static Option 2', {
+        name: 'Add Abbreviation',
+        abbreviation: 'STATIC_ADD_ABBREVIATION'
+      })
     ]}
     valueKey="abbreviation"
   />
@@ -184,8 +187,11 @@ stories.add('with SimpleSelect and Two Static Option and empty options', () => (
     placeholder={text('Placeholder', 'Select value...')}
     showInput={boolean('Show Input', false)}
     staticOption={[
-      object('Static Option', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
-      object('Static Option', { name: 'Add Abbreviation', abbreviation: 'STATIC_ADD_ABBREVIATION' })
+      object('Static Option 1', { name: 'Add New State', abbreviation: 'STATIC_ADD_NEW_STATE' }),
+      object('Static Option 2', {
+        name: 'Add Abbreviation',
+        abbreviation: 'STATIC_ADD_ABBREVIATION'
+      })
     ]}
     valueKey="abbreviation"
   />

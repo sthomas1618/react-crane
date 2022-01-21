@@ -81,8 +81,8 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",
     "jest-enzyme": "^7.1.2",
-    "less": "^3.13.1",
-    "less-loader": "^5.0.0",
+    "less": "^4.1.2",
+    "less-loader": "^7.3.0",
     "nyc": "^11.7.1",
     "postcss": "^8.4.5",
     "postcss-flexbugs-fixes": "^3.2.0",
@@ -102,7 +102,9 @@
     "collectCoverageFrom": [
       "src/**/*.{js}"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/config/jest/setupTests.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/jest/setupTests.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
     ],

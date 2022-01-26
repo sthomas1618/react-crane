@@ -15,9 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Improved accessibility of menu with aria-controls and aria-expanded.
 
+## [0.30.0] - 2021-08-10
+
+### Fixed
+
+- Disable keyboard select when an option is disabled.
+
 ## [0.29.0] - 2021-07-28
 
 ### Added
 
-- Add ability to override key used for disabled option, optionDisabledKey
-- Add ability to disable individual options in a dropdown
+- Add ability to override key used for disabled option, optionDisabledKey.
+- Add ability to disable individual options in a dropdown.

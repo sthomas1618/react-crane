@@ -45,7 +45,7 @@ class SimpleSelect extends Component {
     }
 
     if (prevIsOpen !== isOpen) {
-      const eventProp = isOpen ? this.onMenuOpen : this.onMenuClose
+      const eventProp = isOpen ? this.handleMenuOpen : this.handleMenuClose
 
       if (eventProp) {
         eventProp()
@@ -53,7 +53,7 @@ class SimpleSelect extends Component {
     }
   }
 
-  onMenuOpen = () => {
+  handleMenuOpen = () => {
     const { onOpen } = this.props
 
     this.announceAriaLiveContext('menu', null)
@@ -63,7 +63,7 @@ class SimpleSelect extends Component {
     }
   }
 
-  onMenuClose = () => {
+  handleMenuClose = () => {
     const { onClose } = this.props
 
     this.announceAriaLiveContext('input', null)
@@ -73,23 +73,23 @@ class SimpleSelect extends Component {
     }
   }
 
-  onValueTouchEnd = (event) => {
-    this.onValueMouseDown(event)
+  handleValueTouchEnd = (event) => {
+    this.handleValueMouseDown(event)
   }
 
-  onValueMouseDown = (event) => {
+  handleValueMouseDown = (event) => {
     if (this.isSecondaryClick(event)) {
       return
     }
 
-    const { disabled, isOpen, showInput, openOnClick, openOnEmptyInput, inputValue } = this.props
+    const { disabled, showInput, openOnClick, openOnEmptyInput, inputValue } = this.props
 
     if (disabled) {
       return
     }
 
     // eslint-disable-next-line react/destructuring-assignment
-    const setOpen = isOpen || (openOnClick && (showInput ? true : !this.state.isOpen))
+    const setOpen = this.props.isOpen || (openOnClick && (showInput ? true : !this.state.isOpen))
 
     event.stopPropagation()
 
@@ -122,7 +122,7 @@ class SimpleSelect extends Component {
     }
   }
 
-  onInputBlur = (event) => {
+  handleInputBlur = (event) => {
     const { clearInputOnBlur, onBlur, name, inputValue } = this.props
 
     if (onBlur) {
@@ -140,16 +140,8 @@ class SimpleSelect extends Component {
     })
   }
 
-  onInputFocus = (event) => {
-    const {
-      'aria-label': ariaLabel,
-      disabled,
-      isMulti,
-      isOpen,
-      isSearchable,
-      name,
-      onFocus
-    } = this.props
+  handleInputFocus = (event) => {
+    const { 'aria-label': ariaLabel, disabled, isMulti, isSearchable, name, onFocus } = this.props
 
     if (disabled) {
       return
@@ -166,12 +158,12 @@ class SimpleSelect extends Component {
     })
 
     this.setState((prevState) => ({
-      isOpen: isOpen || prevState.isOpen,
+      isOpen: this.props.isOpen || prevState.isOpen,
       isFocused: true
     }))
   }
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     const newInputValue = event.target.value
     const { disabled, inputValue, openOnEmptyInput } = this.props
 
@@ -189,8 +181,9 @@ class SimpleSelect extends Component {
     this.setInputValue(event, newInputValue)
   }
 
-  onKeyDown = (event) => {
-    const { disabled, inputValue, onKeyDown, isOpen } = this.props
+  handleKeyDown = (event) => {
+    const { disabled, inputValue, onKeyDown } = this.props
+    const isOpen = this.props.isOpen || this.state.isOpen
 
     if (disabled) {
       return
@@ -249,11 +242,11 @@ class SimpleSelect extends Component {
     event.preventDefault()
   }
 
-  onArrowTouchEnd = (event) => {
-    this.onArrowClick(event)
+  handleArrowTouchEnd = (event) => {
+    this.handleArrowClick(event)
   }
 
-  onArrowClick = (event) => {
+  handleArrowClick = (event) => {
     if (this.isSecondaryClick(event)) {
       return
     }
@@ -271,11 +264,11 @@ class SimpleSelect extends Component {
     this.closeMenu()
   }
 
-  onClearTouchEnd = (event) => {
-    this.onClearClick(event)
+  handleClearTouchEnd = (event) => {
+    this.handleClearClick(event)
   }
 
-  onClearClick = (event) => {
+  handleClearClick = (event) => {
     if (this.isSecondaryClick(event)) {
       return
     }
@@ -286,7 +279,7 @@ class SimpleSelect extends Component {
     this.setState({ isOpen: false, isOuterFocused: false }, this.emitValueChange(null, event))
   }
 
-  onOptionClick = (event, option) => {
+  handleOptionClick = (event, option) => {
     if (this.isSecondaryClick(event)) {
       return
     }
@@ -297,7 +290,7 @@ class SimpleSelect extends Component {
     this.selectOption(event, option)
   }
 
-  onOptionFocus = (event, option) => {
+  handleOptionFocus = (event, option) => {
     const { labelKey, options } = this.props
     this.setState({ focusedOption: option })
     this.announceAriaLiveContext('focus', {
@@ -581,8 +574,8 @@ class SimpleSelect extends Component {
     return (
       <ArrowComponent
         arrowRenderer={arrowRenderer}
-        onArrowClick={this.onArrowClick}
-        onArrowTouchEnd={this.onArrowTouchEnd}
+        onArrowClick={this.handleArrowClick}
+        onArrowTouchEnd={this.handleArrowTouchEnd}
         isOpen={isOpen}
       />
     )
@@ -601,8 +594,8 @@ class SimpleSelect extends Component {
       <ClearComponent
         clearRenderer={clearRenderer}
         disabled={disabled}
-        onClearClick={this.onClearClick}
-        onClearTouchEnd={this.onClearTouchEnd}
+        onClearClick={this.handleClearClick}
+        onClearTouchEnd={this.handleClearTouchEnd}
       />
     )
   }
@@ -619,8 +612,8 @@ class SimpleSelect extends Component {
     const { menuComponent, options, ...otherProps } = this.props
     const menuProps = {
       ...otherProps,
-      onOptionClick: this.onOptionClick,
-      onOptionFocus: this.onOptionFocus,
+      onOptionClick: this.handleOptionClick,
+      onOptionFocus: this.handleOptionFocus,
       optionRef: (el, key) => {
         this.optionRefs[key] = el
       },
@@ -689,9 +682,9 @@ class SimpleSelect extends Component {
       },
       id: inputId,
       inputValue,
-      onBlur: this.onInputBlur,
-      onChange: this.onInputChange,
-      onFocus: this.onInputFocus
+      onBlur: this.handleInputBlur,
+      onChange: this.handleInputChange,
+      onFocus: this.handleInputFocus
     }
     const InputComponent = inputComponent
 
@@ -725,9 +718,9 @@ class SimpleSelect extends Component {
         <div
           className="crane-select-input-group"
           id={id}
-          onKeyDown={this.onKeyDown}
-          onMouseDown={this.onValueMouseDown}
-          onTouchEnd={this.onValueTouchEnd}
+          onKeyDown={this.handleKeyDown}
+          onMouseDown={this.handleValueMouseDown}
+          onTouchEnd={this.handleValueTouchEnd}
           role="presentation"
         >
           {this.renderLiveRegion()}

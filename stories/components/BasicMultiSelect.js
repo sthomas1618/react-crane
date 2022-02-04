@@ -12,7 +12,7 @@ class BasicMultiSelect extends Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     this.setState({ value: event.value })
   }
 
@@ -28,7 +28,7 @@ class BasicMultiSelect extends Component {
       <MultiSelect
         {...this.props}
         isAllSelected={this.isAllSelected}
-        onChange={this.onChange}
+        onChange={this.handleChange}
         value={value}
       />
     )

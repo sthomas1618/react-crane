@@ -22,14 +22,14 @@ class LargeDataAsyncSelect extends React.Component {
     }
   }
 
-  onChange = (event) => this.setState({ value: event.value })
+  handleChange = (event) => this.setState({ value: event.value })
 
-  onInputChange = async (event) => {
+  handleInputChange = async (event) => {
     this.setState({ inputValue: event.value, isLoading: true })
     await this.fetchOptions(event.value)
   }
 
-  onOpen = async () => {
+  handleOpen = async () => {
     this.setState({ isLoading: true })
     await this.fetchOptions()
   }
@@ -53,9 +53,9 @@ class LargeDataAsyncSelect extends React.Component {
         isLoading={isLoading}
         valueKey="id"
         labelKey="name"
-        onChange={this.onChange}
-        onInputChange={this.onInputChange}
-        onOpen={this.onOpen}
+        onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
+        onOpen={this.handleOpen}
         options={options}
         value={value}
       />

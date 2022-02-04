@@ -20,7 +20,7 @@ class FilterMultiSelect extends React.Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     const { onChange, valueKey } = this.props
 
     this.setState({ value: event.value.map((val) => val[valueKey]) })
@@ -30,7 +30,7 @@ class FilterMultiSelect extends React.Component {
     }
   }
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({ inputValue: event.value })
   }
 
@@ -67,8 +67,8 @@ class FilterMultiSelect extends React.Component {
         {...controlProps}
         inputValue={inputValue}
         options={opts}
-        onChange={this.onChange}
-        onInputChange={this.onInputChange}
+        onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
         getSelectValue={this.getSelectValue}
         isAllSelected={this.isAllSelected}
         value={value}

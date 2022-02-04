@@ -13,12 +13,12 @@ class SimpleSelectWithStringValue extends Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     const { valueKey } = this.props
     this.setState({ value: event.value[valueKey] })
   }
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({ inputValue: event.value })
   }
 
@@ -27,8 +27,8 @@ class SimpleSelectWithStringValue extends Component {
     return (
       <SimpleSelect
         {...this.props}
-        onChange={this.onChange}
-        onInputChange={this.onInputChange}
+        onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
         value={value}
         inputValue={inputValue}
       />

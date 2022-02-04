@@ -12,11 +12,11 @@ class BasicSelect extends Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     this.setState({ value: event.value })
   }
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({ inputValue: event.value })
   }
 
@@ -25,8 +25,8 @@ class BasicSelect extends Component {
     return (
       <SimpleSelect
         {...this.props}
-        onChange={this.onChange}
-        onInputChange={this.onInputChange}
+        onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
         value={value}
         inputValue={inputValue}
       />

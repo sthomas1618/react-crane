@@ -5,7 +5,7 @@ import { isValueEqual } from './utils'
 
 // TODO: FUTURE convert to function component and use React.Memo
 class OptionGroup extends PureComponent {
-  onMouseDown = (event) => {
+  handleMouseDown = (event) => {
     // If the label is clicked but the option is disabled, do nothing.
     if (event && event.target && event.target.ariaDisabled === 'true') {
       return
@@ -21,7 +21,7 @@ class OptionGroup extends PureComponent {
     onOptionClick(event, newValue)
   }
 
-  onFocus = (event) => {
+  handleFocus = (event) => {
     const { isFocused, onOptionFocus, option } = this.props
     if (!isFocused) {
       onOptionFocus(event, option)
@@ -73,9 +73,9 @@ class OptionGroup extends PureComponent {
         ref={(el) => optionRef(el, option[valueKey])}
         aria-selected={selected}
         className="crane-select-option"
-        onMouseDown={this.onMouseDown}
-        onMouseEnter={this.onFocus}
-        onMouseMove={this.onFocus}
+        onMouseDown={this.handleMouseDown}
+        onMouseEnter={this.handleFocus}
+        onMouseMove={this.handleFocus}
         role="option"
         tabIndex="0"
       >

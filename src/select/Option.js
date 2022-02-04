@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 
 // TODO: FUTURE convert to function component and use React.Memo
 class Option extends PureComponent {
-  onMouseDown = (event) => {
+  handleMouseDown = (event) => {
     const { onOptionClick, optionDisabledKey, option } = this.props
     if (!option[optionDisabledKey]) {
       onOptionClick(event, option)
     }
   }
 
-  onFocus = (event) => {
+  handleFocus = (event) => {
     const { isFocused, onOptionFocus, option } = this.props
     if (!isFocused) {
       onOptionFocus(event, option)
@@ -68,10 +68,10 @@ class Option extends PureComponent {
         aria-disabled={isDisabled}
         aria-selected={selected}
         className={className}
-        onMouseDown={this.onMouseDown}
-        onMouseEnter={this.onFocus}
-        onMouseMove={this.onFocus}
-        onFocus={this.onFocus}
+        onMouseDown={this.handleMouseDown}
+        onMouseEnter={this.handleFocus}
+        onMouseMove={this.handleFocus}
+        onFocus={this.handleFocus}
         role="option"
         tabIndex="0"
       >

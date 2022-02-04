@@ -12,7 +12,7 @@ class FilterSelect extends Component {
     this.state = { inputValue: '' }
   }
 
-  onInputChange = (eventContext, event) => {
+  handleInputChange = (eventContext, event) => {
     const { onInputChange } = this.props
     this.setState({ inputValue: eventContext.value })
 
@@ -44,7 +44,7 @@ class FilterSelect extends Component {
         options={filteredOptions}
         inputValue={currentInputValue}
         isSearchable
-        onInputChange={this.onInputChange}
+        onInputChange={this.handleInputChange}
         getSelectValue={this.getSelectValue}
         showInput
       />

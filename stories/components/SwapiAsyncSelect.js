@@ -14,14 +14,14 @@ class SwapiAsyncSelect extends React.Component {
     }
   }
 
-  onChange = (event) => this.setState({ value: event.value })
+  handleChange = (event) => this.setState({ value: event.value })
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({ inputValue: event.value, isLoading: true })
     this.fetchOptions(event.value)
   }
 
-  onOpen = () => {
+  handleOpen = () => {
     this.setState({ isLoading: true })
     this.fetchOptions()
   }
@@ -47,9 +47,9 @@ class SwapiAsyncSelect extends React.Component {
         inputValue={inputValue}
         isLoading={isLoading}
         labelKey="name"
-        onChange={this.onChange}
-        onInputChange={this.onInputChange}
-        onOpen={this.onOpen}
+        onChange={this.handleChange}
+        onInputChange={this.handleInputChange}
+        onOpen={this.handleOpen}
         options={options}
         value={value}
         valueKey="name"

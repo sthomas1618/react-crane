@@ -12,13 +12,13 @@ class BasicFilterSelect extends Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     this.setState({ value: event.value })
   }
 
   render() {
     const { value } = this.state
-    return <FilterSelect {...this.props} onChange={this.onChange} value={value} />
+    return <FilterSelect {...this.props} onChange={this.handleChange} value={value} />
   }
 }
 

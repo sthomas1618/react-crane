@@ -12,14 +12,14 @@ class MultiSelectWithStringValues extends Component {
     }
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
     const { valueKey } = this.props
     this.setState({ value: event.value.map((val) => val[valueKey]) })
   }
 
   render() {
     const { value } = this.state
-    return <MultiSelect {...this.props} onChange={this.onChange} value={value} />
+    return <MultiSelect {...this.props} onChange={this.handleChange} value={value} />
   }
 }
 

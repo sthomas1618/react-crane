@@ -12,7 +12,7 @@ class BasicSearchSelect extends Component {
     }
   }
 
-  onInputChange = (event) => {
+  handleInputChange = (event) => {
     this.setState({ inputValue: event.value })
   }
 
@@ -32,7 +32,7 @@ class BasicSearchSelect extends Component {
       <SearchSelect
         {...this.props}
         options={filteredOptions}
-        onInputChange={this.onInputChange}
+        onInputChange={this.handleInputChange}
         inputValue={inputValue}
       />
     )

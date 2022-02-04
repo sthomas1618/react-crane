@@ -10,7 +10,7 @@ class SearchSelect extends Component {
     this.state = { value: null }
   }
 
-  onChange = (eventContext, event) => {
+  handleChange = (eventContext, event) => {
     this.setState({ value: eventContext.value })
     const { onChange } = this.props
 
@@ -28,7 +28,7 @@ class SearchSelect extends Component {
       <SimpleSelect
         {...selectProps}
         value={currentValue}
-        onChange={this.onChange}
+        onChange={this.handleChange}
         clearInputOnBlur={false}
         clearInputOnSelect={false}
         isSearchable

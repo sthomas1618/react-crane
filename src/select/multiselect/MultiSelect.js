@@ -9,7 +9,7 @@ import { flattenOptions, multiSelectPropTypes, sortBy } from '../utils'
 import { multiSelectDefaults } from '../utils/DefaultProps'
 
 class MultiSelect extends Component {
-  onChange = (eventContext, event) => {
+  handleChange = (eventContext, event) => {
     const {
       allOption,
       allowSelectAll,
@@ -111,7 +111,7 @@ class MultiSelect extends Component {
         {...multiSelectProps}
         isMulti
         options={opts}
-        onChange={this.onChange}
+        onChange={this.handleChange}
         optionRenderer={OptRenderer}
         optionGroupRenderer={OptGroupRenderer}
         // TODO: optimize with useCallback after dropping support for React < 16.8

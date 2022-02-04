@@ -51,6 +51,7 @@ class SwapiAsyncSelect extends React.Component {
         onInputChange={this.handleInputChange}
         onOpen={this.handleOpen}
         options={options}
+        showInput
         value={value}
         valueKey="name"
       />

@@ -51,13 +51,14 @@ class LargeDataAsyncSelect extends React.Component {
         {...this.props}
         inputValue={inputValue}
         isLoading={isLoading}
-        valueKey="id"
         labelKey="name"
         onChange={this.handleChange}
         onInputChange={this.handleInputChange}
         onOpen={this.handleOpen}
         options={options}
+        showInput
         value={value}
+        valueKey="id"
       />
     )
   }

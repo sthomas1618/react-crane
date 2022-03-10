@@ -8,6 +8,7 @@ it('does not explode', () => {
     <FocusPlaceholder
       ariaControls=""
       ariaExpanded=""
+      id="foo"
       getRef={() => {}}
       onBlur={() => {}}
       onFocus={() => {}}

@@ -158,6 +158,7 @@ class SimpleSelect extends Component {
     })
 
     this.setState((prevState) => ({
+      // eslint-disable-next-line react/destructuring-assignment
       isOpen: this.props.isOpen || prevState.isOpen,
       isFocused: true
     }))
@@ -183,6 +184,7 @@ class SimpleSelect extends Component {
 
   handleKeyDown = (event) => {
     const { disabled, inputValue, onKeyDown } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
 
     if (disabled) {
@@ -520,6 +522,7 @@ class SimpleSelect extends Component {
   }
 
   // check for right-clicks, etc
+  // eslint-disable-next-line class-methods-use-this
   isSecondaryClick = (event) => event.type === 'mousedown' && event.button !== 0
 
   focus = () => {
@@ -607,7 +610,7 @@ class SimpleSelect extends Component {
   }
 
   renderMenu() {
-    const { isLoading, loadingText, noResultsText, staticOption } = this.props
+    const { isLoading, loadingText, id, noResultsText, staticOption } = this.props
     const { focusedOption } = this.state
     const { menuComponent, options, ...otherProps } = this.props
     const menuProps = {
@@ -631,7 +634,7 @@ class SimpleSelect extends Component {
     if (opts.length || hasStaticOptions) {
       const MenuComponent = menuComponent
       menu = (
-        <div id="crane-select-menu-container" className="crane-select-menu-container">
+        <div id={`crane-select-menu-${id}`} className="crane-select-menu-container">
           <MenuComponent {...menuProps} options={opts} />
         </div>
       )
@@ -667,20 +670,28 @@ class SimpleSelect extends Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       disabled,
+      id,
       inputComponent,
       inputId,
       inputValue,
-      showInput
+      showInput,
+      valueKey
     } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    const isOpen = this.props.isOpen || this.state.isOpen
+    const { focusedOption } = this.state
+    const focusedOptionDomID = focusedOption ? `crane-item-${focusedOption[valueKey]}` : undefined
 
     const inputProps = {
+      'aria-activedescendant': focusedOptionDomID,
+      'aria-controls': isOpen ? `crane-select-menu-${id}` : undefined,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       disabled,
       getRef: (ref) => {
         this.input = ref
       },
-      id: inputId,
+      id: inputId || `crane-select-input-${id}`,
       inputValue,
       onBlur: this.handleInputBlur,
       onChange: this.handleInputChange,
@@ -713,6 +724,9 @@ class SimpleSelect extends Component {
       disabled
     })
 
+    // jsx-a11y is wrong here. role=combobox does not need aria-controls. That belongs on the input.
+    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/789
+    /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
       <div aria-expanded={isOpen} className={selectClassName}>
         <div
@@ -727,7 +741,7 @@ class SimpleSelect extends Component {
           <div className="crane-select-outer-input">
             {beforeInput}
             <div
-              aria-controls={isOpen ? 'crane-select-menu-container' : null}
+              aria-owns={isOpen ? `crane-select-menu-${id}` : undefined}
               aria-expanded={isOpen}
               aria-haspopup="listbox"
               className={
@@ -748,6 +762,7 @@ class SimpleSelect extends Component {
         {isOpen && this.renderMenu()}
       </div>
     )
+    /* eslint-enable jsx-a11y/role-has-required-aria-props */
   }
 }
 

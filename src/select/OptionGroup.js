@@ -67,9 +67,14 @@ class OptionGroup extends PureComponent {
             option.options.length > 0 &&
             option.options.some((opt) => isValueEqual(opt, val, valueKey)))
       )
+    const optionDomId = `crane-item-${option[groupValueKey]}`
 
     return (
+      // options get psuedo focus while DOM focus remains on the input.
+      // There is no need for a tabindex on the option.
+      // eslint-disable-next-line jsx-a11y/interactive-supports-focus
       <div
+        id={optionDomId}
         ref={(el) => optionRef(el, option[valueKey])}
         aria-selected={selected}
         className="crane-select-option"
@@ -77,7 +82,6 @@ class OptionGroup extends PureComponent {
         onMouseEnter={this.handleFocus}
         onMouseMove={this.handleFocus}
         role="option"
-        tabIndex="0"
       >
         <span className="crane-select-group-header">{renderer}</span>
         {children}

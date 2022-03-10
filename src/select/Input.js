@@ -6,6 +6,8 @@ function Input({ disabled, getRef, id, inputValue, onBlur, onChange, onFocus, ..
     <div className="crane-select-input">
       <input
         id={id}
+        aria-activedescendant={ariaProps['aria-activedescendant'] || undefined}
+        aria-controls={ariaProps['aria-controls'] || undefined}
         aria-label={ariaProps['aria-label'] || undefined}
         aria-labelledby={ariaProps['aria-labelledby'] || undefined}
         autoCapitalize="none"
@@ -25,6 +27,8 @@ function Input({ disabled, getRef, id, inputValue, onBlur, onChange, onFocus, ..
 }
 
 Input.propTypes = {
+  'aria-activedescendant': PropTypes.string,
+  'aria-controls': PropTypes.string,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
   disabled: PropTypes.bool,
@@ -37,8 +41,10 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
+  'aria-activedescendant': undefined,
+  'aria-controls': undefined,
   'aria-label': 'select input',
-  'aria-labelledby': '',
+  'aria-labelledby': undefined,
   disabled: false,
   id: null,
   inputValue: ''

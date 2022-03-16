@@ -23,7 +23,7 @@ export const simpleSelectPropTypes = {
   groups: PropTypes.array,
   groupTitleKey: PropTypes.string,
   groupValueKey: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   inputComponent: PropTypes.func,
   inputId: PropTypes.string,
   inputValue: PropTypes.string,

@@ -234,7 +234,7 @@ export interface SimpleSelectProps {
   groups?: object[]
   groupTitleKey?: string
   groupValueKey?: string
-  id?: string
+  id: string
   inputComponent?: React.ReactNode
   inputId?: string
   inputValue?: string

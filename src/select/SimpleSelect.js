@@ -680,10 +680,10 @@ class SimpleSelect extends Component {
     // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
     const { focusedOption } = this.state
-    const focusedOptionDomID = focusedOption ? `crane-item-${focusedOption[valueKey]}` : undefined
+    const focusedOptionDomId = focusedOption ? `crane-item-${focusedOption[valueKey]}` : undefined
 
     const inputProps = {
-      'aria-activedescendant': focusedOptionDomID,
+      'aria-activedescendant': isOpen ? focusedOptionDomId : undefined,
       'aria-controls': isOpen ? `crane-select-menu-${id}` : undefined,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,

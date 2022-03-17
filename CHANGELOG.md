@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Add aria-activedescendant to Input so screen-readers like JAWs can know which option is "focused" while DOM focus remains on the input.
+  Move aria-controls to Input per aria standards.
+- Add aria-owns to the combobox element so screen-readers know the listbox should immediately follows the input in reading order.
+- Give the menu element a unique id. Fixes a11y problems when multiple menus exist on the screen.
+
+### Changed
+
+- Remove tabindex=0 from Option. Unneeded.
+- Made id a required prop. This is needed to give menu elements a unique id.
+
 ## [0.31.1] - 2022-02-04
 
 ### Fixed

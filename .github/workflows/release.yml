@@ -45,4 +45,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CRANE_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_USERCONFIG: .npmrc-publish
-        run: 'npx release-it --increment ${{ github.event.inputs.type }}'
+        run: 'GITHUB_TOKEN="${{ secrets.CRANE_GITHUB_TOKEN }}" npx release-it --verbose --ci --increment ${{ github.event.inputs.type }}'

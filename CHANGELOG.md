@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- a11y: removed orphaned aria-expanded from crane-select div.
+- a11y: removed orphaned aria-expanded from crane-select div. There already exists an aria-expanded attribute on the combobox element.
 
 ## [0.32.0] - 2022-03-17
 

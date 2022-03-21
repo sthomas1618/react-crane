@@ -728,7 +728,7 @@ class SimpleSelect extends Component {
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/789
     /* eslint-disable jsx-a11y/role-has-required-aria-props */
     return (
-      <div aria-expanded={isOpen} className={selectClassName}>
+      <div className={selectClassName}>
         <div
           className="crane-select-input-group"
           id={id}

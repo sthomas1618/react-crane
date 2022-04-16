@@ -1,7 +1,13 @@
 // Adapted from https://github.com/JedWatson/react-select/blob/master/packages/react-select/src/accessibility/index.js
 
-export const instructionsAriaMessage = (event, context) => {
-  const { isSearchable, focusedOption, label, labelKey, options } = context
+import { A11yContext } from '../typeDefs'
+
+export function instructionsAriaMessage(event: string, context: A11yContext | null) {
+  if (!context) {
+    return null
+  }
+
+  const { isSearchable, focusedOption = {}, label, labelKey = 'label', options = [] } = context
 
   switch (event) {
     case 'menu':
@@ -19,7 +25,11 @@ export const instructionsAriaMessage = (event, context) => {
   }
 }
 
-export const valueEventAriaMessage = (event, context) => {
+export function valueEventAriaMessage<T>(event: string, context: A11yContext | null) {
+  if (!context) {
+    return null
+  }
+
   const { value } = context
 
   if (!value) return null
@@ -34,7 +44,7 @@ export const valueEventAriaMessage = (event, context) => {
   return null
 }
 
-export const resultsAriaMessage = (inputValue, screenReaderMessage) => {
+export const resultsAriaMessage = (inputValue: string, screenReaderMessage: string) => {
   const searchTerm = inputValue && inputValue !== '' ? ` for search term ${inputValue}` : ''
   return `${screenReaderMessage}${searchTerm}.`
 }

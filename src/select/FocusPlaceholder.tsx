@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 
-class FocusPlaceholder extends PureComponent {
+import { FocusPlaceholderProps } from './typeDefs'
+
+class FocusPlaceholder extends PureComponent<FocusPlaceholderProps> {
   render() {
     const { onBlur, onFocus, getRef, id, ...ariaProps } = this.props
 
@@ -19,20 +20,6 @@ class FocusPlaceholder extends PureComponent {
       />
     )
   }
-}
-
-FocusPlaceholder.propTypes = {
-  'aria-activedescendant': PropTypes.string,
-  'aria-controls': PropTypes.string,
-  getRef: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  onFocus: PropTypes.func.isRequired
-}
-
-FocusPlaceholder.defaultProps = {
-  'aria-activedescendant': undefined,
-  'aria-controls': undefined
 }
 
 export default FocusPlaceholder

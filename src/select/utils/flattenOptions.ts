@@ -1,16 +1,22 @@
-const flattenOptions = (options, allowSelectAll, allOption) => {
+import { Option } from '../typeDefs'
+
+function flattenOptions(
+  options: Option[],
+  allowSelectAll: boolean,
+  allOption: Option | null | undefined
+) {
   if (!options) {
-    return null
+    return []
   }
 
-  let flatOptions = []
+  let flatOptions: Option[] = []
   options.forEach((option) => {
     if (option.options && Array.isArray(option.options)) {
       flatOptions = flatOptions.concat(option.options)
     }
   })
 
-  if (allowSelectAll && flatOptions && flatOptions.length > 0) {
+  if (allOption && allowSelectAll && flatOptions && flatOptions.length > 0) {
     flatOptions.unshift(allOption)
   }
 

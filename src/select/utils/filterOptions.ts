@@ -1,4 +1,10 @@
-const filterOptions = (options, inputValue, props) => {
+import { Option, FilterOptionsParameters } from '../typeDefs'
+
+function filterOptions(
+  options: Option[],
+  inputValue: string,
+  props: FilterOptionsParameters
+): Option[] {
   const { allOption, allowSelectAll, getOptionLabel, ignoreCase, labelKey, valueKey } = props
 
   let searchText = inputValue || ''
@@ -11,7 +17,7 @@ const filterOptions = (options, inputValue, props) => {
     searchText = searchText.toLowerCase()
   }
 
-  const matchOption = (option) => {
+  const matchOption = (option: T) => {
     let label = getOptionLabel({ option, labelKey }) || ''
 
     if (ignoreCase) {
@@ -52,7 +58,7 @@ const filterOptions = (options, inputValue, props) => {
       })
     : filteredOptions
 
-  return displayableOptions
+  return displayableOptions as Option[]
 }
 
 export default filterOptions

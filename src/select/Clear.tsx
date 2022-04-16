@@ -1,7 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Clear({ clearRenderer, disabled, onClearClick, onClearTouchEnd }) {
+import { ClearProps } from './typeDefs'
+
+function Clear({ clearRenderer, disabled = false, onClearClick, onClearTouchEnd }: ClearProps) {
   if (disabled) {
     return null
   }
@@ -23,18 +24,6 @@ function Clear({ clearRenderer, disabled, onClearClick, onClearTouchEnd }) {
       {renderer}
     </div>
   )
-}
-
-Clear.propTypes = {
-  clearRenderer: PropTypes.func,
-  disabled: PropTypes.bool,
-  onClearClick: PropTypes.func.isRequired,
-  onClearTouchEnd: PropTypes.func.isRequired
-}
-
-Clear.defaultProps = {
-  clearRenderer: null,
-  disabled: false
 }
 
 export default Clear

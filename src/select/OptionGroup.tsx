@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 
+import { OptionGroupProps } from './typeDefs'
 import { isValueEqual } from './utils'
 
 // TODO: FUTURE convert to function component and use React.Memo
-class OptionGroup extends PureComponent {
-  handleMouseDown = (event) => {
+class OptionGroup<T> extends PureComponent<OptionGroupProps> {
+  handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     // If the label is clicked but the option is disabled, do nothing.
-    if (event && event.target && event.target.ariaDisabled === 'true') {
+    if (event && event.target && event.currentTarget.ariaDisabled === 'true') {
       return
     }
+
     const { onOptionClick, option, value } = this.props
     const isGroup = Array.isArray(option.options)
     const isMulti = Array.isArray(value)
@@ -21,7 +22,7 @@ class OptionGroup extends PureComponent {
     onOptionClick(event, newValue)
   }
 
-  handleFocus = (event) => {
+  handleFocus = (event: React.MouseEvent<HTMLDivElement>) => {
     const { isFocused, onOptionFocus, option } = this.props
     if (!isFocused) {
       onOptionFocus(event, option)
@@ -32,13 +33,13 @@ class OptionGroup extends PureComponent {
     const {
       children,
       option,
-      optionDisabledKey,
+      optionDisabledKey = 'isDisabled',
       optionGroupRenderer,
       optionRef,
-      groupTitleKey,
-      groupValueKey,
+      groupTitleKey = 'label',
+      groupValueKey = 'groupId',
       value,
-      valueKey
+      valueKey = 'value'
     } = this.props
 
     if (!option) {
@@ -55,15 +56,17 @@ class OptionGroup extends PureComponent {
     }
     const renderer = optionGroupRenderer
       ? optionGroupRenderer(optionGroupRendererProps)
-      : option[groupTitleKey]
+      : (option[groupTitleKey] as string)
 
     const selected =
-      value &&
+      !!value &&
+      Array.isArray(value) &&
       value.length > 0 &&
       value.some(
         (val) =>
           isValueEqual(option, val, groupValueKey) ||
           (option.options &&
+            Array.isArray(option.options) &&
             option.options.length > 0 &&
             option.options.some((opt) => isValueEqual(opt, val, valueKey)))
       )
@@ -75,7 +78,7 @@ class OptionGroup extends PureComponent {
       // eslint-disable-next-line jsx-a11y/interactive-supports-focus
       <div
         id={optionDomId}
-        ref={(el) => optionRef(el, option[valueKey])}
+        ref={(el) => optionRef(el, option[valueKey] as string)}
         aria-selected={selected}
         className="crane-select-option"
         onMouseDown={this.handleMouseDown}
@@ -88,36 +91,6 @@ class OptionGroup extends PureComponent {
       </div>
     )
   }
-}
-
-OptionGroup.propTypes = {
-  children: PropTypes.array.isRequired,
-  groupTitleKey: PropTypes.string,
-  groupValueKey: PropTypes.string,
-  isFocused: PropTypes.bool,
-  onOptionClick: PropTypes.func.isRequired,
-  onOptionFocus: PropTypes.func.isRequired,
-  option: PropTypes.object.isRequired,
-  optionDisabledKey: PropTypes.string,
-  optionGroupRenderer: PropTypes.func,
-  optionRef: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.number,
-    PropTypes.object,
-    PropTypes.string
-  ]),
-  valueKey: PropTypes.string
-}
-
-OptionGroup.defaultProps = {
-  groupTitleKey: 'label',
-  groupValueKey: 'groupId',
-  isFocused: false,
-  optionDisabledKey: 'isDisabled',
-  optionGroupRenderer: null,
-  value: null,
-  valueKey: 'value'
 }
 
 export default OptionGroup

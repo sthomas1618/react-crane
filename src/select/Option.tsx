@@ -1,16 +1,24 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+
+import { OptionProps } from './typeDefs'
 
 // TODO: FUTURE convert to function component and use React.Memo
-class Option extends PureComponent {
-  handleMouseDown = (event) => {
-    const { onOptionClick, optionDisabledKey, option } = this.props
+class Option extends PureComponent<OptionProps> {
+  handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { onOptionClick, optionDisabledKey = 'isDisabled', option } = this.props
     if (!option[optionDisabledKey]) {
       onOptionClick(event, option)
     }
   }
 
-  handleFocus = (event) => {
+  handleMouseEnterOrMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { isFocused, onOptionFocus, option } = this.props
+    if (!isFocused) {
+      onOptionFocus(event, option)
+    }
+  }
+
+  handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
     const { isFocused, onOptionFocus, option } = this.props
     if (!isFocused) {
       onOptionFocus(event, option)
@@ -19,18 +27,18 @@ class Option extends PureComponent {
 
   render() {
     const {
-      allowSelectAll,
+      allowSelectAll = false,
       allOption,
       getOptionLabel,
-      hideCheckboxes,
-      isFocused,
-      labelKey,
+      hideCheckboxes = false,
+      isFocused = false,
+      labelKey = '',
       option,
-      optionDisabledKey,
+      optionDisabledKey = 'isDisabled',
       optionRef,
       optionRenderer,
-      selected,
-      valueKey
+      selected = false,
+      valueKey = ''
     } = this.props
 
     if (!option) {
@@ -45,7 +53,7 @@ class Option extends PureComponent {
       optionDisabledKey,
       selected
     }
-    const isDisabled = option[optionDisabledKey]
+    const isDisabled = !!option[optionDisabledKey]
     const renderer = optionRenderer
       ? optionRenderer(optionRendererProps)
       : getOptionLabel({
@@ -57,7 +65,7 @@ class Option extends PureComponent {
     const className = `crane-select-option${isFocused && !isDisabled ? ' focused' : ''}
       ${isDisabled ? ' disabled' : ''}
       ${
-        allowSelectAll && option[valueKey] === allOption[valueKey]
+        allowSelectAll && allOption && option[valueKey] === allOption[valueKey]
           ? ' crane-select-group-header'
           : ''
       }`
@@ -69,13 +77,13 @@ class Option extends PureComponent {
       // eslint-disable-next-line jsx-a11y/interactive-supports-focus
       <div
         id={optionDomId}
-        ref={(el) => optionRef(el, option[valueKey])}
+        ref={(el) => optionRef(el, option[valueKey] as string)}
         aria-disabled={isDisabled}
         aria-selected={selected}
         className={className}
         onMouseDown={this.handleMouseDown}
-        onMouseEnter={this.handleFocus}
-        onMouseMove={this.handleFocus}
+        onMouseEnter={this.handleMouseEnterOrMove}
+        onMouseMove={this.handleMouseEnterOrMove}
         onFocus={this.handleFocus}
         role="option"
       >
@@ -83,35 +91,6 @@ class Option extends PureComponent {
       </div>
     )
   }
-}
-
-Option.propTypes = {
-  allOption: PropTypes.object,
-  allowSelectAll: PropTypes.bool,
-  getOptionLabel: PropTypes.func.isRequired,
-  hideCheckboxes: PropTypes.bool,
-  isFocused: PropTypes.bool,
-  labelKey: PropTypes.string,
-  onOptionClick: PropTypes.func.isRequired,
-  onOptionFocus: PropTypes.func.isRequired,
-  option: PropTypes.object.isRequired,
-  optionDisabledKey: PropTypes.string,
-  optionRef: PropTypes.func.isRequired,
-  optionRenderer: PropTypes.func,
-  selected: PropTypes.bool,
-  valueKey: PropTypes.string
-}
-
-Option.defaultProps = {
-  allowSelectAll: false,
-  allOption: null,
-  hideCheckboxes: false,
-  isFocused: false,
-  labelKey: '',
-  optionDisabledKey: 'isDisabled',
-  optionRenderer: null,
-  selected: false,
-  valueKey: 'value'
 }
 
 export default Option

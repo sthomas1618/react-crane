@@ -1,7 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Arrow({ arrowRenderer, isOpen, onArrowClick, onArrowTouchEnd }) {
+import { ArrowProps } from './typeDefs'
+
+function Arrow({ arrowRenderer, isOpen = false, onArrowClick, onArrowTouchEnd }: ArrowProps) {
   const renderer = arrowRenderer ? (
     arrowRenderer({ isOpen })
   ) : (
@@ -22,18 +23,6 @@ function Arrow({ arrowRenderer, isOpen, onArrowClick, onArrowTouchEnd }) {
       {renderer}
     </div>
   )
-}
-
-Arrow.propTypes = {
-  arrowRenderer: PropTypes.func,
-  onArrowClick: PropTypes.func.isRequired,
-  onArrowTouchEnd: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool
-}
-
-Arrow.defaultProps = {
-  isOpen: false,
-  arrowRenderer: null
 }
 
 export default Arrow

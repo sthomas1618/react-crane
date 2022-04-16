@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
+import { ValueGroupProps } from './typeDefs'
 import { getSelectValue } from './utils'
 
-class ValueGroup extends Component {
+class ValueGroup<T> extends Component<ValueGroupProps> {
   render() {
     const {
       clearInputOnSelect,
       getLabel,
-      inputValue,
+      inputValue = '',
       isFocused,
-      labelKey,
+      labelKey = '',
       options,
-      placeholder,
+      placeholder = '',
       showInput,
-      showValuesWhileFocused,
+      showValuesWhileFocused = false,
       value,
       valueComponent,
       valueKey,
@@ -35,7 +35,6 @@ class ValueGroup extends Component {
         />
       )
     }
-    const ValueRenderer = valueGroupRenderer || defaultRenderer
 
     if (showInput && inputValue && !showValuesWhileFocused) {
       return null
@@ -50,15 +49,16 @@ class ValueGroup extends Component {
     // Don't include group headers or select all in the count
     let newValue = value
 
-    if (Array.isArray(newValue)) {
+    if (Array.isArray(value)) {
       newValue = value.filter((val) => !val.options)
       rendererProps.value = newValue
     }
 
+    const renderedValue = valueGroupRenderer ? valueGroupRenderer(rendererProps) : defaultRenderer()
     const showValue = Array.isArray(newValue) ? newValue.length : newValue
     const renderer =
       (clearInputOnSelect && showValue) || (showValuesWhileFocused && isFocused) ? (
-        <ValueRenderer {...rendererProps} />
+        { renderedValue }
       ) : (
         <span className="crane-select-placeholder">{placeholder}</span>
       )
@@ -69,43 +69,6 @@ class ValueGroup extends Component {
       <div className="crane-select-value-group">{renderer}</div>
     )
   }
-}
-
-ValueGroup.propTypes = {
-  clearInputOnSelect: PropTypes.bool,
-  getLabel: PropTypes.func.isRequired,
-  inputValue: PropTypes.string,
-  isFocused: PropTypes.bool.isRequired,
-  labelKey: PropTypes.string,
-  options: PropTypes.array.isRequired,
-  onMouseDown: PropTypes.func,
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
-  showInput: PropTypes.bool,
-  showValuesWhileFocused: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.number,
-    PropTypes.object,
-    PropTypes.string
-  ]),
-  valueComponent: PropTypes.func,
-  valueKey: PropTypes.string.isRequired,
-  valueGroupRenderer: PropTypes.func,
-  valueRenderer: PropTypes.func
-}
-
-ValueGroup.defaultProps = {
-  clearInputOnSelect: true,
-  inputValue: '',
-  labelKey: '',
-  onMouseDown: null,
-  placeholder: '',
-  showInput: false,
-  showValuesWhileFocused: false,
-  value: null,
-  valueComponent: null,
-  valueGroupRenderer: null,
-  valueRenderer: null
 }
 
 export default ValueGroup

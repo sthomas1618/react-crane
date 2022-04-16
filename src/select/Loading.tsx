@@ -1,7 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Loading({ isLoading, loadingRenderer }) {
+import { LoadingProps } from './typeDefs'
+
+function Loading({ isLoading = false, loadingRenderer }: LoadingProps) {
   if (!isLoading) {
     return null
   }
@@ -13,16 +14,6 @@ function Loading({ isLoading, loadingRenderer }) {
   )
 
   return <div className="crane-select-loading-container">{renderer}</div>
-}
-
-Loading.propTypes = {
-  isLoading: PropTypes.bool,
-  loadingRenderer: PropTypes.func
-}
-
-Loading.defaultProps = {
-  isLoading: false,
-  loadingRenderer: null
 }
 
 export default Loading

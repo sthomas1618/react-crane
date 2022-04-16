@@ -5,38 +5,63 @@ import {
   flattenOptions,
   instructionsAriaMessage,
   resultsAriaMessage,
-  simpleSelectPropTypes,
   sortBy,
   valueEventAriaMessage
 } from './utils'
 // import alone to avoid dep cycle
 import isSelected from './utils/isSelected'
-import { simpleSelectDefaults } from './utils/DefaultProps'
+import { Option, Group, SimpleSelectProps, A11yContext, InputProps } from './typeDefs'
+import getSelectValueDefault from './utils/getSelectValue'
+import getLabelDefault from './utils/getLabel'
+import ArrowDefault from './Arrow'
+import ClearDefault from './Clear'
+import FocusPlaceholderDefault from './FocusPlaceholder'
+import InputDefault from './Input'
+import LoadingDefault from './Loading'
+import MenuDefault from './Menu'
+import OptionDefault from './Option'
+import OptionGroupDefault from './OptionGroup'
+import ValueGroupDefault from './ValueGroup'
+
+type SimpleSelectState = {
+  ariaLiveContext: string | null
+  ariaLiveSelection: string | null
+  focusedOption: Option | null
+  isFocused: boolean
+  isOpen: boolean
+  isOuterFocused: boolean
+}
 
 // credit to https://github.com/JedWatson/react-select for many patterns and techniques used here
-class SimpleSelect extends Component {
-  constructor(props) {
+class SimpleSelect extends Component<SimpleSelectProps, SimpleSelectState> {
+  input: HTMLInputElement | null = null
+  menuRef: HTMLElement | null = null
+  optionRefs: { [key: string]: HTMLElement } = {}
+
+  constructor(props: SimpleSelectProps) {
     super(props)
 
     this.state = {
       ariaLiveContext: '',
       ariaLiveSelection: '',
+      focusedOption: null,
+      isFocused: false,
       isOpen: false,
-      isFocused: false
+      isOuterFocused: false
     }
 
-    this.optionRefs = []
+    this.optionRefs = {}
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: SimpleSelectProps, prevState: SimpleSelectState) {
     const { focusedOption } = this.state
     const prevIsOpen = prevProps.isOpen || prevState.isOpen
     // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
 
     if (!prevIsOpen && isOpen && focusedOption && this.menuRef) {
-      const { valueKey } = this.props
-      const key = focusedOption[valueKey]
+      const { valueKey = 'value' } = this.props
+      const key = focusedOption[valueKey] as string
       const optionNode = this.optionRefs[key]
 
       if (optionNode) {
@@ -73,12 +98,12 @@ class SimpleSelect extends Component {
     }
   }
 
-  handleValueTouchEnd = (event) => {
+  handleValueTouchEnd = (event: React.TouchEvent) => {
     this.handleValueMouseDown(event)
   }
 
-  handleValueMouseDown = (event) => {
-    if (this.isSecondaryClick(event)) {
+  handleValueMouseDown = (event: React.SyntheticEvent) => {
+    if (this.isSecondaryClick(event as React.MouseEvent)) {
       return
     }
 
@@ -93,14 +118,16 @@ class SimpleSelect extends Component {
 
     event.stopPropagation()
 
-    if (event.target.tagName !== 'INPUT') {
+    var element = event.target as HTMLElement
+
+    if (element.tagName !== 'INPUT') {
       event.preventDefault()
     }
 
     this.focus()
 
     if (!showInput) {
-      this.setState({ isOpen: setOpen })
+      this.setState({ isOpen: !!setOpen })
       return
     }
 
@@ -109,8 +136,10 @@ class SimpleSelect extends Component {
 
     // thanks https://github.com/JedWatson/react-select/blob/master/src/Select.js#L238
     if (isFocused) {
-      // clears the value so that the cursor will be at the end of input this re-renders
-      this.input.value = ''
+      if (this.input) {
+        // clears the value so that the cursor will be at the end of input this re-renders
+        this.input.value = ''
+      }
 
       // if the input is focused, ensure the menu is open
       this.setState({
@@ -122,7 +151,7 @@ class SimpleSelect extends Component {
     }
   }
 
-  handleInputBlur = (event) => {
+  handleInputBlur = (event: React.FocusEvent) => {
     const { clearInputOnBlur, onBlur, name, inputValue } = this.props
 
     if (onBlur) {
@@ -140,8 +169,15 @@ class SimpleSelect extends Component {
     })
   }
 
-  handleInputFocus = (event) => {
-    const { 'aria-label': ariaLabel, disabled, isMulti, isSearchable, name, onFocus } = this.props
+  handleInputFocus = (event: React.FocusEvent) => {
+    const {
+      'aria-label': ariaLabel,
+      disabled,
+      isMulti = false,
+      isSearchable = false,
+      name,
+      onFocus
+    } = this.props
 
     if (disabled) {
       return
@@ -154,7 +190,7 @@ class SimpleSelect extends Component {
     this.announceAriaLiveContext('input', {
       isSearchable,
       isMulti,
-      label: ariaLabel
+      label: ariaLabel || ''
     })
 
     this.setState((prevState) => ({
@@ -164,8 +200,8 @@ class SimpleSelect extends Component {
     }))
   }
 
-  handleInputChange = (event) => {
-    const newInputValue = event.target.value
+  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newInputValue = event.currentTarget.value
     const { disabled, inputValue, openOnEmptyInput } = this.props
 
     if (inputValue === newInputValue || disabled) {
@@ -182,7 +218,7 @@ class SimpleSelect extends Component {
     this.setInputValue(event, newInputValue)
   }
 
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: React.KeyboardEvent) => {
     const { disabled, inputValue, onKeyDown } = this.props
     // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -244,12 +280,12 @@ class SimpleSelect extends Component {
     event.preventDefault()
   }
 
-  handleArrowTouchEnd = (event) => {
+  handleArrowTouchEnd = (event: React.TouchEvent) => {
     this.handleArrowClick(event)
   }
 
-  handleArrowClick = (event) => {
-    if (this.isSecondaryClick(event)) {
+  handleArrowClick = (event: React.SyntheticEvent) => {
+    if (this.isSecondaryClick(event as React.MouseEvent)) {
       return
     }
 
@@ -266,22 +302,22 @@ class SimpleSelect extends Component {
     this.closeMenu()
   }
 
-  handleClearTouchEnd = (event) => {
+  handleClearTouchEnd = (event: React.TouchEvent) => {
     this.handleClearClick(event)
   }
 
-  handleClearClick = (event) => {
-    if (this.isSecondaryClick(event)) {
+  handleClearClick = (event: React.SyntheticEvent) => {
+    if (this.isSecondaryClick(event as React.MouseEvent)) {
       return
     }
 
     event.stopPropagation()
     event.preventDefault()
 
-    this.setState({ isOpen: false, isOuterFocused: false }, this.emitValueChange(null, event))
+    this.setState({ isOpen: false, isOuterFocused: false }, () => this.emitValueChange(null, event))
   }
 
-  handleOptionClick = (event, option) => {
+  handleOptionClick = (event: React.MouseEvent, option: Option) => {
     if (this.isSecondaryClick(event)) {
       return
     }
@@ -292,7 +328,7 @@ class SimpleSelect extends Component {
     this.selectOption(event, option)
   }
 
-  handleOptionFocus = (event, option) => {
+  handleOptionFocus = (_event: React.FocusEvent, option: Option) => {
     const { labelKey, options } = this.props
     this.setState({ focusedOption: option })
     this.announceAriaLiveContext('focus', {
@@ -302,7 +338,7 @@ class SimpleSelect extends Component {
     })
   }
 
-  setInputValue = (event, inputVal) => {
+  setInputValue = (event: React.SyntheticEvent, inputVal: string | null) => {
     const { onInputChange, name } = this.props
 
     if (onInputChange) {
@@ -311,10 +347,10 @@ class SimpleSelect extends Component {
     }
   }
 
-  getFocusedOption(direction, options) {
+  getFocusedOption(direction: 'prev' | 'next', options: Option[]) {
     // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
-    const { allowSelectAll, allOption, staticOption, valueKey } = this.props
+    const { allowSelectAll = false, allOption, staticOption, valueKey = 'value' } = this.props
     const { focusedOption } = this.state
 
     let flatOptions = flattenOptions(options, allowSelectAll, allOption)
@@ -348,8 +384,8 @@ class SimpleSelect extends Component {
     }
   }
 
-  getIsSelected = (option) => {
-    const { isMulti, value, valueKey } = this.props
+  getIsSelected = (option: Option) => {
+    const { isMulti, value, valueKey = 'value' } = this.props
 
     if (!isMulti) {
       return true
@@ -363,27 +399,33 @@ class SimpleSelect extends Component {
     return true
   }
 
-  announceAriaLiveSelection = (event, context) => {
+  announceAriaLiveSelection = (event: string, context: A11yContext | null) => {
     this.setState({
       ariaLiveSelection: valueEventAriaMessage(event, context)
     })
   }
 
-  announceAriaLiveContext = (event, context) => {
+  announceAriaLiveContext = (event: string, context: A11yContext | null) => {
     const { 'aria-label': ariaLabel } = this.props
+    const a11yContext = context
+      ? {
+          ...context,
+          label: ariaLabel || ''
+        }
+      : null
     this.setState({
-      ariaLiveContext: instructionsAriaMessage(event, {
-        ...context,
-        label: ariaLabel
-      })
+      ariaLiveContext: instructionsAriaMessage(event, a11yContext)
     })
   }
 
-  focusOnOption = (direction) => {
+  focusOnOption = (direction: 'prev' | 'next') => {
     const { labelKey, options, staticOption } = this.props
-    const newFocusedOption = options.length
-      ? this.getFocusedOption(direction, options)
-      : staticOption || null
+
+    const getStaticOption = () => (Array.isArray(staticOption) ? staticOption[0] : staticOption)
+    const newFocusedOption =
+      options && !options.length
+        ? this.getFocusedOption(direction, options)
+        : getStaticOption() || null
 
     this.setState(
       {
@@ -402,16 +444,16 @@ class SimpleSelect extends Component {
     })
   }
 
-  selectOption = (event, option) => {
+  selectOption = (event: React.SyntheticEvent, option: Option) => {
     const { autoCloseMenu, clearInputOnSelect } = this.props
     const isOpen = !autoCloseMenu
-    const newState = { isOpen, isOuterFocused: !isOpen && clearInputOnSelect }
-    this.setState(newState, this.emitValueChange(option, event))
+    const newState = { isOpen, isOuterFocused: !isOpen && !!clearInputOnSelect }
+    this.setState(newState, () => this.emitValueChange(option, event))
   }
 
-  selectFocusedOption = (event) => {
+  selectFocusedOption = (event: React.KeyboardEvent) => {
     const { focusedOption } = this.state
-    const { optionDisabledKey } = this.props
+    const { optionDisabledKey = 'isDisabled' } = this.props
 
     if (focusedOption && !focusedOption[optionDisabledKey]) {
       this.selectOption(event, focusedOption)
@@ -419,18 +461,18 @@ class SimpleSelect extends Component {
   }
 
   closeMenu = () => {
-    const { isMulti, isSearchable } = this.props
+    const { isMulti = false, isSearchable = false } = this.props
     this.announceAriaLiveContext('input', { isSearchable, isMulti })
     this.setState({ isOpen: false }, this.focus)
   }
 
-  scrollToOption = (option) => {
+  scrollToOption = (option: Option | null) => {
     if (!option || !this.menuRef) {
       return
     }
 
-    const { valueKey } = this.props
-    const key = option[valueKey]
+    const { valueKey = 'value' } = this.props
+    const key = option[valueKey] as string
     const optionNode = this.optionRefs[key]
 
     if (!optionNode) {
@@ -448,14 +490,14 @@ class SimpleSelect extends Component {
     }
   }
 
-  emitValueChange = (option, event) => {
+  emitValueChange = (option: Option | null, event: React.SyntheticEvent) => {
     const {
       autoCloseMenu,
       clearInputOnSelect,
-      getLabel,
-      getSelectValue,
+      getLabel = getLabelDefault,
+      getSelectValue = getSelectValueDefault,
       inputValue,
-      labelKey,
+      labelKey = 'label',
       name,
       onChange,
       onSelect,
@@ -463,16 +505,16 @@ class SimpleSelect extends Component {
       options,
       staticOption,
       value,
-      valueKey
+      valueKey = 'value'
     } = this.props
 
     const multiStaticOptions = Array.isArray(staticOption)
 
     let isStatic = false
     if (staticOption && !multiStaticOptions) {
-      isStatic = option[valueKey] === staticOption[valueKey]
+      isStatic = !!option && option[valueKey] === staticOption[valueKey]
     } else if (staticOption && multiStaticOptions) {
-      isStatic = !!staticOption.find((o) => option[valueKey] === o[valueKey])
+      isStatic = !!option && !!staticOption.find((o) => option[valueKey] === o[valueKey])
     }
     const eventContext = { name, value: option }
 
@@ -496,7 +538,7 @@ class SimpleSelect extends Component {
         Array.isArray(value) && hasOptions
           ? true
           : hasOptions &&
-            (!valueObj || (value && option && valueObj[valueKey] !== option[valueKey]))
+            (!valueObj || (value && option && valueObj && valueObj[valueKey] !== option[valueKey]))
 
       if ((valueSelected || valueChanged) && onChange) {
         onChange(eventContext, event)
@@ -508,10 +550,10 @@ class SimpleSelect extends Component {
         this.setInputValue(event, newInputVal)
       }
 
-      if (valueChanged) {
+      if (valueChanged && option) {
         const announceEvent = this.getIsSelected(option) ? 'select-option' : 'deselect-option'
         this.announceAriaLiveSelection(announceEvent, {
-          value: option[labelKey]
+          value: option[labelKey] as string
         })
       }
 
@@ -523,21 +565,28 @@ class SimpleSelect extends Component {
 
   // check for right-clicks, etc
   // eslint-disable-next-line class-methods-use-this
-  isSecondaryClick = (event) => event.type === 'mousedown' && event.button !== 0
+  isSecondaryClick = (event: React.MouseEvent) => event.type === 'mousedown' && event.button !== 0
 
   focus = () => {
-    this.input.focus()
+    if (this.input) {
+      this.input.focus()
+    }
   }
 
   groupOptions() {
     const { allOption, allowSelectAll, inputValue, groups, groupByKey, options } = this.props
 
     if (groups && groups.length > 0 && groupByKey) {
-      const orderedOptions = options.map((o) => o).sort(sortBy(groupByKey))
-      const parentGroups = []
+      const orderedOptions = options ? options.map((o) => o).sort(sortBy(groupByKey)) : []
+      const parentGroups: Group[] = []
 
-      if (inputValue === '' && allowSelectAll && parentGroups.every((p) => p !== allOption)) {
-        parentGroups.push(allOption)
+      if (
+        allOption &&
+        inputValue === '' &&
+        allowSelectAll &&
+        parentGroups.every((p) => p !== allOption)
+      ) {
+        parentGroups.push(allOption as Group)
       }
 
       orderedOptions.forEach((option) => {
@@ -545,11 +594,11 @@ class SimpleSelect extends Component {
 
         if (group) {
           if (!parentGroups.find((p) => p === group)) {
-            group.options = []
+            group.options = Array<Option>()
             parentGroups.push(group)
           }
 
-          group.options.push(option)
+          group.options?.push(option)
         }
       })
       return parentGroups
@@ -559,18 +608,18 @@ class SimpleSelect extends Component {
 
   constructAriaLiveMessage() {
     const { ariaLiveContext } = this.state
-    const { inputValue, options } = this.props
+    const { inputValue = '', options } = this.props
     // An aria live message representing the set of focusable results and
     // current searchterm/inputvalue.
-    const count = options.length
+    const count = options ? options.length : 0
     const screenMsg = `${count} result${count !== 1 ? 's' : ''} available`
     const resultsMsg = resultsAriaMessage(inputValue, screenMsg)
 
     return `${resultsMsg} ${ariaLiveContext}`
   }
 
-  renderArrow(isOpen) {
-    const { arrowComponent } = this.props
+  renderArrow(isOpen: boolean) {
+    const { arrowComponent = ArrowDefault } = this.props
     const ArrowComponent = arrowComponent
     const { arrowRenderer } = this.props
 
@@ -585,7 +634,7 @@ class SimpleSelect extends Component {
   }
 
   renderClear() {
-    const { clearComponent, clearable, clearRenderer, disabled, value } = this.props
+    const { clearComponent = ClearDefault, clearable, clearRenderer, disabled, value } = this.props
     const ClearComponent = clearComponent
     const hasValue = Array.isArray(value) ? value.length : value
 
@@ -604,7 +653,7 @@ class SimpleSelect extends Component {
   }
 
   renderLoading() {
-    const { loadingComponent, loadingRenderer, isLoading } = this.props
+    const { loadingComponent = LoadingDefault, loadingRenderer, isLoading } = this.props
     const LoadingComponent = loadingComponent
     return <LoadingComponent loadingRenderer={loadingRenderer} isLoading={isLoading} />
   }
@@ -612,15 +661,15 @@ class SimpleSelect extends Component {
   renderMenu() {
     const { isLoading, loadingText, id, noResultsText, staticOption } = this.props
     const { focusedOption } = this.state
-    const { menuComponent, options, ...otherProps } = this.props
+    const { menuComponent = MenuDefault, options, ...otherProps } = this.props
     const menuProps = {
       ...otherProps,
       onOptionClick: this.handleOptionClick,
       onOptionFocus: this.handleOptionFocus,
-      optionRef: (el, key) => {
+      optionRef: (el: HTMLElement, key: string) => {
         this.optionRefs[key] = el
       },
-      menuRef: (el) => {
+      menuRef: (el: HTMLElement) => {
         this.menuRef = el
       },
       focusedOption
@@ -671,7 +720,7 @@ class SimpleSelect extends Component {
       'aria-labelledby': ariaLabelledBy,
       disabled,
       id,
-      inputComponent,
+      inputComponent = InputDefault,
       inputId,
       inputValue,
       showInput,
@@ -688,7 +737,7 @@ class SimpleSelect extends Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       disabled,
-      getRef: (ref) => {
+      getRef: (ref: HTMLInputElement | null) => {
         this.input = ref
       },
       id: inputId || `crane-select-input-${id}`,
@@ -702,16 +751,22 @@ class SimpleSelect extends Component {
     return showInput ? <InputComponent {...inputProps} /> : this.renderFocusPlaceholder(inputProps)
   }
 
-  renderFocusPlaceholder(inputProps) {
-    const { focusPlaceholderComponent } = this.props
+  renderFocusPlaceholder(inputProps: InputProps) {
+    const { focusPlaceholderComponent = FocusPlaceholderDefault } = this.props
     const FocusPlaceholderComponent = focusPlaceholderComponent
     const { onChange, inputValue, ...placeholderProps } = inputProps
     return <FocusPlaceholderComponent {...placeholderProps} />
   }
 
   render() {
-    const { beforeInput, className, disabled, id, showValuesWhileFocused, valueGroupComponent } =
-      this.props
+    const {
+      beforeInput,
+      className,
+      disabled,
+      id,
+      showValuesWhileFocused = false,
+      valueGroupComponent = ValueGroupDefault
+    } = this.props
     const { isFocused, isOuterFocused } = this.state
     // eslint-disable-next-line react/destructuring-assignment
     const isOpen = this.props.isOpen || this.state.isOpen
@@ -764,13 +819,6 @@ class SimpleSelect extends Component {
     )
     /* eslint-enable jsx-a11y/role-has-required-aria-props */
   }
-}
-
-SimpleSelect.propTypes = {
-  ...simpleSelectPropTypes
-}
-SimpleSelect.defaultProps = {
-  ...simpleSelectDefaults
 }
 
 export default SimpleSelect

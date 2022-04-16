@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
+import { Option, MenuProps } from './typeDefs'
 // import alone to avoid dep cycle
 import isSelected from './utils/isSelected'
 
-class Menu extends Component {
-  renderOptions(options) {
+class Menu<T> extends Component<MenuProps> {
+  renderOptions(options?: Option[]) {
     const {
       allOption,
       allowSelectAll,
       focusedOption,
       getOptionLabel,
-      groupTitleKey,
-      groupValueKey,
+      groupTitleKey = '',
+      groupValueKey = '',
       hideCheckboxes,
       labelKey,
       onOptionClick,
       onOptionFocus,
       optionComponent,
-      optionDisabledKey,
+      optionDisabledKey = 'isDisabled',
       optionGroupComponent,
       optionGroupRenderer,
       optionRef,
       optionRenderer,
       value,
-      valueKey
+      valueKey = ''
     } = this.props
 
     if (!options) {
@@ -52,9 +52,7 @@ class Menu extends Component {
       groupTitleKey,
       groupValueKey,
       optionGroupRenderer,
-      optionRef,
       value,
-      valueKey,
       ...optionProps
     }
 
@@ -67,7 +65,7 @@ class Menu extends Component {
         return (
           <OptionGroupComponent
             {...optionGroupProps}
-            key={option[groupValueKey]}
+            key={option[groupValueKey] as string}
             option={option}
             isFocused={isFocused}
           >
@@ -81,7 +79,7 @@ class Menu extends Component {
       return (
         <OptionComponent
           {...optionProps}
-          key={option[valueKey]}
+          key={option[valueKey] as string}
           hideCheckboxes={hideCheckboxes}
           isFocused={isFocused}
           option={option}
@@ -103,13 +101,13 @@ class Menu extends Component {
       onOptionClick,
       onOptionFocus,
       optionComponent,
-      optionDisabledKey,
+      optionDisabledKey = 'isDisabled',
       optionRef,
       optionRenderer,
-      options,
+      options = [],
       staticOption,
       value,
-      valueKey
+      valueKey = ''
     } = this.props
 
     const OptionComponent = optionComponent
@@ -134,7 +132,7 @@ class Menu extends Component {
             const isFocused = option && option === focusedOption
             return (
               <OptionComponent
-                key={option[valueKey]}
+                key={option[valueKey] as string}
                 allowSelectAll={allowSelectAll}
                 allOption={allOption}
                 getOptionLabel={getOptionLabel}
@@ -155,54 +153,6 @@ class Menu extends Component {
       </div>
     )
   }
-}
-
-Menu.propTypes = {
-  allOption: PropTypes.object,
-  allowSelectAll: PropTypes.bool,
-  focusedOption: PropTypes.object,
-  getOptionLabel: PropTypes.func.isRequired,
-  groupTitleKey: PropTypes.string,
-  groupValueKey: PropTypes.string,
-  hideCheckboxes: PropTypes.bool,
-  labelKey: PropTypes.string,
-  menuRef: PropTypes.func.isRequired,
-  onOptionClick: PropTypes.func.isRequired,
-  onOptionFocus: PropTypes.func.isRequired,
-  optionComponent: PropTypes.func,
-  optionDisabledKey: PropTypes.string,
-  optionGroupComponent: PropTypes.func,
-  optionGroupRenderer: PropTypes.func,
-  optionRef: PropTypes.func.isRequired,
-  optionRenderer: PropTypes.func,
-  options: PropTypes.array,
-  staticOption: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  value: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.number,
-    PropTypes.object,
-    PropTypes.string
-  ]),
-  valueKey: PropTypes.string
-}
-
-Menu.defaultProps = {
-  allOption: null,
-  allowSelectAll: false,
-  hideCheckboxes: false,
-  focusedOption: null,
-  groupTitleKey: '',
-  groupValueKey: '',
-  labelKey: '',
-  optionComponent: null,
-  optionDisabledKey: 'isDisabled',
-  optionGroupComponent: null,
-  optionGroupRenderer: null,
-  optionRenderer: null,
-  options: [],
-  staticOption: null,
-  value: null,
-  valueKey: ''
 }
 
 export default Menu

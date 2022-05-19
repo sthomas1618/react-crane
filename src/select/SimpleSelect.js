@@ -381,7 +381,8 @@ class SimpleSelect extends Component {
 
   focusOnOption = (direction) => {
     const { labelKey, options, staticOption } = this.props
-    const newFocusedOption = options.length
+    const multiStaticOptions = Array.isArray(staticOption)
+    const newFocusedOption = options.length || multiStaticOptions
       ? this.getFocusedOption(direction, options)
       : staticOption || null
 

@@ -48,6 +48,24 @@ stories.add('with SimpleSelect', () => (
   />
 ))
 
+stories.add('with SimpleSelect and open', () => (
+  <BasicSelect
+    autoCloseMenu={boolean('Auto Close Menu', true)}
+    clearable={boolean('Clearable', false)}
+    clearInputOnBlur={boolean('Clear Input on Blur', true)}
+    clearInputOnSelect={boolean('Clear Input on Select', true)}
+    isLoading={boolean('Is Loading', false)}
+    isOpen={boolean('Is Open', true)}
+    labelKey="name"
+    openOnClick={boolean('Open On Click', true)}
+    openOnEmptyInput={boolean('Open On Empty Input', true)}
+    options={states}
+    placeholder={text('Placeholder', 'Select value...')}
+    showInput={boolean('Show Input', false)}
+    valueKey="abbreviation"
+  />
+))
+
 stories.add('with SimpleSelect and string value', () => (
   <SimpleSelectWithStringValue
     autoCloseMenu={boolean('Auto Close Menu', true)}
